@@ -13,6 +13,447 @@
   "schema": "public",
   "tables": [
     {
+      "name": "qef_accions",
+      "nameJava": "Accions",
+      "shortName": "accions",
+      "labels": {
+        "ca": "Accio",
+        "es": "Accion"
+      },
+      "labelsPlural": {
+        "ca": "Accions",
+        "es": "Accions"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_accions_pk",
+          "index": "qef_accions_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "accioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "accioid",
+            "es": "accioid"
+          },
+          "javaName": "accioid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_accions_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_modific_accions_accioid_fk",
+              "table": "qef_modificacionsqueesticfent",
+              "field": "accioid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 45,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nomllegenda",
+          "sqlType": 12,
+          "size": 45,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom Llegenda",
+            "es": "Nombre Leyenda"
+          },
+          "javaName": "nomllegenda",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "color",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Color",
+            "es": "Color"
+          },
+          "javaName": "color",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 500,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Descripcio",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_departaments",
+      "nameJava": "Departaments",
+      "shortName": "departamen",
+      "labels": {
+        "ca": "Departament",
+        "es": "Departamento"
+      },
+      "labelsPlural": {
+        "ca": "Departaments",
+        "es": "Departamentos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_departaments_pk",
+          "index": "qef_departaments_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "departamentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "departamentid",
+            "es": "departamentid"
+          },
+          "javaName": "departamentid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_departaments_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_projectes_departamen_d_fk",
+              "table": "qef_projectes",
+              "field": "departamentid",
+              "type": 0
+            },
+            {
+              "name": "qef_usudep_departamen_depar_fk",
+              "table": "qef_usuarisdepartament",
+              "field": "departamentid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 300,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "coordinadorid",
+          "sqlType": 12,
+          "size": 200,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Coordinador ID",
+            "es": "Coordinador ID"
+          },
+          "javaName": "coordinadorid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nomldap",
+          "sqlType": 12,
+          "size": 200,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom LDAP",
+            "es": "Nombre LDAP"
+          },
+          "javaName": "nomldap",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 3000,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Descripció",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_festius",
+      "nameJava": "Festius",
+      "shortName": "festius",
+      "labels": {
+        "ca": "Festiu",
+        "es": "Festivo"
+      },
+      "labelsPlural": {
+        "ca": "Festius",
+        "es": "Festivos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_festius_pk",
+          "index": "qef_festiu_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "festiuid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "festiuid",
+            "es": "festiuid"
+          },
+          "javaName": "festiuid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_festius_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 300,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "data",
+          "sqlType": 91,
+          "size": 13,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Data",
+            "es": "Fecha"
+          },
+          "javaName": "data",
+          "javaType": "java.sql.Date",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 5
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 2000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Descripció",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
       "name": "qef_fitxer",
       "nameJava": "Fitxer",
       "shortName": "fitxer",
@@ -176,6 +617,263 @@
       ]
     },
     {
+      "name": "qef_grups",
+      "nameJava": "Grups",
+      "shortName": "grups",
+      "labels": {
+        "ca": "Grup",
+        "es": "Grupo"
+      },
+      "labelsPlural": {
+        "ca": "Grups",
+        "es": "Grupos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_grups_pk",
+          "index": "qef_grups_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "grupid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "grupid",
+            "es": "grupid"
+          },
+          "javaName": "grupid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_grups_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_grupsusu_grups_grupid_fk",
+              "table": "qef_grupsusuari",
+              "field": "grupid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 1000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Descripció",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nivellseguretat",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Nivell Seguretat",
+            "es": "Nivel Seguridad"
+          },
+          "javaName": "nivellseguretat",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_grupsusuari",
+      "nameJava": "Grupsusuari",
+      "shortName": "grupsusu",
+      "labels": {
+        "ca": "Grup Usuari",
+        "es": "Grupo Usuario"
+      },
+      "labelsPlural": {
+        "ca": "Grups Usuari",
+        "es": "Grupos Usuario"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_grupsusuari_pk",
+          "index": "qef_grupsusuari_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "grupsusuariid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "grupsusuariid",
+            "es": "grupsusuariid"
+          },
+          "javaName": "grupsusuariid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_grupsusuari_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_grupsusuari_usuariid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": 12,
+          "size": 20,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "usuariid",
+            "es": "usuariid"
+          },
+          "javaName": "usuariid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_grupsusuari_usuari_fk",
+              "table": "qef_usuaris",
+              "field": "usuariid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_grupsusu_usuaris_usuari_fk",
+              "table": "qef_usuaris",
+              "field": "usuariid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "qef_grupsusuari_grupid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "grupid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "grupid",
+            "es": "grupid"
+          },
+          "javaName": "grupid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_grupsusuari_grup_fk",
+              "table": "qef_grups",
+              "field": "grupid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_grupsusu_grups_grupid_fk",
+              "table": "qef_grups",
+              "field": "grupid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "qef_idioma",
       "nameJava": "Idioma",
       "shortName": "idioma",
@@ -306,6 +1004,676 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_modificacionsqueesticfent",
+      "nameJava": "ModificacionsQueEsticFent",
+      "shortName": "modific",
+      "labels": {
+        "ca": "Modificacio",
+        "es": "Modificacion"
+      },
+      "labelsPlural": {
+        "ca": "Modificacions",
+        "es": "Modificaciones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_modific_pk",
+          "index": "qef_modific_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "modificacioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "modificacioid",
+            "es": "modificacioid"
+          },
+          "javaName": "modificacioid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_modificacionsqueesticfent_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_modific_accioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "accioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "accioid",
+            "es": "accioid"
+          },
+          "javaName": "accioid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_modificacionsqueesticfent_accions_fk",
+              "table": "qef_accions",
+              "field": "accioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_modific_accions_accioid_fk",
+              "table": "qef_accions",
+              "field": "accioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": 12,
+          "size": 45,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Usuari ID",
+            "es": "Usuario ID"
+          },
+          "javaName": "usuariid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_modific_projecteid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "projecteid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Projecte ID",
+            "es": "Proyecto ID"
+          },
+          "javaName": "projecteid",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_modificacionsqueesticfent_projectes_fk",
+              "table": "qef_projectes",
+              "field": "projecteid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_modific_projectes_proje_fk",
+              "table": "qef_projectes",
+              "field": "projecteid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "data",
+          "sqlType": 93,
+          "size": 35,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Data",
+            "es": "Fecha"
+          },
+          "javaName": "data",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "queesticfentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "QueEsticFent ID",
+            "es": "QueEsticFent ID"
+          },
+          "javaName": "queesticfentid",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": "-1 significa nou",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "dada1",
+          "sqlType": 12,
+          "size": 500,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Dada1",
+            "es": "Dato1"
+          },
+          "javaName": "dada1",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "dada2",
+          "sqlType": 12,
+          "size": 500,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Dada 2",
+            "es": "Dato 2"
+          },
+          "javaName": "dada2",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_personalprojecte",
+      "nameJava": "PersonalProjecte",
+      "shortName": "persproj",
+      "labels": {
+        "ca": "Personal Projecte",
+        "es": "Personal Proyecto"
+      },
+      "labelsPlural": {
+        "ca": "Personals Projecte",
+        "es": "Personales Proyecto"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_personalprojecte_pk",
+          "index": "qef_personalprojecte_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "personalprojecteid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "personalprojecteid",
+            "es": "personalprojecteid"
+          },
+          "javaName": "personalprojecteid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_personalprojecte_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Usuari ID",
+            "es": "Usuario ID"
+          },
+          "javaName": "usuariid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_persproj_projecteid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "projecteid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Projecte ID",
+            "es": "Proyecto ID"
+          },
+          "javaName": "projecteid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_personalprojecte_projectes_fk",
+              "table": "qef_projectes",
+              "field": "projecteid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_persproj_projectes_pro_fk",
+              "table": "qef_projectes",
+              "field": "projecteid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "percent",
+          "sqlType": 5,
+          "size": 5,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Percent",
+            "es": "Percent"
+          },
+          "javaName": "percent",
+          "javaType": "java.lang.Short",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_projectes",
+      "nameJava": "Projectes",
+      "shortName": "projectes",
+      "labels": {
+        "ca": "Projecte",
+        "es": "Proyecto"
+      },
+      "labelsPlural": {
+        "ca": "Projectes",
+        "es": "Proyectos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_projectes_pk",
+          "index": "qef_projectes_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "projecteid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "projecteid",
+            "es": "projecteid"
+          },
+          "javaName": "projecteid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_projectes_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_modific_projectes_proje_fk",
+              "table": "qef_modificacionsqueesticfent",
+              "field": "projecteid",
+              "type": 0
+            },
+            {
+              "name": "qef_persproj_projectes_pro_fk",
+              "table": "qef_personalprojecte",
+              "field": "projecteid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 45,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_projectes_departamen_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "departamentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Departament ID",
+            "es": "Departamento ID"
+          },
+          "javaName": "departamentid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_projectes_departaments_fk",
+              "table": "qef_departaments",
+              "field": "departamentid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_projectes_departamen_d_fk",
+              "table": "qef_departaments",
+              "field": "departamentid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 500,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Descripció",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Actiu",
+            "es": "Activo"
+          },
+          "javaName": "actiu",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "fromdata",
+          "sqlType": 91,
+          "size": 13,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "desde",
+            "es": "desde"
+          },
+          "javaName": "fromdata",
+          "javaType": "java.sql.Date",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 5
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "todata",
+          "sqlType": 91,
+          "size": 13,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "fins",
+            "es": "hasta"
+          },
+          "javaName": "todata",
+          "javaType": "java.sql.Date",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 5
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu2",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "actiu2",
+            "es": "actiu2"
+          },
+          "javaName": "actiu2",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
           },
           "foreignKeys": []
         }
@@ -496,6 +1864,603 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_jos_twitter",
+      "nameJava": "Twitter",
+      "shortName": "twitter",
+      "labels": {
+        "ca": "Twitter",
+        "es": "Twitter"
+      },
+      "labelsPlural": {
+        "ca": "Twitter",
+        "es": "Twitter"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_jos_twitter_pk",
+          "index": "qef_jos_twitter_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "id",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "id",
+            "es": "id"
+          },
+          "javaName": "id",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_jos_twitter_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "username",
+          "sqlType": 12,
+          "size": 25,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "username",
+            "es": "username"
+          },
+          "javaName": "username",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "comentario",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "comentario",
+            "es": "comentario"
+          },
+          "javaName": "comentario",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "fecha",
+          "sqlType": 91,
+          "size": 13,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "fecha",
+            "es": "fecha"
+          },
+          "javaName": "fecha",
+          "javaType": "java.sql.Date",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 5
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "user_id",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "user_id",
+            "es": "user_id"
+          },
+          "javaName": "user_id",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ip",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "ip",
+            "es": "ip"
+          },
+          "javaName": "ip",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_usuaris",
+      "nameJava": "Usuaris",
+      "shortName": "usuaris",
+      "labels": {
+        "ca": "Usuari",
+        "es": "Usuario"
+      },
+      "labelsPlural": {
+        "ca": "Usuaris",
+        "es": "Usuarios"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "qef_usuaris_pk",
+          "index": "qef_usuaris_pk_i",
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "usuariid",
+            "es": "usuariid"
+          },
+          "javaName": "usuariid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_grupsusu_usuaris_usuari_fk",
+              "table": "qef_grupsusuari",
+              "field": "usuariid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge1",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Llinatge 1",
+            "es": "Apellido 1"
+          },
+          "javaName": "llinatge1",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge2",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Llinatge 2",
+            "es": "Apellido 2"
+          },
+          "javaName": "llinatge2",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "correu",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Correu",
+            "es": "Correo"
+          },
+          "javaName": "correu",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Descripció",
+            "es": "Descripcion"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "extensio",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Extensio",
+            "es": "Extension"
+          },
+          "javaName": "extensio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "naixement",
+          "sqlType": 91,
+          "size": 13,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Naixement",
+            "es": "Nacimiento"
+          },
+          "javaName": "naixement",
+          "javaType": "java.sql.Date",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 5
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "telefoncasa",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Telefon fixe",
+            "es": "Telefono fijo"
+          },
+          "javaName": "telefoncasa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "telefonmobil",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Mobil",
+            "es": "Mobil"
+          },
+          "javaName": "telefonmobil",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "contrasenya",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Contrasenya",
+            "es": "Contraseña"
+          },
+          "javaName": "contrasenya",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "qef_usuarisdepartament",
+      "nameJava": "UsuarisDepartament",
+      "shortName": "usudep",
+      "labels": {
+        "ca": "Usuari Departament",
+        "es": "Usuario Departamento"
+      },
+      "labelsPlural": {
+        "ca": "Usuaris Departament",
+        "es": "Usuarios Departamento"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": 12,
+          "size": 20,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "usuariid",
+            "es": "usuariid"
+          },
+          "javaName": "usuariid",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_usudep_departamentid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "departamentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "departamentid",
+            "es": "departamentid"
+          },
+          "javaName": "departamentid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_usudepart_departamen_d_fk",
+              "table": "qef_departaments",
+              "field": "departamentid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "qef_usudep_departamen_depar_fk",
+              "table": "qef_departaments",
+              "field": "departamentid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "PK": "qef_usuarisdepartament_pk",
+          "index": "qef_usuarisdepartament_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "usuaridepartamentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "usuaridepartamentid",
+            "es": "usuaridepartamentid"
+          },
+          "javaName": "usuaridepartamentid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_usuarisdepartament_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
           },
           "foreignKeys": []
         }

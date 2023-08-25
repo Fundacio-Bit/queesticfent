@@ -1,0 +1,13 @@
+﻿<datasources>
+    ...
+    <datasource jndi-name="java:jboss/datasources/queesticfentDS" pool-name="queesticfentDS" enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:postgresql://localhost:5432/queesticfent</connection-url>
+        <driver>postgresql</driver>
+        <security>
+            <user-name>queesticfent</user-name>
+            <password>queesticfent</password>
+        </security>
+    </datasource>
+    ...
+</datasources>
