@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+
 /**
  * 
  * @author anadal
@@ -41,7 +42,8 @@ public class EntradesUserController extends ModificacionsQueEsticFentController 
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-      return null;
+        String userName = request.getRemoteUser();
+        return USUARIID.equal(userName);
     }
     
     public ModificacionsQueEsticFentFilterForm getModificacionsQueEsticFentFilterForm(Integer pagina, ModelAndView mav,

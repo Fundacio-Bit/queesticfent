@@ -23,13 +23,6 @@
        Option XXXXX</span></a></li>
    </sec:authorize>
     --%>
-
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-    <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/option2"/>">
-        <span style="${(fn:contains(url, 'option2'))? "font-weight: bold;" : ""}">Menú ADMIN Option 2</span>
-      </a>
-    </li>
    
   </ul>
 </div>
