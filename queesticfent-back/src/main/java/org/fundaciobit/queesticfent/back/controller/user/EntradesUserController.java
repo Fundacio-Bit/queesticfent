@@ -63,8 +63,10 @@ public class EntradesUserController extends ModificacionsQueEsticFentController 
     public ModificacionsQueEsticFentForm getModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA _jpa,
             boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
          ModificacionsQueEsticFentForm modificacionsQueEsticFentForm = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
+         modificacionsQueEsticFentForm.addReadOnlyField(USUARIID);
          modificacionsQueEsticFentForm.addHiddenField(MODIFICACIOID);
          modificacionsQueEsticFentForm.addHiddenField(QUEESTICFENTID);
+         
          
          
          return modificacionsQueEsticFentForm;
