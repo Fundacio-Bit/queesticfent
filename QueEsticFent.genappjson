@@ -40,8 +40,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "accioid",
-            "es": "accioid"
+            "ca": "Accio ID",
+            "es": "Acción ID"
           },
           "javaName": "accioid",
           "javaType": "long",
