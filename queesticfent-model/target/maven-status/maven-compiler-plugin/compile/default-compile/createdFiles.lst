@@ -6,6 +6,7 @@ org\fundaciobit\queesticfent\model\bean\ModificacionsQueEsticFentBean.class
 org\fundaciobit\queesticfent\model\bean\ProjectesBean.class
 org\fundaciobit\queesticfent\model\fields\FestiusQueryPath.class
 org\fundaciobit\queesticfent\model\bean\TraduccioBean.class
+org\fundaciobit\queesticfent\model\fields\UsuarisDepartamentQueryPath$2.class
 org\fundaciobit\queesticfent\model\fields\UsuarisDepartamentQueryPath$1.class
 org\fundaciobit\queesticfent\model\dao\ITwitterManager.class
 org\fundaciobit\queesticfent\model\fields\AccionsFields.class

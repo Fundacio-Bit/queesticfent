@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,GrupsFields.GRUPID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="grups.grupid" />:</span>
+              <span class="add-on"><fmt:message key="grups.grupID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="grupidDesde" />
+              <form:input cssClass="input-append input-small" path="grupIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="grupidFins" />
+              <form:input cssClass="input-append input-small search-query" path="grupIDFins" />
 
             </div>
 
@@ -97,16 +97,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,GrupsFields.NIVELLSEGURETAT)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="grups.nivellseguretat" />:</span>
+              <span class="add-on"><fmt:message key="grups.nivellSeguretat" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="nivellseguretatDesde" />
+              <form:input cssClass="input-append input-small" path="nivellSeguretatDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="nivellseguretatFins" />
+              <form:input cssClass="input-append input-small search-query" path="nivellSeguretatFins" />
 
             </div>
 

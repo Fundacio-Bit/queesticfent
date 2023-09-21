@@ -12,12 +12,12 @@ public interface ModificacionsQueEsticFentFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final LongField MODIFICACIOID = new LongField(_TABLE_MODEL, "modificacioid", "modificacioid");  // PK
-	 public static final LongField ACCIOID = new LongField(_TABLE_MODEL, "accioid", "accioid");
-	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariid", "usuariid");
-	 public static final LongField PROJECTEID = new LongField(_TABLE_MODEL, "projecteid", "projecteid");
+	 public static final LongField MODIFICACIOID = new LongField(_TABLE_MODEL, "modificacioID", "modificacioid");  // PK
+	 public static final LongField ACCIOID = new LongField(_TABLE_MODEL, "accioID", "accioid");
+	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariID", "usuariid");
+	 public static final LongField PROJECTEID = new LongField(_TABLE_MODEL, "projecteID", "projecteid");
 	 public static final TimestampField DATA = new TimestampField(_TABLE_MODEL, "data", "data");
-	 public static final LongField QUEESTICFENTID = new LongField(_TABLE_MODEL, "queesticfentid", "queesticfentid");
+	 public static final LongField QUEESTICFENTID = new LongField(_TABLE_MODEL, "queEsticFentID", "queesticfentid");
 	 public static final StringField DADA1 = new StringField(_TABLE_MODEL, "dada1", "dada1");
 	 public static final StringField DADA2 = new StringField(_TABLE_MODEL, "dada2", "dada2");
 

@@ -60,6 +60,10 @@ public class UsuarisDepartamentController
 
   // References 
   @Autowired
+  protected UsuarisRefList usuarisRefList;
+
+  // References 
+  @Autowired
   protected DepartamentsRefList departamentsRefList;
 
   /**
@@ -182,6 +186,16 @@ public class UsuarisDepartamentController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field usuariId
+    {
+      _listSKV = getReferenceListForUsuariId(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfUsuarisForUsuariId(_tmp);
+      if (filterForm.getGroupByFields().contains(USUARIID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIID, false);
+      };
+    }
+
     // Field departamentid
     {
       _listSKV = getReferenceListForDepartamentid(request, mav, filterForm, list, groupByItemsMap, null);
@@ -207,6 +221,7 @@ public class UsuarisDepartamentController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(USUARIID, filterForm.getMapOfUsuarisForUsuariId());
     __mapping.put(DEPARTAMENTID, filterForm.getMapOfDepartamentsForDepartamentid());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -256,6 +271,15 @@ public class UsuarisDepartamentController
   public void fillReferencesForForm(UsuarisDepartamentForm usuarisDepartamentForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
+    if (usuarisDepartamentForm.getListOfUsuarisForUsuariId() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForUsuariId(request, mav, usuarisDepartamentForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      usuarisDepartamentForm.setListOfUsuarisForUsuariId(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
     if (usuarisDepartamentForm.getListOfDepartamentsForDepartamentid() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForDepartamentid(request, mav, usuarisDepartamentForm, null);
 
@@ -291,7 +315,7 @@ public class UsuarisDepartamentController
         return getTileForm();
       } else {
         usuarisDepartament = create(request, usuarisDepartament);
-        createMessageSuccess(request, "success.creation", usuarisDepartament.getUsuaridepartamentid());
+        createMessageSuccess(request, "success.creation", usuarisDepartament.getUsuariDepartamentId());
         usuarisDepartamentForm.setUsuarisDepartament(usuarisDepartament);
         return getRedirectWhenCreated(request, usuarisDepartamentForm);
       }
@@ -306,16 +330,16 @@ public class UsuarisDepartamentController
     }
   }
 
-  @RequestMapping(value = "/view/{usuaridepartamentid}", method = RequestMethod.GET)
-  public ModelAndView veureUsuarisDepartamentGet(@PathVariable("usuaridepartamentid") java.lang.Long usuaridepartamentid,
+  @RequestMapping(value = "/view/{usuariDepartamentId}", method = RequestMethod.GET)
+  public ModelAndView veureUsuarisDepartamentGet(@PathVariable("usuariDepartamentId") java.lang.Long usuariDepartamentId,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewUsuarisDepartamentGet(usuaridepartamentid,
+      return editAndViewUsuarisDepartamentGet(usuariDepartamentId,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewUsuarisDepartamentGet(@PathVariable("usuaridepartamentid") java.lang.Long usuaridepartamentid,
+  protected ModelAndView editAndViewUsuarisDepartamentGet(@PathVariable("usuariDepartamentId") java.lang.Long usuariDepartamentId,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -327,11 +351,11 @@ public class UsuarisDepartamentController
         return null;
       }
     }
-    UsuarisDepartamentJPA usuarisDepartament = findByPrimaryKey(request, usuaridepartamentid);
+    UsuarisDepartamentJPA usuarisDepartament = findByPrimaryKey(request, usuariDepartamentId);
 
     if (usuarisDepartament == null) {
-      createMessageWarning(request, "error.notfound", usuaridepartamentid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, usuaridepartamentid), true));
+      createMessageWarning(request, "error.notfound", usuariDepartamentId);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, usuariDepartamentId), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -352,11 +376,11 @@ public class UsuarisDepartamentController
   /**
    * Carregar el formulari per modificar un UsuarisDepartament existent
    */
-  @RequestMapping(value = "/{usuaridepartamentid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarUsuarisDepartamentGet(@PathVariable("usuaridepartamentid") java.lang.Long usuaridepartamentid,
+  @RequestMapping(value = "/{usuariDepartamentId}/edit", method = RequestMethod.GET)
+  public ModelAndView editarUsuarisDepartamentGet(@PathVariable("usuariDepartamentId") java.lang.Long usuariDepartamentId,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewUsuarisDepartamentGet(usuaridepartamentid,
+      return editAndViewUsuarisDepartamentGet(usuariDepartamentId,
         request, response, false);
   }
 
@@ -365,7 +389,7 @@ public class UsuarisDepartamentController
   /**
    * Editar un UsuarisDepartament existent
    */
-  @RequestMapping(value = "/{usuaridepartamentid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{usuariDepartamentId}/edit", method = RequestMethod.POST)
   public String editarUsuarisDepartamentPost(@ModelAttribute UsuarisDepartamentForm usuarisDepartamentForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -386,7 +410,7 @@ public class UsuarisDepartamentController
         return getTileForm();
       } else {
         usuarisDepartament = update(request, usuarisDepartament);
-        createMessageSuccess(request, "success.modification", usuarisDepartament.getUsuaridepartamentid());
+        createMessageSuccess(request, "success.modification", usuarisDepartament.getUsuariDepartamentId());
         status.setComplete();
         return getRedirectWhenModified(request, usuarisDepartamentForm, null);
       }
@@ -396,7 +420,7 @@ public class UsuarisDepartamentController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          usuarisDepartament.getUsuaridepartamentid(), __e);
+          usuarisDepartament.getUsuariDepartamentId(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, usuarisDepartamentForm, __e);
     }
@@ -407,8 +431,8 @@ public class UsuarisDepartamentController
   /**
    * Eliminar un UsuarisDepartament existent
    */
-  @RequestMapping(value = "/{usuaridepartamentid}/delete")
-  public String eliminarUsuarisDepartament(@PathVariable("usuaridepartamentid") java.lang.Long usuaridepartamentid,
+  @RequestMapping(value = "/{usuariDepartamentId}/delete")
+  public String eliminarUsuarisDepartament(@PathVariable("usuariDepartamentId") java.lang.Long usuariDepartamentId,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -416,20 +440,20 @@ public class UsuarisDepartamentController
       return null;
     }
     try {
-      UsuarisDepartament usuarisDepartament = this.findByPrimaryKey(request, usuaridepartamentid);
+      UsuarisDepartament usuarisDepartament = this.findByPrimaryKey(request, usuariDepartamentId);
       if (usuarisDepartament == null) {
-        String __msg = createMessageError(request, "error.notfound", usuaridepartamentid);
-        return getRedirectWhenDelete(request, usuaridepartamentid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", usuariDepartamentId);
+        return getRedirectWhenDelete(request, usuariDepartamentId, new Exception(__msg));
       } else {
         delete(request, usuarisDepartament);
-        createMessageSuccess(request, "success.deleted", usuaridepartamentid);
-        return getRedirectWhenDelete(request, usuaridepartamentid,null);
+        createMessageSuccess(request, "success.deleted", usuariDepartamentId);
+        return getRedirectWhenDelete(request, usuariDepartamentId,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", usuaridepartamentid, e);
+      String msg = createMessageError(request, "error.deleting", usuariDepartamentId, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, usuaridepartamentid, e);
+      return getRedirectWhenDelete(request, usuariDepartamentId, e);
     }
   }
 
@@ -465,8 +489,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __usuaridepartamentid, Throwable e) {
-    java.lang.Long usuaridepartamentid = (java.lang.Long)__usuaridepartamentid;
+  public String[] getArgumentsMissatge(Object __usuariDepartamentId, Throwable e) {
+    java.lang.Long usuariDepartamentId = (java.lang.Long)__usuariDepartamentId;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -476,13 +500,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (usuaridepartamentid == null) {
+    if (usuariDepartamentId == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(usuaridepartamentid),
+         String.valueOf(usuariDepartamentId),
  exceptionMsg };
     }
   }
@@ -496,7 +520,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("usuarisDepartament.usuaridepartamentid");
+    return  I18NUtils.tradueix("usuarisDepartament.usuariDepartamentId");
   }
 
   @InitBinder("usuarisDepartamentFilterForm")
@@ -511,7 +535,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "usuarisDepartament.usuaridepartamentid");
+    initDisallowedFields(binder, "usuarisDepartament.usuariDepartamentId");
   }
 
   public UsuarisDepartamentWebValidator getWebValidator() {
@@ -529,10 +553,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de UsuarisDepartament
    */
-  @RequestMapping(value = "/{usuaridepartamentid}/cancel")
-  public String cancelUsuarisDepartament(@PathVariable("usuaridepartamentid") java.lang.Long usuaridepartamentid,
+  @RequestMapping(value = "/{usuariDepartamentId}/cancel")
+  public String cancelUsuarisDepartament(@PathVariable("usuariDepartamentId") java.lang.Long usuariDepartamentId,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, usuaridepartamentid);
+     return getRedirectWhenCancel(request, usuariDepartamentId);
   }
 
   @Override
@@ -564,6 +588,45 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariId(HttpServletRequest request,
+       ModelAndView mav, UsuarisDepartamentForm usuarisDepartamentForm, Where where)  throws I18NException {
+    if (usuarisDepartamentForm.isHiddenField(USUARIID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (usuarisDepartamentForm.isReadOnlyField(USUARIID)) {
+      _where = UsuarisFields.USUARIID.equal(usuarisDepartamentForm.getUsuarisDepartament().getUsuariId());
+    }
+    return getReferenceListForUsuariId(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariId(HttpServletRequest request,
+       ModelAndView mav, UsuarisDepartamentFilterForm usuarisDepartamentFilterForm,
+       List<UsuarisDepartament> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (usuarisDepartamentFilterForm.isHiddenField(USUARIID)
+       && !usuarisDepartamentFilterForm.isGroupByField(USUARIID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(USUARIID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.String> _pkList = new java.util.HashSet<java.lang.String>();
+      for (UsuarisDepartament _item : list) {
+        _pkList.add(_item.getUsuariId());
+        }
+        _w = UsuarisFields.USUARIID.in(_pkList);
+      }
+    return getReferenceListForUsuariId(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariId(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return usuarisRefList.getReferenceList(UsuarisFields.USUARIID, where );
   }
 
 
@@ -637,11 +700,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long usuaridepartamentid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long usuariDepartamentId, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long usuaridepartamentid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long usuariDepartamentId) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -664,8 +727,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public UsuarisDepartamentJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long usuaridepartamentid) throws I18NException {
-    return (UsuarisDepartamentJPA) usuarisDepartamentEjb.findByPrimaryKey(usuaridepartamentid);
+  public UsuarisDepartamentJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long usuariDepartamentId) throws I18NException {
+    return (UsuarisDepartamentJPA) usuarisDepartamentEjb.findByPrimaryKey(usuariDepartamentId);
   }
 
 

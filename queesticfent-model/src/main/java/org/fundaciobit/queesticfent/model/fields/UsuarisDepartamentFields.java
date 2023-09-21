@@ -12,9 +12,9 @@ public interface UsuarisDepartamentFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariid", "usuariid");
+	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariId", "usuariid");
 	 public static final LongField DEPARTAMENTID = new LongField(_TABLE_MODEL, "departamentid", "departamentid");
-	 public static final LongField USUARIDEPARTAMENTID = new LongField(_TABLE_MODEL, "usuaridepartamentid", "usuaridepartamentid");  // PK
+	 public static final LongField USUARIDEPARTAMENTID = new LongField(_TABLE_MODEL, "usuariDepartamentId", "usuaridepartamentid");  // PK
 
 
   public static final Field<?>[] ALL_USUARISDEPARTAMENT_FIELDS = {

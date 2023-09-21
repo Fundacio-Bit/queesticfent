@@ -27,13 +27,13 @@ public class GrupsusuariJPA implements Grupsusuari {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="GRUPSUSUARI_SEQ")
     @Column(name="grupsusuariid",nullable = false,length = 19)
-    long grupsusuariid;
+    long grupsUsuariID;
 
     @Column(name="usuariid",nullable = false,length = 20)
-    java.lang.String usuariid;
+    java.lang.String usuariID;
 
     @Column(name="grupid",nullable = false,length = 19)
-    long grupid;
+    long grupID;
 
 
 
@@ -42,41 +42,41 @@ public class GrupsusuariJPA implements Grupsusuari {
   }
 
   /** Constructor amb tots els camps  */
-  public GrupsusuariJPA(long grupsusuariid , java.lang.String usuariid , long grupid) {
-    this.grupsusuariid=grupsusuariid;
-    this.usuariid=usuariid;
-    this.grupid=grupid;
+  public GrupsusuariJPA(long grupsUsuariID , java.lang.String usuariID , long grupID) {
+    this.grupsUsuariID=grupsUsuariID;
+    this.usuariID=usuariID;
+    this.grupID=grupID;
 }
   /** Constructor sense valors autoincrementals */
-  public GrupsusuariJPA(java.lang.String usuariid , long grupid) {
-    this.usuariid=usuariid;
-    this.grupid=grupid;
+  public GrupsusuariJPA(java.lang.String usuariID , long grupID) {
+    this.usuariID=usuariID;
+    this.grupID=grupID;
 }
   public GrupsusuariJPA(Grupsusuari __bean) {
-    this.setGrupsusuariid(__bean.getGrupsusuariid());
-    this.setUsuariid(__bean.getUsuariid());
-    this.setGrupid(__bean.getGrupid());
+    this.setGrupsUsuariID(__bean.getGrupsUsuariID());
+    this.setUsuariID(__bean.getUsuariID());
+    this.setGrupID(__bean.getGrupID());
 	}
 
-	public long getGrupsusuariid() {
-		return(grupsusuariid);
+	public long getGrupsUsuariID() {
+		return(grupsUsuariID);
 	};
-	public void setGrupsusuariid(long _grupsusuariid_) {
-		this.grupsusuariid = _grupsusuariid_;
-	};
-
-	public java.lang.String getUsuariid() {
-		return(usuariid);
-	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setGrupsUsuariID(long _grupsUsuariID_) {
+		this.grupsUsuariID = _grupsUsuariID_;
 	};
 
-	public long getGrupid() {
-		return(grupid);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setGrupid(long _grupid_) {
-		this.grupid = _grupid_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
+	};
+
+	public long getGrupID() {
+		return(grupID);
+	};
+	public void setGrupID(long _grupID_) {
+		this.grupID = _grupID_;
 	};
 
 
@@ -87,7 +87,7 @@ public class GrupsusuariJPA implements Grupsusuari {
     if (__obj != null && __obj instanceof Grupsusuari) {
       Grupsusuari __instance = (Grupsusuari)__obj;
       __result = true;
-      __result = __result && (this.getGrupsusuariid() == __instance.getGrupsusuariid()) ;
+      __result = __result && (this.getGrupsUsuariID() == __instance.getGrupsUsuariID()) ;
     } else {
       __result = false;
     }
@@ -97,7 +97,7 @@ public class GrupsusuariJPA implements Grupsusuari {
 // IMP Field:usuariid | Table: qef_usuaris | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuariid", referencedColumnName ="usuariid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_usuaris_usuari_fk"))
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_usuaris_usuari_fk"))
     private UsuarisJPA usuaris;
 
     public UsuarisJPA getUsuaris() {
@@ -111,7 +111,7 @@ public class GrupsusuariJPA implements Grupsusuari {
 // IMP Field:grupid | Table: qef_grups | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "grupid", referencedColumnName ="grupid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_grups_grupid_fk"))
+    @JoinColumn(name = "grupid", referencedColumnName ="grupID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_grups_grupid_fk"))
     private GrupsJPA grups;
 
     public GrupsJPA getGrups() {
@@ -127,9 +127,9 @@ public class GrupsusuariJPA implements Grupsusuari {
   public static GrupsusuariJPA toJPA(Grupsusuari __bean) {
     if (__bean == null) { return null;}
     GrupsusuariJPA __tmp = new GrupsusuariJPA();
-    __tmp.setGrupsusuariid(__bean.getGrupsusuariid());
-    __tmp.setUsuariid(__bean.getUsuariid());
-    __tmp.setGrupid(__bean.getGrupid());
+    __tmp.setGrupsUsuariID(__bean.getGrupsUsuariID());
+    __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setGrupID(__bean.getGrupID());
 		return __tmp;
 	}
 

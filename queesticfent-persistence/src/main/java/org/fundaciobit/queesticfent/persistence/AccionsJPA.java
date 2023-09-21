@@ -27,13 +27,13 @@ public class AccionsJPA implements Accions {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCIONS_SEQ")
     @Column(name="accioid",nullable = false,length = 19)
-    long accioid;
+    long accioId;
 
     @Column(name="nom",nullable = false,length = 45)
     java.lang.String nom;
 
     @Column(name="nomllegenda",nullable = false,length = 45)
-    java.lang.String nomllegenda;
+    java.lang.String nomLlegenda;
 
     @Column(name="color",length = 2147483647)
     @Lob
@@ -50,39 +50,39 @@ public class AccionsJPA implements Accions {
   }
 
   /** Constructor amb tots els camps  */
-  public AccionsJPA(long accioid , java.lang.String nom , java.lang.String nomllegenda , java.lang.String color , java.lang.String descripcio) {
-    this.accioid=accioid;
+  public AccionsJPA(long accioId , java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
+    this.accioId=accioId;
     this.nom=nom;
-    this.nomllegenda=nomllegenda;
+    this.nomLlegenda=nomLlegenda;
     this.color=color;
     this.descripcio=descripcio;
 }
   /** Constructor sense valors autoincrementals */
-  public AccionsJPA(java.lang.String nom , java.lang.String nomllegenda , java.lang.String color , java.lang.String descripcio) {
+  public AccionsJPA(java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
     this.nom=nom;
-    this.nomllegenda=nomllegenda;
+    this.nomLlegenda=nomLlegenda;
     this.color=color;
     this.descripcio=descripcio;
 }
   /** Constructor dels valors Not Null */
-  public AccionsJPA(long accioid , java.lang.String nom , java.lang.String nomllegenda) {
-    this.accioid=accioid;
+  public AccionsJPA(long accioId , java.lang.String nom , java.lang.String nomLlegenda) {
+    this.accioId=accioId;
     this.nom=nom;
-    this.nomllegenda=nomllegenda;
+    this.nomLlegenda=nomLlegenda;
 }
   public AccionsJPA(Accions __bean) {
-    this.setAccioid(__bean.getAccioid());
+    this.setAccioId(__bean.getAccioId());
     this.setNom(__bean.getNom());
-    this.setNomllegenda(__bean.getNomllegenda());
+    this.setNomLlegenda(__bean.getNomLlegenda());
     this.setColor(__bean.getColor());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getAccioid() {
-		return(accioid);
+	public long getAccioId() {
+		return(accioId);
 	};
-	public void setAccioid(long _accioid_) {
-		this.accioid = _accioid_;
+	public void setAccioId(long _accioId_) {
+		this.accioId = _accioId_;
 	};
 
 	public java.lang.String getNom() {
@@ -92,11 +92,11 @@ public class AccionsJPA implements Accions {
 		this.nom = _nom_;
 	};
 
-	public java.lang.String getNomllegenda() {
-		return(nomllegenda);
+	public java.lang.String getNomLlegenda() {
+		return(nomLlegenda);
 	};
-	public void setNomllegenda(java.lang.String _nomllegenda_) {
-		this.nomllegenda = _nomllegenda_;
+	public void setNomLlegenda(java.lang.String _nomLlegenda_) {
+		this.nomLlegenda = _nomLlegenda_;
 	};
 
 	public java.lang.String getColor() {
@@ -121,7 +121,7 @@ public class AccionsJPA implements Accions {
     if (__obj != null && __obj instanceof Accions) {
       Accions __instance = (Accions)__obj;
       __result = true;
-      __result = __result && (this.getAccioid() == __instance.getAccioid()) ;
+      __result = __result && (this.getAccioId() == __instance.getAccioId()) ;
     } else {
       __result = false;
     }
@@ -146,9 +146,9 @@ public class AccionsJPA implements Accions {
   public static AccionsJPA toJPA(Accions __bean) {
     if (__bean == null) { return null;}
     AccionsJPA __tmp = new AccionsJPA();
-    __tmp.setAccioid(__bean.getAccioid());
+    __tmp.setAccioId(__bean.getAccioId());
     __tmp.setNom(__bean.getNom());
-    __tmp.setNomllegenda(__bean.getNomllegenda());
+    __tmp.setNomLlegenda(__bean.getNomLlegenda());
     __tmp.setColor(__bean.getColor());
     __tmp.setDescripcio(__bean.getDescripcio());
 		return __tmp;

@@ -48,7 +48,7 @@ public class ModificacionsQueEsticFentValidator<I extends ModificacionsQueEsticF
 
     // Check size
     if (__vr.getFieldErrorCount(USUARIID) == 0) {
-      java.lang.String __usuariid = __target__.getUsuariid();
+      java.lang.String __usuariid = __target__.getUsuariID();
       if (__usuariid!= null && __usuariid.length() > 45) {
         __vr.rejectValue(USUARIID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(45)));
@@ -88,26 +88,26 @@ public class ModificacionsQueEsticFentValidator<I extends ModificacionsQueEsticF
 
     // Fields with References to Other tables 
     if (__vr.getFieldErrorCount(ACCIOID) == 0) {
-      java.lang.Long __accioid = __target__.getAccioid();
+      java.lang.Long __accioid = __target__.getAccioID();
       Long __count_ = null;
       try { __count_ = __accionsManager.count(AccionsFields.ACCIOID.equal(__accioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(ACCIOID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("accions.accions"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("accions.accioid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("accions.accioId"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__accioid)));
       }
     }
 
     if (__vr.getFieldErrorCount(PROJECTEID) == 0) {
-      java.lang.Long __projecteid = __target__.getProjecteid();
+      java.lang.Long __projecteid = __target__.getProjecteID();
       if (__projecteid != null ) {
         Long __count_ = null;
         try { __count_ = __projectesManager.count(ProjectesFields.PROJECTEID.equal(__projecteid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ == 0) {        
           __vr.rejectValue(PROJECTEID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projectes"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projecteid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projecteId"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__projecteid)));
         }
       }

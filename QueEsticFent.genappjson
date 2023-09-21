@@ -43,7 +43,7 @@
             "ca": "Accio ID",
             "es": "Acción ID"
           },
-          "javaName": "accioid",
+          "javaName": "accioID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -101,7 +101,7 @@
             "ca": "Nom Llegenda",
             "es": "Nombre Leyenda"
           },
-          "javaName": "nomllegenda",
+          "javaName": "nomLlegenda",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -196,10 +196,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "departamentid",
-            "es": "departamentid"
+            "ca": "Departament Id",
+            "es": "Departamento Id"
           },
-          "javaName": "departamentid",
+          "javaName": "departamentID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -263,7 +263,7 @@
             "ca": "Coordinador ID",
             "es": "Coordinador ID"
           },
-          "javaName": "coordinadorid",
+          "javaName": "coordinadorId",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -288,7 +288,7 @@
             "ca": "Nom LDAP",
             "es": "Nombre LDAP"
           },
-          "javaName": "nomldap",
+          "javaName": "nomLDAP",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -357,10 +357,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "festiuid",
-            "es": "festiuid"
+            "ca": "Festiu Id",
+            "es": "Festivo Id"
           },
-          "javaName": "festiuid",
+          "javaName": "festiuID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -647,7 +647,7 @@
             "ca": "grupid",
             "es": "grupid"
           },
-          "javaName": "grupid",
+          "javaName": "grupID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -731,7 +731,7 @@
             "ca": "Nivell Seguretat",
             "es": "Nivel Seguridad"
           },
-          "javaName": "nivellseguretat",
+          "javaName": "nivellSeguretat",
           "javaType": "java.lang.Long",
           "traduible": false,
           "showInWebList": true,
@@ -778,7 +778,7 @@
             "ca": "grupsusuariid",
             "es": "grupsusuariid"
           },
-          "javaName": "grupsusuariid",
+          "javaName": "grupsUsuariID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -805,7 +805,7 @@
             "ca": "usuariid",
             "es": "usuariid"
           },
-          "javaName": "usuariid",
+          "javaName": "usuariID",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -844,7 +844,7 @@
             "ca": "grupid",
             "es": "grupid"
           },
-          "javaName": "grupid",
+          "javaName": "grupID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1037,10 +1037,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "modificacioid",
-            "es": "modificacioid"
+            "ca": "Modificacio Id",
+            "es": "Modificacion Id"
           },
-          "javaName": "modificacioid",
+          "javaName": "modificacioID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1067,7 +1067,7 @@
             "ca": "accioid",
             "es": "accioid"
           },
-          "javaName": "accioid",
+          "javaName": "accioID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1105,7 +1105,7 @@
             "ca": "Usuari ID",
             "es": "Usuario ID"
           },
-          "javaName": "usuariid",
+          "javaName": "usuariID",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -1131,7 +1131,7 @@
             "ca": "Projecte ID",
             "es": "Proyecto ID"
           },
-          "javaName": "projecteid",
+          "javaName": "projecteID",
           "javaType": "java.lang.Long",
           "traduible": false,
           "showInWebList": true,
@@ -1194,7 +1194,7 @@
             "ca": "QueEsticFent ID",
             "es": "QueEsticFent ID"
           },
-          "javaName": "queesticfentid",
+          "javaName": "queEsticFentID",
           "javaType": "java.lang.Long",
           "traduible": false,
           "showInWebList": true,
@@ -1294,7 +1294,7 @@
             "ca": "personalprojecteid",
             "es": "personalprojecteid"
           },
-          "javaName": "personalprojecteid",
+          "javaName": "personalProjecteID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1320,7 +1320,7 @@
             "ca": "Usuari ID",
             "es": "Usuario ID"
           },
-          "javaName": "usuariid",
+          "javaName": "usuariID",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -1346,7 +1346,7 @@
             "ca": "Projecte ID",
             "es": "Proyecto ID"
           },
-          "javaName": "projecteid",
+          "javaName": "projecteID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1456,7 +1456,7 @@
             "ca": "projecteid",
             "es": "projecteid"
           },
-          "javaName": "projecteid",
+          "javaName": "projecteID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1524,7 +1524,7 @@
             "ca": "Departament ID",
             "es": "Departamento ID"
           },
-          "javaName": "departamentid",
+          "javaName": "departamentID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -1580,10 +1580,10 @@
         {
           "isAutoIncrement": false,
           "sqlName": "actiu",
-          "sqlType": 4,
-          "size": 10,
+          "sqlType": -7,
+          "size": 1,
           "digits": 0,
-          "isNotNullable": false,
+          "isNotNullable": true,
           "labels": {
             "ca": "Actiu",
             "es": "Activo"
@@ -1649,31 +1649,6 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 5
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "actiu2",
-          "sqlType": -7,
-          "size": 1,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "actiu2",
-            "es": "actiu2"
-          },
-          "javaName": "actiu2",
-          "javaType": "boolean",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 4
           },
           "foreignKeys": []
         }
@@ -2072,10 +2047,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "usuariid",
-            "es": "usuariid"
+            "ca": "Usuari ID",
+            "es": "Usuario ID"
           },
-          "javaName": "usuariid",
+          "javaName": "usuariID",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -2091,6 +2066,12 @@
             {
               "name": "qef_grupsusu_usuaris_usuari_fk",
               "table": "qef_grupsusuari",
+              "field": "usuariid",
+              "type": 0
+            },
+            {
+              "name": "qef_usudep_usuaris_usuari_fk",
+              "table": "qef_usuarisdepartament",
               "field": "usuariid",
               "type": 0
             }
@@ -2373,6 +2354,35 @@
       "translationMapEntity": false,
       "fields": [
         {
+          "PK": "qef_usuarisdepartament_pk",
+          "index": "qef_usuarisdepartament_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "usuaridepartamentid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "usuaridepartamentid",
+            "es": "usuaridepartamentid"
+          },
+          "javaName": "usuariDepartamentID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027qef_usuarisdepartament_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "qef_usudep_usuariid_fk_i",
           "isAutoIncrement": false,
           "sqlName": "usuariid",
           "sqlType": 12,
@@ -2383,7 +2393,7 @@
             "ca": "usuariid",
             "es": "usuariid"
           },
-          "javaName": "usuariid",
+          "javaName": "usuariID",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -2393,9 +2403,22 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 1
+            "webtype": 3,
+            "foreignKey": {
+              "name": "qef_usudep_usuaris_usuari_fk",
+              "table": "qef_usuaris",
+              "field": "usuariid",
+              "type": 1
+            }
           },
-          "foreignKeys": []
+          "foreignKeys": [
+            {
+              "name": "qef_usudep_usuaris_usuari_fk",
+              "table": "qef_usuaris",
+              "field": "usuariid",
+              "type": 1
+            }
+          ]
         },
         {
           "index": "qef_usudep_departamentid_fk_i",
@@ -2409,7 +2432,7 @@
             "ca": "departamentid",
             "es": "departamentid"
           },
-          "javaName": "departamentid",
+          "javaName": "departamentID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -2435,34 +2458,6 @@
               "type": 1
             }
           ]
-        },
-        {
-          "PK": "qef_usuarisdepartament_pk",
-          "index": "qef_usuarisdepartament_pk_i",
-          "isAutoIncrement": true,
-          "sqlName": "usuaridepartamentid",
-          "sqlType": -5,
-          "size": 19,
-          "digits": 0,
-          "isNotNullable": true,
-          "labels": {
-            "ca": "usuaridepartamentid",
-            "es": "usuaridepartamentid"
-          },
-          "javaName": "usuaridepartamentid",
-          "javaType": "long",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": true,
-          "transientField": false,
-          "defaultValue": "nextval(\u0027qef_usuarisdepartament_seq\u0027::regclass)",
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 0
-          },
-          "foreignKeys": []
         }
       ]
     }
@@ -2473,5 +2468,6 @@
   ],
   "generateBack": true,
   "generateFront": true,
-  "generateWS": false
+  "generateApiInterna": false,
+  "generateApiExterna": false
 }

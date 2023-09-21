@@ -2,8 +2,8 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface Festius extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getFestiuid();
-	public void setFestiuid(long _festiuid_);
+	public long getFestiuID();
+	public void setFestiuID(long _festiuID_);
 
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);

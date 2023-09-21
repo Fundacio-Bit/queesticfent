@@ -19,6 +19,8 @@ public class UsuarisDepartamentBeanValidator
   // EJB's
   protected final org.fundaciobit.queesticfent.model.dao.IDepartamentsManager __departamentsManager;
 
+  protected final org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager;
+
   protected final org.fundaciobit.queesticfent.model.dao.IUsuarisDepartamentManager __usuarisDepartamentManager;
 
 
@@ -26,16 +28,20 @@ public class UsuarisDepartamentBeanValidator
 
 
   public UsuarisDepartamentBeanValidator(org.fundaciobit.queesticfent.model.dao.IDepartamentsManager __departamentsManager,
+     org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager,
      org.fundaciobit.queesticfent.model.dao.IUsuarisDepartamentManager __usuarisDepartamentManager) { 
     this.__departamentsManager = __departamentsManager;
+    this.__usuarisManager = __usuarisManager;
     this.__usuarisDepartamentManager = __usuarisDepartamentManager;
     _validator = new UsuarisDepartamentValidator<UsuarisDepartamentJPA>();
   }
 
   public UsuarisDepartamentBeanValidator(UsuarisDepartamentValidator<UsuarisDepartamentJPA> _validator,
      org.fundaciobit.queesticfent.model.dao.IDepartamentsManager __departamentsManager,
+     org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager,
      org.fundaciobit.queesticfent.model.dao.IUsuarisDepartamentManager __usuarisDepartamentManager) {
     this.__departamentsManager = __departamentsManager;
+    this.__usuarisManager = __usuarisManager;
     this.__usuarisDepartamentManager = __usuarisDepartamentManager;
     this._validator = _validator;
   }
@@ -43,7 +49,7 @@ public class UsuarisDepartamentBeanValidator
   @Override
   public List<I18NFieldError> validate(UsuarisDepartamentJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<UsuarisDepartamentJPA> _bvr_ = new BeanValidatorResult<UsuarisDepartamentJPA>();
-    _validator.validate(_bvr_, target, isNou, __departamentsManager, __usuarisDepartamentManager);
+    _validator.validate(_bvr_, target, isNou, __departamentsManager, __usuarisManager, __usuarisDepartamentManager);
     return _bvr_.getErrors();
   }
 }

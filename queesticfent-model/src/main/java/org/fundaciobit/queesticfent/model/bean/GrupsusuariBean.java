@@ -8,9 +8,9 @@ public class GrupsusuariBean implements Grupsusuari {
 
 
 
-	long grupsusuariid;// PK
-	java.lang.String usuariid;
-	long grupid;
+	long grupsUsuariID;// PK
+	java.lang.String usuariID;
+	long grupID;
 
 
   /** Constructor Buit */
@@ -18,41 +18,41 @@ public class GrupsusuariBean implements Grupsusuari {
   }
 
   /** Constructor amb tots els camps  */
-  public GrupsusuariBean(long grupsusuariid , java.lang.String usuariid , long grupid) {
-    this.grupsusuariid=grupsusuariid;
-    this.usuariid=usuariid;
-    this.grupid=grupid;
+  public GrupsusuariBean(long grupsUsuariID , java.lang.String usuariID , long grupID) {
+    this.grupsUsuariID=grupsUsuariID;
+    this.usuariID=usuariID;
+    this.grupID=grupID;
 }
   /** Constructor sense valors autoincrementals */
-  public GrupsusuariBean(java.lang.String usuariid , long grupid) {
-    this.usuariid=usuariid;
-    this.grupid=grupid;
+  public GrupsusuariBean(java.lang.String usuariID , long grupID) {
+    this.usuariID=usuariID;
+    this.grupID=grupID;
 }
   public GrupsusuariBean(Grupsusuari __bean) {
-    this.setGrupsusuariid(__bean.getGrupsusuariid());
-    this.setUsuariid(__bean.getUsuariid());
-    this.setGrupid(__bean.getGrupid());
+    this.setGrupsUsuariID(__bean.getGrupsUsuariID());
+    this.setUsuariID(__bean.getUsuariID());
+    this.setGrupID(__bean.getGrupID());
 	}
 
-	public long getGrupsusuariid() {
-		return(grupsusuariid);
+	public long getGrupsUsuariID() {
+		return(grupsUsuariID);
 	};
-	public void setGrupsusuariid(long _grupsusuariid_) {
-		this.grupsusuariid = _grupsusuariid_;
-	};
-
-	public java.lang.String getUsuariid() {
-		return(usuariid);
-	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setGrupsUsuariID(long _grupsUsuariID_) {
+		this.grupsUsuariID = _grupsUsuariID_;
 	};
 
-	public long getGrupid() {
-		return(grupid);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setGrupid(long _grupid_) {
-		this.grupid = _grupid_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
+	};
+
+	public long getGrupID() {
+		return(grupID);
+	};
+	public void setGrupID(long _grupID_) {
+		this.grupID = _grupID_;
 	};
 
 
@@ -62,9 +62,9 @@ public class GrupsusuariBean implements Grupsusuari {
   public static GrupsusuariBean toBean(Grupsusuari __bean) {
     if (__bean == null) { return null;}
     GrupsusuariBean __tmp = new GrupsusuariBean();
-    __tmp.setGrupsusuariid(__bean.getGrupsusuariid());
-    __tmp.setUsuariid(__bean.getUsuariid());
-    __tmp.setGrupid(__bean.getGrupid());
+    __tmp.setGrupsUsuariID(__bean.getGrupsUsuariID());
+    __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setGrupID(__bean.getGrupID());
 		return __tmp;
 	}
 

@@ -1,7 +1,7 @@
       <%--  CHECK DE SELECCIO MULTIPLE  --%>
       <c:if test="${__theFilterForm.visibleMultipleSelection}">
       <td>
-       <form:checkbox path="selectedItems" value="${festius.festiuid}"/>
+       <form:checkbox path="selectedItems" value="${festius.festiuID}"/>
        &nbsp;
       </td>
       </c:if>

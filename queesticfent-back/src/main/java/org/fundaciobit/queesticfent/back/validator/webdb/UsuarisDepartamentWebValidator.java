@@ -35,6 +35,9 @@ public class UsuarisDepartamentWebValidator extends AbstractWebValidator<Usuaris
   @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentsService.JNDI_NAME)
   protected org.fundaciobit.queesticfent.ejb.DepartamentsService departamentsEjb;
 
+  @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
+  protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+
   @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
   protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
 
@@ -80,7 +83,7 @@ public class UsuarisDepartamentWebValidator extends AbstractWebValidator<Usuaris
 
     BeanValidatorResult<UsuarisDepartament> __vr = new BeanValidatorResult<UsuarisDepartament>();
     validator.validate(__vr, __bean,
-      isNou, departamentsEjb, usuarisDepartamentEjb);
+      isNou, departamentsEjb, usuarisEjb, usuarisDepartamentEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

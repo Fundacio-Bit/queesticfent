@@ -44,7 +44,7 @@ public class GrupsusuariValidator<I extends Grupsusuari>
 
     // Check size
     if (__vr.getFieldErrorCount(USUARIID) == 0) {
-      java.lang.String __usuariid = __target__.getUsuariid();
+      java.lang.String __usuariid = __target__.getUsuariID();
       if (__usuariid!= null && __usuariid.length() > 20) {
         __vr.rejectValue(USUARIID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(20)));
@@ -68,25 +68,25 @@ public class GrupsusuariValidator<I extends Grupsusuari>
 
     // Fields with References to Other tables 
     if (__vr.getFieldErrorCount(USUARIID) == 0) {
-      java.lang.String __usuariid = __target__.getUsuariid();
+      java.lang.String __usuariid = __target__.getUsuariID();
       Long __count_ = null;
       try { __count_ = __usuarisManager.count(UsuarisFields.USUARIID.equal(__usuariid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(USUARIID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuaris"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuariid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuariId"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariid)));
       }
     }
 
     if (__vr.getFieldErrorCount(GRUPID) == 0) {
-      java.lang.Long __grupid = __target__.getGrupid();
+      java.lang.Long __grupid = __target__.getGrupID();
       Long __count_ = null;
       try { __count_ = __grupsManager.count(GrupsFields.GRUPID.equal(__grupid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(GRUPID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("grups.grups"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("grups.grupid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("grups.grupID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__grupid)));
       }
     }

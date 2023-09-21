@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,GrupsusuariFields.GRUPSUSUARIID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="grupsusuari.grupsusuariid" />:</span>
+              <span class="add-on"><fmt:message key="grupsusuari.grupsUsuariID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="grupsusuariidDesde" />
+              <form:input cssClass="input-append input-small" path="grupsUsuariIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="grupsusuariidFins" />
+              <form:input cssClass="input-append input-small search-query" path="grupsUsuariIDFins" />
 
             </div>
 
@@ -71,12 +71,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,GrupsusuariFields.USUARIID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="grupsusuari.usuariid" var="usuariid" />
-              <fmt:message key="genapp.form.searchby" var="cercaperusuariid" >                
-                 <fmt:param value="${usuariid}"/>
+              <fmt:message key="grupsusuari.usuariID" var="usuariID" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariID" >                
+                 <fmt:param value="${usuariID}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${usuariid}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariid}" path="usuariid" />
+              <span class="add-on"><c:out value="${usuariID}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariID}" path="usuariID" />
             </div>
 
 
@@ -84,16 +84,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,GrupsusuariFields.GRUPID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="grupsusuari.grupid" />:</span>
+              <span class="add-on"><fmt:message key="grupsusuari.grupID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="grupidDesde" />
+              <form:input cssClass="input-append input-small" path="grupIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="grupidFins" />
+              <form:input cssClass="input-append input-small search-query" path="grupIDFins" />
 
             </div>
 

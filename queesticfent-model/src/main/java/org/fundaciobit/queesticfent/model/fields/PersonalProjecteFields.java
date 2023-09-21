@@ -12,7 +12,7 @@ public interface PersonalProjecteFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final LongField PERSONALPROJECTEID = new LongField(_TABLE_MODEL, "personalprojecteid", "personalprojecteid");  // PK
+	 public static final LongField PERSONALPROJECTEID = new LongField(_TABLE_MODEL, "personalProjecteId", "personalprojecteid");  // PK
 	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariid", "usuariid");
 	 public static final LongField PROJECTEID = new LongField(_TABLE_MODEL, "projecteid", "projecteid");
 	 public static final LongField ORDRE = new LongField(_TABLE_MODEL, "ordre", "ordre");

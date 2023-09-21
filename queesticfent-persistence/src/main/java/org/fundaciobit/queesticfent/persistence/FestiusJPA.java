@@ -21,7 +21,7 @@ public class FestiusJPA implements Festius {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FESTIUS_SEQ")
     @Column(name="festiuid",nullable = false,length = 19)
-    long festiuid;
+    long festiuID;
 
     @Column(name="nom",nullable = false,length = 300)
     java.lang.String nom;
@@ -39,8 +39,8 @@ public class FestiusJPA implements Festius {
   }
 
   /** Constructor amb tots els camps  */
-  public FestiusJPA(long festiuid , java.lang.String nom , java.sql.Date data , java.lang.String descripcio) {
-    this.festiuid=festiuid;
+  public FestiusJPA(long festiuID , java.lang.String nom , java.sql.Date data , java.lang.String descripcio) {
+    this.festiuID=festiuID;
     this.nom=nom;
     this.data=data;
     this.descripcio=descripcio;
@@ -52,17 +52,17 @@ public class FestiusJPA implements Festius {
     this.descripcio=descripcio;
 }
   public FestiusJPA(Festius __bean) {
-    this.setFestiuid(__bean.getFestiuid());
+    this.setFestiuID(__bean.getFestiuID());
     this.setNom(__bean.getNom());
     this.setData(__bean.getData());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getFestiuid() {
-		return(festiuid);
+	public long getFestiuID() {
+		return(festiuID);
 	};
-	public void setFestiuid(long _festiuid_) {
-		this.festiuid = _festiuid_;
+	public void setFestiuID(long _festiuID_) {
+		this.festiuID = _festiuID_;
 	};
 
 	public java.lang.String getNom() {
@@ -94,7 +94,7 @@ public class FestiusJPA implements Festius {
     if (__obj != null && __obj instanceof Festius) {
       Festius __instance = (Festius)__obj;
       __result = true;
-      __result = __result && (this.getFestiuid() == __instance.getFestiuid()) ;
+      __result = __result && (this.getFestiuID() == __instance.getFestiuID()) ;
     } else {
       __result = false;
     }
@@ -106,7 +106,7 @@ public class FestiusJPA implements Festius {
   public static FestiusJPA toJPA(Festius __bean) {
     if (__bean == null) { return null;}
     FestiusJPA __tmp = new FestiusJPA();
-    __tmp.setFestiuid(__bean.getFestiuid());
+    __tmp.setFestiuID(__bean.getFestiuID());
     __tmp.setNom(__bean.getNom());
     __tmp.setData(__bean.getData());
     __tmp.setDescripcio(__bean.getDescripcio());

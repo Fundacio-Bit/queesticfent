@@ -8,10 +8,10 @@ public class GrupsBean implements Grups {
 
 
 
-	long grupid;// PK
+	long grupID;// PK
 	java.lang.String nom;
 	java.lang.String descripcio;
-	java.lang.Long nivellseguretat;
+	java.lang.Long nivellSeguretat;
 
 
   /** Constructor Buit */
@@ -19,35 +19,35 @@ public class GrupsBean implements Grups {
   }
 
   /** Constructor amb tots els camps  */
-  public GrupsBean(long grupid , java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellseguretat) {
-    this.grupid=grupid;
+  public GrupsBean(long grupID , java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellSeguretat) {
+    this.grupID=grupID;
     this.nom=nom;
     this.descripcio=descripcio;
-    this.nivellseguretat=nivellseguretat;
+    this.nivellSeguretat=nivellSeguretat;
 }
   /** Constructor sense valors autoincrementals */
-  public GrupsBean(java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellseguretat) {
+  public GrupsBean(java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellSeguretat) {
     this.nom=nom;
     this.descripcio=descripcio;
-    this.nivellseguretat=nivellseguretat;
+    this.nivellSeguretat=nivellSeguretat;
 }
   /** Constructor dels valors Not Null */
-  public GrupsBean(long grupid , java.lang.String nom) {
-    this.grupid=grupid;
+  public GrupsBean(long grupID , java.lang.String nom) {
+    this.grupID=grupID;
     this.nom=nom;
 }
   public GrupsBean(Grups __bean) {
-    this.setGrupid(__bean.getGrupid());
+    this.setGrupID(__bean.getGrupID());
     this.setNom(__bean.getNom());
     this.setDescripcio(__bean.getDescripcio());
-    this.setNivellseguretat(__bean.getNivellseguretat());
+    this.setNivellSeguretat(__bean.getNivellSeguretat());
 	}
 
-	public long getGrupid() {
-		return(grupid);
+	public long getGrupID() {
+		return(grupID);
 	};
-	public void setGrupid(long _grupid_) {
-		this.grupid = _grupid_;
+	public void setGrupID(long _grupID_) {
+		this.grupID = _grupID_;
 	};
 
 	public java.lang.String getNom() {
@@ -64,11 +64,11 @@ public class GrupsBean implements Grups {
 		this.descripcio = _descripcio_;
 	};
 
-	public java.lang.Long getNivellseguretat() {
-		return(nivellseguretat);
+	public java.lang.Long getNivellSeguretat() {
+		return(nivellSeguretat);
 	};
-	public void setNivellseguretat(java.lang.Long _nivellseguretat_) {
-		this.nivellseguretat = _nivellseguretat_;
+	public void setNivellSeguretat(java.lang.Long _nivellSeguretat_) {
+		this.nivellSeguretat = _nivellSeguretat_;
 	};
 
 
@@ -78,10 +78,10 @@ public class GrupsBean implements Grups {
   public static GrupsBean toBean(Grups __bean) {
     if (__bean == null) { return null;}
     GrupsBean __tmp = new GrupsBean();
-    __tmp.setGrupid(__bean.getGrupid());
+    __tmp.setGrupID(__bean.getGrupID());
     __tmp.setNom(__bean.getNom());
     __tmp.setDescripcio(__bean.getDescripcio());
-    __tmp.setNivellseguretat(__bean.getNivellseguretat());
+    __tmp.setNivellSeguretat(__bean.getNivellSeguretat());
 		return __tmp;
 	}
 

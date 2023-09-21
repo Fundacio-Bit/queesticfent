@@ -32,6 +32,14 @@ public class UsuarisDepartamentQueryPath extends org.fundaciobit.genapp.common.q
   }
 
 
+  public UsuarisQueryPath USUARIS() {
+    return new UsuarisQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return UsuarisDepartamentQueryPath.this.getQueryPath() + "usuaris" + ".";
+      }
+    });
+  }
+
   public DepartamentsQueryPath DEPARTAMENTS() {
     return new DepartamentsQueryPath(new QueryPath() {
       public String getQueryPath() {

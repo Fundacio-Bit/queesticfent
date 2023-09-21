@@ -24,7 +24,7 @@
 
       <c:forEach var="usuaris" items="${usuarisItems}">
 
-        <tr id="usuaris_rowid_${usuaris.usuariid}">
+        <tr id="usuaris_rowid_${usuaris.usuariId}">
           <%@include file="usuarisListCoreMultipleSelect.jsp" %>
 
           <%@include file="usuarisListCoreContent.jsp" %>

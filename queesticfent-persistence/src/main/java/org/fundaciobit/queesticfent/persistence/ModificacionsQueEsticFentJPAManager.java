@@ -55,22 +55,22 @@ public class ModificacionsQueEsticFentJPAManager
         return list.toArray(new ModificacionsQueEsticFent[list.size()]);
     };
 
-    public ModificacionsQueEsticFent create( long _accioid_, java.lang.String _usuariid_, java.lang.Long _projecteid_, java.sql.Timestamp _data_, java.lang.Long _queesticfentid_, java.lang.String _dada1_, java.lang.String _dada2_) throws I18NException {
-        ModificacionsQueEsticFentJPA __bean =  new ModificacionsQueEsticFentJPA(_accioid_,_usuariid_,_projecteid_,_data_,_queesticfentid_,_dada1_,_dada2_);
+    public ModificacionsQueEsticFent create( long _accioID_, java.lang.String _usuariID_, java.lang.Long _projecteID_, java.sql.Timestamp _data_, java.lang.Long _queEsticFentID_, java.lang.String _dada1_, java.lang.String _dada2_) throws I18NException {
+        ModificacionsQueEsticFentJPA __bean =  new ModificacionsQueEsticFentJPA(_accioID_,_usuariID_,_projecteID_,_data_,_queEsticFentID_,_dada1_,_dada2_);
         return create(__bean);
     }
 
 
 
- public void delete(long _modificacioid_) {
-   delete(findByPrimaryKey(_modificacioid_));
+ public void delete(long _modificacioID_) {
+   delete(findByPrimaryKey(_modificacioID_));
  }
 
 
 
 
-    public ModificacionsQueEsticFent findByPrimaryKey(long _modificacioid_) {
-        return __em.find(ModificacionsQueEsticFentJPA.class, _modificacioid_);  
+    public ModificacionsQueEsticFent findByPrimaryKey(long _modificacioID_) {
+        return __em.find(ModificacionsQueEsticFentJPA.class, _modificacioID_);  
     }
     @Override
     protected ModificacionsQueEsticFent getJPAInstance(ModificacionsQueEsticFent __bean) {

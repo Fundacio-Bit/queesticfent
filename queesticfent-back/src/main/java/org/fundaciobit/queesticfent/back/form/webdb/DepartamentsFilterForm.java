@@ -20,25 +20,25 @@ import org.fundaciobit.queesticfent.model.fields.DepartamentsFields;
 @Component
 public class DepartamentsFilterForm extends queesticfentBaseFilterForm implements DepartamentsFields {
 
-  private java.lang.Long departamentidDesde;
+  private java.lang.Long departamentIDDesde;
 
-  public java.lang.Long getDepartamentidDesde() {
-    return this.departamentidDesde;
+  public java.lang.Long getDepartamentIDDesde() {
+    return this.departamentIDDesde;
   }
 
-  public void setDepartamentidDesde(java.lang.Long departamentidDesde) {
-    this.departamentidDesde = departamentidDesde;
+  public void setDepartamentIDDesde(java.lang.Long departamentIDDesde) {
+    this.departamentIDDesde = departamentIDDesde;
   }
 
 
-  private java.lang.Long departamentidFins;
+  private java.lang.Long departamentIDFins;
 
-  public java.lang.Long getDepartamentidFins() {
-    return this.departamentidFins;
+  public java.lang.Long getDepartamentIDFins() {
+    return this.departamentIDFins;
   }
 
-  public void setDepartamentidFins(java.lang.Long departamentidFins) {
-    this.departamentidFins = departamentidFins;
+  public void setDepartamentIDFins(java.lang.Long departamentIDFins) {
+    this.departamentIDFins = departamentIDFins;
   }
 
 
@@ -53,14 +53,14 @@ public class DepartamentsFilterForm extends queesticfentBaseFilterForm implement
   }
 
 
-  private java.lang.String coordinadorid;
+  private java.lang.String coordinadorId;
 
-  public java.lang.String getCoordinadorid() {
-    return this.coordinadorid;
+  public java.lang.String getCoordinadorId() {
+    return this.coordinadorId;
   }
 
-  public void setCoordinadorid(java.lang.String coordinadorid) {
-    this.coordinadorid = coordinadorid;
+  public void setCoordinadorId(java.lang.String coordinadorId) {
+    this.coordinadorId = coordinadorId;
   }
 
 
@@ -91,10 +91,10 @@ public class DepartamentsFilterForm extends queesticfentBaseFilterForm implement
   
   public DepartamentsFilterForm(DepartamentsFilterForm __toClone) {
     super(__toClone);
-    this.departamentidDesde = __toClone.departamentidDesde;
-    this.departamentidFins = __toClone.departamentidFins;
+    this.departamentIDDesde = __toClone.departamentIDDesde;
+    this.departamentIDFins = __toClone.departamentIDFins;
     this.nom = __toClone.nom;
-    this.coordinadorid = __toClone.coordinadorid;
+    this.coordinadorId = __toClone.coordinadorId;
     this.nomldap = __toClone.nomldap;
     this.descripcio = __toClone.descripcio;
   }

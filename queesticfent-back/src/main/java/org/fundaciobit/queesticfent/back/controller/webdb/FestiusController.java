@@ -262,7 +262,7 @@ public class FestiusController
         return getTileForm();
       } else {
         festius = create(request, festius);
-        createMessageSuccess(request, "success.creation", festius.getFestiuid());
+        createMessageSuccess(request, "success.creation", festius.getFestiuID());
         festiusForm.setFestius(festius);
         return getRedirectWhenCreated(request, festiusForm);
       }
@@ -277,16 +277,16 @@ public class FestiusController
     }
   }
 
-  @RequestMapping(value = "/view/{festiuid}", method = RequestMethod.GET)
-  public ModelAndView veureFestiusGet(@PathVariable("festiuid") java.lang.Long festiuid,
+  @RequestMapping(value = "/view/{festiuID}", method = RequestMethod.GET)
+  public ModelAndView veureFestiusGet(@PathVariable("festiuID") java.lang.Long festiuID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewFestiusGet(festiuid,
+      return editAndViewFestiusGet(festiuID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewFestiusGet(@PathVariable("festiuid") java.lang.Long festiuid,
+  protected ModelAndView editAndViewFestiusGet(@PathVariable("festiuID") java.lang.Long festiuID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -298,11 +298,11 @@ public class FestiusController
         return null;
       }
     }
-    FestiusJPA festius = findByPrimaryKey(request, festiuid);
+    FestiusJPA festius = findByPrimaryKey(request, festiuID);
 
     if (festius == null) {
-      createMessageWarning(request, "error.notfound", festiuid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, festiuid), true));
+      createMessageWarning(request, "error.notfound", festiuID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, festiuID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -323,11 +323,11 @@ public class FestiusController
   /**
    * Carregar el formulari per modificar un Festius existent
    */
-  @RequestMapping(value = "/{festiuid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarFestiusGet(@PathVariable("festiuid") java.lang.Long festiuid,
+  @RequestMapping(value = "/{festiuID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarFestiusGet(@PathVariable("festiuID") java.lang.Long festiuID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewFestiusGet(festiuid,
+      return editAndViewFestiusGet(festiuID,
         request, response, false);
   }
 
@@ -336,7 +336,7 @@ public class FestiusController
   /**
    * Editar un Festius existent
    */
-  @RequestMapping(value = "/{festiuid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{festiuID}/edit", method = RequestMethod.POST)
   public String editarFestiusPost(@ModelAttribute FestiusForm festiusForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -357,7 +357,7 @@ public class FestiusController
         return getTileForm();
       } else {
         festius = update(request, festius);
-        createMessageSuccess(request, "success.modification", festius.getFestiuid());
+        createMessageSuccess(request, "success.modification", festius.getFestiuID());
         status.setComplete();
         return getRedirectWhenModified(request, festiusForm, null);
       }
@@ -367,7 +367,7 @@ public class FestiusController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          festius.getFestiuid(), __e);
+          festius.getFestiuID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, festiusForm, __e);
     }
@@ -378,8 +378,8 @@ public class FestiusController
   /**
    * Eliminar un Festius existent
    */
-  @RequestMapping(value = "/{festiuid}/delete")
-  public String eliminarFestius(@PathVariable("festiuid") java.lang.Long festiuid,
+  @RequestMapping(value = "/{festiuID}/delete")
+  public String eliminarFestius(@PathVariable("festiuID") java.lang.Long festiuID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -387,20 +387,20 @@ public class FestiusController
       return null;
     }
     try {
-      Festius festius = this.findByPrimaryKey(request, festiuid);
+      Festius festius = this.findByPrimaryKey(request, festiuID);
       if (festius == null) {
-        String __msg = createMessageError(request, "error.notfound", festiuid);
-        return getRedirectWhenDelete(request, festiuid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", festiuID);
+        return getRedirectWhenDelete(request, festiuID, new Exception(__msg));
       } else {
         delete(request, festius);
-        createMessageSuccess(request, "success.deleted", festiuid);
-        return getRedirectWhenDelete(request, festiuid,null);
+        createMessageSuccess(request, "success.deleted", festiuID);
+        return getRedirectWhenDelete(request, festiuID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", festiuid, e);
+      String msg = createMessageError(request, "error.deleting", festiuID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, festiuid, e);
+      return getRedirectWhenDelete(request, festiuID, e);
     }
   }
 
@@ -436,8 +436,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __festiuid, Throwable e) {
-    java.lang.Long festiuid = (java.lang.Long)__festiuid;
+  public String[] getArgumentsMissatge(Object __festiuID, Throwable e) {
+    java.lang.Long festiuID = (java.lang.Long)__festiuID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -447,13 +447,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (festiuid == null) {
+    if (festiuID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(festiuid),
+         String.valueOf(festiuID),
  exceptionMsg };
     }
   }
@@ -467,7 +467,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("festius.festiuid");
+    return  I18NUtils.tradueix("festius.festiuID");
   }
 
   @InitBinder("festiusFilterForm")
@@ -482,7 +482,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "festius.festiuid");
+    initDisallowedFields(binder, "festius.festiuID");
   }
 
   public FestiusWebValidator getWebValidator() {
@@ -500,10 +500,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Festius
    */
-  @RequestMapping(value = "/{festiuid}/cancel")
-  public String cancelFestius(@PathVariable("festiuid") java.lang.Long festiuid,
+  @RequestMapping(value = "/{festiuID}/cancel")
+  public String cancelFestius(@PathVariable("festiuID") java.lang.Long festiuID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, festiuid);
+     return getRedirectWhenCancel(request, festiuID);
   }
 
   @Override
@@ -569,11 +569,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long festiuid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long festiuID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long festiuid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long festiuID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -596,8 +596,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public FestiusJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long festiuid) throws I18NException {
-    return (FestiusJPA) festiusEjb.findByPrimaryKey(festiuid);
+  public FestiusJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long festiuID) throws I18NException {
+    return (FestiusJPA) festiusEjb.findByPrimaryKey(festiuID);
   }
 
 

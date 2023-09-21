@@ -33,9 +33,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.TODATA)}">
         <th>${qef:getSortIcons(__theFilterForm,ProjectesFields.TODATA)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.ACTIU2)}">
-        <th>${qef:getSortIcons(__theFilterForm,ProjectesFields.ACTIU2)}</th>
-        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

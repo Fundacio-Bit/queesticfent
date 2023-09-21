@@ -40,6 +40,10 @@ public class ProjectesValidator<I extends Projectes>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DEPARTAMENTID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ACTIU, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACTIU)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,FROMDATA, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FROMDATA)));
@@ -84,7 +88,7 @@ public class ProjectesValidator<I extends Projectes>
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(DEPARTAMENTID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("departaments.departaments"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("departaments.departamentid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("departaments.departamentID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__departamentid)));
       }
     }

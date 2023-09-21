@@ -19,6 +19,7 @@ public class UsuarisDepartamentForm extends queesticfentBaseForm {
   public UsuarisDepartamentForm(UsuarisDepartamentForm __toClone) {
     super(__toClone);
       this.usuarisDepartament = __toClone.usuarisDepartament;
+    this.listOfUsuarisForUsuariId = __toClone.listOfUsuarisForUsuariId;
     this.listOfDepartamentsForDepartamentid = __toClone.listOfDepartamentsForDepartamentid;
   }
   
@@ -35,6 +36,18 @@ public class UsuarisDepartamentForm extends queesticfentBaseForm {
   }
   
   
+  private List<StringKeyValue> listOfUsuarisForUsuariId;
+
+  public List<StringKeyValue> getListOfUsuarisForUsuariId() {
+    return this.listOfUsuarisForUsuariId;
+  }
+
+  public void setListOfUsuarisForUsuariId(List<StringKeyValue> listOfUsuarisForUsuariId) {
+    this.listOfUsuarisForUsuariId = listOfUsuarisForUsuariId;
+  }
+
+
+
   private List<StringKeyValue> listOfDepartamentsForDepartamentid;
 
   public List<StringKeyValue> getListOfDepartamentsForDepartamentid() {

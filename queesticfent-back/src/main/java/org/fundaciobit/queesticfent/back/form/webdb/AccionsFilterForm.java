@@ -20,25 +20,25 @@ import org.fundaciobit.queesticfent.model.fields.AccionsFields;
 @Component
 public class AccionsFilterForm extends queesticfentBaseFilterForm implements AccionsFields {
 
-  private java.lang.Long accioidDesde;
+  private java.lang.Long accioIdDesde;
 
-  public java.lang.Long getAccioidDesde() {
-    return this.accioidDesde;
+  public java.lang.Long getAccioIdDesde() {
+    return this.accioIdDesde;
   }
 
-  public void setAccioidDesde(java.lang.Long accioidDesde) {
-    this.accioidDesde = accioidDesde;
+  public void setAccioIdDesde(java.lang.Long accioIdDesde) {
+    this.accioIdDesde = accioIdDesde;
   }
 
 
-  private java.lang.Long accioidFins;
+  private java.lang.Long accioIdFins;
 
-  public java.lang.Long getAccioidFins() {
-    return this.accioidFins;
+  public java.lang.Long getAccioIdFins() {
+    return this.accioIdFins;
   }
 
-  public void setAccioidFins(java.lang.Long accioidFins) {
-    this.accioidFins = accioidFins;
+  public void setAccioIdFins(java.lang.Long accioIdFins) {
+    this.accioIdFins = accioIdFins;
   }
 
 
@@ -53,14 +53,14 @@ public class AccionsFilterForm extends queesticfentBaseFilterForm implements Acc
   }
 
 
-  private java.lang.String nomllegenda;
+  private java.lang.String nomLlegenda;
 
-  public java.lang.String getNomllegenda() {
-    return this.nomllegenda;
+  public java.lang.String getNomLlegenda() {
+    return this.nomLlegenda;
   }
 
-  public void setNomllegenda(java.lang.String nomllegenda) {
-    this.nomllegenda = nomllegenda;
+  public void setNomLlegenda(java.lang.String nomLlegenda) {
+    this.nomLlegenda = nomLlegenda;
   }
 
 
@@ -91,10 +91,10 @@ public class AccionsFilterForm extends queesticfentBaseFilterForm implements Acc
   
   public AccionsFilterForm(AccionsFilterForm __toClone) {
     super(__toClone);
-    this.accioidDesde = __toClone.accioidDesde;
-    this.accioidFins = __toClone.accioidFins;
+    this.accioIdDesde = __toClone.accioIdDesde;
+    this.accioIdFins = __toClone.accioIdFins;
     this.nom = __toClone.nom;
-    this.nomllegenda = __toClone.nomllegenda;
+    this.nomLlegenda = __toClone.nomLlegenda;
     this.color = __toClone.color;
     this.descripcio = __toClone.descripcio;
   }

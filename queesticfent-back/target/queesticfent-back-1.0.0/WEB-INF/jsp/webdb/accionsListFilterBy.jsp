@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccionsFields.ACCIOID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="accions.accioid" />:</span>
+              <span class="add-on"><fmt:message key="accions.accioId" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="accioidDesde" />
+              <form:input cssClass="input-append input-small" path="accioIdDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="accioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="accioIdFins" />
 
             </div>
 
@@ -84,12 +84,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccionsFields.NOMLLEGENDA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="accions.nomllegenda" var="nomllegenda" />
-              <fmt:message key="genapp.form.searchby" var="cercapernomllegenda" >                
-                 <fmt:param value="${nomllegenda}"/>
+              <fmt:message key="accions.nomLlegenda" var="nomLlegenda" />
+              <fmt:message key="genapp.form.searchby" var="cercapernomLlegenda" >                
+                 <fmt:param value="${nomLlegenda}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${nomllegenda}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapernomllegenda}" path="nomllegenda" />
+              <span class="add-on"><c:out value="${nomLlegenda}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapernomLlegenda}" path="nomLlegenda" />
             </div>
 
 

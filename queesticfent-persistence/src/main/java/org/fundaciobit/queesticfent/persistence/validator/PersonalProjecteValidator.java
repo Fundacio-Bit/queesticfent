@@ -76,7 +76,7 @@ public class PersonalProjecteValidator<I extends PersonalProjecte>
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(PROJECTEID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projectes"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projecteid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("projectes.projecteId"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__projecteid)));
       }
     }

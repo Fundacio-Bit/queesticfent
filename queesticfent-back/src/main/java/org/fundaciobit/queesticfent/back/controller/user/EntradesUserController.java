@@ -26,15 +26,16 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class EntradesUserController extends ModificacionsQueEsticFentController {
 
-
+    @Override
     public String getTileForm() {
       return "entradesFormUser";
     }
-
+    
+    @Override
     public String getTileList() {
       return "entradesListUser";
     }
-
+    @Override
     public String getSessionAttributeFilterForm() {
       return "ModificacionsQueEsticFent_FilterForm_" + this.getClass().getName();
     }
@@ -46,6 +47,7 @@ public class EntradesUserController extends ModificacionsQueEsticFentController 
         return USUARIID.equal(userName);
     }
     
+    @Override
     public ModificacionsQueEsticFentFilterForm getModificacionsQueEsticFentFilterForm(Integer pagina, ModelAndView mav,
             HttpServletRequest request) throws I18NException {
             ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm = super.getModificacionsQueEsticFentFilterForm(pagina, mav, request);
@@ -60,14 +62,15 @@ public class EntradesUserController extends ModificacionsQueEsticFentController 
             return modificacionsQueEsticFentFilterForm;
           }
     
+    @Override
     public ModificacionsQueEsticFentForm getModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA _jpa,
             boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
          ModificacionsQueEsticFentForm modificacionsQueEsticFentForm = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
+         
          modificacionsQueEsticFentForm.addReadOnlyField(USUARIID);
+         modificacionsQueEsticFentForm.addHiddenField(PROJECTEID);
          modificacionsQueEsticFentForm.addHiddenField(MODIFICACIOID);
          modificacionsQueEsticFentForm.addHiddenField(QUEESTICFENTID);
-         
-         
          
          return modificacionsQueEsticFentForm;
          

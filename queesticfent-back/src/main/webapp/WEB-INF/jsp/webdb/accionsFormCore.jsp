@@ -21,18 +21,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AccionsFields.NOMLLEGENDA)}">
-        <tr id="accions_nomllegenda_rowid">
-          <td id="accions_nomllegenda_columnlabelid">
+        <tr id="accions_nomLlegenda_rowid">
+          <td id="accions_nomLlegenda_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[AccionsFields.NOMLLEGENDA])?'accions.nomllegenda':__theForm.labels[AccionsFields.NOMLLEGENDA]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[AccionsFields.NOMLLEGENDA])?'accions.nomLlegenda':__theForm.labels[AccionsFields.NOMLLEGENDA]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[AccionsFields.NOMLLEGENDA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccionsFields.NOMLLEGENDA]}" ></i>
               </c:if>
             </td>
-          <td id="accions_nomllegenda_columnvalueid">
-            <form:errors path="accions.nomllegenda" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccionsFields.NOMLLEGENDA)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,AccionsFields.NOMLLEGENDA)? ' uneditable-input' : ''}"  style="" maxlength="45" path="accions.nomllegenda"   />
+          <td id="accions_nomLlegenda_columnvalueid">
+            <form:errors path="accions.nomLlegenda" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccionsFields.NOMLLEGENDA)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,AccionsFields.NOMLLEGENDA)? ' uneditable-input' : ''}"  style="" maxlength="45" path="accions.nomLlegenda"   />
 
            </td>
         </tr>

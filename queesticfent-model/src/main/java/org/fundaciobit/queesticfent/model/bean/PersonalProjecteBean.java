@@ -8,7 +8,7 @@ public class PersonalProjecteBean implements PersonalProjecte {
 
 
 
-	long personalprojecteid;// PK
+	long personalProjecteId;// PK
 	java.lang.String usuariid;
 	long projecteid;
 	long ordre;
@@ -20,8 +20,8 @@ public class PersonalProjecteBean implements PersonalProjecte {
   }
 
   /** Constructor amb tots els camps  */
-  public PersonalProjecteBean(long personalprojecteid , java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
-    this.personalprojecteid=personalprojecteid;
+  public PersonalProjecteBean(long personalProjecteId , java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
+    this.personalProjecteId=personalProjecteId;
     this.usuariid=usuariid;
     this.projecteid=projecteid;
     this.ordre=ordre;
@@ -35,18 +35,18 @@ public class PersonalProjecteBean implements PersonalProjecte {
     this.percent=percent;
 }
   public PersonalProjecteBean(PersonalProjecte __bean) {
-    this.setPersonalprojecteid(__bean.getPersonalprojecteid());
+    this.setPersonalProjecteId(__bean.getPersonalProjecteId());
     this.setUsuariid(__bean.getUsuariid());
     this.setProjecteid(__bean.getProjecteid());
     this.setOrdre(__bean.getOrdre());
     this.setPercent(__bean.getPercent());
 	}
 
-	public long getPersonalprojecteid() {
-		return(personalprojecteid);
+	public long getPersonalProjecteId() {
+		return(personalProjecteId);
 	};
-	public void setPersonalprojecteid(long _personalprojecteid_) {
-		this.personalprojecteid = _personalprojecteid_;
+	public void setPersonalProjecteId(long _personalProjecteId_) {
+		this.personalProjecteId = _personalProjecteId_;
 	};
 
 	public java.lang.String getUsuariid() {
@@ -84,7 +84,7 @@ public class PersonalProjecteBean implements PersonalProjecte {
   public static PersonalProjecteBean toBean(PersonalProjecte __bean) {
     if (__bean == null) { return null;}
     PersonalProjecteBean __tmp = new PersonalProjecteBean();
-    __tmp.setPersonalprojecteid(__bean.getPersonalprojecteid());
+    __tmp.setPersonalProjecteId(__bean.getPersonalProjecteId());
     __tmp.setUsuariid(__bean.getUsuariid());
     __tmp.setProjecteid(__bean.getProjecteid());
     __tmp.setOrdre(__bean.getOrdre());

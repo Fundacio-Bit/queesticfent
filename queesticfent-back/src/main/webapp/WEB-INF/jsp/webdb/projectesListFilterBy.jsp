@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ProjectesFields.PROJECTEID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="projectes.projecteid" />:</span>
+              <span class="add-on"><fmt:message key="projectes.projecteId" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="projecteidDesde" />
+              <form:input cssClass="input-append input-small" path="projecteIdDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="projecteidFins" />
+              <form:input cssClass="input-append input-small search-query" path="projecteIdFins" />
 
             </div>
 
@@ -229,24 +229,6 @@
             });
         </script>            </div>
     
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ProjectesFields.ACTIU2)}">
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-            <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="projectes.actiu2" />:</span>
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="actiu2Desde" />
-
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="actiu2Fins" />
-
-            </div>
-
-
         </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

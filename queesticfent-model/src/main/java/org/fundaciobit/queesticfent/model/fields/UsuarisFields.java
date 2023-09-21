@@ -12,7 +12,7 @@ public interface UsuarisFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariid", "usuariid");  // PK
+	 public static final StringField USUARIID = new StringField(_TABLE_MODEL, "usuariId", "usuariid");  // PK
 	 public static final StringField LLINATGE1 = new StringField(_TABLE_MODEL, "llinatge1", "llinatge1");
 	 public static final StringField LLINATGE2 = new StringField(_TABLE_MODEL, "llinatge2", "llinatge2");
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");

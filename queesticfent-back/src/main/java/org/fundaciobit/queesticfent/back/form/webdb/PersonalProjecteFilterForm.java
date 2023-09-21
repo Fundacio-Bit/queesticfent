@@ -21,25 +21,25 @@ import org.fundaciobit.queesticfent.model.fields.PersonalProjecteFields;
 @Component
 public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm implements PersonalProjecteFields {
 
-  private java.lang.Long personalprojecteidDesde;
+  private java.lang.Long personalProjecteIdDesde;
 
-  public java.lang.Long getPersonalprojecteidDesde() {
-    return this.personalprojecteidDesde;
+  public java.lang.Long getPersonalProjecteIdDesde() {
+    return this.personalProjecteIdDesde;
   }
 
-  public void setPersonalprojecteidDesde(java.lang.Long personalprojecteidDesde) {
-    this.personalprojecteidDesde = personalprojecteidDesde;
+  public void setPersonalProjecteIdDesde(java.lang.Long personalProjecteIdDesde) {
+    this.personalProjecteIdDesde = personalProjecteIdDesde;
   }
 
 
-  private java.lang.Long personalprojecteidFins;
+  private java.lang.Long personalProjecteIdFins;
 
-  public java.lang.Long getPersonalprojecteidFins() {
-    return this.personalprojecteidFins;
+  public java.lang.Long getPersonalProjecteIdFins() {
+    return this.personalProjecteIdFins;
   }
 
-  public void setPersonalprojecteidFins(java.lang.Long personalprojecteidFins) {
-    this.personalprojecteidFins = personalprojecteidFins;
+  public void setPersonalProjecteIdFins(java.lang.Long personalProjecteIdFins) {
+    this.personalProjecteIdFins = personalProjecteIdFins;
   }
 
 
@@ -125,8 +125,8 @@ public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm imple
   
   public PersonalProjecteFilterForm(PersonalProjecteFilterForm __toClone) {
     super(__toClone);
-    this.personalprojecteidDesde = __toClone.personalprojecteidDesde;
-    this.personalprojecteidFins = __toClone.personalprojecteidFins;
+    this.personalProjecteIdDesde = __toClone.personalProjecteIdDesde;
+    this.personalProjecteIdFins = __toClone.personalProjecteIdFins;
     this.usuariid = __toClone.usuariid;
     this.projecteidDesde = __toClone.projecteidDesde;
     this.projecteidFins = __toClone.projecteidFins;

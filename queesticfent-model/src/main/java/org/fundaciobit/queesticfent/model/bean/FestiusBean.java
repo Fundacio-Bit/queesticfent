@@ -8,7 +8,7 @@ public class FestiusBean implements Festius {
 
 
 
-	long festiuid;// PK
+	long festiuID;// PK
 	java.lang.String nom;
 	java.sql.Date data;
 	java.lang.String descripcio;
@@ -19,8 +19,8 @@ public class FestiusBean implements Festius {
   }
 
   /** Constructor amb tots els camps  */
-  public FestiusBean(long festiuid , java.lang.String nom , java.sql.Date data , java.lang.String descripcio) {
-    this.festiuid=festiuid;
+  public FestiusBean(long festiuID , java.lang.String nom , java.sql.Date data , java.lang.String descripcio) {
+    this.festiuID=festiuID;
     this.nom=nom;
     this.data=data;
     this.descripcio=descripcio;
@@ -32,17 +32,17 @@ public class FestiusBean implements Festius {
     this.descripcio=descripcio;
 }
   public FestiusBean(Festius __bean) {
-    this.setFestiuid(__bean.getFestiuid());
+    this.setFestiuID(__bean.getFestiuID());
     this.setNom(__bean.getNom());
     this.setData(__bean.getData());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getFestiuid() {
-		return(festiuid);
+	public long getFestiuID() {
+		return(festiuID);
 	};
-	public void setFestiuid(long _festiuid_) {
-		this.festiuid = _festiuid_;
+	public void setFestiuID(long _festiuID_) {
+		this.festiuID = _festiuID_;
 	};
 
 	public java.lang.String getNom() {
@@ -73,7 +73,7 @@ public class FestiusBean implements Festius {
   public static FestiusBean toBean(Festius __bean) {
     if (__bean == null) { return null;}
     FestiusBean __tmp = new FestiusBean();
-    __tmp.setFestiuid(__bean.getFestiuid());
+    __tmp.setFestiuID(__bean.getFestiuID());
     __tmp.setNom(__bean.getNom());
     __tmp.setData(__bean.getData());
     __tmp.setDescripcio(__bean.getDescripcio());

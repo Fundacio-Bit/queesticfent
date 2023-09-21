@@ -9,7 +9,7 @@
         <c:if test="${ __entry.key < 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteId]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />
@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.PROJECTEID)}">
           <td>
-          ${projectes.projecteid}
+          ${projectes.projecteId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.NOM)}">
@@ -49,9 +49,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.ACTIU)}">
           <td>
-            &nbsp;<c:if test="${not empty projectes.actiu}">
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${projectes.actiu?'success':'error'}.png"/>">
-            </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.FROMDATA)}">
@@ -60,13 +58,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.TODATA)}">
           <td> <fmt:formatDate pattern="${gen:getDatePattern()}" value="${projectes.todata}" /></td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.ACTIU2)}">
-          <td>
-            &nbsp;<c:if test="${not empty projectes.actiu2}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${projectes.actiu2?'success':'error'}.png"/>">
-            </c:if>
-          </td>
-        </c:if>
 
 
         <!--  /** Additional Fields */  -->
@@ -74,7 +65,7 @@
         <c:if test="${ __entry.key >= 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteId]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />

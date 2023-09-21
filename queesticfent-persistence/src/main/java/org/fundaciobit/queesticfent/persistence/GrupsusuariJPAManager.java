@@ -55,22 +55,22 @@ public class GrupsusuariJPAManager
         return list.toArray(new Grupsusuari[list.size()]);
     };
 
-    public Grupsusuari create( java.lang.String _usuariid_, long _grupid_) throws I18NException {
-        GrupsusuariJPA __bean =  new GrupsusuariJPA(_usuariid_,_grupid_);
+    public Grupsusuari create( java.lang.String _usuariID_, long _grupID_) throws I18NException {
+        GrupsusuariJPA __bean =  new GrupsusuariJPA(_usuariID_,_grupID_);
         return create(__bean);
     }
 
 
 
- public void delete(long _grupsusuariid_) {
-   delete(findByPrimaryKey(_grupsusuariid_));
+ public void delete(long _grupsUsuariID_) {
+   delete(findByPrimaryKey(_grupsUsuariID_));
  }
 
 
 
 
-    public Grupsusuari findByPrimaryKey(long _grupsusuariid_) {
-        return __em.find(GrupsusuariJPA.class, _grupsusuariid_);  
+    public Grupsusuari findByPrimaryKey(long _grupsUsuariID_) {
+        return __em.find(GrupsusuariJPA.class, _grupsUsuariID_);  
     }
     @Override
     protected Grupsusuari getJPAInstance(Grupsusuari __bean) {

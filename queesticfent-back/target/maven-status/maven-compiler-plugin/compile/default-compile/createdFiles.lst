@@ -1,10 +1,12 @@
 org\fundaciobit\queesticfent\back\config\MvcConfiguration.class
+org\fundaciobit\queesticfent\back\controller\user\UserInfo.class
 org\fundaciobit\queesticfent\back\form\webdb\UsuarisRefList.class
 org\fundaciobit\queesticfent\back\controller\DataExporterIconController.class
 org\fundaciobit\queesticfent\back\form\webdb\DepartamentsFilterForm.class
 org\fundaciobit\queesticfent\back\validator\webdb\FestiusWebValidator.class
 org\fundaciobit\queesticfent\back\form\webdb\AccionsFilterForm.class
 org\fundaciobit\queesticfent\back\validator\webdb\GrupsusuariWebValidator.class
+org\fundaciobit\queesticfent\back\controller\user\LlistatEntradesUserController.class
 org\fundaciobit\queesticfent\back\security\LoginException.class
 org\fundaciobit\queesticfent\back\form\webdb\FestiusRefList.class
 org\fundaciobit\queesticfent\back\controller\user\UserController.class
@@ -41,6 +43,7 @@ org\fundaciobit\queesticfent\back\utils\InitServlet.class
 org\fundaciobit\queesticfent\back\preparer\CapPreparer.class
 org\fundaciobit\queesticfent\back\controller\webdb\PersonalProjecteController.class
 org\fundaciobit\queesticfent\back\validator\webdb\ProjectesWebValidator.class
+org\fundaciobit\queesticfent\back\controller\user\ModificacioItem.class
 org\fundaciobit\queesticfent\back\controller\FileDownloadController.class
 org\fundaciobit\queesticfent\back\form\webdb\GrupsusuariFilterForm.class
 org\fundaciobit\queesticfent\back\form\webdb\TwitterForm.class
@@ -70,6 +73,7 @@ org\fundaciobit\queesticfent\back\utils\queesticfentMaxUploadSizeExceededExcepti
 org\fundaciobit\queesticfent\back\form\webdb\UsuarisFilterForm.class
 org\fundaciobit\queesticfent\back\form\webdb\GrupsRefList.class
 org\fundaciobit\queesticfent\back\validator\webdb\UsuarisDepartamentWebValidator.class
+org\fundaciobit\queesticfent\back\controller\user\Item.class
 org\fundaciobit\queesticfent\back\form\webdb\TraduccioFilterForm.class
 org\fundaciobit\queesticfent\back\form\webdb\IdiomaFilterForm.class
 org\fundaciobit\queesticfent\back\controller\webdb\FestiusController.class
@@ -100,4 +104,5 @@ org\fundaciobit\queesticfent\back\security\AuthenticationSuccessListener.class
 org\fundaciobit\queesticfent\back\form\webdb\FitxerRefList.class
 org\fundaciobit\queesticfent\back\validator\webdb\UsuarisWebValidator.class
 org\fundaciobit\queesticfent\back\utils\Utils$1.class
+org\fundaciobit\queesticfent\back\controller\user\QueEsticFentItem.class
 org\fundaciobit\queesticfent\back\form\webdb\FitxerFilterForm.class

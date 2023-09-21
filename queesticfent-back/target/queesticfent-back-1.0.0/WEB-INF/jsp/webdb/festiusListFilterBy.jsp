@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,FestiusFields.FESTIUID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="festius.festiuid" />:</span>
+              <span class="add-on"><fmt:message key="festius.festiuID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="festiuidDesde" />
+              <form:input cssClass="input-append input-small" path="festiuIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="festiuidFins" />
+              <form:input cssClass="input-append input-small search-query" path="festiuIDFins" />
 
             </div>
 

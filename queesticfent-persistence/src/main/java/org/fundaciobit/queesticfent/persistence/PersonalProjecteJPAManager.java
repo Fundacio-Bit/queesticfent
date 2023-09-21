@@ -62,15 +62,15 @@ public class PersonalProjecteJPAManager
 
 
 
- public void delete(long _personalprojecteid_) {
-   delete(findByPrimaryKey(_personalprojecteid_));
+ public void delete(long _personalProjecteId_) {
+   delete(findByPrimaryKey(_personalProjecteId_));
  }
 
 
 
 
-    public PersonalProjecte findByPrimaryKey(long _personalprojecteid_) {
-        return __em.find(PersonalProjecteJPA.class, _personalprojecteid_);  
+    public PersonalProjecte findByPrimaryKey(long _personalProjecteId_) {
+        return __em.find(PersonalProjecteJPA.class, _personalProjecteId_);  
     }
     @Override
     protected PersonalProjecte getJPAInstance(PersonalProjecte __bean) {

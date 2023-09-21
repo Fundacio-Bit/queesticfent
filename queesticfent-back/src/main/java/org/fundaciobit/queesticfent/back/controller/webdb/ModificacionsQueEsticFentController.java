@@ -186,21 +186,21 @@ public class ModificacionsQueEsticFentController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field accioid
+    // Field accioID
     {
-      _listSKV = getReferenceListForAccioid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForAccioID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfAccionsForAccioid(_tmp);
+      filterForm.setMapOfAccionsForAccioID(_tmp);
       if (filterForm.getGroupByFields().contains(ACCIOID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, ACCIOID, false);
       };
     }
 
-    // Field projecteid
+    // Field projecteID
     {
-      _listSKV = getReferenceListForProjecteid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForProjecteID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfProjectesForProjecteid(_tmp);
+      filterForm.setMapOfProjectesForProjecteID(_tmp);
       if (filterForm.getGroupByFields().contains(PROJECTEID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, PROJECTEID, false);
       };
@@ -221,8 +221,8 @@ public class ModificacionsQueEsticFentController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(ACCIOID, filterForm.getMapOfAccionsForAccioid());
-    __mapping.put(PROJECTEID, filterForm.getMapOfProjectesForProjecteid());
+    __mapping.put(ACCIOID, filterForm.getMapOfAccionsForAccioID());
+    __mapping.put(PROJECTEID, filterForm.getMapOfProjectesForProjecteID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -271,22 +271,22 @@ public class ModificacionsQueEsticFentController
   public void fillReferencesForForm(ModificacionsQueEsticFentForm modificacionsQueEsticFentForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (modificacionsQueEsticFentForm.getListOfAccionsForAccioid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForAccioid(request, mav, modificacionsQueEsticFentForm, null);
+    if (modificacionsQueEsticFentForm.getListOfAccionsForAccioID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForAccioID(request, mav, modificacionsQueEsticFentForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      modificacionsQueEsticFentForm.setListOfAccionsForAccioid(_listSKV);
+      modificacionsQueEsticFentForm.setListOfAccionsForAccioID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (modificacionsQueEsticFentForm.getListOfProjectesForProjecteid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForProjecteid(request, mav, modificacionsQueEsticFentForm, null);
+    if (modificacionsQueEsticFentForm.getListOfProjectesForProjecteID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForProjecteID(request, mav, modificacionsQueEsticFentForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      modificacionsQueEsticFentForm.setListOfProjectesForProjecteid(_listSKV);
+      modificacionsQueEsticFentForm.setListOfProjectesForProjecteID(_listSKV);
     }
     
   }
@@ -315,7 +315,7 @@ public class ModificacionsQueEsticFentController
         return getTileForm();
       } else {
         modificacionsQueEsticFent = create(request, modificacionsQueEsticFent);
-        createMessageSuccess(request, "success.creation", modificacionsQueEsticFent.getModificacioid());
+        createMessageSuccess(request, "success.creation", modificacionsQueEsticFent.getModificacioID());
         modificacionsQueEsticFentForm.setModificacionsQueEsticFent(modificacionsQueEsticFent);
         return getRedirectWhenCreated(request, modificacionsQueEsticFentForm);
       }
@@ -330,16 +330,16 @@ public class ModificacionsQueEsticFentController
     }
   }
 
-  @RequestMapping(value = "/view/{modificacioid}", method = RequestMethod.GET)
-  public ModelAndView veureModificacionsQueEsticFentGet(@PathVariable("modificacioid") java.lang.Long modificacioid,
+  @RequestMapping(value = "/view/{modificacioID}", method = RequestMethod.GET)
+  public ModelAndView veureModificacionsQueEsticFentGet(@PathVariable("modificacioID") java.lang.Long modificacioID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewModificacionsQueEsticFentGet(modificacioid,
+      return editAndViewModificacionsQueEsticFentGet(modificacioID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewModificacionsQueEsticFentGet(@PathVariable("modificacioid") java.lang.Long modificacioid,
+  protected ModelAndView editAndViewModificacionsQueEsticFentGet(@PathVariable("modificacioID") java.lang.Long modificacioID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -351,11 +351,11 @@ public class ModificacionsQueEsticFentController
         return null;
       }
     }
-    ModificacionsQueEsticFentJPA modificacionsQueEsticFent = findByPrimaryKey(request, modificacioid);
+    ModificacionsQueEsticFentJPA modificacionsQueEsticFent = findByPrimaryKey(request, modificacioID);
 
     if (modificacionsQueEsticFent == null) {
-      createMessageWarning(request, "error.notfound", modificacioid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, modificacioid), true));
+      createMessageWarning(request, "error.notfound", modificacioID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, modificacioID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -376,11 +376,11 @@ public class ModificacionsQueEsticFentController
   /**
    * Carregar el formulari per modificar un ModificacionsQueEsticFent existent
    */
-  @RequestMapping(value = "/{modificacioid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarModificacionsQueEsticFentGet(@PathVariable("modificacioid") java.lang.Long modificacioid,
+  @RequestMapping(value = "/{modificacioID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarModificacionsQueEsticFentGet(@PathVariable("modificacioID") java.lang.Long modificacioID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewModificacionsQueEsticFentGet(modificacioid,
+      return editAndViewModificacionsQueEsticFentGet(modificacioID,
         request, response, false);
   }
 
@@ -389,7 +389,7 @@ public class ModificacionsQueEsticFentController
   /**
    * Editar un ModificacionsQueEsticFent existent
    */
-  @RequestMapping(value = "/{modificacioid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{modificacioID}/edit", method = RequestMethod.POST)
   public String editarModificacionsQueEsticFentPost(@ModelAttribute ModificacionsQueEsticFentForm modificacionsQueEsticFentForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -410,7 +410,7 @@ public class ModificacionsQueEsticFentController
         return getTileForm();
       } else {
         modificacionsQueEsticFent = update(request, modificacionsQueEsticFent);
-        createMessageSuccess(request, "success.modification", modificacionsQueEsticFent.getModificacioid());
+        createMessageSuccess(request, "success.modification", modificacionsQueEsticFent.getModificacioID());
         status.setComplete();
         return getRedirectWhenModified(request, modificacionsQueEsticFentForm, null);
       }
@@ -420,7 +420,7 @@ public class ModificacionsQueEsticFentController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          modificacionsQueEsticFent.getModificacioid(), __e);
+          modificacionsQueEsticFent.getModificacioID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, modificacionsQueEsticFentForm, __e);
     }
@@ -431,8 +431,8 @@ public class ModificacionsQueEsticFentController
   /**
    * Eliminar un ModificacionsQueEsticFent existent
    */
-  @RequestMapping(value = "/{modificacioid}/delete")
-  public String eliminarModificacionsQueEsticFent(@PathVariable("modificacioid") java.lang.Long modificacioid,
+  @RequestMapping(value = "/{modificacioID}/delete")
+  public String eliminarModificacionsQueEsticFent(@PathVariable("modificacioID") java.lang.Long modificacioID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -440,20 +440,20 @@ public class ModificacionsQueEsticFentController
       return null;
     }
     try {
-      ModificacionsQueEsticFent modificacionsQueEsticFent = this.findByPrimaryKey(request, modificacioid);
+      ModificacionsQueEsticFent modificacionsQueEsticFent = this.findByPrimaryKey(request, modificacioID);
       if (modificacionsQueEsticFent == null) {
-        String __msg = createMessageError(request, "error.notfound", modificacioid);
-        return getRedirectWhenDelete(request, modificacioid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", modificacioID);
+        return getRedirectWhenDelete(request, modificacioID, new Exception(__msg));
       } else {
         delete(request, modificacionsQueEsticFent);
-        createMessageSuccess(request, "success.deleted", modificacioid);
-        return getRedirectWhenDelete(request, modificacioid,null);
+        createMessageSuccess(request, "success.deleted", modificacioID);
+        return getRedirectWhenDelete(request, modificacioID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", modificacioid, e);
+      String msg = createMessageError(request, "error.deleting", modificacioID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, modificacioid, e);
+      return getRedirectWhenDelete(request, modificacioID, e);
     }
   }
 
@@ -489,8 +489,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __modificacioid, Throwable e) {
-    java.lang.Long modificacioid = (java.lang.Long)__modificacioid;
+  public String[] getArgumentsMissatge(Object __modificacioID, Throwable e) {
+    java.lang.Long modificacioID = (java.lang.Long)__modificacioID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -500,13 +500,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (modificacioid == null) {
+    if (modificacioID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(modificacioid),
+         String.valueOf(modificacioID),
  exceptionMsg };
     }
   }
@@ -520,7 +520,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("modificacionsQueEsticFent.modificacioid");
+    return  I18NUtils.tradueix("modificacionsQueEsticFent.modificacioID");
   }
 
   @InitBinder("modificacionsQueEsticFentFilterForm")
@@ -535,7 +535,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "modificacionsQueEsticFent.modificacioid");
+    initDisallowedFields(binder, "modificacionsQueEsticFent.modificacioID");
   }
 
   public ModificacionsQueEsticFentWebValidator getWebValidator() {
@@ -553,10 +553,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de ModificacionsQueEsticFent
    */
-  @RequestMapping(value = "/{modificacioid}/cancel")
-  public String cancelModificacionsQueEsticFent(@PathVariable("modificacioid") java.lang.Long modificacioid,
+  @RequestMapping(value = "/{modificacioID}/cancel")
+  public String cancelModificacionsQueEsticFent(@PathVariable("modificacioID") java.lang.Long modificacioID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, modificacioid);
+     return getRedirectWhenCancel(request, modificacioID);
   }
 
   @Override
@@ -591,20 +591,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccioid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForAccioID(HttpServletRequest request,
        ModelAndView mav, ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, Where where)  throws I18NException {
     if (modificacionsQueEsticFentForm.isHiddenField(ACCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (modificacionsQueEsticFentForm.isReadOnlyField(ACCIOID)) {
-      _where = AccionsFields.ACCIOID.equal(modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getAccioid());
+      _where = AccionsFields.ACCIOID.equal(modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getAccioID());
     }
-    return getReferenceListForAccioid(request, mav, Where.AND(where, _where));
+    return getReferenceListForAccioID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccioid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForAccioID(HttpServletRequest request,
        ModelAndView mav, ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm,
        List<ModificacionsQueEsticFent> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (modificacionsQueEsticFentFilterForm.isHiddenField(ACCIOID)
@@ -616,34 +616,34 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (ModificacionsQueEsticFent _item : list) {
-        _pkList.add(_item.getAccioid());
+        _pkList.add(_item.getAccioID());
         }
         _w = AccionsFields.ACCIOID.in(_pkList);
       }
-    return getReferenceListForAccioid(request, mav, Where.AND(where,_w));
+    return getReferenceListForAccioID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccioid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForAccioID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return accionsRefList.getReferenceList(AccionsFields.ACCIOID, where );
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, Where where)  throws I18NException {
     if (modificacionsQueEsticFentForm.isHiddenField(PROJECTEID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (modificacionsQueEsticFentForm.isReadOnlyField(PROJECTEID)) {
-      _where = ProjectesFields.PROJECTEID.equal(modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteid());
+      _where = ProjectesFields.PROJECTEID.equal(modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteID());
     }
-    return getReferenceListForProjecteid(request, mav, Where.AND(where, _where));
+    return getReferenceListForProjecteID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm,
        List<ModificacionsQueEsticFent> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (modificacionsQueEsticFentFilterForm.isHiddenField(PROJECTEID)
@@ -655,16 +655,16 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (ModificacionsQueEsticFent _item : list) {
-        if(_item.getProjecteid() == null) { continue; };
-        _pkList.add(_item.getProjecteid());
+        if(_item.getProjecteID() == null) { continue; };
+        _pkList.add(_item.getProjecteID());
         }
         _w = ProjectesFields.PROJECTEID.in(_pkList);
       }
-    return getReferenceListForProjecteid(request, mav, Where.AND(where,_w));
+    return getReferenceListForProjecteID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return projectesRefList.getReferenceList(ProjectesFields.PROJECTEID, where );
   }
@@ -701,11 +701,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long modificacioid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long modificacioID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long modificacioid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long modificacioID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -728,8 +728,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public ModificacionsQueEsticFentJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long modificacioid) throws I18NException {
-    return (ModificacionsQueEsticFentJPA) modificacionsQueEsticFentEjb.findByPrimaryKey(modificacioid);
+  public ModificacionsQueEsticFentJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long modificacioID) throws I18NException {
+    return (ModificacionsQueEsticFentJPA) modificacionsQueEsticFentEjb.findByPrimaryKey(modificacioID);
   }
 
 

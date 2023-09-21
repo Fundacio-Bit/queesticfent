@@ -55,22 +55,22 @@ public class GrupsJPAManager
         return list.toArray(new Grups[list.size()]);
     };
 
-    public Grups create( java.lang.String _nom_, java.lang.String _descripcio_, java.lang.Long _nivellseguretat_) throws I18NException {
-        GrupsJPA __bean =  new GrupsJPA(_nom_,_descripcio_,_nivellseguretat_);
+    public Grups create( java.lang.String _nom_, java.lang.String _descripcio_, java.lang.Long _nivellSeguretat_) throws I18NException {
+        GrupsJPA __bean =  new GrupsJPA(_nom_,_descripcio_,_nivellSeguretat_);
         return create(__bean);
     }
 
 
 
- public void delete(long _grupid_) {
-   delete(findByPrimaryKey(_grupid_));
+ public void delete(long _grupID_) {
+   delete(findByPrimaryKey(_grupID_));
  }
 
 
 
 
-    public Grups findByPrimaryKey(long _grupid_) {
-        return __em.find(GrupsJPA.class, _grupid_);  
+    public Grups findByPrimaryKey(long _grupID_) {
+        return __em.find(GrupsJPA.class, _grupID_);  
     }
     @Override
     protected Grups getJPAInstance(Grups __bean) {

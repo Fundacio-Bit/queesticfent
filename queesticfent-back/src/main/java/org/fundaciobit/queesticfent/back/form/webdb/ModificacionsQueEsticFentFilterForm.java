@@ -21,80 +21,80 @@ import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields
 @Component
 public class ModificacionsQueEsticFentFilterForm extends queesticfentBaseFilterForm implements ModificacionsQueEsticFentFields {
 
-  private java.lang.Long modificacioidDesde;
+  private java.lang.Long modificacioIDDesde;
 
-  public java.lang.Long getModificacioidDesde() {
-    return this.modificacioidDesde;
+  public java.lang.Long getModificacioIDDesde() {
+    return this.modificacioIDDesde;
   }
 
-  public void setModificacioidDesde(java.lang.Long modificacioidDesde) {
-    this.modificacioidDesde = modificacioidDesde;
-  }
-
-
-  private java.lang.Long modificacioidFins;
-
-  public java.lang.Long getModificacioidFins() {
-    return this.modificacioidFins;
-  }
-
-  public void setModificacioidFins(java.lang.Long modificacioidFins) {
-    this.modificacioidFins = modificacioidFins;
+  public void setModificacioIDDesde(java.lang.Long modificacioIDDesde) {
+    this.modificacioIDDesde = modificacioIDDesde;
   }
 
 
-  private java.lang.Long accioidDesde;
+  private java.lang.Long modificacioIDFins;
 
-  public java.lang.Long getAccioidDesde() {
-    return this.accioidDesde;
+  public java.lang.Long getModificacioIDFins() {
+    return this.modificacioIDFins;
   }
 
-  public void setAccioidDesde(java.lang.Long accioidDesde) {
-    this.accioidDesde = accioidDesde;
-  }
-
-
-  private java.lang.Long accioidFins;
-
-  public java.lang.Long getAccioidFins() {
-    return this.accioidFins;
-  }
-
-  public void setAccioidFins(java.lang.Long accioidFins) {
-    this.accioidFins = accioidFins;
+  public void setModificacioIDFins(java.lang.Long modificacioIDFins) {
+    this.modificacioIDFins = modificacioIDFins;
   }
 
 
-  private java.lang.String usuariid;
+  private java.lang.Long accioIDDesde;
 
-  public java.lang.String getUsuariid() {
-    return this.usuariid;
+  public java.lang.Long getAccioIDDesde() {
+    return this.accioIDDesde;
   }
 
-  public void setUsuariid(java.lang.String usuariid) {
-    this.usuariid = usuariid;
-  }
-
-
-  private java.lang.Long projecteidDesde;
-
-  public java.lang.Long getProjecteidDesde() {
-    return this.projecteidDesde;
-  }
-
-  public void setProjecteidDesde(java.lang.Long projecteidDesde) {
-    this.projecteidDesde = projecteidDesde;
+  public void setAccioIDDesde(java.lang.Long accioIDDesde) {
+    this.accioIDDesde = accioIDDesde;
   }
 
 
-  private java.lang.Long projecteidFins;
+  private java.lang.Long accioIDFins;
 
-  public java.lang.Long getProjecteidFins() {
-    return this.projecteidFins;
+  public java.lang.Long getAccioIDFins() {
+    return this.accioIDFins;
   }
 
-  public void setProjecteidFins(java.lang.Long projecteidFins) {
-    this.projecteidFins = projecteidFins;
+  public void setAccioIDFins(java.lang.Long accioIDFins) {
+    this.accioIDFins = accioIDFins;
+  }
+
+
+  private java.lang.String usuariID;
+
+  public java.lang.String getUsuariID() {
+    return this.usuariID;
+  }
+
+  public void setUsuariID(java.lang.String usuariID) {
+    this.usuariID = usuariID;
+  }
+
+
+  private java.lang.Long projecteIDDesde;
+
+  public java.lang.Long getProjecteIDDesde() {
+    return this.projecteIDDesde;
+  }
+
+  public void setProjecteIDDesde(java.lang.Long projecteIDDesde) {
+    this.projecteIDDesde = projecteIDDesde;
+  }
+
+
+  private java.lang.Long projecteIDFins;
+
+  public java.lang.Long getProjecteIDFins() {
+    return this.projecteIDFins;
+  }
+
+  public void setProjecteIDFins(java.lang.Long projecteIDFins) {
+    this.projecteIDFins = projecteIDFins;
   }
 
 
@@ -120,25 +120,25 @@ public class ModificacionsQueEsticFentFilterForm extends queesticfentBaseFilterF
   }
 
 
-  private java.lang.Long queesticfentidDesde;
+  private java.lang.Long queEsticFentIDDesde;
 
-  public java.lang.Long getQueesticfentidDesde() {
-    return this.queesticfentidDesde;
+  public java.lang.Long getQueEsticFentIDDesde() {
+    return this.queEsticFentIDDesde;
   }
 
-  public void setQueesticfentidDesde(java.lang.Long queesticfentidDesde) {
-    this.queesticfentidDesde = queesticfentidDesde;
+  public void setQueEsticFentIDDesde(java.lang.Long queEsticFentIDDesde) {
+    this.queEsticFentIDDesde = queEsticFentIDDesde;
   }
 
 
-  private java.lang.Long queesticfentidFins;
+  private java.lang.Long queEsticFentIDFins;
 
-  public java.lang.Long getQueesticfentidFins() {
-    return this.queesticfentidFins;
+  public java.lang.Long getQueEsticFentIDFins() {
+    return this.queEsticFentIDFins;
   }
 
-  public void setQueesticfentidFins(java.lang.Long queesticfentidFins) {
-    this.queesticfentidFins = queesticfentidFins;
+  public void setQueEsticFentIDFins(java.lang.Long queEsticFentIDFins) {
+    this.queEsticFentIDFins = queEsticFentIDFins;
   }
 
 
@@ -169,21 +169,21 @@ public class ModificacionsQueEsticFentFilterForm extends queesticfentBaseFilterF
   
   public ModificacionsQueEsticFentFilterForm(ModificacionsQueEsticFentFilterForm __toClone) {
     super(__toClone);
-    this.modificacioidDesde = __toClone.modificacioidDesde;
-    this.modificacioidFins = __toClone.modificacioidFins;
-    this.accioidDesde = __toClone.accioidDesde;
-    this.accioidFins = __toClone.accioidFins;
-    this.usuariid = __toClone.usuariid;
-    this.projecteidDesde = __toClone.projecteidDesde;
-    this.projecteidFins = __toClone.projecteidFins;
+    this.modificacioIDDesde = __toClone.modificacioIDDesde;
+    this.modificacioIDFins = __toClone.modificacioIDFins;
+    this.accioIDDesde = __toClone.accioIDDesde;
+    this.accioIDFins = __toClone.accioIDFins;
+    this.usuariID = __toClone.usuariID;
+    this.projecteIDDesde = __toClone.projecteIDDesde;
+    this.projecteIDFins = __toClone.projecteIDFins;
     this.dataDesde = __toClone.dataDesde;
     this.dataFins = __toClone.dataFins;
-    this.queesticfentidDesde = __toClone.queesticfentidDesde;
-    this.queesticfentidFins = __toClone.queesticfentidFins;
+    this.queEsticFentIDDesde = __toClone.queEsticFentIDDesde;
+    this.queEsticFentIDFins = __toClone.queEsticFentIDFins;
     this.dada1 = __toClone.dada1;
     this.dada2 = __toClone.dada2;
-    this.mapOfAccionsForAccioid = __toClone.mapOfAccionsForAccioid;
-    this.mapOfProjectesForProjecteid = __toClone.mapOfProjectesForProjecteid;
+    this.mapOfAccionsForAccioID = __toClone.mapOfAccionsForAccioID;
+    this.mapOfProjectesForProjecteID = __toClone.mapOfProjectesForProjecteID;
   }
   
   /* ========= UTILS ========== */
@@ -218,26 +218,26 @@ public class ModificacionsQueEsticFentFilterForm extends queesticfentBaseFilterF
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfAccionsForAccioid;
+  private Map<String, String> mapOfAccionsForAccioID;
 
-  public Map<String, String> getMapOfAccionsForAccioid() {
-    return this.mapOfAccionsForAccioid;
+  public Map<String, String> getMapOfAccionsForAccioID() {
+    return this.mapOfAccionsForAccioID;
   }
 
-  public void setMapOfAccionsForAccioid(Map<String, String> mapOfAccionsForAccioid) {
-    this.mapOfAccionsForAccioid = mapOfAccionsForAccioid;
+  public void setMapOfAccionsForAccioID(Map<String, String> mapOfAccionsForAccioID) {
+    this.mapOfAccionsForAccioID = mapOfAccionsForAccioID;
   }
 
 
 
-  private Map<String, String> mapOfProjectesForProjecteid;
+  private Map<String, String> mapOfProjectesForProjecteID;
 
-  public Map<String, String> getMapOfProjectesForProjecteid() {
-    return this.mapOfProjectesForProjecteid;
+  public Map<String, String> getMapOfProjectesForProjecteID() {
+    return this.mapOfProjectesForProjecteID;
   }
 
-  public void setMapOfProjectesForProjecteid(Map<String, String> mapOfProjectesForProjecteid) {
-    this.mapOfProjectesForProjecteid = mapOfProjectesForProjecteid;
+  public void setMapOfProjectesForProjecteID(Map<String, String> mapOfProjectesForProjecteID) {
+    this.mapOfProjectesForProjecteID = mapOfProjectesForProjecteID;
   }
 
 

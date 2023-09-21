@@ -12,9 +12,9 @@ public interface AccionsFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final LongField ACCIOID = new LongField(_TABLE_MODEL, "accioid", "accioid");  // PK
+	 public static final LongField ACCIOID = new LongField(_TABLE_MODEL, "accioId", "accioid");  // PK
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
-	 public static final StringField NOMLLEGENDA = new StringField(_TABLE_MODEL, "nomllegenda", "nomllegenda");
+	 public static final StringField NOMLLEGENDA = new StringField(_TABLE_MODEL, "nomLlegenda", "nomllegenda");
 	 public static final StringField COLOR = new StringField(_TABLE_MODEL, "color", "color");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
 

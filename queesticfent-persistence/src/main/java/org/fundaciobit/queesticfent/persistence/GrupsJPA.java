@@ -25,7 +25,7 @@ public class GrupsJPA implements Grups {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="GRUPS_SEQ")
     @Column(name="grupid",nullable = false,length = 19)
-    long grupid;
+    long grupID;
 
     @Column(name="nom",nullable = false,length = 255)
     java.lang.String nom;
@@ -34,7 +34,7 @@ public class GrupsJPA implements Grups {
     java.lang.String descripcio;
 
     @Column(name="nivellseguretat",length = 19)
-    java.lang.Long nivellseguretat;
+    java.lang.Long nivellSeguretat;
 
 
 
@@ -43,35 +43,35 @@ public class GrupsJPA implements Grups {
   }
 
   /** Constructor amb tots els camps  */
-  public GrupsJPA(long grupid , java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellseguretat) {
-    this.grupid=grupid;
+  public GrupsJPA(long grupID , java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellSeguretat) {
+    this.grupID=grupID;
     this.nom=nom;
     this.descripcio=descripcio;
-    this.nivellseguretat=nivellseguretat;
+    this.nivellSeguretat=nivellSeguretat;
 }
   /** Constructor sense valors autoincrementals */
-  public GrupsJPA(java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellseguretat) {
+  public GrupsJPA(java.lang.String nom , java.lang.String descripcio , java.lang.Long nivellSeguretat) {
     this.nom=nom;
     this.descripcio=descripcio;
-    this.nivellseguretat=nivellseguretat;
+    this.nivellSeguretat=nivellSeguretat;
 }
   /** Constructor dels valors Not Null */
-  public GrupsJPA(long grupid , java.lang.String nom) {
-    this.grupid=grupid;
+  public GrupsJPA(long grupID , java.lang.String nom) {
+    this.grupID=grupID;
     this.nom=nom;
 }
   public GrupsJPA(Grups __bean) {
-    this.setGrupid(__bean.getGrupid());
+    this.setGrupID(__bean.getGrupID());
     this.setNom(__bean.getNom());
     this.setDescripcio(__bean.getDescripcio());
-    this.setNivellseguretat(__bean.getNivellseguretat());
+    this.setNivellSeguretat(__bean.getNivellSeguretat());
 	}
 
-	public long getGrupid() {
-		return(grupid);
+	public long getGrupID() {
+		return(grupID);
 	};
-	public void setGrupid(long _grupid_) {
-		this.grupid = _grupid_;
+	public void setGrupID(long _grupID_) {
+		this.grupID = _grupID_;
 	};
 
 	public java.lang.String getNom() {
@@ -88,11 +88,11 @@ public class GrupsJPA implements Grups {
 		this.descripcio = _descripcio_;
 	};
 
-	public java.lang.Long getNivellseguretat() {
-		return(nivellseguretat);
+	public java.lang.Long getNivellSeguretat() {
+		return(nivellSeguretat);
 	};
-	public void setNivellseguretat(java.lang.Long _nivellseguretat_) {
-		this.nivellseguretat = _nivellseguretat_;
+	public void setNivellSeguretat(java.lang.Long _nivellSeguretat_) {
+		this.nivellSeguretat = _nivellSeguretat_;
 	};
 
 
@@ -103,7 +103,7 @@ public class GrupsJPA implements Grups {
     if (__obj != null && __obj instanceof Grups) {
       Grups __instance = (Grups)__obj;
       __result = true;
-      __result = __result && (this.getGrupid() == __instance.getGrupid()) ;
+      __result = __result && (this.getGrupID() == __instance.getGrupID()) ;
     } else {
       __result = false;
     }
@@ -128,10 +128,10 @@ public class GrupsJPA implements Grups {
   public static GrupsJPA toJPA(Grups __bean) {
     if (__bean == null) { return null;}
     GrupsJPA __tmp = new GrupsJPA();
-    __tmp.setGrupid(__bean.getGrupid());
+    __tmp.setGrupID(__bean.getGrupID());
     __tmp.setNom(__bean.getNom());
     __tmp.setDescripcio(__bean.getDescripcio());
-    __tmp.setNivellseguretat(__bean.getNivellseguretat());
+    __tmp.setNivellSeguretat(__bean.getNivellSeguretat());
 		return __tmp;
 	}
 

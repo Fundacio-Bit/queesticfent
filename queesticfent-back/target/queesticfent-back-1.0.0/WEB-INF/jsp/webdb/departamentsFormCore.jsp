@@ -21,18 +21,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,DepartamentsFields.COORDINADORID)}">
-        <tr id="departaments_coordinadorid_rowid">
-          <td id="departaments_coordinadorid_columnlabelid">
+        <tr id="departaments_coordinadorId_rowid">
+          <td id="departaments_coordinadorId_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[DepartamentsFields.COORDINADORID])?'departaments.coordinadorid':__theForm.labels[DepartamentsFields.COORDINADORID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[DepartamentsFields.COORDINADORID])?'departaments.coordinadorId':__theForm.labels[DepartamentsFields.COORDINADORID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[DepartamentsFields.COORDINADORID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[DepartamentsFields.COORDINADORID]}" ></i>
               </c:if>
             </td>
-          <td id="departaments_coordinadorid_columnvalueid">
-            <form:errors path="departaments.coordinadorid" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,DepartamentsFields.COORDINADORID)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,DepartamentsFields.COORDINADORID)? ' uneditable-input' : ''}"  style="" maxlength="200" path="departaments.coordinadorid"   />
+          <td id="departaments_coordinadorId_columnvalueid">
+            <form:errors path="departaments.coordinadorId" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,DepartamentsFields.COORDINADORID)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,DepartamentsFields.COORDINADORID)? ' uneditable-input' : ''}"  style="" maxlength="200" path="departaments.coordinadorId"   />
 
            </td>
         </tr>

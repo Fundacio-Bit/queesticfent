@@ -21,58 +21,58 @@ import org.fundaciobit.queesticfent.model.fields.GrupsusuariFields;
 @Component
 public class GrupsusuariFilterForm extends queesticfentBaseFilterForm implements GrupsusuariFields {
 
-  private java.lang.Long grupsusuariidDesde;
+  private java.lang.Long grupsUsuariIDDesde;
 
-  public java.lang.Long getGrupsusuariidDesde() {
-    return this.grupsusuariidDesde;
+  public java.lang.Long getGrupsUsuariIDDesde() {
+    return this.grupsUsuariIDDesde;
   }
 
-  public void setGrupsusuariidDesde(java.lang.Long grupsusuariidDesde) {
-    this.grupsusuariidDesde = grupsusuariidDesde;
-  }
-
-
-  private java.lang.Long grupsusuariidFins;
-
-  public java.lang.Long getGrupsusuariidFins() {
-    return this.grupsusuariidFins;
-  }
-
-  public void setGrupsusuariidFins(java.lang.Long grupsusuariidFins) {
-    this.grupsusuariidFins = grupsusuariidFins;
+  public void setGrupsUsuariIDDesde(java.lang.Long grupsUsuariIDDesde) {
+    this.grupsUsuariIDDesde = grupsUsuariIDDesde;
   }
 
 
-  private java.lang.String usuariid;
+  private java.lang.Long grupsUsuariIDFins;
 
-  public java.lang.String getUsuariid() {
-    return this.usuariid;
+  public java.lang.Long getGrupsUsuariIDFins() {
+    return this.grupsUsuariIDFins;
   }
 
-  public void setUsuariid(java.lang.String usuariid) {
-    this.usuariid = usuariid;
-  }
-
-
-  private java.lang.Long grupidDesde;
-
-  public java.lang.Long getGrupidDesde() {
-    return this.grupidDesde;
-  }
-
-  public void setGrupidDesde(java.lang.Long grupidDesde) {
-    this.grupidDesde = grupidDesde;
+  public void setGrupsUsuariIDFins(java.lang.Long grupsUsuariIDFins) {
+    this.grupsUsuariIDFins = grupsUsuariIDFins;
   }
 
 
-  private java.lang.Long grupidFins;
+  private java.lang.String usuariID;
 
-  public java.lang.Long getGrupidFins() {
-    return this.grupidFins;
+  public java.lang.String getUsuariID() {
+    return this.usuariID;
   }
 
-  public void setGrupidFins(java.lang.Long grupidFins) {
-    this.grupidFins = grupidFins;
+  public void setUsuariID(java.lang.String usuariID) {
+    this.usuariID = usuariID;
+  }
+
+
+  private java.lang.Long grupIDDesde;
+
+  public java.lang.Long getGrupIDDesde() {
+    return this.grupIDDesde;
+  }
+
+  public void setGrupIDDesde(java.lang.Long grupIDDesde) {
+    this.grupIDDesde = grupIDDesde;
+  }
+
+
+  private java.lang.Long grupIDFins;
+
+  public java.lang.Long getGrupIDFins() {
+    return this.grupIDFins;
+  }
+
+  public void setGrupIDFins(java.lang.Long grupIDFins) {
+    this.grupIDFins = grupIDFins;
   }
 
 
@@ -81,13 +81,13 @@ public class GrupsusuariFilterForm extends queesticfentBaseFilterForm implements
   
   public GrupsusuariFilterForm(GrupsusuariFilterForm __toClone) {
     super(__toClone);
-    this.grupsusuariidDesde = __toClone.grupsusuariidDesde;
-    this.grupsusuariidFins = __toClone.grupsusuariidFins;
-    this.usuariid = __toClone.usuariid;
-    this.grupidDesde = __toClone.grupidDesde;
-    this.grupidFins = __toClone.grupidFins;
-    this.mapOfUsuarisForUsuariid = __toClone.mapOfUsuarisForUsuariid;
-    this.mapOfGrupsForGrupid = __toClone.mapOfGrupsForGrupid;
+    this.grupsUsuariIDDesde = __toClone.grupsUsuariIDDesde;
+    this.grupsUsuariIDFins = __toClone.grupsUsuariIDFins;
+    this.usuariID = __toClone.usuariID;
+    this.grupIDDesde = __toClone.grupIDDesde;
+    this.grupIDFins = __toClone.grupIDFins;
+    this.mapOfUsuarisForUsuariID = __toClone.mapOfUsuarisForUsuariID;
+    this.mapOfGrupsForGrupID = __toClone.mapOfGrupsForGrupID;
   }
   
   /* ========= UTILS ========== */
@@ -122,26 +122,26 @@ public class GrupsusuariFilterForm extends queesticfentBaseFilterForm implements
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfUsuarisForUsuariid;
+  private Map<String, String> mapOfUsuarisForUsuariID;
 
-  public Map<String, String> getMapOfUsuarisForUsuariid() {
-    return this.mapOfUsuarisForUsuariid;
+  public Map<String, String> getMapOfUsuarisForUsuariID() {
+    return this.mapOfUsuarisForUsuariID;
   }
 
-  public void setMapOfUsuarisForUsuariid(Map<String, String> mapOfUsuarisForUsuariid) {
-    this.mapOfUsuarisForUsuariid = mapOfUsuarisForUsuariid;
+  public void setMapOfUsuarisForUsuariID(Map<String, String> mapOfUsuarisForUsuariID) {
+    this.mapOfUsuarisForUsuariID = mapOfUsuarisForUsuariID;
   }
 
 
 
-  private Map<String, String> mapOfGrupsForGrupid;
+  private Map<String, String> mapOfGrupsForGrupID;
 
-  public Map<String, String> getMapOfGrupsForGrupid() {
-    return this.mapOfGrupsForGrupid;
+  public Map<String, String> getMapOfGrupsForGrupID() {
+    return this.mapOfGrupsForGrupID;
   }
 
-  public void setMapOfGrupsForGrupid(Map<String, String> mapOfGrupsForGrupid) {
-    this.mapOfGrupsForGrupid = mapOfGrupsForGrupid;
+  public void setMapOfGrupsForGrupID(Map<String, String> mapOfGrupsForGrupID) {
+    this.mapOfGrupsForGrupID = mapOfGrupsForGrupID;
   }
 
 

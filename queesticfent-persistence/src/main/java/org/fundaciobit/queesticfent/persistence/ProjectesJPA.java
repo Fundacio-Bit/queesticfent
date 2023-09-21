@@ -29,7 +29,7 @@ public class ProjectesJPA implements Projectes {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROJECTES_SEQ")
     @Column(name="projecteid",nullable = false,length = 19)
-    long projecteid;
+    long projecteId;
 
     @Column(name="nom",nullable = false,length = 45)
     java.lang.String nom;
@@ -40,7 +40,7 @@ public class ProjectesJPA implements Projectes {
     @Column(name="descripcio",length = 500)
     java.lang.String descripcio;
 
-    @Column(name="actiu",length = 10)
+    @Column(name="actiu",nullable = false,length = 1)
     boolean actiu;
 
     @Column(name="fromdata",nullable = false,length = 13)
@@ -49,9 +49,6 @@ public class ProjectesJPA implements Projectes {
     @Column(name="todata",length = 13)
     java.sql.Date todata;
 
-    @Column(name="actiu2",length = 1)
-    boolean actiu2;
-
 
 
   /** Constructor Buit */
@@ -59,49 +56,47 @@ public class ProjectesJPA implements Projectes {
   }
 
   /** Constructor amb tots els camps  */
-  public ProjectesJPA(long projecteid , java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata , boolean actiu2) {
-    this.projecteid=projecteid;
+  public ProjectesJPA(long projecteId , java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
+    this.projecteId=projecteId;
     this.nom=nom;
     this.departamentid=departamentid;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
-    this.actiu2=actiu2;
 }
   /** Constructor sense valors autoincrementals */
-  public ProjectesJPA(java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata , boolean actiu2) {
+  public ProjectesJPA(java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
     this.nom=nom;
     this.departamentid=departamentid;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
-    this.actiu2=actiu2;
 }
   /** Constructor dels valors Not Null */
-  public ProjectesJPA(long projecteid , java.lang.String nom , long departamentid , java.sql.Date fromdata) {
-    this.projecteid=projecteid;
+  public ProjectesJPA(long projecteId , java.lang.String nom , long departamentid , boolean actiu , java.sql.Date fromdata) {
+    this.projecteId=projecteId;
     this.nom=nom;
     this.departamentid=departamentid;
+    this.actiu=actiu;
     this.fromdata=fromdata;
 }
   public ProjectesJPA(Projectes __bean) {
-    this.setProjecteid(__bean.getProjecteid());
+    this.setProjecteId(__bean.getProjecteId());
     this.setNom(__bean.getNom());
     this.setDepartamentid(__bean.getDepartamentid());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
     this.setFromdata(__bean.getFromdata());
     this.setTodata(__bean.getTodata());
-    this.setActiu2(__bean.isActiu2());
 	}
 
-	public long getProjecteid() {
-		return(projecteid);
+	public long getProjecteId() {
+		return(projecteId);
 	};
-	public void setProjecteid(long _projecteid_) {
-		this.projecteid = _projecteid_;
+	public void setProjecteId(long _projecteId_) {
+		this.projecteId = _projecteId_;
 	};
 
 	public java.lang.String getNom() {
@@ -146,13 +141,6 @@ public class ProjectesJPA implements Projectes {
 		this.todata = _todata_;
 	};
 
-	public boolean isActiu2() {
-		return(actiu2);
-	};
-	public void setActiu2(boolean _actiu2_) {
-		this.actiu2 = _actiu2_;
-	};
-
 
 
   @Override
@@ -161,7 +149,7 @@ public class ProjectesJPA implements Projectes {
     if (__obj != null && __obj instanceof Projectes) {
       Projectes __instance = (Projectes)__obj;
       __result = true;
-      __result = __result && (this.getProjecteid() == __instance.getProjecteid()) ;
+      __result = __result && (this.getProjecteId() == __instance.getProjecteId()) ;
     } else {
       __result = false;
     }
@@ -197,7 +185,7 @@ public class ProjectesJPA implements Projectes {
 // IMP Field:departamentid | Table: qef_departaments | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamentid", referencedColumnName ="departamentid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_projectes_departamen_d_fk"))
+    @JoinColumn(name = "departamentid", referencedColumnName ="departamentID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_projectes_departamen_d_fk"))
     private DepartamentsJPA departaments;
 
     public DepartamentsJPA getDepartaments() {
@@ -213,14 +201,13 @@ public class ProjectesJPA implements Projectes {
   public static ProjectesJPA toJPA(Projectes __bean) {
     if (__bean == null) { return null;}
     ProjectesJPA __tmp = new ProjectesJPA();
-    __tmp.setProjecteid(__bean.getProjecteid());
+    __tmp.setProjecteId(__bean.getProjecteId());
     __tmp.setNom(__bean.getNom());
     __tmp.setDepartamentid(__bean.getDepartamentid());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setFromdata(__bean.getFromdata());
     __tmp.setTodata(__bean.getTodata());
-    __tmp.setActiu2(__bean.isActiu2());
 		return __tmp;
 	}
 

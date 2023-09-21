@@ -26,7 +26,7 @@ public class PersonalProjecteJPA implements PersonalProjecte {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PERSONALPROJECTE_SEQ")
     @Column(name="personalprojecteid",nullable = false,length = 19)
-    long personalprojecteid;
+    long personalProjecteId;
 
     @Column(name="usuariid",nullable = false,length = 50)
     java.lang.String usuariid;
@@ -47,8 +47,8 @@ public class PersonalProjecteJPA implements PersonalProjecte {
   }
 
   /** Constructor amb tots els camps  */
-  public PersonalProjecteJPA(long personalprojecteid , java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
-    this.personalprojecteid=personalprojecteid;
+  public PersonalProjecteJPA(long personalProjecteId , java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
+    this.personalProjecteId=personalProjecteId;
     this.usuariid=usuariid;
     this.projecteid=projecteid;
     this.ordre=ordre;
@@ -62,18 +62,18 @@ public class PersonalProjecteJPA implements PersonalProjecte {
     this.percent=percent;
 }
   public PersonalProjecteJPA(PersonalProjecte __bean) {
-    this.setPersonalprojecteid(__bean.getPersonalprojecteid());
+    this.setPersonalProjecteId(__bean.getPersonalProjecteId());
     this.setUsuariid(__bean.getUsuariid());
     this.setProjecteid(__bean.getProjecteid());
     this.setOrdre(__bean.getOrdre());
     this.setPercent(__bean.getPercent());
 	}
 
-	public long getPersonalprojecteid() {
-		return(personalprojecteid);
+	public long getPersonalProjecteId() {
+		return(personalProjecteId);
 	};
-	public void setPersonalprojecteid(long _personalprojecteid_) {
-		this.personalprojecteid = _personalprojecteid_;
+	public void setPersonalProjecteId(long _personalProjecteId_) {
+		this.personalProjecteId = _personalProjecteId_;
 	};
 
 	public java.lang.String getUsuariid() {
@@ -112,7 +112,7 @@ public class PersonalProjecteJPA implements PersonalProjecte {
     if (__obj != null && __obj instanceof PersonalProjecte) {
       PersonalProjecte __instance = (PersonalProjecte)__obj;
       __result = true;
-      __result = __result && (this.getPersonalprojecteid() == __instance.getPersonalprojecteid()) ;
+      __result = __result && (this.getPersonalProjecteId() == __instance.getPersonalProjecteId()) ;
     } else {
       __result = false;
     }
@@ -122,7 +122,7 @@ public class PersonalProjecteJPA implements PersonalProjecte {
 // IMP Field:projecteid | Table: qef_projectes | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projecteid", referencedColumnName ="projecteid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_persproj_projectes_pro_fk"))
+    @JoinColumn(name = "projecteid", referencedColumnName ="projecteId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_persproj_projectes_pro_fk"))
     private ProjectesJPA projectes;
 
     public ProjectesJPA getProjectes() {
@@ -138,7 +138,7 @@ public class PersonalProjecteJPA implements PersonalProjecte {
   public static PersonalProjecteJPA toJPA(PersonalProjecte __bean) {
     if (__bean == null) { return null;}
     PersonalProjecteJPA __tmp = new PersonalProjecteJPA();
-    __tmp.setPersonalprojecteid(__bean.getPersonalprojecteid());
+    __tmp.setPersonalProjecteId(__bean.getPersonalProjecteId());
     __tmp.setUsuariid(__bean.getUsuariid());
     __tmp.setProjecteid(__bean.getProjecteid());
     __tmp.setOrdre(__bean.getOrdre());

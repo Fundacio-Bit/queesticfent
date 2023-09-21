@@ -62,15 +62,15 @@ public class FestiusJPAManager
 
 
 
- public void delete(long _festiuid_) {
-   delete(findByPrimaryKey(_festiuid_));
+ public void delete(long _festiuID_) {
+   delete(findByPrimaryKey(_festiuID_));
  }
 
 
 
 
-    public Festius findByPrimaryKey(long _festiuid_) {
-        return __em.find(FestiusJPA.class, _festiuid_);  
+    public Festius findByPrimaryKey(long _festiuID_) {
+        return __em.find(FestiusJPA.class, _festiuID_);  
     }
     @Override
     protected Festius getJPAInstance(Festius __bean) {

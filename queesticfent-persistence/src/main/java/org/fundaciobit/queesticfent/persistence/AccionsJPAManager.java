@@ -55,22 +55,22 @@ public class AccionsJPAManager
         return list.toArray(new Accions[list.size()]);
     };
 
-    public Accions create( java.lang.String _nom_, java.lang.String _nomllegenda_, java.lang.String _color_, java.lang.String _descripcio_) throws I18NException {
-        AccionsJPA __bean =  new AccionsJPA(_nom_,_nomllegenda_,_color_,_descripcio_);
+    public Accions create( java.lang.String _nom_, java.lang.String _nomLlegenda_, java.lang.String _color_, java.lang.String _descripcio_) throws I18NException {
+        AccionsJPA __bean =  new AccionsJPA(_nom_,_nomLlegenda_,_color_,_descripcio_);
         return create(__bean);
     }
 
 
 
- public void delete(long _accioid_) {
-   delete(findByPrimaryKey(_accioid_));
+ public void delete(long _accioId_) {
+   delete(findByPrimaryKey(_accioId_));
  }
 
 
 
 
-    public Accions findByPrimaryKey(long _accioid_) {
-        return __em.find(AccionsJPA.class, _accioid_);  
+    public Accions findByPrimaryKey(long _accioId_) {
+        return __em.find(AccionsJPA.class, _accioId_);  
     }
     @Override
     protected Accions getJPAInstance(Accions __bean) {

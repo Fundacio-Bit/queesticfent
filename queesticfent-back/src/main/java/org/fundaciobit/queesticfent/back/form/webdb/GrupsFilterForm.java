@@ -20,25 +20,25 @@ import org.fundaciobit.queesticfent.model.fields.GrupsFields;
 @Component
 public class GrupsFilterForm extends queesticfentBaseFilterForm implements GrupsFields {
 
-  private java.lang.Long grupidDesde;
+  private java.lang.Long grupIDDesde;
 
-  public java.lang.Long getGrupidDesde() {
-    return this.grupidDesde;
+  public java.lang.Long getGrupIDDesde() {
+    return this.grupIDDesde;
   }
 
-  public void setGrupidDesde(java.lang.Long grupidDesde) {
-    this.grupidDesde = grupidDesde;
+  public void setGrupIDDesde(java.lang.Long grupIDDesde) {
+    this.grupIDDesde = grupIDDesde;
   }
 
 
-  private java.lang.Long grupidFins;
+  private java.lang.Long grupIDFins;
 
-  public java.lang.Long getGrupidFins() {
-    return this.grupidFins;
+  public java.lang.Long getGrupIDFins() {
+    return this.grupIDFins;
   }
 
-  public void setGrupidFins(java.lang.Long grupidFins) {
-    this.grupidFins = grupidFins;
+  public void setGrupIDFins(java.lang.Long grupIDFins) {
+    this.grupIDFins = grupIDFins;
   }
 
 
@@ -64,25 +64,25 @@ public class GrupsFilterForm extends queesticfentBaseFilterForm implements Grups
   }
 
 
-  private java.lang.Long nivellseguretatDesde;
+  private java.lang.Long nivellSeguretatDesde;
 
-  public java.lang.Long getNivellseguretatDesde() {
-    return this.nivellseguretatDesde;
+  public java.lang.Long getNivellSeguretatDesde() {
+    return this.nivellSeguretatDesde;
   }
 
-  public void setNivellseguretatDesde(java.lang.Long nivellseguretatDesde) {
-    this.nivellseguretatDesde = nivellseguretatDesde;
+  public void setNivellSeguretatDesde(java.lang.Long nivellSeguretatDesde) {
+    this.nivellSeguretatDesde = nivellSeguretatDesde;
   }
 
 
-  private java.lang.Long nivellseguretatFins;
+  private java.lang.Long nivellSeguretatFins;
 
-  public java.lang.Long getNivellseguretatFins() {
-    return this.nivellseguretatFins;
+  public java.lang.Long getNivellSeguretatFins() {
+    return this.nivellSeguretatFins;
   }
 
-  public void setNivellseguretatFins(java.lang.Long nivellseguretatFins) {
-    this.nivellseguretatFins = nivellseguretatFins;
+  public void setNivellSeguretatFins(java.lang.Long nivellSeguretatFins) {
+    this.nivellSeguretatFins = nivellSeguretatFins;
   }
 
 
@@ -91,12 +91,12 @@ public class GrupsFilterForm extends queesticfentBaseFilterForm implements Grups
   
   public GrupsFilterForm(GrupsFilterForm __toClone) {
     super(__toClone);
-    this.grupidDesde = __toClone.grupidDesde;
-    this.grupidFins = __toClone.grupidFins;
+    this.grupIDDesde = __toClone.grupIDDesde;
+    this.grupIDFins = __toClone.grupIDFins;
     this.nom = __toClone.nom;
     this.descripcio = __toClone.descripcio;
-    this.nivellseguretatDesde = __toClone.nivellseguretatDesde;
-    this.nivellseguretatFins = __toClone.nivellseguretatFins;
+    this.nivellSeguretatDesde = __toClone.nivellSeguretatDesde;
+    this.nivellSeguretatFins = __toClone.nivellSeguretatFins;
   }
   
   /* ========= UTILS ========== */

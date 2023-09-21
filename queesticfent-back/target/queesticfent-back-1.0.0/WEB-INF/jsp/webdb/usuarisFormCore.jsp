@@ -3,18 +3,18 @@
 <un:useConstants var="UsuarisFields" className="org.fundaciobit.queesticfent.model.fields.UsuarisFields"/>
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuarisFields.USUARIID)}">
-        <tr id="usuaris_usuariid_rowid">
-          <td id="usuaris_usuariid_columnlabelid">
+        <tr id="usuaris_usuariId_rowid">
+          <td id="usuaris_usuariId_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[UsuarisFields.USUARIID])?'usuaris.usuariid':__theForm.labels[UsuarisFields.USUARIID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[UsuarisFields.USUARIID])?'usuaris.usuariId':__theForm.labels[UsuarisFields.USUARIID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[UsuarisFields.USUARIID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuarisFields.USUARIID]}" ></i>
               </c:if>
             </td>
-          <td id="usuaris_usuariid_columnvalueid">
-            <form:errors path="usuaris.usuariid" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuarisFields.USUARIID)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuarisFields.USUARIID)? ' uneditable-input' : ''}"  style="" maxlength="100" path="usuaris.usuariid"   />
+          <td id="usuaris_usuariId_columnvalueid">
+            <form:errors path="usuaris.usuariId" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuarisFields.USUARIID)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuarisFields.USUARIID)? ' uneditable-input' : ''}"  style="" maxlength="100" path="usuaris.usuariId"   />
 
            </td>
         </tr>

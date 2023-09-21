@@ -27,23 +27,23 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="MODIFICACIONSQUEESTICFENT_SEQ")
     @Column(name="modificacioid",nullable = false,length = 19)
-    long modificacioid;
+    long modificacioID;
 
     @Column(name="accioid",nullable = false,length = 19)
-    long accioid;
+    long accioID;
 
     @Column(name="usuariid",nullable = false,length = 45)
-    java.lang.String usuariid;
+    java.lang.String usuariID;
 
     @Column(name="projecteid",length = 19)
-    java.lang.Long projecteid;
+    java.lang.Long projecteID;
 
     @Column(name="data",nullable = false,length = 35,precision = 6)
     java.sql.Timestamp data;
 
   /** -1 significa nou */
     @Column(name="queesticfentid",length = 19)
-    java.lang.Long queesticfentid;
+    java.lang.Long queEsticFentID;
 
     @Column(name="dada1",length = 500)
     java.lang.String dada1;
@@ -58,70 +58,70 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
   }
 
   /** Constructor amb tots els camps  */
-  public ModificacionsQueEsticFentJPA(long modificacioid , long accioid , java.lang.String usuariid , java.lang.Long projecteid , java.sql.Timestamp data , java.lang.Long queesticfentid , java.lang.String dada1 , java.lang.String dada2) {
-    this.modificacioid=modificacioid;
-    this.accioid=accioid;
-    this.usuariid=usuariid;
-    this.projecteid=projecteid;
+  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+    this.modificacioID=modificacioID;
+    this.accioID=accioID;
+    this.usuariID=usuariID;
+    this.projecteID=projecteID;
     this.data=data;
-    this.queesticfentid=queesticfentid;
+    this.queEsticFentID=queEsticFentID;
     this.dada1=dada1;
     this.dada2=dada2;
 }
   /** Constructor sense valors autoincrementals */
-  public ModificacionsQueEsticFentJPA(long accioid , java.lang.String usuariid , java.lang.Long projecteid , java.sql.Timestamp data , java.lang.Long queesticfentid , java.lang.String dada1 , java.lang.String dada2) {
-    this.accioid=accioid;
-    this.usuariid=usuariid;
-    this.projecteid=projecteid;
+  public ModificacionsQueEsticFentJPA(long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+    this.accioID=accioID;
+    this.usuariID=usuariID;
+    this.projecteID=projecteID;
     this.data=data;
-    this.queesticfentid=queesticfentid;
+    this.queEsticFentID=queEsticFentID;
     this.dada1=dada1;
     this.dada2=dada2;
 }
   /** Constructor dels valors Not Null */
-  public ModificacionsQueEsticFentJPA(long modificacioid , long accioid , java.lang.String usuariid , java.sql.Timestamp data) {
-    this.modificacioid=modificacioid;
-    this.accioid=accioid;
-    this.usuariid=usuariid;
+  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.sql.Timestamp data) {
+    this.modificacioID=modificacioID;
+    this.accioID=accioID;
+    this.usuariID=usuariID;
     this.data=data;
 }
   public ModificacionsQueEsticFentJPA(ModificacionsQueEsticFent __bean) {
-    this.setModificacioid(__bean.getModificacioid());
-    this.setAccioid(__bean.getAccioid());
-    this.setUsuariid(__bean.getUsuariid());
-    this.setProjecteid(__bean.getProjecteid());
+    this.setModificacioID(__bean.getModificacioID());
+    this.setAccioID(__bean.getAccioID());
+    this.setUsuariID(__bean.getUsuariID());
+    this.setProjecteID(__bean.getProjecteID());
     this.setData(__bean.getData());
-    this.setQueesticfentid(__bean.getQueesticfentid());
+    this.setQueEsticFentID(__bean.getQueEsticFentID());
     this.setDada1(__bean.getDada1());
     this.setDada2(__bean.getDada2());
 	}
 
-	public long getModificacioid() {
-		return(modificacioid);
+	public long getModificacioID() {
+		return(modificacioID);
 	};
-	public void setModificacioid(long _modificacioid_) {
-		this.modificacioid = _modificacioid_;
-	};
-
-	public long getAccioid() {
-		return(accioid);
-	};
-	public void setAccioid(long _accioid_) {
-		this.accioid = _accioid_;
+	public void setModificacioID(long _modificacioID_) {
+		this.modificacioID = _modificacioID_;
 	};
 
-	public java.lang.String getUsuariid() {
-		return(usuariid);
+	public long getAccioID() {
+		return(accioID);
 	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setAccioID(long _accioID_) {
+		this.accioID = _accioID_;
 	};
 
-	public java.lang.Long getProjecteid() {
-		return(projecteid);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setProjecteid(java.lang.Long _projecteid_) {
-		this.projecteid = _projecteid_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
+	};
+
+	public java.lang.Long getProjecteID() {
+		return(projecteID);
+	};
+	public void setProjecteID(java.lang.Long _projecteID_) {
+		this.projecteID = _projecteID_;
 	};
 
 	public java.sql.Timestamp getData() {
@@ -131,11 +131,11 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 		this.data = _data_;
 	};
 
-	public java.lang.Long getQueesticfentid() {
-		return(queesticfentid);
+	public java.lang.Long getQueEsticFentID() {
+		return(queEsticFentID);
 	};
-	public void setQueesticfentid(java.lang.Long _queesticfentid_) {
-		this.queesticfentid = _queesticfentid_;
+	public void setQueEsticFentID(java.lang.Long _queEsticFentID_) {
+		this.queEsticFentID = _queEsticFentID_;
 	};
 
 	public java.lang.String getDada1() {
@@ -160,7 +160,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     if (__obj != null && __obj instanceof ModificacionsQueEsticFent) {
       ModificacionsQueEsticFent __instance = (ModificacionsQueEsticFent)__obj;
       __result = true;
-      __result = __result && (this.getModificacioid() == __instance.getModificacioid()) ;
+      __result = __result && (this.getModificacioID() == __instance.getModificacioID()) ;
     } else {
       __result = false;
     }
@@ -170,7 +170,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 // IMP Field:accioid | Table: qef_accions | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accioid", referencedColumnName ="accioid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_accions_accioid_fk"))
+    @JoinColumn(name = "accioid", referencedColumnName ="accioId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_accions_accioid_fk"))
     private AccionsJPA accions;
 
     public AccionsJPA getAccions() {
@@ -184,7 +184,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 // IMP Field:projecteid | Table: qef_projectes | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projecteid", referencedColumnName ="projecteid", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_projectes_proje_fk"))
+    @JoinColumn(name = "projecteid", referencedColumnName ="projecteId", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_projectes_proje_fk"))
     private ProjectesJPA projectes;
 
     public ProjectesJPA getProjectes() {
@@ -200,12 +200,12 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
   public static ModificacionsQueEsticFentJPA toJPA(ModificacionsQueEsticFent __bean) {
     if (__bean == null) { return null;}
     ModificacionsQueEsticFentJPA __tmp = new ModificacionsQueEsticFentJPA();
-    __tmp.setModificacioid(__bean.getModificacioid());
-    __tmp.setAccioid(__bean.getAccioid());
-    __tmp.setUsuariid(__bean.getUsuariid());
-    __tmp.setProjecteid(__bean.getProjecteid());
+    __tmp.setModificacioID(__bean.getModificacioID());
+    __tmp.setAccioID(__bean.getAccioID());
+    __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setProjecteID(__bean.getProjecteID());
     __tmp.setData(__bean.getData());
-    __tmp.setQueesticfentid(__bean.getQueesticfentid());
+    __tmp.setQueEsticFentID(__bean.getQueEsticFentID());
     __tmp.setDada1(__bean.getDada1());
     __tmp.setDada2(__bean.getDada2());
 		return __tmp;

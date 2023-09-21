@@ -186,21 +186,21 @@ public class GrupsusuariController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field usuariid
+    // Field usuariID
     {
-      _listSKV = getReferenceListForUsuariid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForUsuariID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfUsuarisForUsuariid(_tmp);
+      filterForm.setMapOfUsuarisForUsuariID(_tmp);
       if (filterForm.getGroupByFields().contains(USUARIID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIID, false);
       };
     }
 
-    // Field grupid
+    // Field grupID
     {
-      _listSKV = getReferenceListForGrupid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForGrupID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfGrupsForGrupid(_tmp);
+      filterForm.setMapOfGrupsForGrupID(_tmp);
       if (filterForm.getGroupByFields().contains(GRUPID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, GRUPID, false);
       };
@@ -221,8 +221,8 @@ public class GrupsusuariController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(USUARIID, filterForm.getMapOfUsuarisForUsuariid());
-    __mapping.put(GRUPID, filterForm.getMapOfGrupsForGrupid());
+    __mapping.put(USUARIID, filterForm.getMapOfUsuarisForUsuariID());
+    __mapping.put(GRUPID, filterForm.getMapOfGrupsForGrupID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -271,22 +271,22 @@ public class GrupsusuariController
   public void fillReferencesForForm(GrupsusuariForm grupsusuariForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (grupsusuariForm.getListOfUsuarisForUsuariid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForUsuariid(request, mav, grupsusuariForm, null);
+    if (grupsusuariForm.getListOfUsuarisForUsuariID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForUsuariID(request, mav, grupsusuariForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      grupsusuariForm.setListOfUsuarisForUsuariid(_listSKV);
+      grupsusuariForm.setListOfUsuarisForUsuariID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (grupsusuariForm.getListOfGrupsForGrupid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForGrupid(request, mav, grupsusuariForm, null);
+    if (grupsusuariForm.getListOfGrupsForGrupID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForGrupID(request, mav, grupsusuariForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      grupsusuariForm.setListOfGrupsForGrupid(_listSKV);
+      grupsusuariForm.setListOfGrupsForGrupID(_listSKV);
     }
     
   }
@@ -315,7 +315,7 @@ public class GrupsusuariController
         return getTileForm();
       } else {
         grupsusuari = create(request, grupsusuari);
-        createMessageSuccess(request, "success.creation", grupsusuari.getGrupsusuariid());
+        createMessageSuccess(request, "success.creation", grupsusuari.getGrupsUsuariID());
         grupsusuariForm.setGrupsusuari(grupsusuari);
         return getRedirectWhenCreated(request, grupsusuariForm);
       }
@@ -330,16 +330,16 @@ public class GrupsusuariController
     }
   }
 
-  @RequestMapping(value = "/view/{grupsusuariid}", method = RequestMethod.GET)
-  public ModelAndView veureGrupsusuariGet(@PathVariable("grupsusuariid") java.lang.Long grupsusuariid,
+  @RequestMapping(value = "/view/{grupsUsuariID}", method = RequestMethod.GET)
+  public ModelAndView veureGrupsusuariGet(@PathVariable("grupsUsuariID") java.lang.Long grupsUsuariID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewGrupsusuariGet(grupsusuariid,
+      return editAndViewGrupsusuariGet(grupsUsuariID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewGrupsusuariGet(@PathVariable("grupsusuariid") java.lang.Long grupsusuariid,
+  protected ModelAndView editAndViewGrupsusuariGet(@PathVariable("grupsUsuariID") java.lang.Long grupsUsuariID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -351,11 +351,11 @@ public class GrupsusuariController
         return null;
       }
     }
-    GrupsusuariJPA grupsusuari = findByPrimaryKey(request, grupsusuariid);
+    GrupsusuariJPA grupsusuari = findByPrimaryKey(request, grupsUsuariID);
 
     if (grupsusuari == null) {
-      createMessageWarning(request, "error.notfound", grupsusuariid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, grupsusuariid), true));
+      createMessageWarning(request, "error.notfound", grupsUsuariID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, grupsUsuariID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -376,11 +376,11 @@ public class GrupsusuariController
   /**
    * Carregar el formulari per modificar un Grupsusuari existent
    */
-  @RequestMapping(value = "/{grupsusuariid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarGrupsusuariGet(@PathVariable("grupsusuariid") java.lang.Long grupsusuariid,
+  @RequestMapping(value = "/{grupsUsuariID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarGrupsusuariGet(@PathVariable("grupsUsuariID") java.lang.Long grupsUsuariID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewGrupsusuariGet(grupsusuariid,
+      return editAndViewGrupsusuariGet(grupsUsuariID,
         request, response, false);
   }
 
@@ -389,7 +389,7 @@ public class GrupsusuariController
   /**
    * Editar un Grupsusuari existent
    */
-  @RequestMapping(value = "/{grupsusuariid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{grupsUsuariID}/edit", method = RequestMethod.POST)
   public String editarGrupsusuariPost(@ModelAttribute GrupsusuariForm grupsusuariForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -410,7 +410,7 @@ public class GrupsusuariController
         return getTileForm();
       } else {
         grupsusuari = update(request, grupsusuari);
-        createMessageSuccess(request, "success.modification", grupsusuari.getGrupsusuariid());
+        createMessageSuccess(request, "success.modification", grupsusuari.getGrupsUsuariID());
         status.setComplete();
         return getRedirectWhenModified(request, grupsusuariForm, null);
       }
@@ -420,7 +420,7 @@ public class GrupsusuariController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          grupsusuari.getGrupsusuariid(), __e);
+          grupsusuari.getGrupsUsuariID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, grupsusuariForm, __e);
     }
@@ -431,8 +431,8 @@ public class GrupsusuariController
   /**
    * Eliminar un Grupsusuari existent
    */
-  @RequestMapping(value = "/{grupsusuariid}/delete")
-  public String eliminarGrupsusuari(@PathVariable("grupsusuariid") java.lang.Long grupsusuariid,
+  @RequestMapping(value = "/{grupsUsuariID}/delete")
+  public String eliminarGrupsusuari(@PathVariable("grupsUsuariID") java.lang.Long grupsUsuariID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -440,20 +440,20 @@ public class GrupsusuariController
       return null;
     }
     try {
-      Grupsusuari grupsusuari = this.findByPrimaryKey(request, grupsusuariid);
+      Grupsusuari grupsusuari = this.findByPrimaryKey(request, grupsUsuariID);
       if (grupsusuari == null) {
-        String __msg = createMessageError(request, "error.notfound", grupsusuariid);
-        return getRedirectWhenDelete(request, grupsusuariid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", grupsUsuariID);
+        return getRedirectWhenDelete(request, grupsUsuariID, new Exception(__msg));
       } else {
         delete(request, grupsusuari);
-        createMessageSuccess(request, "success.deleted", grupsusuariid);
-        return getRedirectWhenDelete(request, grupsusuariid,null);
+        createMessageSuccess(request, "success.deleted", grupsUsuariID);
+        return getRedirectWhenDelete(request, grupsUsuariID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", grupsusuariid, e);
+      String msg = createMessageError(request, "error.deleting", grupsUsuariID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, grupsusuariid, e);
+      return getRedirectWhenDelete(request, grupsUsuariID, e);
     }
   }
 
@@ -489,8 +489,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __grupsusuariid, Throwable e) {
-    java.lang.Long grupsusuariid = (java.lang.Long)__grupsusuariid;
+  public String[] getArgumentsMissatge(Object __grupsUsuariID, Throwable e) {
+    java.lang.Long grupsUsuariID = (java.lang.Long)__grupsUsuariID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -500,13 +500,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (grupsusuariid == null) {
+    if (grupsUsuariID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(grupsusuariid),
+         String.valueOf(grupsUsuariID),
  exceptionMsg };
     }
   }
@@ -520,7 +520,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("grupsusuari.grupsusuariid");
+    return  I18NUtils.tradueix("grupsusuari.grupsUsuariID");
   }
 
   @InitBinder("grupsusuariFilterForm")
@@ -535,7 +535,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "grupsusuari.grupsusuariid");
+    initDisallowedFields(binder, "grupsusuari.grupsUsuariID");
   }
 
   public GrupsusuariWebValidator getWebValidator() {
@@ -553,10 +553,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Grupsusuari
    */
-  @RequestMapping(value = "/{grupsusuariid}/cancel")
-  public String cancelGrupsusuari(@PathVariable("grupsusuariid") java.lang.Long grupsusuariid,
+  @RequestMapping(value = "/{grupsUsuariID}/cancel")
+  public String cancelGrupsusuari(@PathVariable("grupsUsuariID") java.lang.Long grupsUsuariID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, grupsusuariid);
+     return getRedirectWhenCancel(request, grupsUsuariID);
   }
 
   @Override
@@ -591,20 +591,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForUsuariid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, GrupsusuariForm grupsusuariForm, Where where)  throws I18NException {
     if (grupsusuariForm.isHiddenField(USUARIID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (grupsusuariForm.isReadOnlyField(USUARIID)) {
-      _where = UsuarisFields.USUARIID.equal(grupsusuariForm.getGrupsusuari().getUsuariid());
+      _where = UsuarisFields.USUARIID.equal(grupsusuariForm.getGrupsusuari().getUsuariID());
     }
-    return getReferenceListForUsuariid(request, mav, Where.AND(where, _where));
+    return getReferenceListForUsuariID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForUsuariid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, GrupsusuariFilterForm grupsusuariFilterForm,
        List<Grupsusuari> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (grupsusuariFilterForm.isHiddenField(USUARIID)
@@ -616,34 +616,34 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.String> _pkList = new java.util.HashSet<java.lang.String>();
       for (Grupsusuari _item : list) {
-        _pkList.add(_item.getUsuariid());
+        _pkList.add(_item.getUsuariID());
         }
         _w = UsuarisFields.USUARIID.in(_pkList);
       }
-    return getReferenceListForUsuariid(request, mav, Where.AND(where,_w));
+    return getReferenceListForUsuariID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForUsuariid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return usuarisRefList.getReferenceList(UsuarisFields.USUARIID, where );
   }
 
 
-  public List<StringKeyValue> getReferenceListForGrupid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForGrupID(HttpServletRequest request,
        ModelAndView mav, GrupsusuariForm grupsusuariForm, Where where)  throws I18NException {
     if (grupsusuariForm.isHiddenField(GRUPID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (grupsusuariForm.isReadOnlyField(GRUPID)) {
-      _where = GrupsFields.GRUPID.equal(grupsusuariForm.getGrupsusuari().getGrupid());
+      _where = GrupsFields.GRUPID.equal(grupsusuariForm.getGrupsusuari().getGrupID());
     }
-    return getReferenceListForGrupid(request, mav, Where.AND(where, _where));
+    return getReferenceListForGrupID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForGrupid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForGrupID(HttpServletRequest request,
        ModelAndView mav, GrupsusuariFilterForm grupsusuariFilterForm,
        List<Grupsusuari> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (grupsusuariFilterForm.isHiddenField(GRUPID)
@@ -655,15 +655,15 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (Grupsusuari _item : list) {
-        _pkList.add(_item.getGrupid());
+        _pkList.add(_item.getGrupID());
         }
         _w = GrupsFields.GRUPID.in(_pkList);
       }
-    return getReferenceListForGrupid(request, mav, Where.AND(where,_w));
+    return getReferenceListForGrupID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForGrupid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForGrupID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return grupsRefList.getReferenceList(GrupsFields.GRUPID, where );
   }
@@ -700,11 +700,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long grupsusuariid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long grupsUsuariID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long grupsusuariid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long grupsUsuariID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -727,8 +727,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public GrupsusuariJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long grupsusuariid) throws I18NException {
-    return (GrupsusuariJPA) grupsusuariEjb.findByPrimaryKey(grupsusuariid);
+  public GrupsusuariJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long grupsUsuariID) throws I18NException {
+    return (GrupsusuariJPA) grupsusuariEjb.findByPrimaryKey(grupsUsuariID);
   }
 
 

@@ -21,25 +21,25 @@ import org.fundaciobit.queesticfent.model.fields.ProjectesFields;
 @Component
 public class ProjectesFilterForm extends queesticfentBaseFilterForm implements ProjectesFields {
 
-  private java.lang.Long projecteidDesde;
+  private java.lang.Long projecteIdDesde;
 
-  public java.lang.Long getProjecteidDesde() {
-    return this.projecteidDesde;
+  public java.lang.Long getProjecteIdDesde() {
+    return this.projecteIdDesde;
   }
 
-  public void setProjecteidDesde(java.lang.Long projecteidDesde) {
-    this.projecteidDesde = projecteidDesde;
+  public void setProjecteIdDesde(java.lang.Long projecteIdDesde) {
+    this.projecteIdDesde = projecteIdDesde;
   }
 
 
-  private java.lang.Long projecteidFins;
+  private java.lang.Long projecteIdFins;
 
-  public java.lang.Long getProjecteidFins() {
-    return this.projecteidFins;
+  public java.lang.Long getProjecteIdFins() {
+    return this.projecteIdFins;
   }
 
-  public void setProjecteidFins(java.lang.Long projecteidFins) {
-    this.projecteidFins = projecteidFins;
+  public void setProjecteIdFins(java.lang.Long projecteIdFins) {
+    this.projecteIdFins = projecteIdFins;
   }
 
 
@@ -136,8 +136,8 @@ public class ProjectesFilterForm extends queesticfentBaseFilterForm implements P
   
   public ProjectesFilterForm(ProjectesFilterForm __toClone) {
     super(__toClone);
-    this.projecteidDesde = __toClone.projecteidDesde;
-    this.projecteidFins = __toClone.projecteidFins;
+    this.projecteIdDesde = __toClone.projecteIdDesde;
+    this.projecteIdFins = __toClone.projecteIdFins;
     this.nom = __toClone.nom;
     this.departamentidDesde = __toClone.departamentidDesde;
     this.departamentidFins = __toClone.departamentidFins;

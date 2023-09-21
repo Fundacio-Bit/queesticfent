@@ -20,25 +20,25 @@ import org.fundaciobit.queesticfent.model.fields.FestiusFields;
 @Component
 public class FestiusFilterForm extends queesticfentBaseFilterForm implements FestiusFields {
 
-  private java.lang.Long festiuidDesde;
+  private java.lang.Long festiuIDDesde;
 
-  public java.lang.Long getFestiuidDesde() {
-    return this.festiuidDesde;
+  public java.lang.Long getFestiuIDDesde() {
+    return this.festiuIDDesde;
   }
 
-  public void setFestiuidDesde(java.lang.Long festiuidDesde) {
-    this.festiuidDesde = festiuidDesde;
+  public void setFestiuIDDesde(java.lang.Long festiuIDDesde) {
+    this.festiuIDDesde = festiuIDDesde;
   }
 
 
-  private java.lang.Long festiuidFins;
+  private java.lang.Long festiuIDFins;
 
-  public java.lang.Long getFestiuidFins() {
-    return this.festiuidFins;
+  public java.lang.Long getFestiuIDFins() {
+    return this.festiuIDFins;
   }
 
-  public void setFestiuidFins(java.lang.Long festiuidFins) {
-    this.festiuidFins = festiuidFins;
+  public void setFestiuIDFins(java.lang.Long festiuIDFins) {
+    this.festiuIDFins = festiuIDFins;
   }
 
 
@@ -91,8 +91,8 @@ public class FestiusFilterForm extends queesticfentBaseFilterForm implements Fes
   
   public FestiusFilterForm(FestiusFilterForm __toClone) {
     super(__toClone);
-    this.festiuidDesde = __toClone.festiuidDesde;
-    this.festiuidFins = __toClone.festiuidFins;
+    this.festiuIDDesde = __toClone.festiuIDDesde;
+    this.festiuIDFins = __toClone.festiuIDFins;
     this.nom = __toClone.nom;
     this.dataDesde = __toClone.dataDesde;
     this.dataFins = __toClone.dataFins;

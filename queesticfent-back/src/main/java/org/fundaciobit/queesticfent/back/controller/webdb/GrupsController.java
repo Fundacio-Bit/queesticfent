@@ -262,7 +262,7 @@ public class GrupsController
         return getTileForm();
       } else {
         grups = create(request, grups);
-        createMessageSuccess(request, "success.creation", grups.getGrupid());
+        createMessageSuccess(request, "success.creation", grups.getGrupID());
         grupsForm.setGrups(grups);
         return getRedirectWhenCreated(request, grupsForm);
       }
@@ -277,16 +277,16 @@ public class GrupsController
     }
   }
 
-  @RequestMapping(value = "/view/{grupid}", method = RequestMethod.GET)
-  public ModelAndView veureGrupsGet(@PathVariable("grupid") java.lang.Long grupid,
+  @RequestMapping(value = "/view/{grupID}", method = RequestMethod.GET)
+  public ModelAndView veureGrupsGet(@PathVariable("grupID") java.lang.Long grupID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewGrupsGet(grupid,
+      return editAndViewGrupsGet(grupID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewGrupsGet(@PathVariable("grupid") java.lang.Long grupid,
+  protected ModelAndView editAndViewGrupsGet(@PathVariable("grupID") java.lang.Long grupID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -298,11 +298,11 @@ public class GrupsController
         return null;
       }
     }
-    GrupsJPA grups = findByPrimaryKey(request, grupid);
+    GrupsJPA grups = findByPrimaryKey(request, grupID);
 
     if (grups == null) {
-      createMessageWarning(request, "error.notfound", grupid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, grupid), true));
+      createMessageWarning(request, "error.notfound", grupID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, grupID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -323,11 +323,11 @@ public class GrupsController
   /**
    * Carregar el formulari per modificar un Grups existent
    */
-  @RequestMapping(value = "/{grupid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarGrupsGet(@PathVariable("grupid") java.lang.Long grupid,
+  @RequestMapping(value = "/{grupID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarGrupsGet(@PathVariable("grupID") java.lang.Long grupID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewGrupsGet(grupid,
+      return editAndViewGrupsGet(grupID,
         request, response, false);
   }
 
@@ -336,7 +336,7 @@ public class GrupsController
   /**
    * Editar un Grups existent
    */
-  @RequestMapping(value = "/{grupid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{grupID}/edit", method = RequestMethod.POST)
   public String editarGrupsPost(@ModelAttribute GrupsForm grupsForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -357,7 +357,7 @@ public class GrupsController
         return getTileForm();
       } else {
         grups = update(request, grups);
-        createMessageSuccess(request, "success.modification", grups.getGrupid());
+        createMessageSuccess(request, "success.modification", grups.getGrupID());
         status.setComplete();
         return getRedirectWhenModified(request, grupsForm, null);
       }
@@ -367,7 +367,7 @@ public class GrupsController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          grups.getGrupid(), __e);
+          grups.getGrupID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, grupsForm, __e);
     }
@@ -378,8 +378,8 @@ public class GrupsController
   /**
    * Eliminar un Grups existent
    */
-  @RequestMapping(value = "/{grupid}/delete")
-  public String eliminarGrups(@PathVariable("grupid") java.lang.Long grupid,
+  @RequestMapping(value = "/{grupID}/delete")
+  public String eliminarGrups(@PathVariable("grupID") java.lang.Long grupID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -387,20 +387,20 @@ public class GrupsController
       return null;
     }
     try {
-      Grups grups = this.findByPrimaryKey(request, grupid);
+      Grups grups = this.findByPrimaryKey(request, grupID);
       if (grups == null) {
-        String __msg = createMessageError(request, "error.notfound", grupid);
-        return getRedirectWhenDelete(request, grupid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", grupID);
+        return getRedirectWhenDelete(request, grupID, new Exception(__msg));
       } else {
         delete(request, grups);
-        createMessageSuccess(request, "success.deleted", grupid);
-        return getRedirectWhenDelete(request, grupid,null);
+        createMessageSuccess(request, "success.deleted", grupID);
+        return getRedirectWhenDelete(request, grupID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", grupid, e);
+      String msg = createMessageError(request, "error.deleting", grupID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, grupid, e);
+      return getRedirectWhenDelete(request, grupID, e);
     }
   }
 
@@ -436,8 +436,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __grupid, Throwable e) {
-    java.lang.Long grupid = (java.lang.Long)__grupid;
+  public String[] getArgumentsMissatge(Object __grupID, Throwable e) {
+    java.lang.Long grupID = (java.lang.Long)__grupID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -447,13 +447,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (grupid == null) {
+    if (grupID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(grupid),
+         String.valueOf(grupID),
  exceptionMsg };
     }
   }
@@ -467,7 +467,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("grups.grupid");
+    return  I18NUtils.tradueix("grups.grupID");
   }
 
   @InitBinder("grupsFilterForm")
@@ -482,7 +482,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "grups.grupid");
+    initDisallowedFields(binder, "grups.grupID");
   }
 
   public GrupsWebValidator getWebValidator() {
@@ -500,10 +500,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Grups
    */
-  @RequestMapping(value = "/{grupid}/cancel")
-  public String cancelGrups(@PathVariable("grupid") java.lang.Long grupid,
+  @RequestMapping(value = "/{grupID}/cancel")
+  public String cancelGrups(@PathVariable("grupID") java.lang.Long grupID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, grupid);
+     return getRedirectWhenCancel(request, grupID);
   }
 
   @Override
@@ -569,11 +569,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long grupid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long grupID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long grupid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long grupID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -596,8 +596,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public GrupsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long grupid) throws I18NException {
-    return (GrupsJPA) grupsEjb.findByPrimaryKey(grupid);
+  public GrupsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long grupID) throws I18NException {
+    return (GrupsJPA) grupsEjb.findByPrimaryKey(grupID);
   }
 
 

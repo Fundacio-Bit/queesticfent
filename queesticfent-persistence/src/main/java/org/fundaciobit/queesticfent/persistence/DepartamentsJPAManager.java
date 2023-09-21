@@ -55,22 +55,22 @@ public class DepartamentsJPAManager
         return list.toArray(new Departaments[list.size()]);
     };
 
-    public Departaments create( java.lang.String _nom_, java.lang.String _coordinadorid_, java.lang.String _nomldap_, java.lang.String _descripcio_) throws I18NException {
-        DepartamentsJPA __bean =  new DepartamentsJPA(_nom_,_coordinadorid_,_nomldap_,_descripcio_);
+    public Departaments create( java.lang.String _nom_, java.lang.String _coordinadorId_, java.lang.String _nomldap_, java.lang.String _descripcio_) throws I18NException {
+        DepartamentsJPA __bean =  new DepartamentsJPA(_nom_,_coordinadorId_,_nomldap_,_descripcio_);
         return create(__bean);
     }
 
 
 
- public void delete(long _departamentid_) {
-   delete(findByPrimaryKey(_departamentid_));
+ public void delete(long _departamentID_) {
+   delete(findByPrimaryKey(_departamentID_));
  }
 
 
 
 
-    public Departaments findByPrimaryKey(long _departamentid_) {
-        return __em.find(DepartamentsJPA.class, _departamentid_);  
+    public Departaments findByPrimaryKey(long _departamentID_) {
+        return __em.find(DepartamentsJPA.class, _departamentID_);  
     }
     @Override
     protected Departaments getJPAInstance(Departaments __bean) {

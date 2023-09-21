@@ -17,6 +17,7 @@ import javax.persistence.Id;
 
 @Entity(name = "UsuarisDepartamentJPA")
 @Table(name = "qef_usuarisdepartament" , indexes = { 
+        @Index(name="qef_usudep_usuariid_fk_i", columnList = "usuariid"),
         @Index(name="qef_usudep_departamentid_fk_i", columnList = "departamentid"),
         @Index(name="qef_usuarisdepartament_pk_i", columnList = "usuaridepartamentid")})
 @SequenceGenerator(name="USUARISDEPARTAMENT_SEQ", sequenceName="qef_usuarisdepartament_seq", allocationSize=1, initialValue=1000)
@@ -24,7 +25,7 @@ import javax.persistence.Id;
 public class UsuarisDepartamentJPA implements UsuarisDepartament {
 
     @Column(name="usuariid",nullable = false,length = 20)
-    java.lang.String usuariid;
+    java.lang.String usuariId;
 
     @Column(name="departamentid",nullable = false,length = 19)
     long departamentid;
@@ -32,7 +33,7 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARISDEPARTAMENT_SEQ")
     @Column(name="usuaridepartamentid",nullable = false,length = 19)
-    long usuaridepartamentid;
+    long usuariDepartamentId;
 
 
 
@@ -41,27 +42,27 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisDepartamentJPA(java.lang.String usuariid , long departamentid , long usuaridepartamentid) {
-    this.usuariid=usuariid;
+  public UsuarisDepartamentJPA(java.lang.String usuariId , long departamentid , long usuariDepartamentId) {
+    this.usuariId=usuariId;
     this.departamentid=departamentid;
-    this.usuaridepartamentid=usuaridepartamentid;
+    this.usuariDepartamentId=usuariDepartamentId;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuarisDepartamentJPA(java.lang.String usuariid , long departamentid) {
-    this.usuariid=usuariid;
+  public UsuarisDepartamentJPA(java.lang.String usuariId , long departamentid) {
+    this.usuariId=usuariId;
     this.departamentid=departamentid;
 }
   public UsuarisDepartamentJPA(UsuarisDepartament __bean) {
-    this.setUsuariid(__bean.getUsuariid());
+    this.setUsuariId(__bean.getUsuariId());
     this.setDepartamentid(__bean.getDepartamentid());
-    this.setUsuaridepartamentid(__bean.getUsuaridepartamentid());
+    this.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
 	}
 
-	public java.lang.String getUsuariid() {
-		return(usuariid);
+	public java.lang.String getUsuariId() {
+		return(usuariId);
 	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setUsuariId(java.lang.String _usuariId_) {
+		this.usuariId = _usuariId_;
 	};
 
 	public long getDepartamentid() {
@@ -71,11 +72,11 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
 		this.departamentid = _departamentid_;
 	};
 
-	public long getUsuaridepartamentid() {
-		return(usuaridepartamentid);
+	public long getUsuariDepartamentId() {
+		return(usuariDepartamentId);
 	};
-	public void setUsuaridepartamentid(long _usuaridepartamentid_) {
-		this.usuaridepartamentid = _usuaridepartamentid_;
+	public void setUsuariDepartamentId(long _usuariDepartamentId_) {
+		this.usuariDepartamentId = _usuariDepartamentId_;
 	};
 
 
@@ -86,17 +87,31 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
     if (__obj != null && __obj instanceof UsuarisDepartament) {
       UsuarisDepartament __instance = (UsuarisDepartament)__obj;
       __result = true;
-      __result = __result && (this.getUsuaridepartamentid() == __instance.getUsuaridepartamentid()) ;
+      __result = __result && (this.getUsuariDepartamentId() == __instance.getUsuariDepartamentId()) ;
     } else {
       __result = false;
     }
     return __result;
   }
 
+// IMP Field:usuariid | Table: qef_usuaris | Type: 1  
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_usudep_usuaris_usuari_fk"))
+    private UsuarisJPA usuaris;
+
+    public UsuarisJPA getUsuaris() {
+    return this.usuaris;
+  }
+
+    public  void setUsuaris(UsuarisJPA usuaris) {
+    this.usuaris = usuaris;
+  }
+
 // IMP Field:departamentid | Table: qef_departaments | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamentid", referencedColumnName ="departamentid", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_usudep_departamen_depar_fk"))
+    @JoinColumn(name = "departamentid", referencedColumnName ="departamentID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_usudep_departamen_depar_fk"))
     private DepartamentsJPA departaments;
 
     public DepartamentsJPA getDepartaments() {
@@ -112,9 +127,9 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
   public static UsuarisDepartamentJPA toJPA(UsuarisDepartament __bean) {
     if (__bean == null) { return null;}
     UsuarisDepartamentJPA __tmp = new UsuarisDepartamentJPA();
-    __tmp.setUsuariid(__bean.getUsuariid());
+    __tmp.setUsuariId(__bean.getUsuariId());
     __tmp.setDepartamentid(__bean.getDepartamentid());
-    __tmp.setUsuaridepartamentid(__bean.getUsuaridepartamentid());
+    __tmp.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
 		return __tmp;
 	}
 
@@ -148,6 +163,10 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
     if(!"DepartamentsJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.departaments) || org.hibernate.Hibernate.isInitialized(__jpa.getDepartaments()) ) ) {
       __tmp.setDepartaments(DepartamentsJPA.copyJPA(__jpa.getDepartaments(), __alreadyCopied,"UsuarisDepartamentJPA"));
+    }
+    if(!"UsuarisJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuaris) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuaris()) ) ) {
+      __tmp.setUsuaris(UsuarisJPA.copyJPA(__jpa.getUsuaris(), __alreadyCopied,"UsuarisDepartamentJPA"));
     }
 
     return __tmp;

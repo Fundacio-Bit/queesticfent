@@ -262,7 +262,7 @@ public class DepartamentsController
         return getTileForm();
       } else {
         departaments = create(request, departaments);
-        createMessageSuccess(request, "success.creation", departaments.getDepartamentid());
+        createMessageSuccess(request, "success.creation", departaments.getDepartamentID());
         departamentsForm.setDepartaments(departaments);
         return getRedirectWhenCreated(request, departamentsForm);
       }
@@ -277,16 +277,16 @@ public class DepartamentsController
     }
   }
 
-  @RequestMapping(value = "/view/{departamentid}", method = RequestMethod.GET)
-  public ModelAndView veureDepartamentsGet(@PathVariable("departamentid") java.lang.Long departamentid,
+  @RequestMapping(value = "/view/{departamentID}", method = RequestMethod.GET)
+  public ModelAndView veureDepartamentsGet(@PathVariable("departamentID") java.lang.Long departamentID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewDepartamentsGet(departamentid,
+      return editAndViewDepartamentsGet(departamentID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewDepartamentsGet(@PathVariable("departamentid") java.lang.Long departamentid,
+  protected ModelAndView editAndViewDepartamentsGet(@PathVariable("departamentID") java.lang.Long departamentID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -298,11 +298,11 @@ public class DepartamentsController
         return null;
       }
     }
-    DepartamentsJPA departaments = findByPrimaryKey(request, departamentid);
+    DepartamentsJPA departaments = findByPrimaryKey(request, departamentID);
 
     if (departaments == null) {
-      createMessageWarning(request, "error.notfound", departamentid);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, departamentid), true));
+      createMessageWarning(request, "error.notfound", departamentID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, departamentID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -323,11 +323,11 @@ public class DepartamentsController
   /**
    * Carregar el formulari per modificar un Departaments existent
    */
-  @RequestMapping(value = "/{departamentid}/edit", method = RequestMethod.GET)
-  public ModelAndView editarDepartamentsGet(@PathVariable("departamentid") java.lang.Long departamentid,
+  @RequestMapping(value = "/{departamentID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarDepartamentsGet(@PathVariable("departamentID") java.lang.Long departamentID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewDepartamentsGet(departamentid,
+      return editAndViewDepartamentsGet(departamentID,
         request, response, false);
   }
 
@@ -336,7 +336,7 @@ public class DepartamentsController
   /**
    * Editar un Departaments existent
    */
-  @RequestMapping(value = "/{departamentid}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{departamentID}/edit", method = RequestMethod.POST)
   public String editarDepartamentsPost(@ModelAttribute DepartamentsForm departamentsForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -357,7 +357,7 @@ public class DepartamentsController
         return getTileForm();
       } else {
         departaments = update(request, departaments);
-        createMessageSuccess(request, "success.modification", departaments.getDepartamentid());
+        createMessageSuccess(request, "success.modification", departaments.getDepartamentID());
         status.setComplete();
         return getRedirectWhenModified(request, departamentsForm, null);
       }
@@ -367,7 +367,7 @@ public class DepartamentsController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          departaments.getDepartamentid(), __e);
+          departaments.getDepartamentID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, departamentsForm, __e);
     }
@@ -378,8 +378,8 @@ public class DepartamentsController
   /**
    * Eliminar un Departaments existent
    */
-  @RequestMapping(value = "/{departamentid}/delete")
-  public String eliminarDepartaments(@PathVariable("departamentid") java.lang.Long departamentid,
+  @RequestMapping(value = "/{departamentID}/delete")
+  public String eliminarDepartaments(@PathVariable("departamentID") java.lang.Long departamentID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -387,20 +387,20 @@ public class DepartamentsController
       return null;
     }
     try {
-      Departaments departaments = this.findByPrimaryKey(request, departamentid);
+      Departaments departaments = this.findByPrimaryKey(request, departamentID);
       if (departaments == null) {
-        String __msg = createMessageError(request, "error.notfound", departamentid);
-        return getRedirectWhenDelete(request, departamentid, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", departamentID);
+        return getRedirectWhenDelete(request, departamentID, new Exception(__msg));
       } else {
         delete(request, departaments);
-        createMessageSuccess(request, "success.deleted", departamentid);
-        return getRedirectWhenDelete(request, departamentid,null);
+        createMessageSuccess(request, "success.deleted", departamentID);
+        return getRedirectWhenDelete(request, departamentID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", departamentid, e);
+      String msg = createMessageError(request, "error.deleting", departamentID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, departamentid, e);
+      return getRedirectWhenDelete(request, departamentID, e);
     }
   }
 
@@ -436,8 +436,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __departamentid, Throwable e) {
-    java.lang.Long departamentid = (java.lang.Long)__departamentid;
+  public String[] getArgumentsMissatge(Object __departamentID, Throwable e) {
+    java.lang.Long departamentID = (java.lang.Long)__departamentID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -447,13 +447,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (departamentid == null) {
+    if (departamentID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(departamentid),
+         String.valueOf(departamentID),
  exceptionMsg };
     }
   }
@@ -467,7 +467,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("departaments.departamentid");
+    return  I18NUtils.tradueix("departaments.departamentID");
   }
 
   @InitBinder("departamentsFilterForm")
@@ -482,7 +482,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "departaments.departamentid");
+    initDisallowedFields(binder, "departaments.departamentID");
   }
 
   public DepartamentsWebValidator getWebValidator() {
@@ -500,10 +500,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Departaments
    */
-  @RequestMapping(value = "/{departamentid}/cancel")
-  public String cancelDepartaments(@PathVariable("departamentid") java.lang.Long departamentid,
+  @RequestMapping(value = "/{departamentID}/cancel")
+  public String cancelDepartaments(@PathVariable("departamentID") java.lang.Long departamentID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, departamentid);
+     return getRedirectWhenCancel(request, departamentID);
   }
 
   @Override
@@ -569,11 +569,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long departamentid, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long departamentID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long departamentid) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long departamentID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -596,8 +596,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public DepartamentsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long departamentid) throws I18NException {
-    return (DepartamentsJPA) departamentsEjb.findByPrimaryKey(departamentid);
+  public DepartamentsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long departamentID) throws I18NException {
+    return (DepartamentsJPA) departamentsEjb.findByPrimaryKey(departamentID);
   }
 
 

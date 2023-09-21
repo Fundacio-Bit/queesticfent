@@ -8,9 +8,9 @@ public class DepartamentsBean implements Departaments {
 
 
 
-	long departamentid;// PK
+	long departamentID;// PK
 	java.lang.String nom;
-	java.lang.String coordinadorid;
+	java.lang.String coordinadorId;
 	java.lang.String nomldap;
 	java.lang.String descripcio;
 
@@ -20,33 +20,33 @@ public class DepartamentsBean implements Departaments {
   }
 
   /** Constructor amb tots els camps  */
-  public DepartamentsBean(long departamentid , java.lang.String nom , java.lang.String coordinadorid , java.lang.String nomldap , java.lang.String descripcio) {
-    this.departamentid=departamentid;
+  public DepartamentsBean(long departamentID , java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
+    this.departamentID=departamentID;
     this.nom=nom;
-    this.coordinadorid=coordinadorid;
+    this.coordinadorId=coordinadorId;
     this.nomldap=nomldap;
     this.descripcio=descripcio;
 }
   /** Constructor sense valors autoincrementals */
-  public DepartamentsBean(java.lang.String nom , java.lang.String coordinadorid , java.lang.String nomldap , java.lang.String descripcio) {
+  public DepartamentsBean(java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
     this.nom=nom;
-    this.coordinadorid=coordinadorid;
+    this.coordinadorId=coordinadorId;
     this.nomldap=nomldap;
     this.descripcio=descripcio;
 }
   public DepartamentsBean(Departaments __bean) {
-    this.setDepartamentid(__bean.getDepartamentid());
+    this.setDepartamentID(__bean.getDepartamentID());
     this.setNom(__bean.getNom());
-    this.setCoordinadorid(__bean.getCoordinadorid());
+    this.setCoordinadorId(__bean.getCoordinadorId());
     this.setNomldap(__bean.getNomldap());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getDepartamentid() {
-		return(departamentid);
+	public long getDepartamentID() {
+		return(departamentID);
 	};
-	public void setDepartamentid(long _departamentid_) {
-		this.departamentid = _departamentid_;
+	public void setDepartamentID(long _departamentID_) {
+		this.departamentID = _departamentID_;
 	};
 
 	public java.lang.String getNom() {
@@ -56,11 +56,11 @@ public class DepartamentsBean implements Departaments {
 		this.nom = _nom_;
 	};
 
-	public java.lang.String getCoordinadorid() {
-		return(coordinadorid);
+	public java.lang.String getCoordinadorId() {
+		return(coordinadorId);
 	};
-	public void setCoordinadorid(java.lang.String _coordinadorid_) {
-		this.coordinadorid = _coordinadorid_;
+	public void setCoordinadorId(java.lang.String _coordinadorId_) {
+		this.coordinadorId = _coordinadorId_;
 	};
 
 	public java.lang.String getNomldap() {
@@ -84,9 +84,9 @@ public class DepartamentsBean implements Departaments {
   public static DepartamentsBean toBean(Departaments __bean) {
     if (__bean == null) { return null;}
     DepartamentsBean __tmp = new DepartamentsBean();
-    __tmp.setDepartamentid(__bean.getDepartamentid());
+    __tmp.setDepartamentID(__bean.getDepartamentID());
     __tmp.setNom(__bean.getNom());
-    __tmp.setCoordinadorid(__bean.getCoordinadorid());
+    __tmp.setCoordinadorId(__bean.getCoordinadorId());
     __tmp.setNomldap(__bean.getNomldap());
     __tmp.setDescripcio(__bean.getDescripcio());
 		return __tmp;

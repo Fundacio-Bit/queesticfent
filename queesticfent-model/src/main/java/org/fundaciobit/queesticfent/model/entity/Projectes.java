@@ -2,8 +2,8 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface Projectes extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getProjecteid();
-	public void setProjecteid(long _projecteid_);
+	public long getProjecteId();
+	public void setProjecteId(long _projecteId_);
 
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
@@ -22,9 +22,6 @@ public interface Projectes extends org.fundaciobit.genapp.common.IGenAppEntity {
 
 	public java.sql.Date getTodata();
 	public void setTodata(java.sql.Date _todata_);
-
-	public boolean isActiu2();
-	public void setActiu2(boolean _actiu2_);
 
 
 

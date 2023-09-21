@@ -22,7 +22,7 @@ public class UsuarisJPA implements Usuaris {
 
     @Id
     @Column(name="usuariid",nullable = false,length = 100)
-    java.lang.String usuariid;
+    java.lang.String usuariId;
 
     @Column(name="llinatge1",length = 100)
     java.lang.String llinatge1;
@@ -61,8 +61,8 @@ public class UsuarisJPA implements Usuaris {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisJPA(java.lang.String usuariid , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String contrasenya) {
-    this.usuariid=usuariid;
+  public UsuarisJPA(java.lang.String usuariId , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String contrasenya) {
+    this.usuariId=usuariId;
     this.llinatge1=llinatge1;
     this.llinatge2=llinatge2;
     this.nom=nom;
@@ -75,13 +75,13 @@ public class UsuarisJPA implements Usuaris {
     this.contrasenya=contrasenya;
 }
   /** Constructor dels valors Not Null */
-  public UsuarisJPA(java.lang.String usuariid , java.lang.String nom , java.lang.String correu) {
-    this.usuariid=usuariid;
+  public UsuarisJPA(java.lang.String usuariId , java.lang.String nom , java.lang.String correu) {
+    this.usuariId=usuariId;
     this.nom=nom;
     this.correu=correu;
 }
   public UsuarisJPA(Usuaris __bean) {
-    this.setUsuariid(__bean.getUsuariid());
+    this.setUsuariId(__bean.getUsuariId());
     this.setLlinatge1(__bean.getLlinatge1());
     this.setLlinatge2(__bean.getLlinatge2());
     this.setNom(__bean.getNom());
@@ -94,11 +94,11 @@ public class UsuarisJPA implements Usuaris {
     this.setContrasenya(__bean.getContrasenya());
 	}
 
-	public java.lang.String getUsuariid() {
-		return(usuariid);
+	public java.lang.String getUsuariId() {
+		return(usuariId);
 	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setUsuariId(java.lang.String _usuariId_) {
+		this.usuariId = _usuariId_;
 	};
 
 	public java.lang.String getLlinatge1() {
@@ -179,10 +179,10 @@ public class UsuarisJPA implements Usuaris {
     if (__obj != null && __obj instanceof Usuaris) {
       Usuaris __instance = (Usuaris)__obj;
       __result = true;
-      if (this.getUsuariid() == null) {
-        __result = __result && (__instance.getUsuariid() == null);
+      if (this.getUsuariId() == null) {
+        __result = __result && (__instance.getUsuariId() == null);
       } else {
-        __result = __result && this.getUsuariid().equals(__instance.getUsuariid()) ;
+        __result = __result && this.getUsuariId().equals(__instance.getUsuariId()) ;
       }
 
     } else {
@@ -204,12 +204,25 @@ public class UsuarisJPA implements Usuaris {
     }
 
 
+// EXP  Field:usuariid | Table: qef_usuarisdepartament | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuaris")
+    private Set<UsuarisDepartamentJPA> usuarisDepartaments = new HashSet<UsuarisDepartamentJPA>(0);
+    public  Set<UsuarisDepartamentJPA> getUsuarisDepartaments() {
+    return this.usuarisDepartaments;
+  }
+
+    public void setUsuarisDepartaments(Set<UsuarisDepartamentJPA> usuarisDepartaments) {
+      this.usuarisDepartaments = usuarisDepartaments;
+    }
+
+
 
  // ---------------  STATIC METHODS ------------------
   public static UsuarisJPA toJPA(Usuaris __bean) {
     if (__bean == null) { return null;}
     UsuarisJPA __tmp = new UsuarisJPA();
-    __tmp.setUsuariid(__bean.getUsuariid());
+    __tmp.setUsuariId(__bean.getUsuariId());
     __tmp.setLlinatge1(__bean.getLlinatge1());
     __tmp.setLlinatge2(__bean.getLlinatge2());
     __tmp.setNom(__bean.getNom());
@@ -252,6 +265,10 @@ public class UsuarisJPA implements Usuaris {
     if(!"GrupsusuariJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.grupsusuaris) || org.hibernate.Hibernate.isInitialized(__jpa.getGrupsusuaris())) ) {
       __tmp.setGrupsusuaris(GrupsusuariJPA.copyJPA(__jpa.getGrupsusuaris(), __alreadyCopied,"UsuarisJPA"));
+    }
+    if(!"UsuarisDepartamentJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuarisDepartaments) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuarisDepartaments())) ) {
+      __tmp.setUsuarisDepartaments(UsuarisDepartamentJPA.copyJPA(__jpa.getUsuarisDepartaments(), __alreadyCopied,"UsuarisJPA"));
     }
     // Copia de beans complexes (IMP)
 

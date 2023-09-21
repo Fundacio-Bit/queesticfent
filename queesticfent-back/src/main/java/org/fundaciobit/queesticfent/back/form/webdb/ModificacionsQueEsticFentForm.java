@@ -19,8 +19,8 @@ public class ModificacionsQueEsticFentForm extends queesticfentBaseForm {
   public ModificacionsQueEsticFentForm(ModificacionsQueEsticFentForm __toClone) {
     super(__toClone);
       this.modificacionsQueEsticFent = __toClone.modificacionsQueEsticFent;
-    this.listOfAccionsForAccioid = __toClone.listOfAccionsForAccioid;
-    this.listOfProjectesForProjecteid = __toClone.listOfProjectesForProjecteid;
+    this.listOfAccionsForAccioID = __toClone.listOfAccionsForAccioID;
+    this.listOfProjectesForProjecteID = __toClone.listOfProjectesForProjecteID;
   }
   
   public ModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA modificacionsQueEsticFent, boolean nou) {
@@ -36,26 +36,26 @@ public class ModificacionsQueEsticFentForm extends queesticfentBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfAccionsForAccioid;
+  private List<StringKeyValue> listOfAccionsForAccioID;
 
-  public List<StringKeyValue> getListOfAccionsForAccioid() {
-    return this.listOfAccionsForAccioid;
+  public List<StringKeyValue> getListOfAccionsForAccioID() {
+    return this.listOfAccionsForAccioID;
   }
 
-  public void setListOfAccionsForAccioid(List<StringKeyValue> listOfAccionsForAccioid) {
-    this.listOfAccionsForAccioid = listOfAccionsForAccioid;
+  public void setListOfAccionsForAccioID(List<StringKeyValue> listOfAccionsForAccioID) {
+    this.listOfAccionsForAccioID = listOfAccionsForAccioID;
   }
 
 
 
-  private List<StringKeyValue> listOfProjectesForProjecteid;
+  private List<StringKeyValue> listOfProjectesForProjecteID;
 
-  public List<StringKeyValue> getListOfProjectesForProjecteid() {
-    return this.listOfProjectesForProjecteid;
+  public List<StringKeyValue> getListOfProjectesForProjecteID() {
+    return this.listOfProjectesForProjecteID;
   }
 
-  public void setListOfProjectesForProjecteid(List<StringKeyValue> listOfProjectesForProjecteid) {
-    this.listOfProjectesForProjecteid = listOfProjectesForProjecteid;
+  public void setListOfProjectesForProjecteID(List<StringKeyValue> listOfProjectesForProjecteID) {
+    this.listOfProjectesForProjecteID = listOfProjectesForProjecteID;
   }
 
 

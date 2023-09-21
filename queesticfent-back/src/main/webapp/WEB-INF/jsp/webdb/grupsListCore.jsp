@@ -24,7 +24,7 @@
 
       <c:forEach var="grups" items="${grupsItems}">
 
-        <tr id="grups_rowid_${grups.grupid}">
+        <tr id="grups_rowid_${grups.grupID}">
           <%@include file="grupsListCoreMultipleSelect.jsp" %>
 
           <%@include file="grupsListCoreContent.jsp" %>

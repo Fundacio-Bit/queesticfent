@@ -24,7 +24,7 @@
 
       <c:forEach var="festius" items="${festiusItems}">
 
-        <tr id="festius_rowid_${festius.festiuid}">
+        <tr id="festius_rowid_${festius.festiuID}">
           <%@include file="festiusListCoreMultipleSelect.jsp" %>
 
           <%@include file="festiusListCoreContent.jsp" %>

@@ -56,7 +56,7 @@ public class DepartamentsValidator<I extends Departaments>
     }
 
     if (__vr.getFieldErrorCount(COORDINADORID) == 0) {
-      java.lang.String __coordinadorid = __target__.getCoordinadorid();
+      java.lang.String __coordinadorid = __target__.getCoordinadorId();
       if (__coordinadorid!= null && __coordinadorid.length() > 200) {
         __vr.rejectValue(COORDINADORID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(COORDINADORID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(200)));

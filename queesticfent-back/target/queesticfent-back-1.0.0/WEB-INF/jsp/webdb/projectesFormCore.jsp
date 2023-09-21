@@ -102,11 +102,8 @@
             </td>
           <td id="projectes_actiu_columnvalueid">
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,ProjectesFields.ACTIU)}" >
-              <form:select cssClass="form-control col-md-6" onchange="if(typeof onChangeActiu == 'function') {  onChangeActiu(this); };"  path="projectes.actiu">
-                <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
-                <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
-                <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
-              </form:select>
+              <form:errors path="projectes.actiu" cssClass="errorField alert alert-danger" />
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,ProjectesFields.ACTIU)? 'false' : 'true'}" path="projectes.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,ProjectesFields.ACTIU)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.projectes.actiu}" />
@@ -184,31 +181,6 @@
                 });
             });
         </script>           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ProjectesFields.ACTIU2)}">
-        <tr id="projectes_actiu2_rowid">
-          <td id="projectes_actiu2_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ProjectesFields.ACTIU2])?'projectes.actiu2':__theForm.labels[ProjectesFields.ACTIU2]}" />
-             </label>
-              <c:if test="${not empty __theForm.help[ProjectesFields.ACTIU2]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[ProjectesFields.ACTIU2]}" ></i>
-              </c:if>
-            </td>
-          <td id="projectes_actiu2_columnvalueid">
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ProjectesFields.ACTIU2)}" >
-              <form:select cssClass="form-control col-md-6" onchange="if(typeof onChangeActiu2 == 'function') {  onChangeActiu2(this); };"  path="projectes.actiu2">
-                <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
-                <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
-                <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
-              </form:select>
-          </c:if>
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ProjectesFields.ACTIU2)}" >
-                <fmt:message key="genapp.checkbox.${__theForm.projectes.actiu2}" />
-          </c:if>
-           </td>
         </tr>
         </c:if>
         

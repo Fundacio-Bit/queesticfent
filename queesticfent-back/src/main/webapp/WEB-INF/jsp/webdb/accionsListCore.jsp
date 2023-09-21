@@ -24,7 +24,7 @@
 
       <c:forEach var="accions" items="${accionsItems}">
 
-        <tr id="accions_rowid_${accions.accioid}">
+        <tr id="accions_rowid_${accions.accioId}">
           <%@include file="accionsListCoreMultipleSelect.jsp" %>
 
           <%@include file="accionsListCoreContent.jsp" %>

@@ -8,8 +8,8 @@ public class UsuarisDepartamentBean implements UsuarisDepartament {
 
 
 
-	long usuaridepartamentid;// PK
-	java.lang.String usuariid;
+	long usuariDepartamentId;// PK
+	java.lang.String usuariId;
 	long departamentid;
 
 
@@ -18,27 +18,27 @@ public class UsuarisDepartamentBean implements UsuarisDepartament {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisDepartamentBean(java.lang.String usuariid , long departamentid , long usuaridepartamentid) {
-    this.usuariid=usuariid;
+  public UsuarisDepartamentBean(java.lang.String usuariId , long departamentid , long usuariDepartamentId) {
+    this.usuariId=usuariId;
     this.departamentid=departamentid;
-    this.usuaridepartamentid=usuaridepartamentid;
+    this.usuariDepartamentId=usuariDepartamentId;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuarisDepartamentBean(java.lang.String usuariid , long departamentid) {
-    this.usuariid=usuariid;
+  public UsuarisDepartamentBean(java.lang.String usuariId , long departamentid) {
+    this.usuariId=usuariId;
     this.departamentid=departamentid;
 }
   public UsuarisDepartamentBean(UsuarisDepartament __bean) {
-    this.setUsuariid(__bean.getUsuariid());
+    this.setUsuariId(__bean.getUsuariId());
     this.setDepartamentid(__bean.getDepartamentid());
-    this.setUsuaridepartamentid(__bean.getUsuaridepartamentid());
+    this.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
 	}
 
-	public java.lang.String getUsuariid() {
-		return(usuariid);
+	public java.lang.String getUsuariId() {
+		return(usuariId);
 	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setUsuariId(java.lang.String _usuariId_) {
+		this.usuariId = _usuariId_;
 	};
 
 	public long getDepartamentid() {
@@ -48,11 +48,11 @@ public class UsuarisDepartamentBean implements UsuarisDepartament {
 		this.departamentid = _departamentid_;
 	};
 
-	public long getUsuaridepartamentid() {
-		return(usuaridepartamentid);
+	public long getUsuariDepartamentId() {
+		return(usuariDepartamentId);
 	};
-	public void setUsuaridepartamentid(long _usuaridepartamentid_) {
-		this.usuaridepartamentid = _usuaridepartamentid_;
+	public void setUsuariDepartamentId(long _usuariDepartamentId_) {
+		this.usuariDepartamentId = _usuariDepartamentId_;
 	};
 
 
@@ -62,9 +62,9 @@ public class UsuarisDepartamentBean implements UsuarisDepartament {
   public static UsuarisDepartamentBean toBean(UsuarisDepartament __bean) {
     if (__bean == null) { return null;}
     UsuarisDepartamentBean __tmp = new UsuarisDepartamentBean();
-    __tmp.setUsuariid(__bean.getUsuariid());
+    __tmp.setUsuariId(__bean.getUsuariId());
     __tmp.setDepartamentid(__bean.getDepartamentid());
-    __tmp.setUsuaridepartamentid(__bean.getUsuaridepartamentid());
+    __tmp.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
 		return __tmp;
 	}
 

@@ -39,10 +39,6 @@ public class ProjectesQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new DateField(getQueryPath(), ProjectesFields.TODATA);
   }
 
-  public BooleanField ACTIU2() {
-    return new BooleanField(getQueryPath(), ProjectesFields.ACTIU2);
-  }
-
 
 
   @Override

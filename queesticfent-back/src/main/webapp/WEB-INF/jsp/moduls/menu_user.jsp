@@ -13,6 +13,13 @@
       </a>
     </li>
     
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/user/llistatentrades/llistatentrades"/>">
+        <span style="${(fn:contains(url, '/user/llistatentrades'))? "font-weight: bold;" : ""}">Entrades Antigues</span>
+      </a>
+    </li>
+    
     
 
    <%-- Example with security: virtual roles  --%>

@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PersonalProjecteFields.PERSONALPROJECTEID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="personalProjecte.personalprojecteid" />:</span>
+              <span class="add-on"><fmt:message key="personalProjecte.personalProjecteId" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="personalprojecteidDesde" />
+              <form:input cssClass="input-append input-small" path="personalProjecteIdDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="personalprojecteidFins" />
+              <form:input cssClass="input-append input-small search-query" path="personalProjecteIdFins" />
 
             </div>
 

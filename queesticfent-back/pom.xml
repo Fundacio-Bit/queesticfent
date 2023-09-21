@@ -7,6 +7,7 @@
 
 	<artifactId>queesticfent-back</artifactId>
 	<packaging>war</packaging>
+	
 
 	<parent>
 		<groupId>org.fundaciobit.queesticfent</groupId>
@@ -24,6 +25,13 @@
 		</repository>
 
 	</repositories>
+	
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <xdocreport.version>2.0.4</xdocreport.version>
+    </properties>
 
 	<dependencies>
 
@@ -274,7 +282,53 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
+		<!--<dependency>
+            <groupId>net.sf.jodreports</groupId>
+            <artifactId>jodreports</artifactId>
+            <version>2.4.0</version>
+        </dependency>-->
+        
+         <!-- OPENSAGRES XDOCREPORT (to merge odt,docx with Java model and convert to PDF) -->
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.odfdom.converter.core</artifactId>
+            <version>${xdocreport.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.xdocreport.converter.odt.odfdom</artifactId>
+            <version>${xdocreport.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.xdocreport.document.odt</artifactId>
+            <version>${xdocreport.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.xdocreport.template.freemarker</artifactId>
+            <version>${xdocreport.version}</version>
+            <exclusions>
+                <!-- This avoids ParseException in template due to unknown built-in: "counter" in freemarker 2.3.20 -->
+                <exclusion>
+                    <groupId>org.freemarker</groupId>
+                    <artifactId>freemarker</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.xdocreport.template.velocity</artifactId>
+            <version>${xdocreport.version}</version>
+        </dependency>
+        <!-- This avoids ParseException in template due to unknown built-in: "counter" in freemarker 2.3.20 -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

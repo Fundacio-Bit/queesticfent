@@ -25,13 +25,13 @@ public class DepartamentsJPA implements Departaments {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DEPARTAMENTS_SEQ")
     @Column(name="departamentid",nullable = false,length = 19)
-    long departamentid;
+    long departamentID;
 
     @Column(name="nom",nullable = false,length = 300)
     java.lang.String nom;
 
     @Column(name="coordinadorid",nullable = false,length = 200)
-    java.lang.String coordinadorid;
+    java.lang.String coordinadorId;
 
     @Column(name="nomldap",nullable = false,length = 200)
     java.lang.String nomldap;
@@ -46,33 +46,33 @@ public class DepartamentsJPA implements Departaments {
   }
 
   /** Constructor amb tots els camps  */
-  public DepartamentsJPA(long departamentid , java.lang.String nom , java.lang.String coordinadorid , java.lang.String nomldap , java.lang.String descripcio) {
-    this.departamentid=departamentid;
+  public DepartamentsJPA(long departamentID , java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
+    this.departamentID=departamentID;
     this.nom=nom;
-    this.coordinadorid=coordinadorid;
+    this.coordinadorId=coordinadorId;
     this.nomldap=nomldap;
     this.descripcio=descripcio;
 }
   /** Constructor sense valors autoincrementals */
-  public DepartamentsJPA(java.lang.String nom , java.lang.String coordinadorid , java.lang.String nomldap , java.lang.String descripcio) {
+  public DepartamentsJPA(java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
     this.nom=nom;
-    this.coordinadorid=coordinadorid;
+    this.coordinadorId=coordinadorId;
     this.nomldap=nomldap;
     this.descripcio=descripcio;
 }
   public DepartamentsJPA(Departaments __bean) {
-    this.setDepartamentid(__bean.getDepartamentid());
+    this.setDepartamentID(__bean.getDepartamentID());
     this.setNom(__bean.getNom());
-    this.setCoordinadorid(__bean.getCoordinadorid());
+    this.setCoordinadorId(__bean.getCoordinadorId());
     this.setNomldap(__bean.getNomldap());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getDepartamentid() {
-		return(departamentid);
+	public long getDepartamentID() {
+		return(departamentID);
 	};
-	public void setDepartamentid(long _departamentid_) {
-		this.departamentid = _departamentid_;
+	public void setDepartamentID(long _departamentID_) {
+		this.departamentID = _departamentID_;
 	};
 
 	public java.lang.String getNom() {
@@ -82,11 +82,11 @@ public class DepartamentsJPA implements Departaments {
 		this.nom = _nom_;
 	};
 
-	public java.lang.String getCoordinadorid() {
-		return(coordinadorid);
+	public java.lang.String getCoordinadorId() {
+		return(coordinadorId);
 	};
-	public void setCoordinadorid(java.lang.String _coordinadorid_) {
-		this.coordinadorid = _coordinadorid_;
+	public void setCoordinadorId(java.lang.String _coordinadorId_) {
+		this.coordinadorId = _coordinadorId_;
 	};
 
 	public java.lang.String getNomldap() {
@@ -111,7 +111,7 @@ public class DepartamentsJPA implements Departaments {
     if (__obj != null && __obj instanceof Departaments) {
       Departaments __instance = (Departaments)__obj;
       __result = true;
-      __result = __result && (this.getDepartamentid() == __instance.getDepartamentid()) ;
+      __result = __result && (this.getDepartamentID() == __instance.getDepartamentID()) ;
     } else {
       __result = false;
     }
@@ -149,9 +149,9 @@ public class DepartamentsJPA implements Departaments {
   public static DepartamentsJPA toJPA(Departaments __bean) {
     if (__bean == null) { return null;}
     DepartamentsJPA __tmp = new DepartamentsJPA();
-    __tmp.setDepartamentid(__bean.getDepartamentid());
+    __tmp.setDepartamentID(__bean.getDepartamentID());
     __tmp.setNom(__bean.getNom());
-    __tmp.setCoordinadorid(__bean.getCoordinadorid());
+    __tmp.setCoordinadorId(__bean.getCoordinadorId());
     __tmp.setNomldap(__bean.getNomldap());
     __tmp.setDescripcio(__bean.getDescripcio());
 		return __tmp;

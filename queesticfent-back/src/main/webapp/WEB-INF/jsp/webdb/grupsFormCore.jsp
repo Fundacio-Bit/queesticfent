@@ -60,18 +60,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,GrupsFields.NIVELLSEGURETAT)}">
-        <tr id="grups_nivellseguretat_rowid">
-          <td id="grups_nivellseguretat_columnlabelid">
+        <tr id="grups_nivellSeguretat_rowid">
+          <td id="grups_nivellSeguretat_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[GrupsFields.NIVELLSEGURETAT])?'grups.nivellseguretat':__theForm.labels[GrupsFields.NIVELLSEGURETAT]}" />
+              <fmt:message key="${(empty __theForm.labels[GrupsFields.NIVELLSEGURETAT])?'grups.nivellSeguretat':__theForm.labels[GrupsFields.NIVELLSEGURETAT]}" />
              </label>
               <c:if test="${not empty __theForm.help[GrupsFields.NIVELLSEGURETAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[GrupsFields.NIVELLSEGURETAT]}" ></i>
               </c:if>
             </td>
-          <td id="grups_nivellseguretat_columnvalueid">
-            <form:errors path="grups.nivellseguretat" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,GrupsFields.NIVELLSEGURETAT)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,GrupsFields.NIVELLSEGURETAT)? ' uneditable-input' : ''}"  style=""  path="grups.nivellseguretat"   />
+          <td id="grups_nivellSeguretat_columnvalueid">
+            <form:errors path="grups.nivellSeguretat" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,GrupsFields.NIVELLSEGURETAT)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,GrupsFields.NIVELLSEGURETAT)? ' uneditable-input' : ''}"  style=""  path="grups.nivellSeguretat"   />
 
            </td>
         </tr>

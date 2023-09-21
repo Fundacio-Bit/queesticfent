@@ -55,22 +55,22 @@ public class UsuarisDepartamentJPAManager
         return list.toArray(new UsuarisDepartament[list.size()]);
     };
 
-    public UsuarisDepartament create( java.lang.String _usuariid_, long _departamentid_) throws I18NException {
-        UsuarisDepartamentJPA __bean =  new UsuarisDepartamentJPA(_usuariid_,_departamentid_);
+    public UsuarisDepartament create( java.lang.String _usuariId_, long _departamentid_) throws I18NException {
+        UsuarisDepartamentJPA __bean =  new UsuarisDepartamentJPA(_usuariId_,_departamentid_);
         return create(__bean);
     }
 
 
 
- public void delete(long _usuaridepartamentid_) {
-   delete(findByPrimaryKey(_usuaridepartamentid_));
+ public void delete(long _usuariDepartamentId_) {
+   delete(findByPrimaryKey(_usuariDepartamentId_));
  }
 
 
 
 
-    public UsuarisDepartament findByPrimaryKey(long _usuaridepartamentid_) {
-        return __em.find(UsuarisDepartamentJPA.class, _usuaridepartamentid_);  
+    public UsuarisDepartament findByPrimaryKey(long _usuariDepartamentId_) {
+        return __em.find(UsuarisDepartamentJPA.class, _usuariDepartamentId_);  
     }
     @Override
     protected UsuarisDepartament getJPAInstance(UsuarisDepartament __bean) {

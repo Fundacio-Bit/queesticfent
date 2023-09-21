@@ -9,7 +9,7 @@
         <c:if test="${ __entry.key < 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[accions.accioid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[accions.accioId]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />
@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccionsFields.ACCIOID)}">
           <td>
-          ${accions.accioid}
+          ${accions.accioId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccionsFields.NOM)}">
@@ -36,7 +36,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccionsFields.NOMLLEGENDA)}">
           <td>
-          ${accions.nomllegenda}
+          ${accions.nomLlegenda}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccionsFields.COLOR)}">
@@ -56,7 +56,7 @@
         <c:if test="${ __entry.key >= 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[accions.accioid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[accions.accioId]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />

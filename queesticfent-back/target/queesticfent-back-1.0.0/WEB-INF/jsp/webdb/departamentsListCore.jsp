@@ -24,7 +24,7 @@
 
       <c:forEach var="departaments" items="${departamentsItems}">
 
-        <tr id="departaments_rowid_${departaments.departamentid}">
+        <tr id="departaments_rowid_${departaments.departamentID}">
           <%@include file="departamentsListCoreMultipleSelect.jsp" %>
 
           <%@include file="departamentsListCoreContent.jsp" %>

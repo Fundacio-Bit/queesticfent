@@ -48,7 +48,7 @@ public class AccionsValidator<I extends Accions>
     }
 
     if (__vr.getFieldErrorCount(NOMLLEGENDA) == 0) {
-      java.lang.String __nomllegenda = __target__.getNomllegenda();
+      java.lang.String __nomllegenda = __target__.getNomLlegenda();
       if (__nomllegenda!= null && __nomllegenda.length() > 45) {
         __vr.rejectValue(NOMLLEGENDA, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOMLLEGENDA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(45)));

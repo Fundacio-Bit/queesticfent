@@ -9,8 +9,8 @@ public interface IFestiusManager extends org.fundaciobit.genapp.common.query.ITa
 
 	public Festius create( java.lang.String _nom_, java.sql.Date _data_, java.lang.String _descripcio_) throws I18NException;
 
-	public Festius findByPrimaryKey(long _festiuid_);
+	public Festius findByPrimaryKey(long _festiuID_);
 
-	public void delete(long _festiuid_);
+	public void delete(long _festiuID_);
 
 }

@@ -9,7 +9,7 @@
         <c:if test="${ __entry.key < 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[modificacionsQueEsticFent.modificacioid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[modificacionsQueEsticFent.modificacioID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />
@@ -26,27 +26,27 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.MODIFICACIOID)}">
           <td>
-          ${modificacionsQueEsticFent.modificacioid}
+          ${modificacionsQueEsticFent.modificacioID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.ACCIOID)}">
           <td>
-          <c:set var="tmp">${modificacionsQueEsticFent.accioid}</c:set>
+          <c:set var="tmp">${modificacionsQueEsticFent.accioID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfAccionsForAccioid[tmp]}
+          ${__theFilterForm.mapOfAccionsForAccioID[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.USUARIID)}">
           <td>
-          ${modificacionsQueEsticFent.usuariid}
+          ${modificacionsQueEsticFent.usuariID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.PROJECTEID)}">
           <td>
-          <c:set var="tmp">${modificacionsQueEsticFent.projecteid}</c:set>
+          <c:set var="tmp">${modificacionsQueEsticFent.projecteID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfProjectesForProjecteid[tmp]}
+          ${__theFilterForm.mapOfProjectesForProjecteID[tmp]}
           </c:if>
           </td>
         </c:if>
@@ -55,7 +55,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.QUEESTICFENTID)}">
           <td>
-          ${modificacionsQueEsticFent.queesticfentid}
+          ${modificacionsQueEsticFent.queEsticFentID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.DADA1)}">
@@ -75,7 +75,7 @@
         <c:if test="${ __entry.key >= 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[modificacionsQueEsticFent.modificacioid]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[modificacionsQueEsticFent.modificacioID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />

@@ -20,14 +20,14 @@ import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
 @Component
 public class UsuarisFilterForm extends queesticfentBaseFilterForm implements UsuarisFields {
 
-  private java.lang.String usuariid;
+  private java.lang.String usuariId;
 
-  public java.lang.String getUsuariid() {
-    return this.usuariid;
+  public java.lang.String getUsuariId() {
+    return this.usuariId;
   }
 
-  public void setUsuariid(java.lang.String usuariid) {
-    this.usuariid = usuariid;
+  public void setUsuariId(java.lang.String usuariId) {
+    this.usuariId = usuariId;
   }
 
 
@@ -157,7 +157,7 @@ public class UsuarisFilterForm extends queesticfentBaseFilterForm implements Usu
   
   public UsuarisFilterForm(UsuarisFilterForm __toClone) {
     super(__toClone);
-    this.usuariid = __toClone.usuariid;
+    this.usuariId = __toClone.usuariId;
     this.llinatge1 = __toClone.llinatge1;
     this.llinatge2 = __toClone.llinatge2;
     this.nom = __toClone.nom;

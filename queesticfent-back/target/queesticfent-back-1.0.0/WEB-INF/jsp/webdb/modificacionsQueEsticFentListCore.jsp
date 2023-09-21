@@ -24,7 +24,7 @@
 
       <c:forEach var="modificacionsQueEsticFent" items="${modificacionsQueEsticFentItems}">
 
-        <tr id="modificacionsQueEsticFent_rowid_${modificacionsQueEsticFent.modificacioid}">
+        <tr id="modificacionsQueEsticFent_rowid_${modificacionsQueEsticFent.modificacioID}">
           <%@include file="modificacionsQueEsticFentListCoreMultipleSelect.jsp" %>
 
           <%@include file="modificacionsQueEsticFentListCoreContent.jsp" %>

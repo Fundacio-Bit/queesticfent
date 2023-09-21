@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ModificacionsQueEsticFentFields.MODIFICACIOID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.modificacioid" />:</span>
+              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.modificacioID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="modificacioidDesde" />
+              <form:input cssClass="input-append input-small" path="modificacioIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="modificacioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="modificacioIDFins" />
 
             </div>
 
@@ -71,16 +71,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ModificacionsQueEsticFentFields.ACCIOID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.accioid" />:</span>
+              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.accioID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="accioidDesde" />
+              <form:input cssClass="input-append input-small" path="accioIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="accioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="accioIDFins" />
 
             </div>
 
@@ -89,12 +89,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ModificacionsQueEsticFentFields.USUARIID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="modificacionsQueEsticFent.usuariid" var="usuariid" />
-              <fmt:message key="genapp.form.searchby" var="cercaperusuariid" >                
-                 <fmt:param value="${usuariid}"/>
+              <fmt:message key="modificacionsQueEsticFent.usuariID" var="usuariID" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariID" >                
+                 <fmt:param value="${usuariID}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${usuariid}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariid}" path="usuariid" />
+              <span class="add-on"><c:out value="${usuariID}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariID}" path="usuariID" />
             </div>
 
 
@@ -102,16 +102,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ModificacionsQueEsticFentFields.PROJECTEID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.projecteid" />:</span>
+              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.projecteID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="projecteidDesde" />
+              <form:input cssClass="input-append input-small" path="projecteIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="projecteidFins" />
+              <form:input cssClass="input-append input-small search-query" path="projecteIDFins" />
 
             </div>
 
@@ -170,16 +170,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ModificacionsQueEsticFentFields.QUEESTICFENTID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.queesticfentid" />:</span>
+              <span class="add-on"><fmt:message key="modificacionsQueEsticFent.queEsticFentID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="queesticfentidDesde" />
+              <form:input cssClass="input-append input-small" path="queEsticFentIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="queesticfentidFins" />
+              <form:input cssClass="input-append input-small search-query" path="queEsticFentIDFins" />
 
             </div>
 

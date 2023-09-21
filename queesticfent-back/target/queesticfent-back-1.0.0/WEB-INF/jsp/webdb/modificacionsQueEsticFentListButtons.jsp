@@ -3,22 +3,22 @@
   
           <c:if test="${__theFilterForm.editButtonVisible || __theFilterForm.viewButtonVisible ||__theFilterForm.deleteButtonVisible || not empty __theFilterForm.additionalButtonsForEachItem || not empty __theFilterForm.additionalButtonsByPK}">
           <td>
-          <c:set var="pk" value="${modificacionsQueEsticFent.modificacioid}"/>
+          <c:set var="pk" value="${modificacionsQueEsticFent.modificacioID}"/>
           <c:choose>
            <c:when test="${__theFilterForm.actionsRenderer == 1}">
             <div class="btn-group" role="group" >
             <c:if test="${__theFilterForm.editButtonVisible}">
-            <a class="btn btn-warning" href="<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioid}/edit"/>" role="button"  title="<fmt:message key="genapp.edit"/>">
+            <a class="btn btn-warning" href="<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioID}/edit"/>" role="button"  title="<fmt:message key="genapp.edit"/>">
                <i class="fas fa-edit"></i>
             </a>
             </c:if>
             <c:if test="${__theFilterForm.viewButtonVisible}">
-            <a class="btn btn-info" href="<c:url value="${contexte}/view/${modificacionsQueEsticFent.modificacioid}"/>" role="button"  title="<fmt:message key="genapp.viewtitle"/>">
+            <a class="btn btn-info" href="<c:url value="${contexte}/view/${modificacionsQueEsticFent.modificacioID}"/>" role="button"  title="<fmt:message key="genapp.viewtitle"/>">
                <i class="fas fa-eye"></i>
             </a>
             </c:if>
             <c:if test="${__theFilterForm.deleteButtonVisible}">
-            <a class="btn btn-danger" href="#myModal" role="button"  onclick="openModal('<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioid}/delete"/>','show');" title="<fmt:message key="genapp.delete"/>">
+            <a class="btn btn-danger" href="#myModal" role="button"  onclick="openModal('<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioID}/delete"/>','show');" title="<fmt:message key="genapp.delete"/>">
                <i class="fas fa-trash icon-white"></i>
             </a>
             </c:if>
@@ -70,7 +70,7 @@
   <ul class="dropdown-menu float-right" style="min-width:35px;padding:5px 5px 0px 5px;margin:0px;font-size: 12px" >
             <c:if test="${__theFilterForm.editButtonVisible}">
             <li>
-            <a class="btn btn-warning btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioid}/edit"/>" onclick="null">
+            <a class="btn btn-warning btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioID}/edit"/>" onclick="null">
             <i class="fas fa-edit"></i>
              <fmt:message key="genapp.edit"/>
             </a>
@@ -78,7 +78,7 @@
             </c:if>
             <c:if test="${__theFilterForm.viewButtonVisible}">
             <li>
-            <a class="btn btn-info btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/view/${modificacionsQueEsticFent.modificacioid}"/>" onclick="null">
+            <a class="btn btn-info btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/view/${modificacionsQueEsticFent.modificacioID}"/>" onclick="null">
             <i class="fas fa-eye"></i>
              <fmt:message key="genapp.viewtitle"/>
             </a>
@@ -86,7 +86,7 @@
             </c:if>
             <c:if test="${__theFilterForm.deleteButtonVisible}">
             <li>
-            <a class="btn btn-danger btn-sm a_item" style="margin-bottom:5px;color: white;" href="#myModal" onclick="openModal('<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioid}/delete"/>','show');">
+            <a class="btn btn-danger btn-sm a_item" style="margin-bottom:5px;color: white;" href="#myModal" onclick="openModal('<c:url value="${contexte}/${modificacionsQueEsticFent.modificacioID}/delete"/>','show');">
             <i class="fas fa-trash icon-white"></i>
              <fmt:message key="genapp.delete"/>
             </a>

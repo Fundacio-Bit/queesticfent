@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,DepartamentsFields.DEPARTAMENTID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="departaments.departamentid" />:</span>
+              <span class="add-on"><fmt:message key="departaments.departamentID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="departamentidDesde" />
+              <form:input cssClass="input-append input-small" path="departamentIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="departamentidFins" />
+              <form:input cssClass="input-append input-small search-query" path="departamentIDFins" />
 
             </div>
 
@@ -84,12 +84,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,DepartamentsFields.COORDINADORID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="departaments.coordinadorid" var="coordinadorid" />
-              <fmt:message key="genapp.form.searchby" var="cercapercoordinadorid" >                
-                 <fmt:param value="${coordinadorid}"/>
+              <fmt:message key="departaments.coordinadorId" var="coordinadorId" />
+              <fmt:message key="genapp.form.searchby" var="cercapercoordinadorId" >                
+                 <fmt:param value="${coordinadorId}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${coordinadorid}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercoordinadorid}" path="coordinadorid" />
+              <span class="add-on"><c:out value="${coordinadorId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercoordinadorId}" path="coordinadorId" />
             </div>
 
 

@@ -19,8 +19,8 @@ public class GrupsusuariForm extends queesticfentBaseForm {
   public GrupsusuariForm(GrupsusuariForm __toClone) {
     super(__toClone);
       this.grupsusuari = __toClone.grupsusuari;
-    this.listOfUsuarisForUsuariid = __toClone.listOfUsuarisForUsuariid;
-    this.listOfGrupsForGrupid = __toClone.listOfGrupsForGrupid;
+    this.listOfUsuarisForUsuariID = __toClone.listOfUsuarisForUsuariID;
+    this.listOfGrupsForGrupID = __toClone.listOfGrupsForGrupID;
   }
   
   public GrupsusuariForm(GrupsusuariJPA grupsusuari, boolean nou) {
@@ -36,26 +36,26 @@ public class GrupsusuariForm extends queesticfentBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfUsuarisForUsuariid;
+  private List<StringKeyValue> listOfUsuarisForUsuariID;
 
-  public List<StringKeyValue> getListOfUsuarisForUsuariid() {
-    return this.listOfUsuarisForUsuariid;
+  public List<StringKeyValue> getListOfUsuarisForUsuariID() {
+    return this.listOfUsuarisForUsuariID;
   }
 
-  public void setListOfUsuarisForUsuariid(List<StringKeyValue> listOfUsuarisForUsuariid) {
-    this.listOfUsuarisForUsuariid = listOfUsuarisForUsuariid;
+  public void setListOfUsuarisForUsuariID(List<StringKeyValue> listOfUsuarisForUsuariID) {
+    this.listOfUsuarisForUsuariID = listOfUsuarisForUsuariID;
   }
 
 
 
-  private List<StringKeyValue> listOfGrupsForGrupid;
+  private List<StringKeyValue> listOfGrupsForGrupID;
 
-  public List<StringKeyValue> getListOfGrupsForGrupid() {
-    return this.listOfGrupsForGrupid;
+  public List<StringKeyValue> getListOfGrupsForGrupID() {
+    return this.listOfGrupsForGrupID;
   }
 
-  public void setListOfGrupsForGrupid(List<StringKeyValue> listOfGrupsForGrupid) {
-    this.listOfGrupsForGrupid = listOfGrupsForGrupid;
+  public void setListOfGrupsForGrupID(List<StringKeyValue> listOfGrupsForGrupID) {
+    this.listOfGrupsForGrupID = listOfGrupsForGrupID;
   }
 
 

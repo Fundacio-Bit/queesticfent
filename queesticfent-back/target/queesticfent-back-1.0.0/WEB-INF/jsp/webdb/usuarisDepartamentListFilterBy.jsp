@@ -53,12 +53,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.USUARIID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="usuarisDepartament.usuariid" var="usuariid" />
-              <fmt:message key="genapp.form.searchby" var="cercaperusuariid" >                
-                 <fmt:param value="${usuariid}"/>
+              <fmt:message key="usuarisDepartament.usuariId" var="usuariId" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariId" >                
+                 <fmt:param value="${usuariId}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${usuariid}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariid}" path="usuariid" />
+              <span class="add-on"><c:out value="${usuariId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariId}" path="usuariId" />
             </div>
 
 
@@ -84,16 +84,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.USUARIDEPARTAMENTID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="usuarisDepartament.usuaridepartamentid" />:</span>
+              <span class="add-on"><fmt:message key="usuarisDepartament.usuariDepartamentId" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuaridepartamentidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariDepartamentIdDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuaridepartamentidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariDepartamentIdFins" />
 
             </div>
 

@@ -3,25 +3,25 @@
 <un:useConstants var="ModificacionsQueEsticFentFields" className="org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields"/>
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,ModificacionsQueEsticFentFields.ACCIOID)}">
-        <tr id="modificacionsQueEsticFent_accioid_rowid">
-          <td id="modificacionsQueEsticFent_accioid_columnlabelid">
+        <tr id="modificacionsQueEsticFent_accioID_rowid">
+          <td id="modificacionsQueEsticFent_accioID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.ACCIOID])?'modificacionsQueEsticFent.accioid':__theForm.labels[ModificacionsQueEsticFentFields.ACCIOID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.ACCIOID])?'modificacionsQueEsticFent.accioID':__theForm.labels[ModificacionsQueEsticFentFields.ACCIOID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[ModificacionsQueEsticFentFields.ACCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[ModificacionsQueEsticFentFields.ACCIOID]}" ></i>
               </c:if>
             </td>
-          <td id="modificacionsQueEsticFent_accioid_columnvalueid">
-          <form:errors path="modificacionsQueEsticFent.accioid" cssClass="errorField alert alert-danger" />
+          <td id="modificacionsQueEsticFent_accioID_columnvalueid">
+          <form:errors path="modificacionsQueEsticFent.accioID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.ACCIOID)}" >
-          <form:hidden path="modificacionsQueEsticFent.accioid"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.modificacionsQueEsticFent.accioid,__theForm.listOfAccionsForAccioid)}"  />
+          <form:hidden path="modificacionsQueEsticFent.accioID"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.modificacionsQueEsticFent.accioID,__theForm.listOfAccionsForAccioID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.ACCIOID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="modificacionsQueEsticFent_accioid"  onchange="if(typeof onChangeAccioid == 'function') {  onChangeAccioid(this); };"  cssClass="form-control col-md-9-optional" path="modificacionsQueEsticFent.accioid">
-            <c:forEach items="${__theForm.listOfAccionsForAccioid}" var="tmp">
+          <form:select id="modificacionsQueEsticFent_accioID"  onchange="if(typeof onChangeAccioID == 'function') {  onChangeAccioID(this); };"  cssClass="form-control col-md-9-optional" path="modificacionsQueEsticFent.accioID">
+            <c:forEach items="${__theForm.listOfAccionsForAccioID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
                   <c:set var="containEmptyValue"  value="true" />
@@ -34,43 +34,43 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,ModificacionsQueEsticFentFields.USUARIID)}">
-        <tr id="modificacionsQueEsticFent_usuariid_rowid">
-          <td id="modificacionsQueEsticFent_usuariid_columnlabelid">
+        <tr id="modificacionsQueEsticFent_usuariID_rowid">
+          <td id="modificacionsQueEsticFent_usuariID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.USUARIID])?'modificacionsQueEsticFent.usuariid':__theForm.labels[ModificacionsQueEsticFentFields.USUARIID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.USUARIID])?'modificacionsQueEsticFent.usuariID':__theForm.labels[ModificacionsQueEsticFentFields.USUARIID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[ModificacionsQueEsticFentFields.USUARIID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[ModificacionsQueEsticFentFields.USUARIID]}" ></i>
               </c:if>
             </td>
-          <td id="modificacionsQueEsticFent_usuariid_columnvalueid">
-            <form:errors path="modificacionsQueEsticFent.usuariid" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.USUARIID)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.USUARIID)? ' uneditable-input' : ''}"  style="" maxlength="45" path="modificacionsQueEsticFent.usuariid"   />
+          <td id="modificacionsQueEsticFent_usuariID_columnvalueid">
+            <form:errors path="modificacionsQueEsticFent.usuariID" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.USUARIID)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.USUARIID)? ' uneditable-input' : ''}"  style="" maxlength="45" path="modificacionsQueEsticFent.usuariID"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,ModificacionsQueEsticFentFields.PROJECTEID)}">
-        <tr id="modificacionsQueEsticFent_projecteid_rowid">
-          <td id="modificacionsQueEsticFent_projecteid_columnlabelid">
+        <tr id="modificacionsQueEsticFent_projecteID_rowid">
+          <td id="modificacionsQueEsticFent_projecteID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.PROJECTEID])?'modificacionsQueEsticFent.projecteid':__theForm.labels[ModificacionsQueEsticFentFields.PROJECTEID]}" />
+              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.PROJECTEID])?'modificacionsQueEsticFent.projecteID':__theForm.labels[ModificacionsQueEsticFentFields.PROJECTEID]}" />
              </label>
               <c:if test="${not empty __theForm.help[ModificacionsQueEsticFentFields.PROJECTEID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[ModificacionsQueEsticFentFields.PROJECTEID]}" ></i>
               </c:if>
             </td>
-          <td id="modificacionsQueEsticFent_projecteid_columnvalueid">
-          <form:errors path="modificacionsQueEsticFent.projecteid" cssClass="errorField alert alert-danger" />
+          <td id="modificacionsQueEsticFent_projecteID_columnvalueid">
+          <form:errors path="modificacionsQueEsticFent.projecteID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.PROJECTEID)}" >
-          <form:hidden path="modificacionsQueEsticFent.projecteid"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.modificacionsQueEsticFent.projecteid,__theForm.listOfProjectesForProjecteid)}"  />
+          <form:hidden path="modificacionsQueEsticFent.projecteID"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.modificacionsQueEsticFent.projecteID,__theForm.listOfProjectesForProjecteID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.PROJECTEID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="modificacionsQueEsticFent_projecteid"  onchange="if(typeof onChangeProjecteid == 'function') {  onChangeProjecteid(this); };"  cssClass="form-control col-md-9-optional" path="modificacionsQueEsticFent.projecteid">
-            <c:forEach items="${__theForm.listOfProjectesForProjecteid}" var="tmp">
+          <form:select id="modificacionsQueEsticFent_projecteID"  onchange="if(typeof onChangeProjecteID == 'function') {  onChangeProjecteID(this); };"  cssClass="form-control col-md-9-optional" path="modificacionsQueEsticFent.projecteID">
+            <c:forEach items="${__theForm.listOfProjectesForProjecteID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
                   <c:set var="containEmptyValue"  value="true" />
@@ -78,10 +78,10 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-              <c:if test="${empty __theForm.modificacionsQueEsticFent.projecteid }">
+              <c:if test="${empty __theForm.modificacionsQueEsticFent.projecteID }">
                   <form:option value="" selected="true" ></form:option>
               </c:if>
-              <c:if test="${not empty __theForm.modificacionsQueEsticFent.projecteid }">
+              <c:if test="${not empty __theForm.modificacionsQueEsticFent.projecteID }">
                   <form:option value="" ></form:option>
               </c:if>
             </c:if>
@@ -128,18 +128,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,ModificacionsQueEsticFentFields.QUEESTICFENTID)}">
-        <tr id="modificacionsQueEsticFent_queesticfentid_rowid">
-          <td id="modificacionsQueEsticFent_queesticfentid_columnlabelid">
+        <tr id="modificacionsQueEsticFent_queEsticFentID_rowid">
+          <td id="modificacionsQueEsticFent_queEsticFentID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.QUEESTICFENTID])?'modificacionsQueEsticFent.queesticfentid':__theForm.labels[ModificacionsQueEsticFentFields.QUEESTICFENTID]}" />
+              <fmt:message key="${(empty __theForm.labels[ModificacionsQueEsticFentFields.QUEESTICFENTID])?'modificacionsQueEsticFent.queEsticFentID':__theForm.labels[ModificacionsQueEsticFentFields.QUEESTICFENTID]}" />
              </label>
               <c:if test="${not empty __theForm.help[ModificacionsQueEsticFentFields.QUEESTICFENTID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[ModificacionsQueEsticFentFields.QUEESTICFENTID]}" ></i>
               </c:if>
             </td>
-          <td id="modificacionsQueEsticFent_queesticfentid_columnvalueid">
-            <form:errors path="modificacionsQueEsticFent.queesticfentid" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.QUEESTICFENTID)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.QUEESTICFENTID)? ' uneditable-input' : ''}"  style=""  path="modificacionsQueEsticFent.queesticfentid"   />
+          <td id="modificacionsQueEsticFent_queEsticFentID_columnvalueid">
+            <form:errors path="modificacionsQueEsticFent.queEsticFentID" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.QUEESTICFENTID)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,ModificacionsQueEsticFentFields.QUEESTICFENTID)? ' uneditable-input' : ''}"  style=""  path="modificacionsQueEsticFent.queEsticFentID"   />
 
            </td>
         </tr>
