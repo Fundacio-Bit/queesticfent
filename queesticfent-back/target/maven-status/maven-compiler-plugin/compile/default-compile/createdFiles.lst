@@ -17,7 +17,6 @@ org\fundaciobit\queesticfent\back\controller\webdb\GrupsusuariController.class
 org\fundaciobit\queesticfent\back\form\webdb\GrupsusuariRefList.class
 org\fundaciobit\queesticfent\back\form\webdb\DepartamentsRefList.class
 org\fundaciobit\queesticfent\back\controller\common\PrincipalController.class
-org\fundaciobit\queesticfent\back\controller\user\EntradesUserController.class
 org\fundaciobit\queesticfent\back\security\DefaultRolesPrefixPostProcessor.class
 org\fundaciobit\queesticfent\back\validator\webdb\FitxerWebValidator.class
 org\fundaciobit\queesticfent\back\utils\queesticfentSessionLocaleResolver.class

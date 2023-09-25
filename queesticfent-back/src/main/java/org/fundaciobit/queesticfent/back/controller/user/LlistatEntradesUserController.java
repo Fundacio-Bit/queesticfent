@@ -1,9 +1,7 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +30,6 @@ import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;
@@ -83,7 +79,7 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class LlistatEntradesUserController extends ModificacionsQueEsticFentController {
 
-    public static final String CONTEXT_WEB = "/user/llistatentrades";
+    public static final String CONTEXT_WEB = "/user/entrades";
 
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;

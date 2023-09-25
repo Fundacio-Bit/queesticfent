@@ -1,7 +1,8 @@
 package org.fundaciobit.queesticfent.back.controller.common;
 
+import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
-
+import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,19 @@ public class PrincipalController {
 	@RequestMapping(value = "/common/principal.html")
 	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+	    
+	    Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
+        
+        if (initialized == null) {
+            HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a queesticfent");
+            session.setAttribute("inicialitzat", true);
+        }
 
-		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
-
-		if (initialized == null) {
-			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a queesticfent");
-			session.setAttribute("inicialitzat", true);
-		}
-
+	    if(LoginInfo.hasRole(Constants.ROLE_ADMIN)) {
+	        return new ModelAndView(new RedirectView("/user/entrades/llistatentrades", true));
+	    }
+		
+		
 		return new ModelAndView("principal");
 
 	}
@@ -72,7 +78,7 @@ public class PrincipalController {
 			}
 
 			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/user/option1", true));
+				return new ModelAndView(new RedirectView("/user/entrades/llistatentrades", true));
 			}
 
 			if ("webdb".equals(pipella)) {

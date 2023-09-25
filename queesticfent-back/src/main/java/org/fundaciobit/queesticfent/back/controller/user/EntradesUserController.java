@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author anadal
  *
  */
-@Controller
+/*@Controller
 @RequestMapping(value = "/user/entrades")
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class EntradesUserController extends ModificacionsQueEsticFentController {
@@ -79,4 +79,4 @@ public class EntradesUserController extends ModificacionsQueEsticFentController 
   
 
   
-}
+}*/

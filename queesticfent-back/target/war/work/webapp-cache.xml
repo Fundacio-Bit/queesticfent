@@ -789,7 +789,6 @@
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/queesticfentBaseController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/queesticfentFilesBaseController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/queesticfentFilesFormManager.class</string>
-          <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/user/EntradesUserController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/user/Item.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/user/LlistatEntradesUserController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/user/ModificacioItem.class</string>
