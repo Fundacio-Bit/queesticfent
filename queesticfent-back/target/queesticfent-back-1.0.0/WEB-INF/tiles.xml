@@ -107,6 +107,30 @@
     <definition name="option1Admin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
+    
+    <definition name="gestioFestiusForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusForm.jsp" />
+    </definition>
+    
+    <definition name="gestioFestiusList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusList.jsp" />
+    </definition>
+    
+    <definition name="gestioUsuarisDepartamentForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentForm.jsp" />
+    </definition>
+    
+    <definition name="gestioUsuarisDepartamentList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentList.jsp" />
+    </definition>
+    
+    <definition name="gestioUsuarisProjecteForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/personalProjecteForm.jsp" />
+    </definition>
+    
+    <definition name="gestioUsuarisProjecteList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/personalProjecteList.jsp" />
+    </definition>
      
     
     

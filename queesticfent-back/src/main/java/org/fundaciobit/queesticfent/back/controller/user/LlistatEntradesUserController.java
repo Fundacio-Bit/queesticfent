@@ -37,6 +37,7 @@ import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.back.utils.Utils;
 import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.fundaciobit.queesticfent.model.bean.AccionsBean;
+import org.fundaciobit.queesticfent.model.bean.ModificacionsQueEsticFentBean;
 import org.fundaciobit.queesticfent.model.entity.Accions;
 import org.fundaciobit.queesticfent.model.entity.Departaments;
 import org.fundaciobit.queesticfent.model.entity.Festius;
@@ -225,7 +226,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         return new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
     }
 
-    protected Map<java.util.Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID,
+    protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID,
             List<Long> projectes, Date start, Date end) throws Exception {
 
         // 1.- Llegir Accions
@@ -234,18 +235,18 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
             List<Accions> accions = this.accionsEjb.select();
             for (Accions acc : accions) {
-                accionsByID.put(acc.getAccioId(), acc);
+                accionsByID.put(acc.getAccioID(), acc);
             }
         }
 
         // 2.- Cercar Elements de QueEsticFent
 
-        Where w1 = null; //getWhereOfQueEsticFent(usuariID, start, end);
-        Where w2 = getWhereProjecte(projectes);
-        Where w3 = null;
+        //Where w1 = null; //getWhereOfQueEsticFent(usuariID, start, end);
+        //Where w2 = getWhereProjecte(projectes);
+        //Where w3 = null;
         //Where w3 = getWhereExcloureModificacions(usuariID, projectes);
 
-        Where w = Where.AND(w1, w2, w3);
+        //Where w = Where.AND(w1, w2, w3);
 
         // 3.- Mapejar dades
         Map<Long, QueEsticFentItem> itemsByQueEsticFentID = new HashMap<Long, QueEsticFentItem>();
@@ -278,6 +279,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         //IModificacionsQueEsticFent[] modificacions = ModificacionsQueEsticFentManager.selectForOnlyRead(wm);
         List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm);
+        log.info("XYZ ZZZ Modificacions = "+modificacions.size());
 
         // 4.2.- Adaptar entrades
         QueEsticFentItem item;
@@ -289,8 +291,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 //break;
 
                 //    '-3', 'Afegir Nova Entrada'                  usuari, data, dada1  
-                case Utils.ACCIO_NOVA_ENTRADA: {
+                case (int) Utils.ACCIO_NOVA_ENTRADA: {
                     Date date = toDate000000(modificacio.getData().getTime());
+                    log.info("XXX XYZ Dia = "+modificacio.getData() + "       --- Titol Dia mes: "+date);
                     item = new QueEsticFentItem(usuariID, modificacio.getData(), modificacio.getDada1());
                     item.addModificacioItem(
                             new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
@@ -307,7 +310,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '-2', 'Afegir Entrada de QueEsticFent'   ID, usuari, data
-                case Utils.ACCIO_AFEGIR_QUEESTICFENT: {
+                case (int) Utils.ACCIO_AFEGIR_QUEESTICFENT: {
 
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
@@ -337,11 +340,17 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '-1'   Festiu                                        data
-                case Utils.ACCIO_FESTIU:
-                // Es realitza amb la taula de Fesius  
+                case (int)  Utils.ACCIO_FESTIU:
+                // Es realitza amb la taula de Fesius
+                    
+                    
+                    
+                    
+                    
+                    
                 break;
                 //    '0'    no mostrar entrada                ID, usuari, data    
-                case Utils.ACCIO_AMAGAR_ENTRADA: {
+                case (int) Utils.ACCIO_AMAGAR_ENTRADA: {
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
                         System.out.println("Modificaci� amb ID " + modificacio.getModificacioID()
@@ -357,7 +366,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '1',  'Modificar Text dins Entrada',     ID, usuari, data, dada1, dada2
-                case Utils.ACCIO_CANVI_TEXT: {
+                case (int) Utils.ACCIO_CANVI_TEXT: {
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item != null) {
                         String dada2 = modificacio.getDada2();
@@ -382,7 +391,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '-4',  'Vacances',                            usuari, data
-                case Utils.ACCIO_VACANCES: {
+                case (int) Utils.ACCIO_VACANCES: {
                     Date date = toDate000000(modificacio.getData().getTime());
 
                     item = new QueEsticFentItem(usuariID, modificacio.getData(), "Vacances");
@@ -402,7 +411,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '3',  'Canvi Data',                          usuari, data  
-                case Utils.ACCIO_CANVI_DATA: {
+                case (int) Utils.ACCIO_CANVI_DATA: {
                     //System.out.println(" + Modificacio QEF_ID: " + modificacio.getQueEsticFentID());
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
@@ -486,8 +495,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
 
                 //System.out.println("Accio Festa : " + accFesta);
-
-                item.addModificacioItem(new ModificacioItem(null, accFesta));
+                ModificacionsQueEsticFent mqef = new ModificacionsQueEsticFentBean();
+                mqef.setAccioID(Utils.ACCIO_FESTIU);
+                mqef.setModificacioID(0);
+                                
+                item.addModificacioItem(new ModificacioItem(mqef, accFesta));
 
                 List<QueEsticFentItem> items = llista.get(date);
 
@@ -701,6 +713,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
+        
         itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, start.getTime(), end.getTime());
         //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
         mav.addObject("start", start);
@@ -730,7 +743,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             List<UsuarisDepartament> personalCap = this.usuarisDepartamentEjb.select(ud);
             for (UsuarisDepartament usuarisDepartament : personalCap) {
 
-                UsuarisJPA usuari = usuarisEjb.findByPrimaryKey(usuarisDepartament.getUsuariId());
+                UsuarisJPA usuari = usuarisEjb.findByPrimaryKey(usuarisDepartament.getUsuariID());
                 UsuarisDepartamentJPA usuarisDepartamentJpa = (UsuarisDepartamentJPA) usuarisDepartament;
                 usuarisDepartamentJpa.setUsuaris(usuari);
             }
@@ -760,6 +773,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
     protected static Date toDate000000(long time) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(time);
+        //return cal.get(Calendar.DAY_OF_MONTH);
 
         // Set time fields to zero  
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -769,6 +783,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // Put it back in the Date object  
         return cal.getTime();
+        
     }
 
     @Override
@@ -979,10 +994,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         List<Usuaris> usuarisFull = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
         for (Usuaris usuari : usuarisFull) {
-            String usuariID = usuari.getUsuariId();
+            String usuariID = usuari.getUsuariID();
             start.set(Calendar.DATE, 1);
 
-            Map<java.util.Date, List<QueEsticFentItem>> itemsByDate;
+            Map<Date, List<QueEsticFentItem>> itemsByDate;
             itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, start.getTime(), end.getTime());
 
             System.out.println("=========================");

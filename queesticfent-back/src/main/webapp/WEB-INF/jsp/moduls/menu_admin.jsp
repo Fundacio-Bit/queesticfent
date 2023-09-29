@@ -8,8 +8,22 @@
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/option1"/>">
-        <span style="${(fn:contains(url, 'option1'))? "font-weight: bold;" : ""}">Menú ADMIN Option 1</span>
+      <a href="<c:url value="/admin/gestiofestius/list"/>">
+        <span style="${(fn:contains(url, 'gestiofestius'))? "font-weight: bold;" : ""}">Gestió de Festius</span>
+      </a>
+    </li>
+    
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/gestiousuarisdepartament/list"/>">
+        <span style="${(fn:contains(url, 'gestiousuarisdepartament'))? "font-weight: bold;" : ""}">Gestió d'Usuaris Departament</span>
+      </a>
+    </li>
+    
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/gestiousuarisprojecte/list"/>">
+        <span style="${(fn:contains(url, 'gestiousuarisprojecte'))? "font-weight: bold;" : ""}">Gestió d'Usuaris Projecte</span>
       </a>
     </li>
 

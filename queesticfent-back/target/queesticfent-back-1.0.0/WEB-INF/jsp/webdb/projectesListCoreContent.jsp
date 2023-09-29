@@ -9,7 +9,7 @@
         <c:if test="${ __entry.key < 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteId]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />
@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.PROJECTEID)}">
           <td>
-          ${projectes.projecteId}
+          ${projectes.projecteID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.NOM)}">
@@ -36,9 +36,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ProjectesFields.DEPARTAMENTID)}">
           <td>
-          <c:set var="tmp">${projectes.departamentid}</c:set>
+          <c:set var="tmp">${projectes.departamentID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfDepartamentsForDepartamentid[tmp]}
+          ${__theFilterForm.mapOfDepartamentsForDepartamentID[tmp]}
           </c:if>
           </td>
         </c:if>
@@ -65,7 +65,7 @@
         <c:if test="${ __entry.key >= 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteId]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[projectes.projecteID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />

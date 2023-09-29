@@ -4,6 +4,7 @@ org\fundaciobit\queesticfent\back\form\webdb\UsuarisRefList.class
 org\fundaciobit\queesticfent\back\controller\DataExporterIconController.class
 org\fundaciobit\queesticfent\back\form\webdb\DepartamentsFilterForm.class
 org\fundaciobit\queesticfent\back\validator\webdb\FestiusWebValidator.class
+org\fundaciobit\queesticfent\back\controller\admin\GestioFestiusAdminController.class
 org\fundaciobit\queesticfent\back\form\webdb\AccionsFilterForm.class
 org\fundaciobit\queesticfent\back\validator\webdb\GrupsusuariWebValidator.class
 org\fundaciobit\queesticfent\back\controller\user\LlistatEntradesUserController.class
@@ -44,6 +45,7 @@ org\fundaciobit\queesticfent\back\controller\webdb\PersonalProjecteController.cl
 org\fundaciobit\queesticfent\back\validator\webdb\ProjectesWebValidator.class
 org\fundaciobit\queesticfent\back\controller\user\ModificacioItem.class
 org\fundaciobit\queesticfent\back\controller\FileDownloadController.class
+org\fundaciobit\queesticfent\back\controller\admin\GestioUsuarisDepartamentAdminController.class
 org\fundaciobit\queesticfent\back\form\webdb\GrupsusuariFilterForm.class
 org\fundaciobit\queesticfent\back\form\webdb\TwitterForm.class
 org\fundaciobit\queesticfent\back\controller\webdb\DepartamentsController.class
@@ -99,6 +101,7 @@ org\fundaciobit\queesticfent\back\form\webdb\ProjectesFilterForm.class
 org\fundaciobit\queesticfent\back\controller\webdb\TwitterController.class
 org\fundaciobit\queesticfent\back\controller\webdb\IdiomaController.class
 org\fundaciobit\queesticfent\back\form\webdb\GrupsusuariForm.class
+org\fundaciobit\queesticfent\back\controller\admin\GestioUsuarisProjecteAdminController.class
 org\fundaciobit\queesticfent\back\security\AuthenticationSuccessListener.class
 org\fundaciobit\queesticfent\back\form\webdb\FitxerRefList.class
 org\fundaciobit\queesticfent\back\validator\webdb\UsuarisWebValidator.class

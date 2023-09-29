@@ -431,6 +431,8 @@
           <string>WEB-INF/beans.xml</string>
           <string>WEB-INF/jboss-web.xml</string>
           <string>WEB-INF/jsp/admin/admin.jsp</string>
+          <string>WEB-INF/jsp/all/avislegal_ca.jsp</string>
+          <string>WEB-INF/jsp/all/avislegal_es.jsp</string>
           <string>WEB-INF/jsp/all/homepublic.jsp</string>
           <string>WEB-INF/jsp/common/option.jsp</string>
           <string>WEB-INF/jsp/desenvolupament.jsp</string>
@@ -781,6 +783,9 @@
           <string>WEB-INF/classes/missatges_es.properties</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/config/MvcConfiguration.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/admin/AdminController.class</string>
+          <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/admin/GestioFestiusAdminController.class</string>
+          <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/admin/GestioUsuarisDepartamentAdminController.class</string>
+          <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/admin/GestioUsuarisProjecteAdminController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/all/PublicController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/common/CommonController.class</string>
           <string>WEB-INF/classes/org/fundaciobit/queesticfent/back/controller/common/PrincipalController.class</string>

@@ -53,16 +53,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ProjectesFields.PROJECTEID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="projectes.projecteId" />:</span>
+              <span class="add-on"><fmt:message key="projectes.projecteID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="projecteIdDesde" />
+              <form:input cssClass="input-append input-small" path="projecteIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="projecteIdFins" />
+              <form:input cssClass="input-append input-small search-query" path="projecteIDFins" />
 
             </div>
 
@@ -84,16 +84,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ProjectesFields.DEPARTAMENTID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="projectes.departamentid" />:</span>
+              <span class="add-on"><fmt:message key="projectes.departamentID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="departamentidDesde" />
+              <form:input cssClass="input-append input-small" path="departamentIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="departamentidFins" />
+              <form:input cssClass="input-append input-small search-query" path="departamentIDFins" />
 
             </div>
 

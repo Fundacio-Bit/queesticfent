@@ -2,8 +2,8 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface Accions extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getAccioId();
-	public void setAccioId(long _accioId_);
+	public long getAccioID();
+	public void setAccioID(long _accioID_);
 
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);

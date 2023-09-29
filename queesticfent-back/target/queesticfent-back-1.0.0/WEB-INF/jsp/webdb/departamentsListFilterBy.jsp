@@ -97,12 +97,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,DepartamentsFields.NOMLDAP)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="departaments.nomldap" var="nomldap" />
-              <fmt:message key="genapp.form.searchby" var="cercapernomldap" >                
-                 <fmt:param value="${nomldap}"/>
+              <fmt:message key="departaments.nomLDAP" var="nomLDAP" />
+              <fmt:message key="genapp.form.searchby" var="cercapernomLDAP" >                
+                 <fmt:param value="${nomLDAP}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${nomldap}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapernomldap}" path="nomldap" />
+              <span class="add-on"><c:out value="${nomLDAP}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapernomLDAP}" path="nomLDAP" />
             </div>
 
 

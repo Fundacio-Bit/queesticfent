@@ -182,11 +182,11 @@ public class ProjectesController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field departamentid
+    // Field departamentID
     {
-      _listSKV = getReferenceListForDepartamentid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForDepartamentID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfDepartamentsForDepartamentid(_tmp);
+      filterForm.setMapOfDepartamentsForDepartamentID(_tmp);
       if (filterForm.getGroupByFields().contains(DEPARTAMENTID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, DEPARTAMENTID, false);
       };
@@ -210,7 +210,7 @@ public class ProjectesController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(DEPARTAMENTID, filterForm.getMapOfDepartamentsForDepartamentid());
+    __mapping.put(DEPARTAMENTID, filterForm.getMapOfDepartamentsForDepartamentID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -259,13 +259,13 @@ public class ProjectesController
   public void fillReferencesForForm(ProjectesForm projectesForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (projectesForm.getListOfDepartamentsForDepartamentid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForDepartamentid(request, mav, projectesForm, null);
+    if (projectesForm.getListOfDepartamentsForDepartamentID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForDepartamentID(request, mav, projectesForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      projectesForm.setListOfDepartamentsForDepartamentid(_listSKV);
+      projectesForm.setListOfDepartamentsForDepartamentID(_listSKV);
     }
     
   }
@@ -294,7 +294,7 @@ public class ProjectesController
         return getTileForm();
       } else {
         projectes = create(request, projectes);
-        createMessageSuccess(request, "success.creation", projectes.getProjecteId());
+        createMessageSuccess(request, "success.creation", projectes.getProjecteID());
         projectesForm.setProjectes(projectes);
         return getRedirectWhenCreated(request, projectesForm);
       }
@@ -309,16 +309,16 @@ public class ProjectesController
     }
   }
 
-  @RequestMapping(value = "/view/{projecteId}", method = RequestMethod.GET)
-  public ModelAndView veureProjectesGet(@PathVariable("projecteId") java.lang.Long projecteId,
+  @RequestMapping(value = "/view/{projecteID}", method = RequestMethod.GET)
+  public ModelAndView veureProjectesGet(@PathVariable("projecteID") java.lang.Long projecteID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewProjectesGet(projecteId,
+      return editAndViewProjectesGet(projecteID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewProjectesGet(@PathVariable("projecteId") java.lang.Long projecteId,
+  protected ModelAndView editAndViewProjectesGet(@PathVariable("projecteID") java.lang.Long projecteID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -330,11 +330,11 @@ public class ProjectesController
         return null;
       }
     }
-    ProjectesJPA projectes = findByPrimaryKey(request, projecteId);
+    ProjectesJPA projectes = findByPrimaryKey(request, projecteID);
 
     if (projectes == null) {
-      createMessageWarning(request, "error.notfound", projecteId);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, projecteId), true));
+      createMessageWarning(request, "error.notfound", projecteID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, projecteID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -355,11 +355,11 @@ public class ProjectesController
   /**
    * Carregar el formulari per modificar un Projectes existent
    */
-  @RequestMapping(value = "/{projecteId}/edit", method = RequestMethod.GET)
-  public ModelAndView editarProjectesGet(@PathVariable("projecteId") java.lang.Long projecteId,
+  @RequestMapping(value = "/{projecteID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarProjectesGet(@PathVariable("projecteID") java.lang.Long projecteID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewProjectesGet(projecteId,
+      return editAndViewProjectesGet(projecteID,
         request, response, false);
   }
 
@@ -368,7 +368,7 @@ public class ProjectesController
   /**
    * Editar un Projectes existent
    */
-  @RequestMapping(value = "/{projecteId}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{projecteID}/edit", method = RequestMethod.POST)
   public String editarProjectesPost(@ModelAttribute ProjectesForm projectesForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -389,7 +389,7 @@ public class ProjectesController
         return getTileForm();
       } else {
         projectes = update(request, projectes);
-        createMessageSuccess(request, "success.modification", projectes.getProjecteId());
+        createMessageSuccess(request, "success.modification", projectes.getProjecteID());
         status.setComplete();
         return getRedirectWhenModified(request, projectesForm, null);
       }
@@ -399,7 +399,7 @@ public class ProjectesController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          projectes.getProjecteId(), __e);
+          projectes.getProjecteID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, projectesForm, __e);
     }
@@ -410,8 +410,8 @@ public class ProjectesController
   /**
    * Eliminar un Projectes existent
    */
-  @RequestMapping(value = "/{projecteId}/delete")
-  public String eliminarProjectes(@PathVariable("projecteId") java.lang.Long projecteId,
+  @RequestMapping(value = "/{projecteID}/delete")
+  public String eliminarProjectes(@PathVariable("projecteID") java.lang.Long projecteID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -419,20 +419,20 @@ public class ProjectesController
       return null;
     }
     try {
-      Projectes projectes = this.findByPrimaryKey(request, projecteId);
+      Projectes projectes = this.findByPrimaryKey(request, projecteID);
       if (projectes == null) {
-        String __msg = createMessageError(request, "error.notfound", projecteId);
-        return getRedirectWhenDelete(request, projecteId, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", projecteID);
+        return getRedirectWhenDelete(request, projecteID, new Exception(__msg));
       } else {
         delete(request, projectes);
-        createMessageSuccess(request, "success.deleted", projecteId);
-        return getRedirectWhenDelete(request, projecteId,null);
+        createMessageSuccess(request, "success.deleted", projecteID);
+        return getRedirectWhenDelete(request, projecteID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", projecteId, e);
+      String msg = createMessageError(request, "error.deleting", projecteID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, projecteId, e);
+      return getRedirectWhenDelete(request, projecteID, e);
     }
   }
 
@@ -468,8 +468,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __projecteId, Throwable e) {
-    java.lang.Long projecteId = (java.lang.Long)__projecteId;
+  public String[] getArgumentsMissatge(Object __projecteID, Throwable e) {
+    java.lang.Long projecteID = (java.lang.Long)__projecteID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -479,13 +479,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (projecteId == null) {
+    if (projecteID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(projecteId),
+         String.valueOf(projecteID),
  exceptionMsg };
     }
   }
@@ -499,7 +499,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("projectes.projecteId");
+    return  I18NUtils.tradueix("projectes.projecteID");
   }
 
   @InitBinder("projectesFilterForm")
@@ -514,7 +514,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "projectes.projecteId");
+    initDisallowedFields(binder, "projectes.projecteID");
   }
 
   public ProjectesWebValidator getWebValidator() {
@@ -532,10 +532,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Projectes
    */
-  @RequestMapping(value = "/{projecteId}/cancel")
-  public String cancelProjectes(@PathVariable("projecteId") java.lang.Long projecteId,
+  @RequestMapping(value = "/{projecteID}/cancel")
+  public String cancelProjectes(@PathVariable("projecteID") java.lang.Long projecteID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, projecteId);
+     return getRedirectWhenCancel(request, projecteID);
   }
 
   @Override
@@ -570,20 +570,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForDepartamentid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForDepartamentID(HttpServletRequest request,
        ModelAndView mav, ProjectesForm projectesForm, Where where)  throws I18NException {
     if (projectesForm.isHiddenField(DEPARTAMENTID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (projectesForm.isReadOnlyField(DEPARTAMENTID)) {
-      _where = DepartamentsFields.DEPARTAMENTID.equal(projectesForm.getProjectes().getDepartamentid());
+      _where = DepartamentsFields.DEPARTAMENTID.equal(projectesForm.getProjectes().getDepartamentID());
     }
-    return getReferenceListForDepartamentid(request, mav, Where.AND(where, _where));
+    return getReferenceListForDepartamentID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForDepartamentid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForDepartamentID(HttpServletRequest request,
        ModelAndView mav, ProjectesFilterForm projectesFilterForm,
        List<Projectes> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (projectesFilterForm.isHiddenField(DEPARTAMENTID)
@@ -595,15 +595,15 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (Projectes _item : list) {
-        _pkList.add(_item.getDepartamentid());
+        _pkList.add(_item.getDepartamentID());
         }
         _w = DepartamentsFields.DEPARTAMENTID.in(_pkList);
       }
-    return getReferenceListForDepartamentid(request, mav, Where.AND(where,_w));
+    return getReferenceListForDepartamentID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForDepartamentid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForDepartamentID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return departamentsRefList.getReferenceList(DepartamentsFields.DEPARTAMENTID, where );
   }
@@ -640,11 +640,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long projecteId, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long projecteID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long projecteId) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long projecteID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -667,8 +667,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public ProjectesJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long projecteId) throws I18NException {
-    return (ProjectesJPA) projectesEjb.findByPrimaryKey(projecteId);
+  public ProjectesJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long projecteID) throws I18NException {
+    return (ProjectesJPA) projectesEjb.findByPrimaryKey(projecteID);
   }
 
 

@@ -27,7 +27,7 @@ public class AccionsJPA implements Accions {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCIONS_SEQ")
     @Column(name="accioid",nullable = false,length = 19)
-    long accioId;
+    long accioID;
 
     @Column(name="nom",nullable = false,length = 45)
     java.lang.String nom;
@@ -50,8 +50,8 @@ public class AccionsJPA implements Accions {
   }
 
   /** Constructor amb tots els camps  */
-  public AccionsJPA(long accioId , java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
-    this.accioId=accioId;
+  public AccionsJPA(long accioID , java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
+    this.accioID=accioID;
     this.nom=nom;
     this.nomLlegenda=nomLlegenda;
     this.color=color;
@@ -65,24 +65,24 @@ public class AccionsJPA implements Accions {
     this.descripcio=descripcio;
 }
   /** Constructor dels valors Not Null */
-  public AccionsJPA(long accioId , java.lang.String nom , java.lang.String nomLlegenda) {
-    this.accioId=accioId;
+  public AccionsJPA(long accioID , java.lang.String nom , java.lang.String nomLlegenda) {
+    this.accioID=accioID;
     this.nom=nom;
     this.nomLlegenda=nomLlegenda;
 }
   public AccionsJPA(Accions __bean) {
-    this.setAccioId(__bean.getAccioId());
+    this.setAccioID(__bean.getAccioID());
     this.setNom(__bean.getNom());
     this.setNomLlegenda(__bean.getNomLlegenda());
     this.setColor(__bean.getColor());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getAccioId() {
-		return(accioId);
+	public long getAccioID() {
+		return(accioID);
 	};
-	public void setAccioId(long _accioId_) {
-		this.accioId = _accioId_;
+	public void setAccioID(long _accioID_) {
+		this.accioID = _accioID_;
 	};
 
 	public java.lang.String getNom() {
@@ -121,7 +121,7 @@ public class AccionsJPA implements Accions {
     if (__obj != null && __obj instanceof Accions) {
       Accions __instance = (Accions)__obj;
       __result = true;
-      __result = __result && (this.getAccioId() == __instance.getAccioId()) ;
+      __result = __result && (this.getAccioID() == __instance.getAccioID()) ;
     } else {
       __result = false;
     }
@@ -146,7 +146,7 @@ public class AccionsJPA implements Accions {
   public static AccionsJPA toJPA(Accions __bean) {
     if (__bean == null) { return null;}
     AccionsJPA __tmp = new AccionsJPA();
-    __tmp.setAccioId(__bean.getAccioId());
+    __tmp.setAccioID(__bean.getAccioID());
     __tmp.setNom(__bean.getNom());
     __tmp.setNomLlegenda(__bean.getNomLlegenda());
     __tmp.setColor(__bean.getColor());

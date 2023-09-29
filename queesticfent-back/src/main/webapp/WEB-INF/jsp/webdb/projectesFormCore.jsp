@@ -21,25 +21,25 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,ProjectesFields.DEPARTAMENTID)}">
-        <tr id="projectes_departamentid_rowid">
-          <td id="projectes_departamentid_columnlabelid">
+        <tr id="projectes_departamentID_rowid">
+          <td id="projectes_departamentID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[ProjectesFields.DEPARTAMENTID])?'projectes.departamentid':__theForm.labels[ProjectesFields.DEPARTAMENTID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[ProjectesFields.DEPARTAMENTID])?'projectes.departamentID':__theForm.labels[ProjectesFields.DEPARTAMENTID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[ProjectesFields.DEPARTAMENTID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[ProjectesFields.DEPARTAMENTID]}" ></i>
               </c:if>
             </td>
-          <td id="projectes_departamentid_columnvalueid">
-          <form:errors path="projectes.departamentid" cssClass="errorField alert alert-danger" />
+          <td id="projectes_departamentID_columnvalueid">
+          <form:errors path="projectes.departamentID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,ProjectesFields.DEPARTAMENTID)}" >
-          <form:hidden path="projectes.departamentid"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.projectes.departamentid,__theForm.listOfDepartamentsForDepartamentid)}"  />
+          <form:hidden path="projectes.departamentID"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.projectes.departamentID,__theForm.listOfDepartamentsForDepartamentID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,ProjectesFields.DEPARTAMENTID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="projectes_departamentid"  onchange="if(typeof onChangeDepartamentid == 'function') {  onChangeDepartamentid(this); };"  cssClass="form-control col-md-9-optional" path="projectes.departamentid">
-            <c:forEach items="${__theForm.listOfDepartamentsForDepartamentid}" var="tmp">
+          <form:select id="projectes_departamentID"  onchange="if(typeof onChangeDepartamentID == 'function') {  onChangeDepartamentID(this); };"  cssClass="form-control col-md-9-optional" path="projectes.departamentID">
+            <c:forEach items="${__theForm.listOfDepartamentsForDepartamentID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
                   <c:set var="containEmptyValue"  value="true" />

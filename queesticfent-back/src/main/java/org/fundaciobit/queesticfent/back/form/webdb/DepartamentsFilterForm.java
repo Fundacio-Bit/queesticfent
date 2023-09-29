@@ -64,14 +64,14 @@ public class DepartamentsFilterForm extends queesticfentBaseFilterForm implement
   }
 
 
-  private java.lang.String nomldap;
+  private java.lang.String nomLDAP;
 
-  public java.lang.String getNomldap() {
-    return this.nomldap;
+  public java.lang.String getNomLDAP() {
+    return this.nomLDAP;
   }
 
-  public void setNomldap(java.lang.String nomldap) {
-    this.nomldap = nomldap;
+  public void setNomLDAP(java.lang.String nomLDAP) {
+    this.nomLDAP = nomLDAP;
   }
 
 
@@ -95,7 +95,7 @@ public class DepartamentsFilterForm extends queesticfentBaseFilterForm implement
     this.departamentIDFins = __toClone.departamentIDFins;
     this.nom = __toClone.nom;
     this.coordinadorId = __toClone.coordinadorId;
-    this.nomldap = __toClone.nomldap;
+    this.nomLDAP = __toClone.nomLDAP;
     this.descripcio = __toClone.descripcio;
   }
   

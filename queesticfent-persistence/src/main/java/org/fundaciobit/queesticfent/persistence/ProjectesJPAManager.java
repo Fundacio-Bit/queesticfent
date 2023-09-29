@@ -55,22 +55,22 @@ public class ProjectesJPAManager
         return list.toArray(new Projectes[list.size()]);
     };
 
-    public Projectes create( java.lang.String _nom_, long _departamentid_, java.lang.String _descripcio_, boolean _actiu_, java.sql.Date _fromdata_, java.sql.Date _todata_) throws I18NException {
-        ProjectesJPA __bean =  new ProjectesJPA(_nom_,_departamentid_,_descripcio_,_actiu_,_fromdata_,_todata_);
+    public Projectes create( java.lang.String _nom_, long _departamentID_, java.lang.String _descripcio_, boolean _actiu_, java.sql.Date _fromdata_, java.sql.Date _todata_) throws I18NException {
+        ProjectesJPA __bean =  new ProjectesJPA(_nom_,_departamentID_,_descripcio_,_actiu_,_fromdata_,_todata_);
         return create(__bean);
     }
 
 
 
- public void delete(long _projecteId_) {
-   delete(findByPrimaryKey(_projecteId_));
+ public void delete(long _projecteID_) {
+   delete(findByPrimaryKey(_projecteID_));
  }
 
 
 
 
-    public Projectes findByPrimaryKey(long _projecteId_) {
-        return __em.find(ProjectesJPA.class, _projecteId_);  
+    public Projectes findByPrimaryKey(long _projecteID_) {
+        return __em.find(ProjectesJPA.class, _projecteID_);  
     }
     @Override
     protected Projectes getJPAInstance(Projectes __bean) {

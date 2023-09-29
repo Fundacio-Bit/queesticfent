@@ -8,9 +8,9 @@ public class PersonalProjecteBean implements PersonalProjecte {
 
 
 
-	long personalProjecteId;// PK
-	java.lang.String usuariid;
-	long projecteid;
+	long personalProjecteID;// PK
+	java.lang.String usuariID;
+	long projecteID;
 	long ordre;
 	java.lang.Short percent;
 
@@ -20,47 +20,47 @@ public class PersonalProjecteBean implements PersonalProjecte {
   }
 
   /** Constructor amb tots els camps  */
-  public PersonalProjecteBean(long personalProjecteId , java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
-    this.personalProjecteId=personalProjecteId;
-    this.usuariid=usuariid;
-    this.projecteid=projecteid;
+  public PersonalProjecteBean(long personalProjecteID , java.lang.String usuariID , long projecteID , long ordre , java.lang.Short percent) {
+    this.personalProjecteID=personalProjecteID;
+    this.usuariID=usuariID;
+    this.projecteID=projecteID;
     this.ordre=ordre;
     this.percent=percent;
 }
   /** Constructor sense valors autoincrementals */
-  public PersonalProjecteBean(java.lang.String usuariid , long projecteid , long ordre , java.lang.Short percent) {
-    this.usuariid=usuariid;
-    this.projecteid=projecteid;
+  public PersonalProjecteBean(java.lang.String usuariID , long projecteID , long ordre , java.lang.Short percent) {
+    this.usuariID=usuariID;
+    this.projecteID=projecteID;
     this.ordre=ordre;
     this.percent=percent;
 }
   public PersonalProjecteBean(PersonalProjecte __bean) {
-    this.setPersonalProjecteId(__bean.getPersonalProjecteId());
-    this.setUsuariid(__bean.getUsuariid());
-    this.setProjecteid(__bean.getProjecteid());
+    this.setPersonalProjecteID(__bean.getPersonalProjecteID());
+    this.setUsuariID(__bean.getUsuariID());
+    this.setProjecteID(__bean.getProjecteID());
     this.setOrdre(__bean.getOrdre());
     this.setPercent(__bean.getPercent());
 	}
 
-	public long getPersonalProjecteId() {
-		return(personalProjecteId);
+	public long getPersonalProjecteID() {
+		return(personalProjecteID);
 	};
-	public void setPersonalProjecteId(long _personalProjecteId_) {
-		this.personalProjecteId = _personalProjecteId_;
-	};
-
-	public java.lang.String getUsuariid() {
-		return(usuariid);
-	};
-	public void setUsuariid(java.lang.String _usuariid_) {
-		this.usuariid = _usuariid_;
+	public void setPersonalProjecteID(long _personalProjecteID_) {
+		this.personalProjecteID = _personalProjecteID_;
 	};
 
-	public long getProjecteid() {
-		return(projecteid);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setProjecteid(long _projecteid_) {
-		this.projecteid = _projecteid_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
+	};
+
+	public long getProjecteID() {
+		return(projecteID);
+	};
+	public void setProjecteID(long _projecteID_) {
+		this.projecteID = _projecteID_;
 	};
 
 	public long getOrdre() {
@@ -84,9 +84,9 @@ public class PersonalProjecteBean implements PersonalProjecte {
   public static PersonalProjecteBean toBean(PersonalProjecte __bean) {
     if (__bean == null) { return null;}
     PersonalProjecteBean __tmp = new PersonalProjecteBean();
-    __tmp.setPersonalProjecteId(__bean.getPersonalProjecteId());
-    __tmp.setUsuariid(__bean.getUsuariid());
-    __tmp.setProjecteid(__bean.getProjecteid());
+    __tmp.setPersonalProjecteID(__bean.getPersonalProjecteID());
+    __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setProjecteID(__bean.getProjecteID());
     __tmp.setOrdre(__bean.getOrdre());
     __tmp.setPercent(__bean.getPercent());
 		return __tmp;

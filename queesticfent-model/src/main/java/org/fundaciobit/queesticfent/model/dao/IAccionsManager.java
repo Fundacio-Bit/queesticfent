@@ -9,8 +9,8 @@ public interface IAccionsManager extends org.fundaciobit.genapp.common.query.ITa
 
 	public Accions create( java.lang.String _nom_, java.lang.String _nomLlegenda_, java.lang.String _color_, java.lang.String _descripcio_) throws I18NException;
 
-	public Accions findByPrimaryKey(long _accioId_);
+	public Accions findByPrimaryKey(long _accioID_);
 
-	public void delete(long _accioId_);
+	public void delete(long _accioID_);
 
 }

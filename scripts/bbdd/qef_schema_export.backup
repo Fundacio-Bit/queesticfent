@@ -1,0 +1,912 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.25
+-- Dumped by pg_dump version 9.3.1
+-- Started on 2023-09-29 09:55:19
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 197 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2116 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 176 (class 1259 OID 84439)
+-- Name: qef_accions_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_accions_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_accions_seq OWNER TO queesticfent;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 180 (class 1259 OID 84449)
+-- Name: qef_accions; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_accions (
+    accioid bigint DEFAULT nextval('qef_accions_seq'::regclass) NOT NULL,
+    nom character varying(45) NOT NULL,
+    nomllegenda character varying(45) NOT NULL,
+    color character varying,
+    descripcio character varying(500) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.qef_accions OWNER TO queesticfent;
+
+--
+-- TOC entry 177 (class 1259 OID 84441)
+-- Name: qef_departaments_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_departaments_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_departaments_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 181 (class 1259 OID 84459)
+-- Name: qef_departaments; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_departaments (
+    departamentid bigint DEFAULT nextval('qef_departaments_seq'::regclass) NOT NULL,
+    nom character varying(300) NOT NULL,
+    coordinadorid character varying(200) NOT NULL,
+    nomldap character varying(200) NOT NULL,
+    descripcio character varying(3000)
+);
+
+
+ALTER TABLE public.qef_departaments OWNER TO queesticfent;
+
+--
+-- TOC entry 187 (class 1259 OID 84522)
+-- Name: qef_festius_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_festius_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_festius_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 182 (class 1259 OID 84468)
+-- Name: qef_festius; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_festius (
+    festiuid bigint DEFAULT nextval('qef_festius_seq'::regclass) NOT NULL,
+    nom character varying(300) NOT NULL,
+    data date NOT NULL,
+    descripcio character varying(2000) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.qef_festius OWNER TO queesticfent;
+
+--
+-- TOC entry 170 (class 1259 OID 84267)
+-- Name: qef_fitxer_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_fitxer_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_fitxer_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 172 (class 1259 OID 84271)
+-- Name: qef_fitxer; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_fitxer (
+    fitxerid bigint DEFAULT nextval('qef_fitxer_seq'::regclass) NOT NULL,
+    descripcio character varying(1000) DEFAULT NULL::character varying,
+    mime character varying(255) NOT NULL,
+    nom character varying(255) NOT NULL,
+    tamany bigint NOT NULL
+);
+
+
+ALTER TABLE public.qef_fitxer OWNER TO queesticfent;
+
+--
+-- TOC entry 178 (class 1259 OID 84445)
+-- Name: qef_grups_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_grups_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_grups_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 2117 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: SEQUENCE qef_grups_seq; Type: COMMENT; Schema: public; Owner: queesticfent
+--
+
+COMMENT ON SEQUENCE qef_grups_seq IS '
+';
+
+
+--
+-- TOC entry 183 (class 1259 OID 84478)
+-- Name: qef_grups; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_grups (
+    grupid bigint DEFAULT nextval('qef_grups_seq'::regclass) NOT NULL,
+    nom character varying(255) NOT NULL,
+    descripcio character varying(1000) DEFAULT NULL::character varying,
+    nivellseguretat bigint
+);
+
+
+ALTER TABLE public.qef_grups OWNER TO queesticfent;
+
+--
+-- TOC entry 179 (class 1259 OID 84447)
+-- Name: qef_grupsusuari_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_grupsusuari_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_grupsusuari_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 2118 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: SEQUENCE qef_grupsusuari_seq; Type: COMMENT; Schema: public; Owner: queesticfent
+--
+
+COMMENT ON SEQUENCE qef_grupsusuari_seq IS '
+';
+
+
+--
+-- TOC entry 188 (class 1259 OID 84530)
+-- Name: qef_grupsusuari; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_grupsusuari (
+    grupsusuariid bigint DEFAULT nextval('qef_grupsusuari_seq'::regclass) NOT NULL,
+    usuariid character varying(20) NOT NULL,
+    grupid bigint NOT NULL
+);
+
+
+ALTER TABLE public.qef_grupsusuari OWNER TO queesticfent;
+
+--
+-- TOC entry 173 (class 1259 OID 84279)
+-- Name: qef_idioma; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_idioma (
+    idiomaid character varying(5) NOT NULL,
+    nom character varying(50) NOT NULL,
+    suportat boolean DEFAULT true NOT NULL,
+    ordre integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.qef_idioma OWNER TO queesticfent;
+
+--
+-- TOC entry 185 (class 1259 OID 84514)
+-- Name: qef_jos_twitter_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_jos_twitter_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_jos_twitter_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 186 (class 1259 OID 84516)
+-- Name: qef_jos_twitter; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_jos_twitter (
+    id bigint DEFAULT nextval('qef_jos_twitter_seq'::regclass) NOT NULL,
+    username character varying(25) NOT NULL,
+    comentario character varying(255) DEFAULT NULL::character varying,
+    fecha date,
+    user_id bigint,
+    ip character varying(50) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.qef_jos_twitter OWNER TO queesticfent;
+
+--
+-- TOC entry 189 (class 1259 OID 84546)
+-- Name: qef_modificacionsqueesticfent_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_modificacionsqueesticfent_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_modificacionsqueesticfent_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 190 (class 1259 OID 84548)
+-- Name: qef_modificacionsqueesticfent; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_modificacionsqueesticfent (
+    modificacioid bigint DEFAULT nextval('qef_modificacionsqueesticfent_seq'::regclass) NOT NULL,
+    accioid bigint NOT NULL,
+    usuariid character varying(45) NOT NULL,
+    projecteid bigint,
+    queesticfentid bigint,
+    dada1 character varying(500) DEFAULT NULL::character varying,
+    dada2 character varying(500) DEFAULT NULL::character varying,
+    data timestamp without time zone
+);
+
+
+ALTER TABLE public.qef_modificacionsqueesticfent OWNER TO queesticfent;
+
+--
+-- TOC entry 2119 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: COLUMN qef_modificacionsqueesticfent.queesticfentid; Type: COMMENT; Schema: public; Owner: queesticfent
+--
+
+COMMENT ON COLUMN qef_modificacionsqueesticfent.queesticfentid IS '-1 significa nou';
+
+
+--
+-- TOC entry 191 (class 1259 OID 84564)
+-- Name: qef_personalprojecte_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_personalprojecte_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_personalprojecte_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 196 (class 1259 OID 84613)
+-- Name: qef_personalprojecte; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_personalprojecte (
+    personalprojecteid bigint DEFAULT nextval('qef_personalprojecte_seq'::regclass) NOT NULL,
+    usuariid character varying(50) NOT NULL,
+    projecteid bigint NOT NULL,
+    ordre bigint NOT NULL,
+    percent smallint
+);
+
+
+ALTER TABLE public.qef_personalprojecte OWNER TO queesticfent;
+
+--
+-- TOC entry 192 (class 1259 OID 84570)
+-- Name: qef_projectes_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_projectes_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_projectes_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 193 (class 1259 OID 84572)
+-- Name: qef_projectes; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_projectes (
+    projecteid bigint DEFAULT nextval('qef_projectes_seq'::regclass) NOT NULL,
+    nom character varying(45) NOT NULL,
+    departamentid bigint NOT NULL,
+    descripcio character varying(500) DEFAULT NULL::character varying,
+    actiu boolean NOT NULL,
+    fromdata date NOT NULL,
+    todata date
+);
+
+
+ALTER TABLE public.qef_projectes OWNER TO queesticfent;
+
+--
+-- TOC entry 171 (class 1259 OID 84269)
+-- Name: qef_traduccio_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_traduccio_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_traduccio_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 174 (class 1259 OID 84284)
+-- Name: qef_traduccio; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_traduccio (
+    traduccioid bigint DEFAULT nextval('qef_traduccio_seq'::regclass) NOT NULL
+);
+
+
+ALTER TABLE public.qef_traduccio OWNER TO queesticfent;
+
+--
+-- TOC entry 175 (class 1259 OID 84288)
+-- Name: qef_traducciomap; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_traducciomap (
+    traducciomapid bigint NOT NULL,
+    idiomaid character varying(10) NOT NULL,
+    valor character varying(4000)
+);
+
+
+ALTER TABLE public.qef_traducciomap OWNER TO queesticfent;
+
+--
+-- TOC entry 184 (class 1259 OID 84499)
+-- Name: qef_usuaris; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_usuaris (
+    usuariid character varying(100) NOT NULL,
+    nom character varying(100) NOT NULL,
+    llinatge1 character varying(100) DEFAULT NULL::character varying,
+    llinatge2 character varying(100) DEFAULT NULL::character varying,
+    correu character varying(100) NOT NULL,
+    descripcio character varying(100) DEFAULT NULL::character varying,
+    extensio character varying(100) DEFAULT NULL::character varying,
+    naixement date,
+    telefoncasa character varying(100) DEFAULT NULL::character varying,
+    telefonmobil character varying(100) DEFAULT NULL::character varying,
+    contrasenya character varying(100)
+);
+
+
+ALTER TABLE public.qef_usuaris OWNER TO queesticfent;
+
+--
+-- TOC entry 194 (class 1259 OID 84582)
+-- Name: qef_usuarisdepartament_seq; Type: SEQUENCE; Schema: public; Owner: queesticfent
+--
+
+CREATE SEQUENCE qef_usuarisdepartament_seq
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.qef_usuarisdepartament_seq OWNER TO queesticfent;
+
+--
+-- TOC entry 195 (class 1259 OID 84593)
+-- Name: qef_usuarisdepartament; Type: TABLE; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE TABLE qef_usuarisdepartament (
+    usuariid character varying(20) NOT NULL,
+    departamentid bigint NOT NULL,
+    usuaridepartamentid bigint DEFAULT nextval('qef_usuarisdepartament_seq'::regclass) NOT NULL
+);
+
+
+ALTER TABLE public.qef_usuarisdepartament OWNER TO queesticfent;
+
+--
+-- TOC entry 1953 (class 2606 OID 84458)
+-- Name: qef_accions_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_accions
+    ADD CONSTRAINT qef_accions_pk PRIMARY KEY (accioid);
+
+
+--
+-- TOC entry 1956 (class 2606 OID 84467)
+-- Name: qef_departaments_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_departaments
+    ADD CONSTRAINT qef_departaments_pk PRIMARY KEY (departamentid);
+
+
+--
+-- TOC entry 1960 (class 2606 OID 84477)
+-- Name: qef_festius_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_festius
+    ADD CONSTRAINT qef_festius_pk PRIMARY KEY (festiuid);
+
+
+--
+-- TOC entry 1940 (class 2606 OID 84295)
+-- Name: qef_fitxer_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_fitxer
+    ADD CONSTRAINT qef_fitxer_pk PRIMARY KEY (fitxerid);
+
+
+--
+-- TOC entry 1962 (class 2606 OID 84487)
+-- Name: qef_grups_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_grups
+    ADD CONSTRAINT qef_grups_pk PRIMARY KEY (grupid);
+
+
+--
+-- TOC entry 1972 (class 2606 OID 84535)
+-- Name: qef_grupsusuari_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_grupsusuari
+    ADD CONSTRAINT qef_grupsusuari_pk PRIMARY KEY (grupsusuariid);
+
+
+--
+-- TOC entry 1943 (class 2606 OID 84297)
+-- Name: qef_idioma_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_idioma
+    ADD CONSTRAINT qef_idioma_pk PRIMARY KEY (idiomaid);
+
+
+--
+-- TOC entry 1968 (class 2606 OID 84630)
+-- Name: qef_jos_twitter_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_jos_twitter
+    ADD CONSTRAINT qef_jos_twitter_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1977 (class 2606 OID 84558)
+-- Name: qef_modific_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_modificacionsqueesticfent
+    ADD CONSTRAINT qef_modific_pk PRIMARY KEY (modificacioid);
+
+
+--
+-- TOC entry 1990 (class 2606 OID 84618)
+-- Name: qef_personalprojecte_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_personalprojecte
+    ADD CONSTRAINT qef_personalprojecte_pk PRIMARY KEY (personalprojecteid);
+
+
+--
+-- TOC entry 1982 (class 2606 OID 84581)
+-- Name: qef_projectes_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_projectes
+    ADD CONSTRAINT qef_projectes_pk PRIMARY KEY (projecteid);
+
+
+--
+-- TOC entry 1946 (class 2606 OID 84299)
+-- Name: qef_traduccio_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_traduccio
+    ADD CONSTRAINT qef_traduccio_pk PRIMARY KEY (traduccioid);
+
+
+--
+-- TOC entry 1951 (class 2606 OID 84301)
+-- Name: qef_traducmap_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_traducciomap
+    ADD CONSTRAINT qef_traducmap_pk PRIMARY KEY (traducciomapid, idiomaid);
+
+
+--
+-- TOC entry 1965 (class 2606 OID 84512)
+-- Name: qef_usuaris_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_usuaris
+    ADD CONSTRAINT qef_usuaris_pk PRIMARY KEY (usuariid);
+
+
+--
+-- TOC entry 1985 (class 2606 OID 84598)
+-- Name: qef_usuarisdepartament_pk; Type: CONSTRAINT; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+ALTER TABLE ONLY qef_usuarisdepartament
+    ADD CONSTRAINT qef_usuarisdepartament_pk PRIMARY KEY (usuaridepartamentid);
+
+
+--
+-- TOC entry 1954 (class 1259 OID 84527)
+-- Name: qef_accions_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_accions_pk_i ON public.qef_accions USING btree (accioid);
+
+
+--
+-- TOC entry 1957 (class 1259 OID 84528)
+-- Name: qef_departaments_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_departaments_pk_i ON public.qef_departaments USING btree (departamentid);
+
+
+--
+-- TOC entry 1958 (class 1259 OID 84525)
+-- Name: qef_festiu_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_festiu_pk_i ON public.qef_festius USING btree (festiuid);
+
+
+--
+-- TOC entry 1941 (class 1259 OID 84302)
+-- Name: qef_fitxer_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_fitxer_pk_i ON public.qef_fitxer USING btree (fitxerid);
+
+
+--
+-- TOC entry 1963 (class 1259 OID 84526)
+-- Name: qef_grups_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_grups_pk_i ON public.qef_grups USING btree (grupid);
+
+
+--
+-- TOC entry 1970 (class 1259 OID 84643)
+-- Name: qef_grupsusuari_grupid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_grupsusuari_grupid_fk_i ON public.qef_grupsusuari USING btree (grupid);
+
+
+--
+-- TOC entry 1973 (class 1259 OID 84657)
+-- Name: qef_grupsusuari_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_grupsusuari_pk_i ON public.qef_grupsusuari USING btree (grupsusuariid);
+
+
+--
+-- TOC entry 1974 (class 1259 OID 84637)
+-- Name: qef_grupsusuari_usuariid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_grupsusuari_usuariid_fk_i ON public.qef_grupsusuari USING btree (usuariid);
+
+
+--
+-- TOC entry 1944 (class 1259 OID 84303)
+-- Name: qef_idioma_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_idioma_pk_i ON public.qef_idioma USING btree (idiomaid);
+
+
+--
+-- TOC entry 1969 (class 1259 OID 84665)
+-- Name: qef_jos_twitter_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_jos_twitter_pk_i ON public.qef_jos_twitter USING btree (id);
+
+
+--
+-- TOC entry 1975 (class 1259 OID 84650)
+-- Name: qef_modific_accioid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_modific_accioid_fk_i ON public.qef_modificacionsqueesticfent USING btree (accioid);
+
+
+--
+-- TOC entry 1978 (class 1259 OID 84644)
+-- Name: qef_modific_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_modific_pk_i ON public.qef_modificacionsqueesticfent USING btree (modificacioid);
+
+
+--
+-- TOC entry 1979 (class 1259 OID 84656)
+-- Name: qef_modific_projecteid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_modific_projecteid_fk_i ON public.qef_modificacionsqueesticfent USING btree (projecteid);
+
+
+--
+-- TOC entry 1991 (class 1259 OID 84658)
+-- Name: qef_personalprojecte_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_personalprojecte_pk_i ON public.qef_personalprojecte USING btree (personalprojecteid);
+
+
+--
+-- TOC entry 1992 (class 1259 OID 84664)
+-- Name: qef_persproj_projecteid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_persproj_projecteid_fk_i ON public.qef_personalprojecte USING btree (projecteid);
+
+
+--
+-- TOC entry 1980 (class 1259 OID 84754)
+-- Name: qef_projectes_departamen_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_projectes_departamen_fk_i ON public.qef_projectes USING btree (departamentid);
+
+
+--
+-- TOC entry 1983 (class 1259 OID 84733)
+-- Name: qef_projectes_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_projectes_pk_i ON public.qef_projectes USING btree (projecteid);
+
+
+--
+-- TOC entry 1947 (class 1259 OID 84304)
+-- Name: qef_traduccio_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_traduccio_pk_i ON public.qef_traduccio USING btree (traduccioid);
+
+
+--
+-- TOC entry 1948 (class 1259 OID 84305)
+-- Name: qef_traducciomap_idiomaid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_traducciomap_idiomaid_fk_i ON public.qef_traducciomap USING btree (idiomaid);
+
+
+--
+-- TOC entry 1949 (class 1259 OID 84306)
+-- Name: qef_traducciomap_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_traducciomap_pk_i ON public.qef_traducciomap USING btree (traducciomapid);
+
+
+--
+-- TOC entry 1966 (class 1259 OID 84529)
+-- Name: qef_usuaris_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_usuaris_pk_i ON public.qef_usuaris USING btree (usuariid);
+
+
+--
+-- TOC entry 1986 (class 1259 OID 84672)
+-- Name: qef_usuarisdepartament_pk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_usuarisdepartament_pk_i ON public.qef_usuarisdepartament USING btree (usuaridepartamentid);
+
+
+--
+-- TOC entry 1987 (class 1259 OID 84671)
+-- Name: qef_usudep_departamentid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_usudep_departamentid_fk_i ON public.qef_usuarisdepartament USING btree (departamentid);
+
+
+--
+-- TOC entry 1988 (class 1259 OID 84782)
+-- Name: qef_usudep_usuariid_fk_i; Type: INDEX; Schema: public; Owner: queesticfent; Tablespace: 
+--
+
+CREATE INDEX qef_usudep_usuariid_fk_i ON public.qef_usuarisdepartament USING btree (usuariid);
+
+
+--
+-- TOC entry 1995 (class 2606 OID 84638)
+-- Name: qef_grupsusu_grups_grupid_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_grupsusuari
+    ADD CONSTRAINT qef_grupsusu_grups_grupid_fk FOREIGN KEY (grupid) REFERENCES qef_grups(grupid);
+
+
+--
+-- TOC entry 1994 (class 2606 OID 84632)
+-- Name: qef_grupsusu_usuaris_usuari_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_grupsusuari
+    ADD CONSTRAINT qef_grupsusu_usuaris_usuari_fk FOREIGN KEY (usuariid) REFERENCES qef_usuaris(usuariid);
+
+
+--
+-- TOC entry 1996 (class 2606 OID 84645)
+-- Name: qef_modific_accions_accioid_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_modificacionsqueesticfent
+    ADD CONSTRAINT qef_modific_accions_accioid_fk FOREIGN KEY (accioid) REFERENCES qef_accions(accioid);
+
+
+--
+-- TOC entry 1997 (class 2606 OID 84651)
+-- Name: qef_modific_projectes_proje_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_modificacionsqueesticfent
+    ADD CONSTRAINT qef_modific_projectes_proje_fk FOREIGN KEY (projecteid) REFERENCES qef_projectes(projecteid);
+
+
+--
+-- TOC entry 2001 (class 2606 OID 84744)
+-- Name: qef_persproj_projectes_pro_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_personalprojecte
+    ADD CONSTRAINT qef_persproj_projectes_pro_fk FOREIGN KEY (projecteid) REFERENCES qef_projectes(projecteid);
+
+
+--
+-- TOC entry 1998 (class 2606 OID 84749)
+-- Name: qef_projectes_departamen_d_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_projectes
+    ADD CONSTRAINT qef_projectes_departamen_d_fk FOREIGN KEY (departamentid) REFERENCES qef_departaments(departamentid);
+
+
+--
+-- TOC entry 1993 (class 2606 OID 84307)
+-- Name: qef_traducmap_traduccio_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_traducciomap
+    ADD CONSTRAINT qef_traducmap_traduccio_fk FOREIGN KEY (traducciomapid) REFERENCES qef_traduccio(traduccioid);
+
+
+--
+-- TOC entry 1999 (class 2606 OID 84767)
+-- Name: qef_usudep_departamen_depar_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_usuarisdepartament
+    ADD CONSTRAINT qef_usudep_departamen_depar_fk FOREIGN KEY (departamentid) REFERENCES qef_departaments(departamentid);
+
+
+--
+-- TOC entry 2000 (class 2606 OID 84777)
+-- Name: qef_usudep_usuaris_usuari_fk; Type: FK CONSTRAINT; Schema: public; Owner: queesticfent
+--
+
+ALTER TABLE ONLY qef_usuarisdepartament
+    ADD CONSTRAINT qef_usudep_usuaris_usuari_fk FOREIGN KEY (usuariid) REFERENCES qef_usuaris(usuariid);
+
+
+--
+-- TOC entry 2115 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2023-09-29 09:55:19
+
+--
+-- PostgreSQL database dump complete
+--
+

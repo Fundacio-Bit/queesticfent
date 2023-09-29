@@ -74,7 +74,7 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/option1", true));
+				return new ModelAndView(new RedirectView("/admin/gestiofestius/list", true));
 			}
 
 			if ("user".equals(pipella)) {

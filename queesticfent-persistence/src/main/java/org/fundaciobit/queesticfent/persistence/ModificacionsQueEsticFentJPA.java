@@ -38,7 +38,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     @Column(name="projecteid",length = 19)
     java.lang.Long projecteID;
 
-    @Column(name="data",nullable = false,length = 35,precision = 6)
+    @Column(name="data",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp data;
 
   /** -1 significa nou */
@@ -170,7 +170,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 // IMP Field:accioid | Table: qef_accions | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accioid", referencedColumnName ="accioId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_accions_accioid_fk"))
+    @JoinColumn(name = "accioid", referencedColumnName ="accioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_accions_accioid_fk"))
     private AccionsJPA accions;
 
     public AccionsJPA getAccions() {
@@ -184,7 +184,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 // IMP Field:projecteid | Table: qef_projectes | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projecteid", referencedColumnName ="projecteId", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_projectes_proje_fk"))
+    @JoinColumn(name = "projecteid", referencedColumnName ="projecteID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_modific_projectes_proje_fk"))
     private ProjectesJPA projectes;
 
     public ProjectesJPA getProjectes() {

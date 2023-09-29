@@ -19,8 +19,8 @@ public class UsuarisDepartamentForm extends queesticfentBaseForm {
   public UsuarisDepartamentForm(UsuarisDepartamentForm __toClone) {
     super(__toClone);
       this.usuarisDepartament = __toClone.usuarisDepartament;
-    this.listOfUsuarisForUsuariId = __toClone.listOfUsuarisForUsuariId;
-    this.listOfDepartamentsForDepartamentid = __toClone.listOfDepartamentsForDepartamentid;
+    this.listOfUsuarisForUsuariID = __toClone.listOfUsuarisForUsuariID;
+    this.listOfDepartamentsForDepartamentID = __toClone.listOfDepartamentsForDepartamentID;
   }
   
   public UsuarisDepartamentForm(UsuarisDepartamentJPA usuarisDepartament, boolean nou) {
@@ -36,26 +36,26 @@ public class UsuarisDepartamentForm extends queesticfentBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfUsuarisForUsuariId;
+  private List<StringKeyValue> listOfUsuarisForUsuariID;
 
-  public List<StringKeyValue> getListOfUsuarisForUsuariId() {
-    return this.listOfUsuarisForUsuariId;
+  public List<StringKeyValue> getListOfUsuarisForUsuariID() {
+    return this.listOfUsuarisForUsuariID;
   }
 
-  public void setListOfUsuarisForUsuariId(List<StringKeyValue> listOfUsuarisForUsuariId) {
-    this.listOfUsuarisForUsuariId = listOfUsuarisForUsuariId;
+  public void setListOfUsuarisForUsuariID(List<StringKeyValue> listOfUsuarisForUsuariID) {
+    this.listOfUsuarisForUsuariID = listOfUsuarisForUsuariID;
   }
 
 
 
-  private List<StringKeyValue> listOfDepartamentsForDepartamentid;
+  private List<StringKeyValue> listOfDepartamentsForDepartamentID;
 
-  public List<StringKeyValue> getListOfDepartamentsForDepartamentid() {
-    return this.listOfDepartamentsForDepartamentid;
+  public List<StringKeyValue> getListOfDepartamentsForDepartamentID() {
+    return this.listOfDepartamentsForDepartamentID;
   }
 
-  public void setListOfDepartamentsForDepartamentid(List<StringKeyValue> listOfDepartamentsForDepartamentid) {
-    this.listOfDepartamentsForDepartamentid = listOfDepartamentsForDepartamentid;
+  public void setListOfDepartamentsForDepartamentID(List<StringKeyValue> listOfDepartamentsForDepartamentID) {
+    this.listOfDepartamentsForDepartamentID = listOfDepartamentsForDepartamentID;
   }
 
 

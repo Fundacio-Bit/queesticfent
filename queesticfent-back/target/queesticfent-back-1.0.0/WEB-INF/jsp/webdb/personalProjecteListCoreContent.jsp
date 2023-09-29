@@ -9,7 +9,7 @@
         <c:if test="${ __entry.key < 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[personalProjecte.personalProjecteId]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[personalProjecte.personalProjecteID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />
@@ -26,19 +26,19 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PersonalProjecteFields.PERSONALPROJECTEID)}">
           <td>
-          ${personalProjecte.personalProjecteId}
+          ${personalProjecte.personalProjecteID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PersonalProjecteFields.USUARIID)}">
           <td>
-          ${personalProjecte.usuariid}
+          ${personalProjecte.usuariID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PersonalProjecteFields.PROJECTEID)}">
           <td>
-          <c:set var="tmp">${personalProjecte.projecteid}</c:set>
+          <c:set var="tmp">${personalProjecte.projecteID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfProjectesForProjecteid[tmp]}
+          ${__theFilterForm.mapOfProjectesForProjecteID[tmp]}
           </c:if>
           </td>
         </c:if>
@@ -59,7 +59,7 @@
         <c:if test="${ __entry.key >= 0  && ((empty __entry.value.searchBy)? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.searchBy)) && ((empty __entry.value.groupBy )? true : !gen:contains(__theFilterForm.hiddenFields, __entry.value.groupBy ))}">
           <td>
              <c:if test="${not empty __entry.value.valueMap }">
-               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[personalProjecte.personalProjecteId]}" />
+               <c:out escapeXml="${__entry.value.escapeXml}" value="${__entry.value.valueMap[personalProjecte.personalProjecteID]}" />
              </c:if>
              <c:if test="${not empty __entry.value.valueField }">
                <c:set var="__tmp" value="${pageScope}" />

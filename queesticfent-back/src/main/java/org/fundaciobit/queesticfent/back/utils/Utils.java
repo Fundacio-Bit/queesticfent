@@ -137,19 +137,19 @@ public class Utils {
     // SINONIM XXX
     //public static final int ACCIO_SINONIM=-4;
     // Vacances
-    public static final int ACCIO_VACANCES = -4;
+    public static final long ACCIO_VACANCES = -4;
     // 'Afegir Nova Entrada'
-    public static final int ACCIO_NOVA_ENTRADA = -3;
+    public static final long ACCIO_NOVA_ENTRADA = -3;
     // 'Afegir Entrada de QueEsticFent'
-    public static final int ACCIO_AFEGIR_QUEESTICFENT = -2;
+    public static final long ACCIO_AFEGIR_QUEESTICFENT = -2;
     // Fesitu
-    public static final int ACCIO_FESTIU = -1;
+    public static final long ACCIO_FESTIU = -1;
     // 'Amagar Entrada'
-    public static final int ACCIO_AMAGAR_ENTRADA = 0;
+    public static final long ACCIO_AMAGAR_ENTRADA = 0;
     // 'Canviar text de l''Entrada'
-    public static final int ACCIO_CANVI_TEXT = 1;
+    public static final long ACCIO_CANVI_TEXT = 1;
     // CANVI DATA
-    public static final int ACCIO_CANVI_DATA = 3;
+    public static final long ACCIO_CANVI_DATA = 3;
 
     public static final String CAP_DE_PROJECTE = "Cap de Projecte";
 

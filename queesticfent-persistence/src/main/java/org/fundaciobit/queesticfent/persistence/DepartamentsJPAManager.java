@@ -55,8 +55,8 @@ public class DepartamentsJPAManager
         return list.toArray(new Departaments[list.size()]);
     };
 
-    public Departaments create( java.lang.String _nom_, java.lang.String _coordinadorId_, java.lang.String _nomldap_, java.lang.String _descripcio_) throws I18NException {
-        DepartamentsJPA __bean =  new DepartamentsJPA(_nom_,_coordinadorId_,_nomldap_,_descripcio_);
+    public Departaments create( java.lang.String _nom_, java.lang.String _coordinadorId_, java.lang.String _nomLDAP_, java.lang.String _descripcio_) throws I18NException {
+        DepartamentsJPA __bean =  new DepartamentsJPA(_nom_,_coordinadorId_,_nomLDAP_,_descripcio_);
         return create(__bean);
     }
 

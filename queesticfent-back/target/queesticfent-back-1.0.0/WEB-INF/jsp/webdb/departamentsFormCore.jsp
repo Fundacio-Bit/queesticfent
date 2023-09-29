@@ -39,18 +39,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,DepartamentsFields.NOMLDAP)}">
-        <tr id="departaments_nomldap_rowid">
-          <td id="departaments_nomldap_columnlabelid">
+        <tr id="departaments_nomLDAP_rowid">
+          <td id="departaments_nomLDAP_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[DepartamentsFields.NOMLDAP])?'departaments.nomldap':__theForm.labels[DepartamentsFields.NOMLDAP]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[DepartamentsFields.NOMLDAP])?'departaments.nomLDAP':__theForm.labels[DepartamentsFields.NOMLDAP]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[DepartamentsFields.NOMLDAP]}">
               <i class="fas fa-info-circle" title="${__theForm.help[DepartamentsFields.NOMLDAP]}" ></i>
               </c:if>
             </td>
-          <td id="departaments_nomldap_columnvalueid">
-            <form:errors path="departaments.nomldap" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,DepartamentsFields.NOMLDAP)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,DepartamentsFields.NOMLDAP)? ' uneditable-input' : ''}"  style="" maxlength="200" path="departaments.nomldap"   />
+          <td id="departaments_nomLDAP_columnvalueid">
+            <form:errors path="departaments.nomLDAP" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,DepartamentsFields.NOMLDAP)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,DepartamentsFields.NOMLDAP)? ' uneditable-input' : ''}"  style="" maxlength="200" path="departaments.nomLDAP"   />
 
            </td>
         </tr>

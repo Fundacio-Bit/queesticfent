@@ -41,7 +41,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,DepartamentsFields.NOMLDAP)}">
           <td>
-          ${departaments.nomldap}
+          ${departaments.nomLDAP}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,DepartamentsFields.DESCRIPCIO)}">

@@ -53,12 +53,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisFields.USUARIID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="usuaris.usuariId" var="usuariId" />
-              <fmt:message key="genapp.form.searchby" var="cercaperusuariId" >                
-                 <fmt:param value="${usuariId}"/>
+              <fmt:message key="usuaris.usuariID" var="usuariID" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariID" >                
+                 <fmt:param value="${usuariID}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${usuariId}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariId}" path="usuariId" />
+              <span class="add-on"><c:out value="${usuariID}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariID}" path="usuariID" />
             </div>
 
 

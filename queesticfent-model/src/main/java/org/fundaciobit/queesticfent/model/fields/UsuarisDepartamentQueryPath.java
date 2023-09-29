@@ -11,16 +11,16 @@ public class UsuarisDepartamentQueryPath extends org.fundaciobit.genapp.common.q
     super(parentQueryPath);
   }
 
+  public LongField USUARIDEPARTAMENTID() {
+    return new LongField(getQueryPath(), UsuarisDepartamentFields.USUARIDEPARTAMENTID);
+  }
+
   public StringField USUARIID() {
     return new StringField(getQueryPath(), UsuarisDepartamentFields.USUARIID);
   }
 
   public LongField DEPARTAMENTID() {
     return new LongField(getQueryPath(), UsuarisDepartamentFields.DEPARTAMENTID);
-  }
-
-  public LongField USUARIDEPARTAMENTID() {
-    return new LongField(getQueryPath(), UsuarisDepartamentFields.USUARIDEPARTAMENTID);
   }
 
 

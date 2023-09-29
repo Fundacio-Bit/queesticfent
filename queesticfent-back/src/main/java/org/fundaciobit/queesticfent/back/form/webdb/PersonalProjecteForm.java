@@ -19,7 +19,7 @@ public class PersonalProjecteForm extends queesticfentBaseForm {
   public PersonalProjecteForm(PersonalProjecteForm __toClone) {
     super(__toClone);
       this.personalProjecte = __toClone.personalProjecte;
-    this.listOfProjectesForProjecteid = __toClone.listOfProjectesForProjecteid;
+    this.listOfProjectesForProjecteID = __toClone.listOfProjectesForProjecteID;
   }
   
   public PersonalProjecteForm(PersonalProjecteJPA personalProjecte, boolean nou) {
@@ -35,14 +35,14 @@ public class PersonalProjecteForm extends queesticfentBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfProjectesForProjecteid;
+  private List<StringKeyValue> listOfProjectesForProjecteID;
 
-  public List<StringKeyValue> getListOfProjectesForProjecteid() {
-    return this.listOfProjectesForProjecteid;
+  public List<StringKeyValue> getListOfProjectesForProjecteID() {
+    return this.listOfProjectesForProjecteID;
   }
 
-  public void setListOfProjectesForProjecteid(List<StringKeyValue> listOfProjectesForProjecteid) {
-    this.listOfProjectesForProjecteid = listOfProjectesForProjecteid;
+  public void setListOfProjectesForProjecteID(List<StringKeyValue> listOfProjectesForProjecteID) {
+    this.listOfProjectesForProjecteID = listOfProjectesForProjecteID;
   }
 
 

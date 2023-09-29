@@ -8,6 +8,7 @@ D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queest
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\TwitterFilterForm.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\queesticfentFilesFormManager.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\ModificacionsQueEsticFentFilterForm.java
+D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\admin\GestioUsuarisDepartamentAdminController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\webdb\DepartamentsController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\DepartamentsFilterForm.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\webdb\IdiomaController.java
@@ -65,6 +66,7 @@ D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queest
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\FestiusFilterForm.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\AccionsRefList.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\utils\queesticfentSessionLocaleResolver.java
+D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\admin\GestioFestiusAdminController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\utils\Utils.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\webdb\ModificacionsQueEsticFentController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\webdb\TwitterController.java
@@ -83,6 +85,7 @@ D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queest
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\utils\queesticfentMaxUploadSizeExceededException.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\security\RolesBasedMappableAttributesRetriever.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\validator\webdb\FitxerWebValidator.java
+D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\admin\GestioUsuarisProjecteAdminController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\controller\webdb\ProjectesController.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\validator\webdb\UsuarisWebValidator.java
 D:\Projectes\queesticfent\queesticfent-back\src\main\java\org\fundaciobit\queesticfent\back\form\webdb\ModificacionsQueEsticFentRefList.java

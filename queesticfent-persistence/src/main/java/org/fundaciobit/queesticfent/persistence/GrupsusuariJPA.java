@@ -97,7 +97,7 @@ public class GrupsusuariJPA implements Grupsusuari {
 // IMP Field:usuariid | Table: qef_usuaris | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuariid", referencedColumnName ="usuariId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_usuaris_usuari_fk"))
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_usuaris_usuari_fk"))
     private UsuarisJPA usuaris;
 
     public UsuarisJPA getUsuaris() {

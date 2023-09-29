@@ -3,22 +3,22 @@
   
           <c:if test="${__theFilterForm.editButtonVisible || __theFilterForm.viewButtonVisible ||__theFilterForm.deleteButtonVisible || not empty __theFilterForm.additionalButtonsForEachItem || not empty __theFilterForm.additionalButtonsByPK}">
           <td>
-          <c:set var="pk" value="${usuaris.usuariId}"/>
+          <c:set var="pk" value="${usuaris.usuariID}"/>
           <c:choose>
            <c:when test="${__theFilterForm.actionsRenderer == 1}">
             <div class="btn-group" role="group" >
             <c:if test="${__theFilterForm.editButtonVisible}">
-            <a class="btn btn-warning" href="<c:url value="${contexte}/${usuaris.usuariId}/edit"/>" role="button"  title="<fmt:message key="genapp.edit"/>">
+            <a class="btn btn-warning" href="<c:url value="${contexte}/${usuaris.usuariID}/edit"/>" role="button"  title="<fmt:message key="genapp.edit"/>">
                <i class="fas fa-edit"></i>
             </a>
             </c:if>
             <c:if test="${__theFilterForm.viewButtonVisible}">
-            <a class="btn btn-info" href="<c:url value="${contexte}/view/${usuaris.usuariId}"/>" role="button"  title="<fmt:message key="genapp.viewtitle"/>">
+            <a class="btn btn-info" href="<c:url value="${contexte}/view/${usuaris.usuariID}"/>" role="button"  title="<fmt:message key="genapp.viewtitle"/>">
                <i class="fas fa-eye"></i>
             </a>
             </c:if>
             <c:if test="${__theFilterForm.deleteButtonVisible}">
-            <a class="btn btn-danger" href="#myModal" role="button"  onclick="openModal('<c:url value="${contexte}/${usuaris.usuariId}/delete"/>','show');" title="<fmt:message key="genapp.delete"/>">
+            <a class="btn btn-danger" href="#myModal" role="button"  onclick="openModal('<c:url value="${contexte}/${usuaris.usuariID}/delete"/>','show');" title="<fmt:message key="genapp.delete"/>">
                <i class="fas fa-trash icon-white"></i>
             </a>
             </c:if>
@@ -70,7 +70,7 @@
   <ul class="dropdown-menu float-right" style="min-width:35px;padding:5px 5px 0px 5px;margin:0px;font-size: 12px" >
             <c:if test="${__theFilterForm.editButtonVisible}">
             <li>
-            <a class="btn btn-warning btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/${usuaris.usuariId}/edit"/>" onclick="null">
+            <a class="btn btn-warning btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/${usuaris.usuariID}/edit"/>" onclick="null">
             <i class="fas fa-edit"></i>
              <fmt:message key="genapp.edit"/>
             </a>
@@ -78,7 +78,7 @@
             </c:if>
             <c:if test="${__theFilterForm.viewButtonVisible}">
             <li>
-            <a class="btn btn-info btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/view/${usuaris.usuariId}"/>" onclick="null">
+            <a class="btn btn-info btn-sm a_item" style="margin-bottom:5px;color: white;" href="<c:url value="${contexte}/view/${usuaris.usuariID}"/>" onclick="null">
             <i class="fas fa-eye"></i>
              <fmt:message key="genapp.viewtitle"/>
             </a>
@@ -86,7 +86,7 @@
             </c:if>
             <c:if test="${__theFilterForm.deleteButtonVisible}">
             <li>
-            <a class="btn btn-danger btn-sm a_item" style="margin-bottom:5px;color: white;" href="#myModal" onclick="openModal('<c:url value="${contexte}/${usuaris.usuariId}/delete"/>','show');">
+            <a class="btn btn-danger btn-sm a_item" style="margin-bottom:5px;color: white;" href="#myModal" onclick="openModal('<c:url value="${contexte}/${usuaris.usuariID}/delete"/>','show');">
             <i class="fas fa-trash icon-white"></i>
              <fmt:message key="genapp.delete"/>
             </a>

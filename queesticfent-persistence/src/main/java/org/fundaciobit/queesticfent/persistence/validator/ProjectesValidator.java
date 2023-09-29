@@ -82,7 +82,7 @@ public class ProjectesValidator<I extends Projectes>
 
     // Fields with References to Other tables 
     if (__vr.getFieldErrorCount(DEPARTAMENTID) == 0) {
-      java.lang.Long __departamentid = __target__.getDepartamentid();
+      java.lang.Long __departamentid = __target__.getDepartamentID();
       Long __count_ = null;
       try { __count_ = __departamentsManager.count(DepartamentsFields.DEPARTAMENTID.equal(__departamentid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        

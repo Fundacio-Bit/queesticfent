@@ -17,23 +17,23 @@ import javax.persistence.Id;
 
 @Entity(name = "UsuarisDepartamentJPA")
 @Table(name = "qef_usuarisdepartament" , indexes = { 
+        @Index(name="qef_usuarisdepartament_pk_i", columnList = "usuaridepartamentid"),
         @Index(name="qef_usudep_usuariid_fk_i", columnList = "usuariid"),
-        @Index(name="qef_usudep_departamentid_fk_i", columnList = "departamentid"),
-        @Index(name="qef_usuarisdepartament_pk_i", columnList = "usuaridepartamentid")})
+        @Index(name="qef_usudep_departamentid_fk_i", columnList = "departamentid")})
 @SequenceGenerator(name="USUARISDEPARTAMENT_SEQ", sequenceName="qef_usuarisdepartament_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class UsuarisDepartamentJPA implements UsuarisDepartament {
 
-    @Column(name="usuariid",nullable = false,length = 20)
-    java.lang.String usuariId;
-
-    @Column(name="departamentid",nullable = false,length = 19)
-    long departamentid;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARISDEPARTAMENT_SEQ")
     @Column(name="usuaridepartamentid",nullable = false,length = 19)
-    long usuariDepartamentId;
+    long usuariDepartamentID;
+
+    @Column(name="usuariid",nullable = false,length = 20)
+    java.lang.String usuariID;
+
+    @Column(name="departamentid",nullable = false,length = 19)
+    long departamentID;
 
 
 
@@ -42,41 +42,41 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisDepartamentJPA(java.lang.String usuariId , long departamentid , long usuariDepartamentId) {
-    this.usuariId=usuariId;
-    this.departamentid=departamentid;
-    this.usuariDepartamentId=usuariDepartamentId;
+  public UsuarisDepartamentJPA(long usuariDepartamentID , java.lang.String usuariID , long departamentID) {
+    this.usuariDepartamentID=usuariDepartamentID;
+    this.usuariID=usuariID;
+    this.departamentID=departamentID;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuarisDepartamentJPA(java.lang.String usuariId , long departamentid) {
-    this.usuariId=usuariId;
-    this.departamentid=departamentid;
+  public UsuarisDepartamentJPA(java.lang.String usuariID , long departamentID) {
+    this.usuariID=usuariID;
+    this.departamentID=departamentID;
 }
   public UsuarisDepartamentJPA(UsuarisDepartament __bean) {
-    this.setUsuariId(__bean.getUsuariId());
-    this.setDepartamentid(__bean.getDepartamentid());
-    this.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
+    this.setUsuariDepartamentID(__bean.getUsuariDepartamentID());
+    this.setUsuariID(__bean.getUsuariID());
+    this.setDepartamentID(__bean.getDepartamentID());
 	}
 
-	public java.lang.String getUsuariId() {
-		return(usuariId);
+	public long getUsuariDepartamentID() {
+		return(usuariDepartamentID);
 	};
-	public void setUsuariId(java.lang.String _usuariId_) {
-		this.usuariId = _usuariId_;
-	};
-
-	public long getDepartamentid() {
-		return(departamentid);
-	};
-	public void setDepartamentid(long _departamentid_) {
-		this.departamentid = _departamentid_;
+	public void setUsuariDepartamentID(long _usuariDepartamentID_) {
+		this.usuariDepartamentID = _usuariDepartamentID_;
 	};
 
-	public long getUsuariDepartamentId() {
-		return(usuariDepartamentId);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setUsuariDepartamentId(long _usuariDepartamentId_) {
-		this.usuariDepartamentId = _usuariDepartamentId_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
+	};
+
+	public long getDepartamentID() {
+		return(departamentID);
+	};
+	public void setDepartamentID(long _departamentID_) {
+		this.departamentID = _departamentID_;
 	};
 
 
@@ -87,7 +87,7 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
     if (__obj != null && __obj instanceof UsuarisDepartament) {
       UsuarisDepartament __instance = (UsuarisDepartament)__obj;
       __result = true;
-      __result = __result && (this.getUsuariDepartamentId() == __instance.getUsuariDepartamentId()) ;
+      __result = __result && (this.getUsuariDepartamentID() == __instance.getUsuariDepartamentID()) ;
     } else {
       __result = false;
     }
@@ -97,7 +97,7 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
 // IMP Field:usuariid | Table: qef_usuaris | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuariid", referencedColumnName ="usuariId", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_usudep_usuaris_usuari_fk"))
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_usudep_usuaris_usuari_fk"))
     private UsuarisJPA usuaris;
 
     public UsuarisJPA getUsuaris() {
@@ -127,9 +127,9 @@ public class UsuarisDepartamentJPA implements UsuarisDepartament {
   public static UsuarisDepartamentJPA toJPA(UsuarisDepartament __bean) {
     if (__bean == null) { return null;}
     UsuarisDepartamentJPA __tmp = new UsuarisDepartamentJPA();
-    __tmp.setUsuariId(__bean.getUsuariId());
-    __tmp.setDepartamentid(__bean.getDepartamentid());
-    __tmp.setUsuariDepartamentId(__bean.getUsuariDepartamentId());
+    __tmp.setUsuariDepartamentID(__bean.getUsuariDepartamentID());
+    __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setDepartamentID(__bean.getDepartamentID());
 		return __tmp;
 	}
 

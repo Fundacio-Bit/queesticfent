@@ -20,25 +20,25 @@ import org.fundaciobit.queesticfent.model.fields.AccionsFields;
 @Component
 public class AccionsFilterForm extends queesticfentBaseFilterForm implements AccionsFields {
 
-  private java.lang.Long accioIdDesde;
+  private java.lang.Long accioIDDesde;
 
-  public java.lang.Long getAccioIdDesde() {
-    return this.accioIdDesde;
+  public java.lang.Long getAccioIDDesde() {
+    return this.accioIDDesde;
   }
 
-  public void setAccioIdDesde(java.lang.Long accioIdDesde) {
-    this.accioIdDesde = accioIdDesde;
+  public void setAccioIDDesde(java.lang.Long accioIDDesde) {
+    this.accioIDDesde = accioIDDesde;
   }
 
 
-  private java.lang.Long accioIdFins;
+  private java.lang.Long accioIDFins;
 
-  public java.lang.Long getAccioIdFins() {
-    return this.accioIdFins;
+  public java.lang.Long getAccioIDFins() {
+    return this.accioIDFins;
   }
 
-  public void setAccioIdFins(java.lang.Long accioIdFins) {
-    this.accioIdFins = accioIdFins;
+  public void setAccioIDFins(java.lang.Long accioIDFins) {
+    this.accioIDFins = accioIDFins;
   }
 
 
@@ -91,8 +91,8 @@ public class AccionsFilterForm extends queesticfentBaseFilterForm implements Acc
   
   public AccionsFilterForm(AccionsFilterForm __toClone) {
     super(__toClone);
-    this.accioIdDesde = __toClone.accioIdDesde;
-    this.accioIdFins = __toClone.accioIdFins;
+    this.accioIDDesde = __toClone.accioIDDesde;
+    this.accioIDFins = __toClone.accioIDFins;
     this.nom = __toClone.nom;
     this.nomLlegenda = __toClone.nomLlegenda;
     this.color = __toClone.color;

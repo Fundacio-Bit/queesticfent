@@ -50,15 +50,33 @@
       </c:forEach>
 
 
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.USUARIDEPARTAMENTID)}">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
+              <span class="add-on"><fmt:message key="usuarisDepartament.usuariDepartamentID" />:</span>
+
+              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="usuariDepartamentIDDesde" />
+
+
+              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
+
+              <form:input cssClass="input-append input-small search-query" path="usuariDepartamentIDFins" />
+
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.USUARIID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="usuarisDepartament.usuariId" var="usuariId" />
-              <fmt:message key="genapp.form.searchby" var="cercaperusuariId" >                
-                 <fmt:param value="${usuariId}"/>
+              <fmt:message key="usuarisDepartament.usuariID" var="usuariID" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariID" >                
+                 <fmt:param value="${usuariID}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${usuariId}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariId}" path="usuariId" />
+              <span class="add-on"><c:out value="${usuariID}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariID}" path="usuariID" />
             </div>
 
 
@@ -66,34 +84,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.DEPARTAMENTID)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
             <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="usuarisDepartament.departamentid" />:</span>
+              <span class="add-on"><fmt:message key="usuarisDepartament.departamentID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="departamentidDesde" />
+              <form:input cssClass="input-append input-small" path="departamentIDDesde" />
 
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
 
-              <form:input cssClass="input-append input-small search-query" path="departamentidFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisDepartamentFields.USUARIDEPARTAMENTID)}">
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-            <%-- FILTRE NUMERO DESDE-FINS --%>
-              <span class="add-on"><fmt:message key="usuarisDepartament.usuariDepartamentId" />:</span>
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="usuariDepartamentIdDesde" />
-
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="usuariDepartamentIdFins" />
+              <form:input cssClass="input-append input-small search-query" path="departamentIDFins" />
 
             </div>
 
