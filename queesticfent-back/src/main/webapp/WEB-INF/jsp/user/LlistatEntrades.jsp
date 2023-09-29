@@ -89,12 +89,8 @@ noms.put(usuariID, info.getUserInfo().getFullName());
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Llista de Modificacions de QueEsticFent</title>
-<link rel="StyleSheet" href="style.css" type="text/css">
-<link rel="StyleSheet" href="table/datatable.css" type="text/css">
-<script type="text/javascript" src="javascript.js"></script>
-<script src="calendar/datetimepicker_css.js"></script>
-<script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
+
 </script>
 </head>
 <body  >
@@ -235,6 +231,8 @@ noms.put(usuariID, info.getUserInfo().getFullName());
  </td>
  <% } %>
  
+ <%--
+ 
  <td style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
  <table>
   <tr><td>
@@ -251,17 +249,12 @@ noms.put(usuariID, info.getUserInfo().getFullName());
 
 <a  href="AfegirEntradaDeQueEsticFent.jsp?<%=redirectUrlParams%>&redirectUrl=<%=redirectUrl%>">
 Afegir Entrada
-   <%-- 
-   </a>
-   
-   <br>
-  
-  <a  href="AfegirEntradaDeQueEsticFent.jsp?<%=redirectUrlParams%>&redirectUrl=<%=redirectUrl%>"> --%>
+
  del QueEsticFent
    </a>
    
 <td>
- 
+ --%>
  
 </tr>
 </table>

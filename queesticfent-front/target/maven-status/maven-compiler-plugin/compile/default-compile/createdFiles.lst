@@ -1,6 +1,0 @@
-org\fundaciobit\queesticfent\front\utils\InitServlet.class
-org\fundaciobit\queesticfent\front\config\queesticfentSecurityConfig.class
-org\fundaciobit\queesticfent\front\config\queesticfentFrontConfig.class
-org\fundaciobit\queesticfent\front\controller\InicioController.class
-org\fundaciobit\queesticfent\front\config\queesticfentSecurityWebAppInitializer.class
-org\fundaciobit\queesticfent\front\config\queesticfentFrontAppInitilizer.class

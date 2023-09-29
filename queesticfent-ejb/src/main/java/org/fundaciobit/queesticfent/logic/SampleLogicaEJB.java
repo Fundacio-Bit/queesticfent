@@ -1,26 +1,8 @@
 package org.fundaciobit.queesticfent.logic;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
 
-/*
-import org.fundaciobit.queesticfent.ejb.AnnexEJB;
-import org.fundaciobit.queesticfent.ejb.FitxerService;
-import org.fundaciobit.queesticfent.persistence.AnnexJPA;
-import org.fundaciobit.queesticfent.model.entity.AnnexFirmat;
-import org.fundaciobit.queesticfent.model.fields.AnnexFields;
-import org.fundaciobit.queesticfent.model.fields.AnnexFirmatFields;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
-*/
-
-//import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.TransactionSynchronizationRegistry;
 
 /**
  * 

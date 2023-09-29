@@ -5,7 +5,7 @@
   <h5>Menú Usuari</h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
     
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+   
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/user/entrades/llistatentrades"/>">
         <span style="${(fn:contains(url, '/user/entrades/llistatentrades'))? "font-weight: bold;" : ""}">Entrades</span>
