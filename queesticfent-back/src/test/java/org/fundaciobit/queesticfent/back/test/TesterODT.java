@@ -1,13 +1,9 @@
 package org.fundaciobit.queesticfent.back.test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +11,12 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.fundaciobit.queesticfent.back.controller.user.Item;
 import org.fundaciobit.queesticfent.back.controller.user.LlistatEntradesUserController;
 import org.fundaciobit.queesticfent.back.controller.user.UserInfo;
-import org.fundaciobit.queesticfent.back.utils.Utils;
 
+/**
+ * 
+ * @author anadal
+ *
+ */
 public class TesterODT {
 
     public static void main(String[] args) {

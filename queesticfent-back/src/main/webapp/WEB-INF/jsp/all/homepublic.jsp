@@ -14,9 +14,9 @@
 <br/>
 <br/>
 
-PAGINA PUBLICA <br/>
-
-This page is generated automatically. Please edit.
+QueEsticFent és una Aplicació desenvolupada pel Departament de Govern Digital de la Fundació Bit <br/>
+per gestionar ls tasques realitzades en els diferents projectes de desenvolupament<br/>
+ i gestió que es duen a terme en aquest departament.
 
 <br/>
 <br/>
@@ -37,11 +37,12 @@ This page is generated automatically. Please edit.
 
 <br/>
 
+
+<c:if test="${qef:isDesenvolupament()}">
+Only in Development Mode
+
 LOGIN ANONIM <br/>
 Locale = <%=LocaleContextHolder.getLocale() %> <br/>
 lang = ${lang} <br/>
 <br/>
-
-<c:if test="${qef:isDesenvolupament()}">
-Only in Development Mode
 </c:if>
