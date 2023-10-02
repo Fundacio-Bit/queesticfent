@@ -8,7 +8,7 @@ public class AccionsBean implements Accions {
 
 
 
-	long accioId;// PK
+	long accioID;// PK
 	java.lang.String nom;
 	java.lang.String nomLlegenda;
 	java.lang.String color;
@@ -20,8 +20,8 @@ public class AccionsBean implements Accions {
   }
 
   /** Constructor amb tots els camps  */
-  public AccionsBean(long accioId , java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
-    this.accioId=accioId;
+  public AccionsBean(long accioID , java.lang.String nom , java.lang.String nomLlegenda , java.lang.String color , java.lang.String descripcio) {
+    this.accioID=accioID;
     this.nom=nom;
     this.nomLlegenda=nomLlegenda;
     this.color=color;
@@ -35,24 +35,24 @@ public class AccionsBean implements Accions {
     this.descripcio=descripcio;
 }
   /** Constructor dels valors Not Null */
-  public AccionsBean(long accioId , java.lang.String nom , java.lang.String nomLlegenda) {
-    this.accioId=accioId;
+  public AccionsBean(long accioID , java.lang.String nom , java.lang.String nomLlegenda) {
+    this.accioID=accioID;
     this.nom=nom;
     this.nomLlegenda=nomLlegenda;
 }
   public AccionsBean(Accions __bean) {
-    this.setAccioId(__bean.getAccioId());
+    this.setAccioID(__bean.getAccioID());
     this.setNom(__bean.getNom());
     this.setNomLlegenda(__bean.getNomLlegenda());
     this.setColor(__bean.getColor());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
-	public long getAccioId() {
-		return(accioId);
+	public long getAccioID() {
+		return(accioID);
 	};
-	public void setAccioId(long _accioId_) {
-		this.accioId = _accioId_;
+	public void setAccioID(long _accioID_) {
+		this.accioID = _accioID_;
 	};
 
 	public java.lang.String getNom() {
@@ -90,7 +90,7 @@ public class AccionsBean implements Accions {
   public static AccionsBean toBean(Accions __bean) {
     if (__bean == null) { return null;}
     AccionsBean __tmp = new AccionsBean();
-    __tmp.setAccioId(__bean.getAccioId());
+    __tmp.setAccioID(__bean.getAccioID());
     __tmp.setNom(__bean.getNom());
     __tmp.setNomLlegenda(__bean.getNomLlegenda());
     __tmp.setColor(__bean.getColor());

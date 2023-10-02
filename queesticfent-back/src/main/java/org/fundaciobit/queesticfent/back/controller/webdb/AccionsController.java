@@ -262,7 +262,7 @@ public class AccionsController
         return getTileForm();
       } else {
         accions = create(request, accions);
-        createMessageSuccess(request, "success.creation", accions.getAccioId());
+        createMessageSuccess(request, "success.creation", accions.getAccioID());
         accionsForm.setAccions(accions);
         return getRedirectWhenCreated(request, accionsForm);
       }
@@ -277,16 +277,16 @@ public class AccionsController
     }
   }
 
-  @RequestMapping(value = "/view/{accioId}", method = RequestMethod.GET)
-  public ModelAndView veureAccionsGet(@PathVariable("accioId") java.lang.Long accioId,
+  @RequestMapping(value = "/view/{accioID}", method = RequestMethod.GET)
+  public ModelAndView veureAccionsGet(@PathVariable("accioID") java.lang.Long accioID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewAccionsGet(accioId,
+      return editAndViewAccionsGet(accioID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewAccionsGet(@PathVariable("accioId") java.lang.Long accioId,
+  protected ModelAndView editAndViewAccionsGet(@PathVariable("accioID") java.lang.Long accioID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -298,11 +298,11 @@ public class AccionsController
         return null;
       }
     }
-    AccionsJPA accions = findByPrimaryKey(request, accioId);
+    AccionsJPA accions = findByPrimaryKey(request, accioID);
 
     if (accions == null) {
-      createMessageWarning(request, "error.notfound", accioId);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, accioId), true));
+      createMessageWarning(request, "error.notfound", accioID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, accioID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -323,11 +323,11 @@ public class AccionsController
   /**
    * Carregar el formulari per modificar un Accions existent
    */
-  @RequestMapping(value = "/{accioId}/edit", method = RequestMethod.GET)
-  public ModelAndView editarAccionsGet(@PathVariable("accioId") java.lang.Long accioId,
+  @RequestMapping(value = "/{accioID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarAccionsGet(@PathVariable("accioID") java.lang.Long accioID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewAccionsGet(accioId,
+      return editAndViewAccionsGet(accioID,
         request, response, false);
   }
 
@@ -336,7 +336,7 @@ public class AccionsController
   /**
    * Editar un Accions existent
    */
-  @RequestMapping(value = "/{accioId}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{accioID}/edit", method = RequestMethod.POST)
   public String editarAccionsPost(@ModelAttribute AccionsForm accionsForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -357,7 +357,7 @@ public class AccionsController
         return getTileForm();
       } else {
         accions = update(request, accions);
-        createMessageSuccess(request, "success.modification", accions.getAccioId());
+        createMessageSuccess(request, "success.modification", accions.getAccioID());
         status.setComplete();
         return getRedirectWhenModified(request, accionsForm, null);
       }
@@ -367,7 +367,7 @@ public class AccionsController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          accions.getAccioId(), __e);
+          accions.getAccioID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, accionsForm, __e);
     }
@@ -378,8 +378,8 @@ public class AccionsController
   /**
    * Eliminar un Accions existent
    */
-  @RequestMapping(value = "/{accioId}/delete")
-  public String eliminarAccions(@PathVariable("accioId") java.lang.Long accioId,
+  @RequestMapping(value = "/{accioID}/delete")
+  public String eliminarAccions(@PathVariable("accioID") java.lang.Long accioID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -387,20 +387,20 @@ public class AccionsController
       return null;
     }
     try {
-      Accions accions = this.findByPrimaryKey(request, accioId);
+      Accions accions = this.findByPrimaryKey(request, accioID);
       if (accions == null) {
-        String __msg = createMessageError(request, "error.notfound", accioId);
-        return getRedirectWhenDelete(request, accioId, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", accioID);
+        return getRedirectWhenDelete(request, accioID, new Exception(__msg));
       } else {
         delete(request, accions);
-        createMessageSuccess(request, "success.deleted", accioId);
-        return getRedirectWhenDelete(request, accioId,null);
+        createMessageSuccess(request, "success.deleted", accioID);
+        return getRedirectWhenDelete(request, accioID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", accioId, e);
+      String msg = createMessageError(request, "error.deleting", accioID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, accioId, e);
+      return getRedirectWhenDelete(request, accioID, e);
     }
   }
 
@@ -436,8 +436,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __accioId, Throwable e) {
-    java.lang.Long accioId = (java.lang.Long)__accioId;
+  public String[] getArgumentsMissatge(Object __accioID, Throwable e) {
+    java.lang.Long accioID = (java.lang.Long)__accioID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -447,13 +447,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (accioId == null) {
+    if (accioID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(accioId),
+         String.valueOf(accioID),
  exceptionMsg };
     }
   }
@@ -467,7 +467,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("accions.accioId");
+    return  I18NUtils.tradueix("accions.accioID");
   }
 
   @InitBinder("accionsFilterForm")
@@ -482,7 +482,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "accions.accioId");
+    initDisallowedFields(binder, "accions.accioID");
   }
 
   public AccionsWebValidator getWebValidator() {
@@ -500,10 +500,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Accions
    */
-  @RequestMapping(value = "/{accioId}/cancel")
-  public String cancelAccions(@PathVariable("accioId") java.lang.Long accioId,
+  @RequestMapping(value = "/{accioID}/cancel")
+  public String cancelAccions(@PathVariable("accioID") java.lang.Long accioID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, accioId);
+     return getRedirectWhenCancel(request, accioID);
   }
 
   @Override
@@ -569,11 +569,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long accioId, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long accioID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long accioId) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long accioID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -596,8 +596,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public AccionsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long accioId) throws I18NException {
-    return (AccionsJPA) accionsEjb.findByPrimaryKey(accioId);
+  public AccionsJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long accioID) throws I18NException {
+    return (AccionsJPA) accionsEjb.findByPrimaryKey(accioID);
   }
 
 

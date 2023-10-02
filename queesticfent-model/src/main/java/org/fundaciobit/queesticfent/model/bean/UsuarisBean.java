@@ -8,7 +8,7 @@ public class UsuarisBean implements Usuaris {
 
 
 
-	java.lang.String usuariId;// PK
+	java.lang.String usuariID;// PK
 	java.lang.String llinatge1;
 	java.lang.String llinatge2;
 	java.lang.String nom;
@@ -26,8 +26,8 @@ public class UsuarisBean implements Usuaris {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisBean(java.lang.String usuariId , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String contrasenya) {
-    this.usuariId=usuariId;
+  public UsuarisBean(java.lang.String usuariID , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String contrasenya) {
+    this.usuariID=usuariID;
     this.llinatge1=llinatge1;
     this.llinatge2=llinatge2;
     this.nom=nom;
@@ -40,13 +40,13 @@ public class UsuarisBean implements Usuaris {
     this.contrasenya=contrasenya;
 }
   /** Constructor dels valors Not Null */
-  public UsuarisBean(java.lang.String usuariId , java.lang.String nom , java.lang.String correu) {
-    this.usuariId=usuariId;
+  public UsuarisBean(java.lang.String usuariID , java.lang.String nom , java.lang.String correu) {
+    this.usuariID=usuariID;
     this.nom=nom;
     this.correu=correu;
 }
   public UsuarisBean(Usuaris __bean) {
-    this.setUsuariId(__bean.getUsuariId());
+    this.setUsuariID(__bean.getUsuariID());
     this.setLlinatge1(__bean.getLlinatge1());
     this.setLlinatge2(__bean.getLlinatge2());
     this.setNom(__bean.getNom());
@@ -59,11 +59,11 @@ public class UsuarisBean implements Usuaris {
     this.setContrasenya(__bean.getContrasenya());
 	}
 
-	public java.lang.String getUsuariId() {
-		return(usuariId);
+	public java.lang.String getUsuariID() {
+		return(usuariID);
 	};
-	public void setUsuariId(java.lang.String _usuariId_) {
-		this.usuariId = _usuariId_;
+	public void setUsuariID(java.lang.String _usuariID_) {
+		this.usuariID = _usuariID_;
 	};
 
 	public java.lang.String getLlinatge1() {
@@ -143,7 +143,7 @@ public class UsuarisBean implements Usuaris {
   public static UsuarisBean toBean(Usuaris __bean) {
     if (__bean == null) { return null;}
     UsuarisBean __tmp = new UsuarisBean();
-    __tmp.setUsuariId(__bean.getUsuariId());
+    __tmp.setUsuariID(__bean.getUsuariID());
     __tmp.setLlinatge1(__bean.getLlinatge1());
     __tmp.setLlinatge2(__bean.getLlinatge2());
     __tmp.setNom(__bean.getNom());

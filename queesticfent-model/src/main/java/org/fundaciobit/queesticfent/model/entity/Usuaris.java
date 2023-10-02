@@ -2,8 +2,8 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface Usuaris extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public java.lang.String getUsuariId();
-	public void setUsuariId(java.lang.String _usuariId_);
+	public java.lang.String getUsuariID();
+	public void setUsuariID(java.lang.String _usuariID_);
 
 	public java.lang.String getLlinatge1();
 	public void setLlinatge1(java.lang.String _llinatge1_);

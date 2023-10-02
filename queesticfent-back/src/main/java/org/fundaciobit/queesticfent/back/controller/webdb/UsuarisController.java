@@ -262,7 +262,7 @@ public class UsuarisController
         return getTileForm();
       } else {
         usuaris = create(request, usuaris);
-        createMessageSuccess(request, "success.creation", usuaris.getUsuariId());
+        createMessageSuccess(request, "success.creation", usuaris.getUsuariID());
         usuarisForm.setUsuaris(usuaris);
         return getRedirectWhenCreated(request, usuarisForm);
       }
@@ -277,16 +277,16 @@ public class UsuarisController
     }
   }
 
-  @RequestMapping(value = "/view/{usuariId}", method = RequestMethod.GET)
-  public ModelAndView veureUsuarisGet(@PathVariable("usuariId") java.lang.String usuariId,
+  @RequestMapping(value = "/view/{usuariID}", method = RequestMethod.GET)
+  public ModelAndView veureUsuarisGet(@PathVariable("usuariID") java.lang.String usuariID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewUsuarisGet(usuariId,
+      return editAndViewUsuarisGet(usuariID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewUsuarisGet(@PathVariable("usuariId") java.lang.String usuariId,
+  protected ModelAndView editAndViewUsuarisGet(@PathVariable("usuariID") java.lang.String usuariID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -298,11 +298,11 @@ public class UsuarisController
         return null;
       }
     }
-    UsuarisJPA usuaris = findByPrimaryKey(request, usuariId);
+    UsuarisJPA usuaris = findByPrimaryKey(request, usuariID);
 
     if (usuaris == null) {
-      createMessageWarning(request, "error.notfound", usuariId);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, usuariId), true));
+      createMessageWarning(request, "error.notfound", usuariID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, usuariID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -323,11 +323,11 @@ public class UsuarisController
   /**
    * Carregar el formulari per modificar un Usuaris existent
    */
-  @RequestMapping(value = "/{usuariId}/edit", method = RequestMethod.GET)
-  public ModelAndView editarUsuarisGet(@PathVariable("usuariId") java.lang.String usuariId,
+  @RequestMapping(value = "/{usuariID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarUsuarisGet(@PathVariable("usuariID") java.lang.String usuariID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewUsuarisGet(usuariId,
+      return editAndViewUsuarisGet(usuariID,
         request, response, false);
   }
 
@@ -336,7 +336,7 @@ public class UsuarisController
   /**
    * Editar un Usuaris existent
    */
-  @RequestMapping(value = "/{usuariId}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{usuariID}/edit", method = RequestMethod.POST)
   public String editarUsuarisPost(@ModelAttribute UsuarisForm usuarisForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -357,7 +357,7 @@ public class UsuarisController
         return getTileForm();
       } else {
         usuaris = update(request, usuaris);
-        createMessageSuccess(request, "success.modification", usuaris.getUsuariId());
+        createMessageSuccess(request, "success.modification", usuaris.getUsuariID());
         status.setComplete();
         return getRedirectWhenModified(request, usuarisForm, null);
       }
@@ -367,7 +367,7 @@ public class UsuarisController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          usuaris.getUsuariId(), __e);
+          usuaris.getUsuariID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, usuarisForm, __e);
     }
@@ -378,8 +378,8 @@ public class UsuarisController
   /**
    * Eliminar un Usuaris existent
    */
-  @RequestMapping(value = "/{usuariId}/delete")
-  public String eliminarUsuaris(@PathVariable("usuariId") java.lang.String usuariId,
+  @RequestMapping(value = "/{usuariID}/delete")
+  public String eliminarUsuaris(@PathVariable("usuariID") java.lang.String usuariID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -387,20 +387,20 @@ public class UsuarisController
       return null;
     }
     try {
-      Usuaris usuaris = this.findByPrimaryKey(request, usuariId);
+      Usuaris usuaris = this.findByPrimaryKey(request, usuariID);
       if (usuaris == null) {
-        String __msg = createMessageError(request, "error.notfound", usuariId);
-        return getRedirectWhenDelete(request, usuariId, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", usuariID);
+        return getRedirectWhenDelete(request, usuariID, new Exception(__msg));
       } else {
         delete(request, usuaris);
-        createMessageSuccess(request, "success.deleted", usuariId);
-        return getRedirectWhenDelete(request, usuariId,null);
+        createMessageSuccess(request, "success.deleted", usuariID);
+        return getRedirectWhenDelete(request, usuariID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", usuariId, e);
+      String msg = createMessageError(request, "error.deleting", usuariID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, usuariId, e);
+      return getRedirectWhenDelete(request, usuariID, e);
     }
   }
 
@@ -436,8 +436,8 @@ public java.lang.String stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __usuariId, Throwable e) {
-    java.lang.String usuariId = (java.lang.String)__usuariId;
+  public String[] getArgumentsMissatge(Object __usuariID, Throwable e) {
+    java.lang.String usuariID = (java.lang.String)__usuariID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -447,13 +447,13 @@ public java.lang.String stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (usuariId == null) {
+    if (usuariID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(usuariId),
+         String.valueOf(usuariID),
  exceptionMsg };
     }
   }
@@ -467,7 +467,7 @@ public java.lang.String stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("usuaris.usuariId");
+    return  I18NUtils.tradueix("usuaris.usuariID");
   }
 
   @InitBinder("usuarisFilterForm")
@@ -500,10 +500,10 @@ public java.lang.String stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de Usuaris
    */
-  @RequestMapping(value = "/{usuariId}/cancel")
-  public String cancelUsuaris(@PathVariable("usuariId") java.lang.String usuariId,
+  @RequestMapping(value = "/{usuariID}/cancel")
+  public String cancelUsuaris(@PathVariable("usuariID") java.lang.String usuariID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, usuariId);
+     return getRedirectWhenCancel(request, usuariID);
   }
 
   @Override
@@ -569,11 +569,11 @@ public java.lang.String stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.String usuariId, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.String usuariID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.String usuariId) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.String usuariID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -596,8 +596,8 @@ public java.lang.String stringToPK(String value) {
   }
 
 
-  public UsuarisJPA findByPrimaryKey(HttpServletRequest request, java.lang.String usuariId) throws I18NException {
-    return (UsuarisJPA) usuarisEjb.findByPrimaryKey(usuariId);
+  public UsuarisJPA findByPrimaryKey(HttpServletRequest request, java.lang.String usuariID) throws I18NException {
+    return (UsuarisJPA) usuarisEjb.findByPrimaryKey(usuariID);
   }
 
 

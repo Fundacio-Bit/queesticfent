@@ -20,7 +20,7 @@ public class QueEsticFentItem {
  
   private List<ModificacioItem> modificacions = new ArrayList<ModificacioItem>();
 
-  private Map<Integer, ModificacioItem> modificacionsByType = new HashMap<Integer, ModificacioItem>();
+  private Map<Long, ModificacioItem> modificacionsByType = new HashMap<Long, ModificacioItem>();
 
   public List<ModificacioItem> getModificacions() {
     return modificacions;
@@ -28,11 +28,11 @@ public class QueEsticFentItem {
 
   public void addModificacioItem(ModificacioItem mi) {
     this.modificacions.add(mi);    
-    modificacionsByType.put((int) mi.getAccio().getAccioId(), mi);
+    modificacionsByType.put(mi.getAccio().getAccioID(), mi);
   }
   
   
-  public ModificacioItem getModificacioItemByAccioType(int type) {
+  public ModificacioItem getModificacioItemByAccioType(long type) {
     return modificacionsByType.get(type);
   }
   

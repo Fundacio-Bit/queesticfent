@@ -2,14 +2,14 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface UsuarisDepartament extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public java.lang.String getUsuariId();
-	public void setUsuariId(java.lang.String _usuariId_);
+	public long getUsuariDepartamentID();
+	public void setUsuariDepartamentID(long _usuariDepartamentID_);
 
-	public long getDepartamentid();
-	public void setDepartamentid(long _departamentid_);
+	public java.lang.String getUsuariID();
+	public void setUsuariID(java.lang.String _usuariID_);
 
-	public long getUsuariDepartamentId();
-	public void setUsuariDepartamentId(long _usuariDepartamentId_);
+	public long getDepartamentID();
+	public void setDepartamentID(long _departamentID_);
 
 
 

@@ -182,11 +182,11 @@ public class PersonalProjecteController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field projecteid
+    // Field projecteID
     {
-      _listSKV = getReferenceListForProjecteid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForProjecteID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfProjectesForProjecteid(_tmp);
+      filterForm.setMapOfProjectesForProjecteID(_tmp);
       if (filterForm.getGroupByFields().contains(PROJECTEID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, PROJECTEID, false);
       };
@@ -207,7 +207,7 @@ public class PersonalProjecteController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(PROJECTEID, filterForm.getMapOfProjectesForProjecteid());
+    __mapping.put(PROJECTEID, filterForm.getMapOfProjectesForProjecteID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -256,13 +256,13 @@ public class PersonalProjecteController
   public void fillReferencesForForm(PersonalProjecteForm personalProjecteForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (personalProjecteForm.getListOfProjectesForProjecteid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForProjecteid(request, mav, personalProjecteForm, null);
+    if (personalProjecteForm.getListOfProjectesForProjecteID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForProjecteID(request, mav, personalProjecteForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      personalProjecteForm.setListOfProjectesForProjecteid(_listSKV);
+      personalProjecteForm.setListOfProjectesForProjecteID(_listSKV);
     }
     
   }
@@ -291,7 +291,7 @@ public class PersonalProjecteController
         return getTileForm();
       } else {
         personalProjecte = create(request, personalProjecte);
-        createMessageSuccess(request, "success.creation", personalProjecte.getPersonalProjecteId());
+        createMessageSuccess(request, "success.creation", personalProjecte.getPersonalProjecteID());
         personalProjecteForm.setPersonalProjecte(personalProjecte);
         return getRedirectWhenCreated(request, personalProjecteForm);
       }
@@ -306,16 +306,16 @@ public class PersonalProjecteController
     }
   }
 
-  @RequestMapping(value = "/view/{personalProjecteId}", method = RequestMethod.GET)
-  public ModelAndView veurePersonalProjecteGet(@PathVariable("personalProjecteId") java.lang.Long personalProjecteId,
+  @RequestMapping(value = "/view/{personalProjecteID}", method = RequestMethod.GET)
+  public ModelAndView veurePersonalProjecteGet(@PathVariable("personalProjecteID") java.lang.Long personalProjecteID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewPersonalProjecteGet(personalProjecteId,
+      return editAndViewPersonalProjecteGet(personalProjecteID,
         request, response, true);
   }
 
 
-  protected ModelAndView editAndViewPersonalProjecteGet(@PathVariable("personalProjecteId") java.lang.Long personalProjecteId,
+  protected ModelAndView editAndViewPersonalProjecteGet(@PathVariable("personalProjecteID") java.lang.Long personalProjecteID,
       HttpServletRequest request,
       HttpServletResponse response, boolean __isView) throws I18NException {
     if((!__isView) && !isActiveFormEdit()) {
@@ -327,11 +327,11 @@ public class PersonalProjecteController
         return null;
       }
     }
-    PersonalProjecteJPA personalProjecte = findByPrimaryKey(request, personalProjecteId);
+    PersonalProjecteJPA personalProjecte = findByPrimaryKey(request, personalProjecteID);
 
     if (personalProjecte == null) {
-      createMessageWarning(request, "error.notfound", personalProjecteId);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, personalProjecteId), true));
+      createMessageWarning(request, "error.notfound", personalProjecteID);
+      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, personalProjecteID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -352,11 +352,11 @@ public class PersonalProjecteController
   /**
    * Carregar el formulari per modificar un PersonalProjecte existent
    */
-  @RequestMapping(value = "/{personalProjecteId}/edit", method = RequestMethod.GET)
-  public ModelAndView editarPersonalProjecteGet(@PathVariable("personalProjecteId") java.lang.Long personalProjecteId,
+  @RequestMapping(value = "/{personalProjecteID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarPersonalProjecteGet(@PathVariable("personalProjecteID") java.lang.Long personalProjecteID,
       HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
-      return editAndViewPersonalProjecteGet(personalProjecteId,
+      return editAndViewPersonalProjecteGet(personalProjecteID,
         request, response, false);
   }
 
@@ -365,7 +365,7 @@ public class PersonalProjecteController
   /**
    * Editar un PersonalProjecte existent
    */
-  @RequestMapping(value = "/{personalProjecteId}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "/{personalProjecteID}/edit", method = RequestMethod.POST)
   public String editarPersonalProjectePost(@ModelAttribute PersonalProjecteForm personalProjecteForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
@@ -386,7 +386,7 @@ public class PersonalProjecteController
         return getTileForm();
       } else {
         personalProjecte = update(request, personalProjecte);
-        createMessageSuccess(request, "success.modification", personalProjecte.getPersonalProjecteId());
+        createMessageSuccess(request, "success.modification", personalProjecte.getPersonalProjecteID());
         status.setComplete();
         return getRedirectWhenModified(request, personalProjecteForm, null);
       }
@@ -396,7 +396,7 @@ public class PersonalProjecteController
         return getTileForm();
       }
       String msg = createMessageError(request, "error.modification",
-          personalProjecte.getPersonalProjecteId(), __e);
+          personalProjecte.getPersonalProjecteID(), __e);
       log.error(msg, __e);
       return getRedirectWhenModified(request, personalProjecteForm, __e);
     }
@@ -407,8 +407,8 @@ public class PersonalProjecteController
   /**
    * Eliminar un PersonalProjecte existent
    */
-  @RequestMapping(value = "/{personalProjecteId}/delete")
-  public String eliminarPersonalProjecte(@PathVariable("personalProjecteId") java.lang.Long personalProjecteId,
+  @RequestMapping(value = "/{personalProjecteID}/delete")
+  public String eliminarPersonalProjecte(@PathVariable("personalProjecteID") java.lang.Long personalProjecteID,
       HttpServletRequest request,HttpServletResponse response) {
 
     if(!isActiveDelete()) {
@@ -416,20 +416,20 @@ public class PersonalProjecteController
       return null;
     }
     try {
-      PersonalProjecte personalProjecte = this.findByPrimaryKey(request, personalProjecteId);
+      PersonalProjecte personalProjecte = this.findByPrimaryKey(request, personalProjecteID);
       if (personalProjecte == null) {
-        String __msg = createMessageError(request, "error.notfound", personalProjecteId);
-        return getRedirectWhenDelete(request, personalProjecteId, new Exception(__msg));
+        String __msg = createMessageError(request, "error.notfound", personalProjecteID);
+        return getRedirectWhenDelete(request, personalProjecteID, new Exception(__msg));
       } else {
         delete(request, personalProjecte);
-        createMessageSuccess(request, "success.deleted", personalProjecteId);
-        return getRedirectWhenDelete(request, personalProjecteId,null);
+        createMessageSuccess(request, "success.deleted", personalProjecteID);
+        return getRedirectWhenDelete(request, personalProjecteID,null);
       }
 
     } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", personalProjecteId, e);
+      String msg = createMessageError(request, "error.deleting", personalProjecteID, e);
       log.error(msg, e);
-      return getRedirectWhenDelete(request, personalProjecteId, e);
+      return getRedirectWhenDelete(request, personalProjecteID, e);
     }
   }
 
@@ -465,8 +465,8 @@ public java.lang.Long stringToPK(String value) {
 }
 
   @Override
-  public String[] getArgumentsMissatge(Object __personalProjecteId, Throwable e) {
-    java.lang.Long personalProjecteId = (java.lang.Long)__personalProjecteId;
+  public String[] getArgumentsMissatge(Object __personalProjecteID, Throwable e) {
+    java.lang.Long personalProjecteID = (java.lang.Long)__personalProjecteID;
     String exceptionMsg = "";
     if (e != null) {
       if (e instanceof I18NException) {
@@ -476,13 +476,13 @@ public java.lang.Long stringToPK(String value) {
         exceptionMsg = e.getMessage();
       };
     };
-    if (personalProjecteId == null) {
+    if (personalProjecteID == null) {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
          getPrimaryKeyColumnsTranslated(), null, exceptionMsg };
     } else {
       return new String[] { I18NUtils.tradueix(getEntityNameCode()),
         getPrimaryKeyColumnsTranslated(),
-         String.valueOf(personalProjecteId),
+         String.valueOf(personalProjecteID),
  exceptionMsg };
     }
   }
@@ -496,7 +496,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getPrimaryKeyColumnsTranslated() {
-    return  I18NUtils.tradueix("personalProjecte.personalProjecteId");
+    return  I18NUtils.tradueix("personalProjecte.personalProjecteID");
   }
 
   @InitBinder("personalProjecteFilterForm")
@@ -511,7 +511,7 @@ public java.lang.Long stringToPK(String value) {
     binder.setValidator(getWebValidator());
 
 
-    initDisallowedFields(binder, "personalProjecte.personalProjecteId");
+    initDisallowedFields(binder, "personalProjecte.personalProjecteID");
   }
 
   public PersonalProjecteWebValidator getWebValidator() {
@@ -529,10 +529,10 @@ public java.lang.Long stringToPK(String value) {
   /**
    * Entra aqui al pitjar el boto cancel en el llistat de PersonalProjecte
    */
-  @RequestMapping(value = "/{personalProjecteId}/cancel")
-  public String cancelPersonalProjecte(@PathVariable("personalProjecteId") java.lang.Long personalProjecteId,
+  @RequestMapping(value = "/{personalProjecteID}/cancel")
+  public String cancelPersonalProjecte(@PathVariable("personalProjecteID") java.lang.Long personalProjecteID,
       HttpServletRequest request,HttpServletResponse response) {
-     return getRedirectWhenCancel(request, personalProjecteId);
+     return getRedirectWhenCancel(request, personalProjecteID);
   }
 
   @Override
@@ -567,20 +567,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, PersonalProjecteForm personalProjecteForm, Where where)  throws I18NException {
     if (personalProjecteForm.isHiddenField(PROJECTEID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (personalProjecteForm.isReadOnlyField(PROJECTEID)) {
-      _where = ProjectesFields.PROJECTEID.equal(personalProjecteForm.getPersonalProjecte().getProjecteid());
+      _where = ProjectesFields.PROJECTEID.equal(personalProjecteForm.getPersonalProjecte().getProjecteID());
     }
-    return getReferenceListForProjecteid(request, mav, Where.AND(where, _where));
+    return getReferenceListForProjecteID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, PersonalProjecteFilterForm personalProjecteFilterForm,
        List<PersonalProjecte> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (personalProjecteFilterForm.isHiddenField(PROJECTEID)
@@ -592,15 +592,15 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (PersonalProjecte _item : list) {
-        _pkList.add(_item.getProjecteid());
+        _pkList.add(_item.getProjecteID());
         }
         _w = ProjectesFields.PROJECTEID.in(_pkList);
       }
-    return getReferenceListForProjecteid(request, mav, Where.AND(where,_w));
+    return getReferenceListForProjecteID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForProjecteid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return projectesRefList.getReferenceList(ProjectesFields.PROJECTEID, where );
   }
@@ -637,11 +637,11 @@ public java.lang.Long stringToPK(String value) {
     }
   }
 
-  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long personalProjecteId, Throwable __e) {
+  public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long personalProjecteID, Throwable __e) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long personalProjecteId) {
+  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long personalProjecteID) {
     return "redirect:" + getContextWeb() + "/list";
   }
 
@@ -664,8 +664,8 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public PersonalProjecteJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long personalProjecteId) throws I18NException {
-    return (PersonalProjecteJPA) personalProjecteEjb.findByPrimaryKey(personalProjecteId);
+  public PersonalProjecteJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long personalProjecteID) throws I18NException {
+    return (PersonalProjecteJPA) personalProjecteEjb.findByPrimaryKey(personalProjecteID);
   }
 
 

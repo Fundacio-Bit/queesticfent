@@ -64,7 +64,7 @@ public class DepartamentsValidator<I extends Departaments>
     }
 
     if (__vr.getFieldErrorCount(NOMLDAP) == 0) {
-      java.lang.String __nomldap = __target__.getNomldap();
+      java.lang.String __nomldap = __target__.getNomLDAP();
       if (__nomldap!= null && __nomldap.length() > 200) {
         __vr.rejectValue(NOMLDAP, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOMLDAP)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(200)));

@@ -55,22 +55,22 @@ public class PersonalProjecteJPAManager
         return list.toArray(new PersonalProjecte[list.size()]);
     };
 
-    public PersonalProjecte create( java.lang.String _usuariid_, long _projecteid_, long _ordre_, java.lang.Short _percent_) throws I18NException {
-        PersonalProjecteJPA __bean =  new PersonalProjecteJPA(_usuariid_,_projecteid_,_ordre_,_percent_);
+    public PersonalProjecte create( java.lang.String _usuariID_, long _projecteID_, long _ordre_, java.lang.Short _percent_) throws I18NException {
+        PersonalProjecteJPA __bean =  new PersonalProjecteJPA(_usuariID_,_projecteID_,_ordre_,_percent_);
         return create(__bean);
     }
 
 
 
- public void delete(long _personalProjecteId_) {
-   delete(findByPrimaryKey(_personalProjecteId_));
+ public void delete(long _personalProjecteID_) {
+   delete(findByPrimaryKey(_personalProjecteID_));
  }
 
 
 
 
-    public PersonalProjecte findByPrimaryKey(long _personalProjecteId_) {
-        return __em.find(PersonalProjecteJPA.class, _personalProjecteId_);  
+    public PersonalProjecte findByPrimaryKey(long _personalProjecteID_) {
+        return __em.find(PersonalProjecteJPA.class, _personalProjecteID_);  
     }
     @Override
     protected PersonalProjecte getJPAInstance(PersonalProjecte __bean) {

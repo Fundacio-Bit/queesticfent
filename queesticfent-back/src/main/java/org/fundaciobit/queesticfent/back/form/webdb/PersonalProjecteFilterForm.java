@@ -21,58 +21,58 @@ import org.fundaciobit.queesticfent.model.fields.PersonalProjecteFields;
 @Component
 public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm implements PersonalProjecteFields {
 
-  private java.lang.Long personalProjecteIdDesde;
+  private java.lang.Long personalProjecteIDDesde;
 
-  public java.lang.Long getPersonalProjecteIdDesde() {
-    return this.personalProjecteIdDesde;
+  public java.lang.Long getPersonalProjecteIDDesde() {
+    return this.personalProjecteIDDesde;
   }
 
-  public void setPersonalProjecteIdDesde(java.lang.Long personalProjecteIdDesde) {
-    this.personalProjecteIdDesde = personalProjecteIdDesde;
-  }
-
-
-  private java.lang.Long personalProjecteIdFins;
-
-  public java.lang.Long getPersonalProjecteIdFins() {
-    return this.personalProjecteIdFins;
-  }
-
-  public void setPersonalProjecteIdFins(java.lang.Long personalProjecteIdFins) {
-    this.personalProjecteIdFins = personalProjecteIdFins;
+  public void setPersonalProjecteIDDesde(java.lang.Long personalProjecteIDDesde) {
+    this.personalProjecteIDDesde = personalProjecteIDDesde;
   }
 
 
-  private java.lang.String usuariid;
+  private java.lang.Long personalProjecteIDFins;
 
-  public java.lang.String getUsuariid() {
-    return this.usuariid;
+  public java.lang.Long getPersonalProjecteIDFins() {
+    return this.personalProjecteIDFins;
   }
 
-  public void setUsuariid(java.lang.String usuariid) {
-    this.usuariid = usuariid;
-  }
-
-
-  private java.lang.Long projecteidDesde;
-
-  public java.lang.Long getProjecteidDesde() {
-    return this.projecteidDesde;
-  }
-
-  public void setProjecteidDesde(java.lang.Long projecteidDesde) {
-    this.projecteidDesde = projecteidDesde;
+  public void setPersonalProjecteIDFins(java.lang.Long personalProjecteIDFins) {
+    this.personalProjecteIDFins = personalProjecteIDFins;
   }
 
 
-  private java.lang.Long projecteidFins;
+  private java.lang.String usuariID;
 
-  public java.lang.Long getProjecteidFins() {
-    return this.projecteidFins;
+  public java.lang.String getUsuariID() {
+    return this.usuariID;
   }
 
-  public void setProjecteidFins(java.lang.Long projecteidFins) {
-    this.projecteidFins = projecteidFins;
+  public void setUsuariID(java.lang.String usuariID) {
+    this.usuariID = usuariID;
+  }
+
+
+  private java.lang.Long projecteIDDesde;
+
+  public java.lang.Long getProjecteIDDesde() {
+    return this.projecteIDDesde;
+  }
+
+  public void setProjecteIDDesde(java.lang.Long projecteIDDesde) {
+    this.projecteIDDesde = projecteIDDesde;
+  }
+
+
+  private java.lang.Long projecteIDFins;
+
+  public java.lang.Long getProjecteIDFins() {
+    return this.projecteIDFins;
+  }
+
+  public void setProjecteIDFins(java.lang.Long projecteIDFins) {
+    this.projecteIDFins = projecteIDFins;
   }
 
 
@@ -125,16 +125,16 @@ public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm imple
   
   public PersonalProjecteFilterForm(PersonalProjecteFilterForm __toClone) {
     super(__toClone);
-    this.personalProjecteIdDesde = __toClone.personalProjecteIdDesde;
-    this.personalProjecteIdFins = __toClone.personalProjecteIdFins;
-    this.usuariid = __toClone.usuariid;
-    this.projecteidDesde = __toClone.projecteidDesde;
-    this.projecteidFins = __toClone.projecteidFins;
+    this.personalProjecteIDDesde = __toClone.personalProjecteIDDesde;
+    this.personalProjecteIDFins = __toClone.personalProjecteIDFins;
+    this.usuariID = __toClone.usuariID;
+    this.projecteIDDesde = __toClone.projecteIDDesde;
+    this.projecteIDFins = __toClone.projecteIDFins;
     this.ordreDesde = __toClone.ordreDesde;
     this.ordreFins = __toClone.ordreFins;
     this.percentDesde = __toClone.percentDesde;
     this.percentFins = __toClone.percentFins;
-    this.mapOfProjectesForProjecteid = __toClone.mapOfProjectesForProjecteid;
+    this.mapOfProjectesForProjecteID = __toClone.mapOfProjectesForProjecteID;
   }
   
   /* ========= UTILS ========== */
@@ -169,14 +169,14 @@ public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm imple
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfProjectesForProjecteid;
+  private Map<String, String> mapOfProjectesForProjecteID;
 
-  public Map<String, String> getMapOfProjectesForProjecteid() {
-    return this.mapOfProjectesForProjecteid;
+  public Map<String, String> getMapOfProjectesForProjecteID() {
+    return this.mapOfProjectesForProjecteID;
   }
 
-  public void setMapOfProjectesForProjecteid(Map<String, String> mapOfProjectesForProjecteid) {
-    this.mapOfProjectesForProjecteid = mapOfProjectesForProjecteid;
+  public void setMapOfProjectesForProjecteID(Map<String, String> mapOfProjectesForProjecteID) {
+    this.mapOfProjectesForProjecteID = mapOfProjectesForProjecteID;
   }
 
 

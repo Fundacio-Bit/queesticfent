@@ -11,8 +11,8 @@ public interface Departaments extends org.fundaciobit.genapp.common.IGenAppEntit
 	public java.lang.String getCoordinadorId();
 	public void setCoordinadorId(java.lang.String _coordinadorId_);
 
-	public java.lang.String getNomldap();
-	public void setNomldap(java.lang.String _nomldap_);
+	public java.lang.String getNomLDAP();
+	public void setNomLDAP(java.lang.String _nomLDAP_);
 
 	public java.lang.String getDescripcio();
 	public void setDescripcio(java.lang.String _descripcio_);

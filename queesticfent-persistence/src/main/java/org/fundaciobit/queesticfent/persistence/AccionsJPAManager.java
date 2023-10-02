@@ -62,15 +62,15 @@ public class AccionsJPAManager
 
 
 
- public void delete(long _accioId_) {
-   delete(findByPrimaryKey(_accioId_));
+ public void delete(long _accioID_) {
+   delete(findByPrimaryKey(_accioID_));
  }
 
 
 
 
-    public Accions findByPrimaryKey(long _accioId_) {
-        return __em.find(AccionsJPA.class, _accioId_);  
+    public Accions findByPrimaryKey(long _accioID_) {
+        return __em.find(AccionsJPA.class, _accioID_);  
     }
     @Override
     protected Accions getJPAInstance(Accions __bean) {

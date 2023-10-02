@@ -74,7 +74,7 @@ public class GrupsusuariValidator<I extends Grupsusuari>
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(USUARIID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuaris"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuariId"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuariID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariid)));
       }
     }

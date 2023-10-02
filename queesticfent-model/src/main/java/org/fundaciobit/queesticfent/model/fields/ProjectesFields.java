@@ -12,9 +12,9 @@ public interface ProjectesFields extends java.io.Serializable {
   public static final String _TABLE_TRANSLATION = _TABLE_MODEL + "." + _TABLE_MODEL;
 
 
-	 public static final LongField PROJECTEID = new LongField(_TABLE_MODEL, "projecteId", "projecteid");  // PK
+	 public static final LongField PROJECTEID = new LongField(_TABLE_MODEL, "projecteID", "projecteid");  // PK
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
-	 public static final LongField DEPARTAMENTID = new LongField(_TABLE_MODEL, "departamentid", "departamentid");
+	 public static final LongField DEPARTAMENTID = new LongField(_TABLE_MODEL, "departamentID", "departamentid");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
 	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
 	 public static final DateField FROMDATA = new DateField(_TABLE_MODEL, "fromdata", "fromdata");

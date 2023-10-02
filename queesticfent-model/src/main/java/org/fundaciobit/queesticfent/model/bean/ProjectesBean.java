@@ -8,9 +8,9 @@ public class ProjectesBean implements Projectes {
 
 
 
-	long projecteId;// PK
+	long projecteID;// PK
 	java.lang.String nom;
-	long departamentid;
+	long departamentID;
 	java.lang.String descripcio;
 	boolean actiu;
 	java.sql.Date fromdata;
@@ -22,47 +22,47 @@ public class ProjectesBean implements Projectes {
   }
 
   /** Constructor amb tots els camps  */
-  public ProjectesBean(long projecteId , java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
-    this.projecteId=projecteId;
+  public ProjectesBean(long projecteID , java.lang.String nom , long departamentID , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
+    this.projecteID=projecteID;
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
 }
   /** Constructor sense valors autoincrementals */
-  public ProjectesBean(java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
+  public ProjectesBean(java.lang.String nom , long departamentID , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
 }
   /** Constructor dels valors Not Null */
-  public ProjectesBean(long projecteId , java.lang.String nom , long departamentid , boolean actiu , java.sql.Date fromdata) {
-    this.projecteId=projecteId;
+  public ProjectesBean(long projecteID , java.lang.String nom , long departamentID , boolean actiu , java.sql.Date fromdata) {
+    this.projecteID=projecteID;
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.actiu=actiu;
     this.fromdata=fromdata;
 }
   public ProjectesBean(Projectes __bean) {
-    this.setProjecteId(__bean.getProjecteId());
+    this.setProjecteID(__bean.getProjecteID());
     this.setNom(__bean.getNom());
-    this.setDepartamentid(__bean.getDepartamentid());
+    this.setDepartamentID(__bean.getDepartamentID());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
     this.setFromdata(__bean.getFromdata());
     this.setTodata(__bean.getTodata());
 	}
 
-	public long getProjecteId() {
-		return(projecteId);
+	public long getProjecteID() {
+		return(projecteID);
 	};
-	public void setProjecteId(long _projecteId_) {
-		this.projecteId = _projecteId_;
+	public void setProjecteID(long _projecteID_) {
+		this.projecteID = _projecteID_;
 	};
 
 	public java.lang.String getNom() {
@@ -72,11 +72,11 @@ public class ProjectesBean implements Projectes {
 		this.nom = _nom_;
 	};
 
-	public long getDepartamentid() {
-		return(departamentid);
+	public long getDepartamentID() {
+		return(departamentID);
 	};
-	public void setDepartamentid(long _departamentid_) {
-		this.departamentid = _departamentid_;
+	public void setDepartamentID(long _departamentID_) {
+		this.departamentID = _departamentID_;
 	};
 
 	public java.lang.String getDescripcio() {
@@ -114,9 +114,9 @@ public class ProjectesBean implements Projectes {
   public static ProjectesBean toBean(Projectes __bean) {
     if (__bean == null) { return null;}
     ProjectesBean __tmp = new ProjectesBean();
-    __tmp.setProjecteId(__bean.getProjecteId());
+    __tmp.setProjecteID(__bean.getProjecteID());
     __tmp.setNom(__bean.getNom());
-    __tmp.setDepartamentid(__bean.getDepartamentid());
+    __tmp.setDepartamentID(__bean.getDepartamentID());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setFromdata(__bean.getFromdata());

@@ -29,13 +29,13 @@ public class ProjectesJPA implements Projectes {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROJECTES_SEQ")
     @Column(name="projecteid",nullable = false,length = 19)
-    long projecteId;
+    long projecteID;
 
     @Column(name="nom",nullable = false,length = 45)
     java.lang.String nom;
 
     @Column(name="departamentid",nullable = false,length = 19)
-    long departamentid;
+    long departamentID;
 
     @Column(name="descripcio",length = 500)
     java.lang.String descripcio;
@@ -56,47 +56,47 @@ public class ProjectesJPA implements Projectes {
   }
 
   /** Constructor amb tots els camps  */
-  public ProjectesJPA(long projecteId , java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
-    this.projecteId=projecteId;
+  public ProjectesJPA(long projecteID , java.lang.String nom , long departamentID , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
+    this.projecteID=projecteID;
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
 }
   /** Constructor sense valors autoincrementals */
-  public ProjectesJPA(java.lang.String nom , long departamentid , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
+  public ProjectesJPA(java.lang.String nom , long departamentID , java.lang.String descripcio , boolean actiu , java.sql.Date fromdata , java.sql.Date todata) {
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.fromdata=fromdata;
     this.todata=todata;
 }
   /** Constructor dels valors Not Null */
-  public ProjectesJPA(long projecteId , java.lang.String nom , long departamentid , boolean actiu , java.sql.Date fromdata) {
-    this.projecteId=projecteId;
+  public ProjectesJPA(long projecteID , java.lang.String nom , long departamentID , boolean actiu , java.sql.Date fromdata) {
+    this.projecteID=projecteID;
     this.nom=nom;
-    this.departamentid=departamentid;
+    this.departamentID=departamentID;
     this.actiu=actiu;
     this.fromdata=fromdata;
 }
   public ProjectesJPA(Projectes __bean) {
-    this.setProjecteId(__bean.getProjecteId());
+    this.setProjecteID(__bean.getProjecteID());
     this.setNom(__bean.getNom());
-    this.setDepartamentid(__bean.getDepartamentid());
+    this.setDepartamentID(__bean.getDepartamentID());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
     this.setFromdata(__bean.getFromdata());
     this.setTodata(__bean.getTodata());
 	}
 
-	public long getProjecteId() {
-		return(projecteId);
+	public long getProjecteID() {
+		return(projecteID);
 	};
-	public void setProjecteId(long _projecteId_) {
-		this.projecteId = _projecteId_;
+	public void setProjecteID(long _projecteID_) {
+		this.projecteID = _projecteID_;
 	};
 
 	public java.lang.String getNom() {
@@ -106,11 +106,11 @@ public class ProjectesJPA implements Projectes {
 		this.nom = _nom_;
 	};
 
-	public long getDepartamentid() {
-		return(departamentid);
+	public long getDepartamentID() {
+		return(departamentID);
 	};
-	public void setDepartamentid(long _departamentid_) {
-		this.departamentid = _departamentid_;
+	public void setDepartamentID(long _departamentID_) {
+		this.departamentID = _departamentID_;
 	};
 
 	public java.lang.String getDescripcio() {
@@ -149,7 +149,7 @@ public class ProjectesJPA implements Projectes {
     if (__obj != null && __obj instanceof Projectes) {
       Projectes __instance = (Projectes)__obj;
       __result = true;
-      __result = __result && (this.getProjecteId() == __instance.getProjecteId()) ;
+      __result = __result && (this.getProjecteID() == __instance.getProjecteID()) ;
     } else {
       __result = false;
     }
@@ -201,9 +201,9 @@ public class ProjectesJPA implements Projectes {
   public static ProjectesJPA toJPA(Projectes __bean) {
     if (__bean == null) { return null;}
     ProjectesJPA __tmp = new ProjectesJPA();
-    __tmp.setProjecteId(__bean.getProjecteId());
+    __tmp.setProjecteID(__bean.getProjecteID());
     __tmp.setNom(__bean.getNom());
-    __tmp.setDepartamentid(__bean.getDepartamentid());
+    __tmp.setDepartamentID(__bean.getDepartamentID());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setFromdata(__bean.getFromdata());

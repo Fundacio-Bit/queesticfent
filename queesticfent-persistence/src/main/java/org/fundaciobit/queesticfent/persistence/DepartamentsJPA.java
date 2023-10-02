@@ -34,7 +34,7 @@ public class DepartamentsJPA implements Departaments {
     java.lang.String coordinadorId;
 
     @Column(name="nomldap",nullable = false,length = 200)
-    java.lang.String nomldap;
+    java.lang.String nomLDAP;
 
     @Column(name="descripcio",nullable = false,length = 3000)
     java.lang.String descripcio;
@@ -46,25 +46,25 @@ public class DepartamentsJPA implements Departaments {
   }
 
   /** Constructor amb tots els camps  */
-  public DepartamentsJPA(long departamentID , java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
+  public DepartamentsJPA(long departamentID , java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomLDAP , java.lang.String descripcio) {
     this.departamentID=departamentID;
     this.nom=nom;
     this.coordinadorId=coordinadorId;
-    this.nomldap=nomldap;
+    this.nomLDAP=nomLDAP;
     this.descripcio=descripcio;
 }
   /** Constructor sense valors autoincrementals */
-  public DepartamentsJPA(java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomldap , java.lang.String descripcio) {
+  public DepartamentsJPA(java.lang.String nom , java.lang.String coordinadorId , java.lang.String nomLDAP , java.lang.String descripcio) {
     this.nom=nom;
     this.coordinadorId=coordinadorId;
-    this.nomldap=nomldap;
+    this.nomLDAP=nomLDAP;
     this.descripcio=descripcio;
 }
   public DepartamentsJPA(Departaments __bean) {
     this.setDepartamentID(__bean.getDepartamentID());
     this.setNom(__bean.getNom());
     this.setCoordinadorId(__bean.getCoordinadorId());
-    this.setNomldap(__bean.getNomldap());
+    this.setNomLDAP(__bean.getNomLDAP());
     this.setDescripcio(__bean.getDescripcio());
 	}
 
@@ -89,11 +89,11 @@ public class DepartamentsJPA implements Departaments {
 		this.coordinadorId = _coordinadorId_;
 	};
 
-	public java.lang.String getNomldap() {
-		return(nomldap);
+	public java.lang.String getNomLDAP() {
+		return(nomLDAP);
 	};
-	public void setNomldap(java.lang.String _nomldap_) {
-		this.nomldap = _nomldap_;
+	public void setNomLDAP(java.lang.String _nomLDAP_) {
+		this.nomLDAP = _nomLDAP_;
 	};
 
 	public java.lang.String getDescripcio() {
@@ -152,7 +152,7 @@ public class DepartamentsJPA implements Departaments {
     __tmp.setDepartamentID(__bean.getDepartamentID());
     __tmp.setNom(__bean.getNom());
     __tmp.setCoordinadorId(__bean.getCoordinadorId());
-    __tmp.setNomldap(__bean.getNomldap());
+    __tmp.setNomLDAP(__bean.getNomLDAP());
     __tmp.setDescripcio(__bean.getDescripcio());
 		return __tmp;
 	}

@@ -2,14 +2,14 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface Projectes extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getProjecteId();
-	public void setProjecteId(long _projecteId_);
+	public long getProjecteID();
+	public void setProjecteID(long _projecteID_);
 
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
-	public long getDepartamentid();
-	public void setDepartamentid(long _departamentid_);
+	public long getDepartamentID();
+	public void setDepartamentID(long _departamentID_);
 
 	public java.lang.String getDescripcio();
 	public void setDescripcio(java.lang.String _descripcio_);

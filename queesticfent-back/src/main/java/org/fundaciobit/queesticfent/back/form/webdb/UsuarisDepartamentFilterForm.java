@@ -21,58 +21,58 @@ import org.fundaciobit.queesticfent.model.fields.UsuarisDepartamentFields;
 @Component
 public class UsuarisDepartamentFilterForm extends queesticfentBaseFilterForm implements UsuarisDepartamentFields {
 
-  private java.lang.String usuariId;
+  private java.lang.Long usuariDepartamentIDDesde;
 
-  public java.lang.String getUsuariId() {
-    return this.usuariId;
+  public java.lang.Long getUsuariDepartamentIDDesde() {
+    return this.usuariDepartamentIDDesde;
   }
 
-  public void setUsuariId(java.lang.String usuariId) {
-    this.usuariId = usuariId;
-  }
-
-
-  private java.lang.Long departamentidDesde;
-
-  public java.lang.Long getDepartamentidDesde() {
-    return this.departamentidDesde;
-  }
-
-  public void setDepartamentidDesde(java.lang.Long departamentidDesde) {
-    this.departamentidDesde = departamentidDesde;
+  public void setUsuariDepartamentIDDesde(java.lang.Long usuariDepartamentIDDesde) {
+    this.usuariDepartamentIDDesde = usuariDepartamentIDDesde;
   }
 
 
-  private java.lang.Long departamentidFins;
+  private java.lang.Long usuariDepartamentIDFins;
 
-  public java.lang.Long getDepartamentidFins() {
-    return this.departamentidFins;
+  public java.lang.Long getUsuariDepartamentIDFins() {
+    return this.usuariDepartamentIDFins;
   }
 
-  public void setDepartamentidFins(java.lang.Long departamentidFins) {
-    this.departamentidFins = departamentidFins;
-  }
-
-
-  private java.lang.Long usuariDepartamentIdDesde;
-
-  public java.lang.Long getUsuariDepartamentIdDesde() {
-    return this.usuariDepartamentIdDesde;
-  }
-
-  public void setUsuariDepartamentIdDesde(java.lang.Long usuariDepartamentIdDesde) {
-    this.usuariDepartamentIdDesde = usuariDepartamentIdDesde;
+  public void setUsuariDepartamentIDFins(java.lang.Long usuariDepartamentIDFins) {
+    this.usuariDepartamentIDFins = usuariDepartamentIDFins;
   }
 
 
-  private java.lang.Long usuariDepartamentIdFins;
+  private java.lang.String usuariID;
 
-  public java.lang.Long getUsuariDepartamentIdFins() {
-    return this.usuariDepartamentIdFins;
+  public java.lang.String getUsuariID() {
+    return this.usuariID;
   }
 
-  public void setUsuariDepartamentIdFins(java.lang.Long usuariDepartamentIdFins) {
-    this.usuariDepartamentIdFins = usuariDepartamentIdFins;
+  public void setUsuariID(java.lang.String usuariID) {
+    this.usuariID = usuariID;
+  }
+
+
+  private java.lang.Long departamentIDDesde;
+
+  public java.lang.Long getDepartamentIDDesde() {
+    return this.departamentIDDesde;
+  }
+
+  public void setDepartamentIDDesde(java.lang.Long departamentIDDesde) {
+    this.departamentIDDesde = departamentIDDesde;
+  }
+
+
+  private java.lang.Long departamentIDFins;
+
+  public java.lang.Long getDepartamentIDFins() {
+    return this.departamentIDFins;
+  }
+
+  public void setDepartamentIDFins(java.lang.Long departamentIDFins) {
+    this.departamentIDFins = departamentIDFins;
   }
 
 
@@ -81,13 +81,13 @@ public class UsuarisDepartamentFilterForm extends queesticfentBaseFilterForm imp
   
   public UsuarisDepartamentFilterForm(UsuarisDepartamentFilterForm __toClone) {
     super(__toClone);
-    this.usuariId = __toClone.usuariId;
-    this.departamentidDesde = __toClone.departamentidDesde;
-    this.departamentidFins = __toClone.departamentidFins;
-    this.usuariDepartamentIdDesde = __toClone.usuariDepartamentIdDesde;
-    this.usuariDepartamentIdFins = __toClone.usuariDepartamentIdFins;
-    this.mapOfUsuarisForUsuariId = __toClone.mapOfUsuarisForUsuariId;
-    this.mapOfDepartamentsForDepartamentid = __toClone.mapOfDepartamentsForDepartamentid;
+    this.usuariDepartamentIDDesde = __toClone.usuariDepartamentIDDesde;
+    this.usuariDepartamentIDFins = __toClone.usuariDepartamentIDFins;
+    this.usuariID = __toClone.usuariID;
+    this.departamentIDDesde = __toClone.departamentIDDesde;
+    this.departamentIDFins = __toClone.departamentIDFins;
+    this.mapOfUsuarisForUsuariID = __toClone.mapOfUsuarisForUsuariID;
+    this.mapOfDepartamentsForDepartamentID = __toClone.mapOfDepartamentsForDepartamentID;
   }
   
   /* ========= UTILS ========== */
@@ -122,26 +122,26 @@ public class UsuarisDepartamentFilterForm extends queesticfentBaseFilterForm imp
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfUsuarisForUsuariId;
+  private Map<String, String> mapOfUsuarisForUsuariID;
 
-  public Map<String, String> getMapOfUsuarisForUsuariId() {
-    return this.mapOfUsuarisForUsuariId;
+  public Map<String, String> getMapOfUsuarisForUsuariID() {
+    return this.mapOfUsuarisForUsuariID;
   }
 
-  public void setMapOfUsuarisForUsuariId(Map<String, String> mapOfUsuarisForUsuariId) {
-    this.mapOfUsuarisForUsuariId = mapOfUsuarisForUsuariId;
+  public void setMapOfUsuarisForUsuariID(Map<String, String> mapOfUsuarisForUsuariID) {
+    this.mapOfUsuarisForUsuariID = mapOfUsuarisForUsuariID;
   }
 
 
 
-  private Map<String, String> mapOfDepartamentsForDepartamentid;
+  private Map<String, String> mapOfDepartamentsForDepartamentID;
 
-  public Map<String, String> getMapOfDepartamentsForDepartamentid() {
-    return this.mapOfDepartamentsForDepartamentid;
+  public Map<String, String> getMapOfDepartamentsForDepartamentID() {
+    return this.mapOfDepartamentsForDepartamentID;
   }
 
-  public void setMapOfDepartamentsForDepartamentid(Map<String, String> mapOfDepartamentsForDepartamentid) {
-    this.mapOfDepartamentsForDepartamentid = mapOfDepartamentsForDepartamentid;
+  public void setMapOfDepartamentsForDepartamentID(Map<String, String> mapOfDepartamentsForDepartamentID) {
+    this.mapOfDepartamentsForDepartamentID = mapOfDepartamentsForDepartamentID;
   }
 
 

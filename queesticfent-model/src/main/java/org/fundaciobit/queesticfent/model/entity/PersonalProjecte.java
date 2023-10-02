@@ -2,14 +2,14 @@ package org.fundaciobit.queesticfent.model.entity;
 
 public interface PersonalProjecte extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getPersonalProjecteId();
-	public void setPersonalProjecteId(long _personalProjecteId_);
+	public long getPersonalProjecteID();
+	public void setPersonalProjecteID(long _personalProjecteID_);
 
-	public java.lang.String getUsuariid();
-	public void setUsuariid(java.lang.String _usuariid_);
+	public java.lang.String getUsuariID();
+	public void setUsuariID(java.lang.String _usuariID_);
 
-	public long getProjecteid();
-	public void setProjecteid(long _projecteid_);
+	public long getProjecteID();
+	public void setProjecteID(long _projecteID_);
 
 	public long getOrdre();
 	public void setOrdre(long _ordre_);

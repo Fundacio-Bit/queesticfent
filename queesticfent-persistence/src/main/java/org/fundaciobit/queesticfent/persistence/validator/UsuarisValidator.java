@@ -44,7 +44,7 @@ public class UsuarisValidator<I extends Usuaris>
 
     // Check size
     if (__vr.getFieldErrorCount(USUARIID) == 0) {
-      java.lang.String __usuariid = __target__.getUsuariId();
+      java.lang.String __usuariid = __target__.getUsuariID();
       if (__usuariid!= null && __usuariid.length() > 100) {
         __vr.rejectValue(USUARIID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
@@ -131,7 +131,7 @@ public class UsuarisValidator<I extends Usuaris>
       // Check Unique - no PK
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
       if (__vr.getFieldErrorCount(USUARIID) == 0) {
-        java.lang.String __usuariid = __target__.getUsuariId();
+        java.lang.String __usuariid = __target__.getUsuariID();
         Long __count_ = null;
         try { __count_ = __usuarisManager.count(org.fundaciobit.genapp.common.query.Where.AND(USUARIID.equal(__usuariid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ != 0) {        

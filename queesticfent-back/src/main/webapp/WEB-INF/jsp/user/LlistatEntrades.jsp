@@ -127,11 +127,11 @@ noms.put(usuariID, info.getUserInfo().getFullName());
     String __def;
     
           for(UsuarisDepartament po : personalCap) {
-            __def = po.getUsuariId().equals(usuariID) ? "selected" : "";
+            __def = po.getUsuariID().equals(usuariID) ? "selected" : "";
             UsuarisJPA usu =((UsuarisDepartamentJPA) po).getUsuaris();
           %>
           
-             <option value="<%=po.getUsuariId()%>" <%=__def%> ><%= (usu.getNom()+" "+usu.getLlinatge1()+" "+usu.getLlinatge2())%></option>
+             <option value="<%=po.getUsuariID()%>" <%=__def%> ><%= (usu.getNom()+" "+usu.getLlinatge1()+" "+usu.getLlinatge2())%></option>
         <% } %>
  <% } %>
 </select>
@@ -180,9 +180,9 @@ noms.put(usuariID, info.getUserInfo().getFullName());
             //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
             String __def;
             for(Projectes proj : projectesList) {
-              __def = projecteID.equals(proj.getProjecteId())? "selected" : "";
+              __def = projecteID.equals(proj.getProjecteID())? "selected" : "";
             %>
-               <option value="<%=proj.getProjecteId()%>" <%=__def%> ><%=proj.getNom()%></option>
+               <option value="<%=proj.getProjecteID()%>" <%=__def%> ><%=proj.getNom()%></option>
           <% } %>
           <% } %>
           </select>
@@ -290,6 +290,7 @@ for(int d=1; d <= maxDay; d++) {
  
 
  boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
+ //llista = itemsByDate.get(d);
  llista = itemsByDate.get(start.getTime());
  String rowbgcolor = null;
  if (isCapDeSetmana) {

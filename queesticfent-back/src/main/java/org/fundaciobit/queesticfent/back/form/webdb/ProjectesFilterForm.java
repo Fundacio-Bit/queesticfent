@@ -21,25 +21,25 @@ import org.fundaciobit.queesticfent.model.fields.ProjectesFields;
 @Component
 public class ProjectesFilterForm extends queesticfentBaseFilterForm implements ProjectesFields {
 
-  private java.lang.Long projecteIdDesde;
+  private java.lang.Long projecteIDDesde;
 
-  public java.lang.Long getProjecteIdDesde() {
-    return this.projecteIdDesde;
+  public java.lang.Long getProjecteIDDesde() {
+    return this.projecteIDDesde;
   }
 
-  public void setProjecteIdDesde(java.lang.Long projecteIdDesde) {
-    this.projecteIdDesde = projecteIdDesde;
+  public void setProjecteIDDesde(java.lang.Long projecteIDDesde) {
+    this.projecteIDDesde = projecteIDDesde;
   }
 
 
-  private java.lang.Long projecteIdFins;
+  private java.lang.Long projecteIDFins;
 
-  public java.lang.Long getProjecteIdFins() {
-    return this.projecteIdFins;
+  public java.lang.Long getProjecteIDFins() {
+    return this.projecteIDFins;
   }
 
-  public void setProjecteIdFins(java.lang.Long projecteIdFins) {
-    this.projecteIdFins = projecteIdFins;
+  public void setProjecteIDFins(java.lang.Long projecteIDFins) {
+    this.projecteIDFins = projecteIDFins;
   }
 
 
@@ -54,25 +54,25 @@ public class ProjectesFilterForm extends queesticfentBaseFilterForm implements P
   }
 
 
-  private java.lang.Long departamentidDesde;
+  private java.lang.Long departamentIDDesde;
 
-  public java.lang.Long getDepartamentidDesde() {
-    return this.departamentidDesde;
+  public java.lang.Long getDepartamentIDDesde() {
+    return this.departamentIDDesde;
   }
 
-  public void setDepartamentidDesde(java.lang.Long departamentidDesde) {
-    this.departamentidDesde = departamentidDesde;
+  public void setDepartamentIDDesde(java.lang.Long departamentIDDesde) {
+    this.departamentIDDesde = departamentIDDesde;
   }
 
 
-  private java.lang.Long departamentidFins;
+  private java.lang.Long departamentIDFins;
 
-  public java.lang.Long getDepartamentidFins() {
-    return this.departamentidFins;
+  public java.lang.Long getDepartamentIDFins() {
+    return this.departamentIDFins;
   }
 
-  public void setDepartamentidFins(java.lang.Long departamentidFins) {
-    this.departamentidFins = departamentidFins;
+  public void setDepartamentIDFins(java.lang.Long departamentIDFins) {
+    this.departamentIDFins = departamentIDFins;
   }
 
 
@@ -136,17 +136,17 @@ public class ProjectesFilterForm extends queesticfentBaseFilterForm implements P
   
   public ProjectesFilterForm(ProjectesFilterForm __toClone) {
     super(__toClone);
-    this.projecteIdDesde = __toClone.projecteIdDesde;
-    this.projecteIdFins = __toClone.projecteIdFins;
+    this.projecteIDDesde = __toClone.projecteIDDesde;
+    this.projecteIDFins = __toClone.projecteIDFins;
     this.nom = __toClone.nom;
-    this.departamentidDesde = __toClone.departamentidDesde;
-    this.departamentidFins = __toClone.departamentidFins;
+    this.departamentIDDesde = __toClone.departamentIDDesde;
+    this.departamentIDFins = __toClone.departamentIDFins;
     this.descripcio = __toClone.descripcio;
     this.fromdataDesde = __toClone.fromdataDesde;
     this.fromdataFins = __toClone.fromdataFins;
     this.todataDesde = __toClone.todataDesde;
     this.todataFins = __toClone.todataFins;
-    this.mapOfDepartamentsForDepartamentid = __toClone.mapOfDepartamentsForDepartamentid;
+    this.mapOfDepartamentsForDepartamentID = __toClone.mapOfDepartamentsForDepartamentID;
   }
   
   /* ========= UTILS ========== */
@@ -181,14 +181,14 @@ public class ProjectesFilterForm extends queesticfentBaseFilterForm implements P
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfDepartamentsForDepartamentid;
+  private Map<String, String> mapOfDepartamentsForDepartamentID;
 
-  public Map<String, String> getMapOfDepartamentsForDepartamentid() {
-    return this.mapOfDepartamentsForDepartamentid;
+  public Map<String, String> getMapOfDepartamentsForDepartamentID() {
+    return this.mapOfDepartamentsForDepartamentID;
   }
 
-  public void setMapOfDepartamentsForDepartamentid(Map<String, String> mapOfDepartamentsForDepartamentid) {
-    this.mapOfDepartamentsForDepartamentid = mapOfDepartamentsForDepartamentid;
+  public void setMapOfDepartamentsForDepartamentID(Map<String, String> mapOfDepartamentsForDepartamentID) {
+    this.mapOfDepartamentsForDepartamentID = mapOfDepartamentsForDepartamentID;
   }
 
 
