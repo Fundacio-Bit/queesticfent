@@ -21,7 +21,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
@@ -860,7 +860,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
             response.setContentType("application/application/vnd.oasis.opendocument.text");
             response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
-                    + StringEscapeUtils.unescapeHtml(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
+                    
+                    + StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
 
             List<String> usuarisList;
             {
@@ -1069,7 +1070,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         }
         Map<String, Object> data = new HashMap<String, Object>();
 
-        data.put("mes", StringEscapeUtils.unescapeHtml(Utils.mesos[mes]));
+        data.put("mes", StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]));
         data.put("any", String.valueOf(any));
         data.put("usuaris", llistaDeUserInfo);
 

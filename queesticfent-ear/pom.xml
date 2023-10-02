@@ -281,7 +281,7 @@
 						<webModule>
 							<groupId>org.fundaciobit.queesticfent</groupId>
 							<artifactId>queesticfent-back</artifactId>
-							<contextRoot>queesticfentback</contextRoot>
+							<contextRoot>queesticfent</contextRoot>
                             <bundleFileName>queesticfent-back.war</bundleFileName>
 						</webModule>
                         
