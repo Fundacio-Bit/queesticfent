@@ -316,7 +316,7 @@ for(int d=1; d <= maxDay; d++) {
 %>
 <td align="center">
  <% if (!isCapDeSetmana) { 
- 
+ /*
    String msg = "Aquesta funcionalitat ha sigut deprecada. La finalitat de QueEsticFentOTAE"
         + " no �s la de substituir el cl�ssic QueEsticFent, per la qual cosa totes les" 
         + " entrades haurien d'apareixer dins el QueEsticFent. Si ens hem oblidat una entrada"
@@ -327,6 +327,7 @@ for(int d=1; d <= maxDay; d++) {
         + "(d) Per millorar la visualitzaci� de l'entrada el que farem ser� un canvi de text de la data entre par�ntesis per buit. Per aix� tornarem a l'entrada canviada de data i li triarem un canvi de tipus [Canvi de text].\\n"
         + "(e) En la pantalla que apareix, en Dada1 afegir la data entre par�ntesis i en Dada2 deixar-ho buit. Donar-li al OK.\\n";
    msg = msg.replace('\'', '`');
+   */
  %>
  <%-- <%=novaAccioURL%>&accioID=<%=Utils.ACCIO_NOVA_ENTRADA%> --%>
  <%--  <a href="javascript:alert('<%=msg%>')"> --%>
@@ -336,9 +337,9 @@ for(int d=1; d <= maxDay; d++) {
  <% } %>
 </td>
 <td align="center">
- <% if (!isCapDeSetmana && (llista == null || llista.size() == 0)) { %>
+ <% if (!isCapDeSetmana) { %>
    <a href="<%=novaAccioURL%>&accioID=<%=Utils.ACCIO_VACANCES%>">
-        <img onmouseover="toolTip('Marcar de vacances', this)" src="<c:url value="/img"/>/add2.gif">
+        <img onmouseover="toolTip('Marcar de vacances', this)" src="<c:url value="/img/add2.gif"/>">
    </a>
  <% } %>
 </td>
