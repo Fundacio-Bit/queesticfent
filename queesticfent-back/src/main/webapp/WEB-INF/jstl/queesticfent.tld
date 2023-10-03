@@ -38,13 +38,6 @@
 </function>
 
 <function>
-        <name>escapeJavaScript</name>
-        <description>escapeJavaScript</description>
-        <function-class>org.apache.commons.lang.StringEscapeUtils</function-class>
-        <function-signature>java.lang.String escapeJavaScript(java.lang.String)</function-signature>
-</function>
-
-<function>
         <name>isDesenvolupament</name>
         <description>Retorna si estam en mode desenvolupament</description>
         <function-class>org.fundaciobit.queesticfent.commons.utils.Configuracio</function-class>
