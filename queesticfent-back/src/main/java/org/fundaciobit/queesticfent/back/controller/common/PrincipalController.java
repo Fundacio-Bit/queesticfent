@@ -37,9 +37,9 @@ public class PrincipalController {
             session.setAttribute("inicialitzat", true);
         }
 
-	    if(LoginInfo.hasRole(Constants.ROLE_ADMIN)) {
+	    /*if(LoginInfo.hasRole(Constants.ROLE_ADMIN)) {
 	        return new ModelAndView(new RedirectView("/user/entrades/llistatentrades", true));
-	    }
+	    }*/
 		
 		
 		return new ModelAndView("principal");
