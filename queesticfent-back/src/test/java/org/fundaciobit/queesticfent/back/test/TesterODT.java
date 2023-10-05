@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.fundaciobit.queesticfent.back.controller.user.Item;
 import org.fundaciobit.queesticfent.back.controller.user.LlistatEntradesUserController;
 import org.fundaciobit.queesticfent.back.controller.user.UserInfo;
@@ -48,7 +47,7 @@ public class TesterODT {
 
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("usuaris", usuaris);
-            map.put("mes", StringEscapeUtils.unescapeHtml("febrer"));
+            map.put("mes", org.apache.commons.text.StringEscapeUtils.unescapeHtml4("febrer"));
             map.put("any", String.valueOf(2022));
 
             //generateUserInfo(usuarisList, projecteID, any, mes);

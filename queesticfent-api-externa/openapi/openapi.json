@@ -1,0 +1,207 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST EXTERNA de queesticfent",
+    "description" : "Conjunt de Serveis REST de queesticfent per ser accedits des de l'exterior",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "http://otae.fundaciobit.org",
+      "email" : "otae@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "License Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/queesticfent/tree/queesticfent-1.0/queesticfent-api-externa-client"
+  },
+  "servers" : [ {
+    "url" : "/queesticfentapi/externa"
+  }, {
+    "url" : "http://localhost:8080/queesticfentapi/externa"
+  }, {
+    "url" : "https://dev.caib.es/queesticfentapi/externa"
+  }, {
+    "url" : "https://proves.caib.es/queesticfentapi/externa"
+  }, {
+    "url" : "https://se.caib.es/queesticfentapi/externa"
+  }, {
+    "url" : "https://www.caib.es/queesticfentapi/externa"
+  } ],
+  "tags" : [ {
+    "name" : "Modificacions",
+    "description" : "Api per afegir entrades de QueEsticFent"
+  } ],
+  "paths" : {
+    "/secure/modificacions/add" : {
+      "post" : {
+        "tags" : [ "Modificacions" ],
+        "summary" : "Afegeix una nova entrada",
+        "operationId" : "add",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Modificacio"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació finalitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "integer",
+                  "format" : "int64"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "EFIB: Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "EFIB: No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "EFIB: No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "EFIB: Error durant la consulta de les dades obertes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ModificacionsConstants"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      },
+      "ModificacionsConstants" : {
+        "required" : [ "ROLE_EJB_BASIC_ACCESS", "ROLE_EJB_FULL_ACCESS", "ROLE_EJB_WS_ACCESS" ],
+        "type" : "object",
+        "properties" : {
+          "ROLE_EJB_FULL_ACCESS" : {
+            "type" : "string",
+            "description" : "Constant ROLE_EJB_FULL_ACCESS",
+            "readOnly" : true,
+            "default" : "QEF_ADMIN"
+          },
+          "ROLE_EJB_BASIC_ACCESS" : {
+            "type" : "integer",
+            "description" : "Constant ROLE_EJB_BASIC_ACCESS",
+            "format" : "int32",
+            "readOnly" : true
+          },
+          "ROLE_EJB_WS_ACCESS" : {
+            "type" : "integer",
+            "description" : "Constant ROLE_EJB_WS_ACCESS",
+            "format" : "int32",
+            "readOnly" : true
+          }
+        }
+      },
+      "Modificacio" : {
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "type" : "string"
+          },
+          "usuariID" : {
+            "type" : "string"
+          },
+          "projecteID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "data" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dada1" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
