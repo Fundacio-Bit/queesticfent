@@ -1,8 +1,6 @@
 package org.fundaciobit.queesticfent.back.controller.common;
 
-import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
-import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;
