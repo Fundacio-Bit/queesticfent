@@ -431,18 +431,16 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         Date date = toDate000000(item.getData().getTime());
                         List<QueEsticFentItem> items = llista.get(date);
                         if (items != null) {
-                            QueEsticFentItem aborrar = null;
-                            for (QueEsticFentItem qefi : items) {
+                            //QueEsticFentItem aborrar = null;
+                            //for (QueEsticFentItem qefi : items) {
                                 //System.out.println(" ID original: " + qefi.getQueesticfentOriginal().getQueesticfentID());
                                 //System.out.println(" Modificacio ID: " + modificacio.getQueEsticFentID());
                                 /*if (qefi.getQueesticfentOriginal().getQueesticfentID() == modificacio.getQueesticfentId()) {                    
                                   aborrar = qefi;
                                   break;
                                 }*/
-                            }
-                            if (aborrar != null) {
-                                items.remove(aborrar);
-                            }
+                            //}
+                            
                         }
 
                         // Afegir al nou Map per data
@@ -463,11 +461,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         item.setAccio(accionsByID.get(modificacio.getAccioID()));
                         */
 
-                    } else {
-                        //   TODO
-                        System.out.println(" ERRROR ");
-                        new Exception().printStackTrace();
-                    }
+                    } 
                 }
                 break;
 
@@ -576,7 +570,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // Cercar departaments de l'usuari
         List<Long> departaments;
-        UsuarisDepartament[] departamentsUsuari;
+        //UsuarisDepartament[] departamentsUsuari;
         {
             Where wud = UsuarisDepartamentFields.USUARIID.equal(usuariID);
 

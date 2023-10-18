@@ -4,9 +4,25 @@
 %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
 %><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
+<%@ include file="/WEB-INF/jsp/moduls/includes.jsp"
+%>
+        
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head></head>
 <body>
-<c:redirect url="/user/entrades/llistatentrades"/>
+<c:redirect url="/common/principal.html"/>
+<!--<c:if test = "${!qef:hasRole('ROLE_USER')}">
+    <c:if test = "${!qef:hasRole('ROLE_ADMIN')}">
+        <c:redirect url="/common/principal.html"/>
+    </c:if>
+</c:if>
+<c:if test = "${!qef:hasRole('ROLE_USER')}">
+    <c:if test = "${qef:hasRole('ROLE_ADMIN')}">
+        <c:redirect url="/admin/gestiofestius/list/1"/>
+    </c:if>
+</c:if>
+<c:if test = "${qef:hasRole('ROLE_USER')}">
+    <c:redirect url="/user/entrades/llistatentrades"/>
+</c:if>-->
 </body>
 </html>
