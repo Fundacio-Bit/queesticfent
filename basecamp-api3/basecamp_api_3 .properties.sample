@@ -1,0 +1,17 @@
+
+# Per crear una integració i obtenir aquestes dades cridar a https://launchpad.37signals.com/integrations
+
+# ---------  Connection
+
+# ruta on guardarem el token
+basecamp_token_properties=./basecamp_token.properties
+client_id=7f827149caf2b1160bc23cggh97590c55d5f3b0e
+client_secret=63e431efder45678sdfghjfe2edad6939f0710e0
+redirect_uri=http://localhost:8080/token
+urlBase=https://3.basecampapi.com/
+# FundacioBit
+organizationID=4456777
+
+# ----- Test
+# Project
+projectID=66602665

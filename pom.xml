@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <name>queesticfent</name>
     <modules>
+        <module>basecamp-api3</module>
         <module>queesticfent-model</module>
         <module>queesticfent-persistence</module>
         <module>queesticfent-ejb</module>
