@@ -27,7 +27,6 @@ import java.util.TreeMap;
 
 import org.fundaciobit.basecamp.api3.BaseCampApi3;
 import org.fundaciobit.basecamp.api3.beans.Assignee;
-import org.fundaciobit.basecamp.api3.beans.Dock;
 import org.fundaciobit.basecamp.api3.beans.Entries;
 import org.fundaciobit.basecamp.api3.beans.Entry;
 import org.fundaciobit.basecamp.api3.beans.Folder;
@@ -39,6 +38,7 @@ import org.fundaciobit.basecamp.api3.utils.TokenResponse;
 import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
 import org.fundaciobit.pluginsib.core.utils.ISO8601;
 
+
 /**
  * 
  * @author anadal
@@ -49,23 +49,58 @@ public class TestBaseCampApi3 {
     public static void main(String[] args) {
 
         try {
+
             Properties prop = new Properties();
             prop.load(new FileInputStream(new File("basecamp_api_3.properties")));
 
             String urlBase = prop.getProperty("urlBase");
             long organizationID = Long.parseLong(prop.getProperty("organizationID"));
 
-            File basecampTokenFile = new File(prop.getProperty("basecamp_token_properties"));
+            File basecampTokenFile = new File(prop.getProperty("basecamp_token_properties_file"));
 
             BaseCampApi3 tu = new BaseCampApi3(urlBase, organizationID, basecampTokenFile);
 
             if (tu.isNecessaryUpdateToken()) {
 
-                String redirect_uri = prop.getProperty("redirect_uri"); //~http://localhost:8080/token
-                String client_id = prop.getProperty("client_id");
-                String client_secret = prop.getProperty("client_secret");
+                final String redirect_uri = prop.getProperty("redirect_uri"); //~http://localhost:8080/token
+                final String client_id = prop.getProperty("client_id");
+                final String client_secret = prop.getProperty("client_secret");
 
-                updateTokenFromStandaloneProgram(tu, basecampTokenFile, redirect_uri, client_id, client_secret);
+                Properties propToken = new Properties();
+                propToken.load(new FileInputStream(basecampTokenFile));
+
+                String refreshToken = propToken.getProperty("refreshToken");
+                boolean tokenUpdated = false;
+                if (refreshToken != null) {
+                    try {
+
+                        // Intentam actualitzar emprant el refresh token
+                        TokenResponse token = UpdateTokenUtils.getNewTokenFromRefreshToken(client_id, client_secret,
+                                redirect_uri, refreshToken);
+                        
+                        System.out.println(token);
+
+                        if (token.getRefreshToken() == null) {
+                            token.setRefreshToken(refreshToken);
+                        }
+
+                        UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, token);
+
+                        tu.updateToken(token.getAccessToken());
+
+                        System.out.println("\n\n REFRESCAT TOKEN SENSE PROBLEMES \n\n");
+
+                        tokenUpdated = true;
+
+                    } catch (Exception e) {
+                        System.err.println("Error intentant refrescar Token: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+
+                if (!tokenUpdated) {
+                    updateTokenViaWebFromStandaloneProgram(tu, basecampTokenFile, redirect_uri, client_id, client_secret);
+                }
 
             }
 
@@ -76,12 +111,16 @@ public class TestBaseCampApi3 {
 
             //listProjects(tu);
 
-            //long projectID = Long.parseLong(prop.getProperty("projectID"));
+            Properties testProps = new Properties();
+            testProps.load(new FileInputStream(new File("test.properties")));
+            long projectID = Long.parseLong(testProps.getProperty("projectID"));
 
-            /*
+            
             Project project = getProject(tu, projectID);
+            System.out.println(project);
             
             
+            /*
             Long folderRootID = null;
             Long schedulerID = null;
             {
@@ -131,9 +170,7 @@ public class TestBaseCampApi3 {
 
     }
 
-
-
-    protected static void updateTokenFromStandaloneProgram(BaseCampApi3 tu, File basecampTokenFile, String redirect_uri,
+    protected static void updateTokenViaWebFromStandaloneProgram(BaseCampApi3 tu, File basecampTokenFile, String redirect_uri,
             String client_id, String client_secret)
             throws MalformedURLException, Exception, IOException, URISyntaxException, FileNotFoundException {
         URL uri = new URL(redirect_uri);
@@ -147,8 +184,6 @@ public class TestBaseCampApi3 {
             throw new Exception(
                     "El servidor redirect ha de tenir protocol http. Configurar Redirect URI de l'app accedint a https://launchpad.37signals.com/integrations.");
         }
-
-        
 
         String url = UpdateTokenUtils.getGetCodeUrl(client_id, redirect_uri);
         if (Desktop.isDesktopSupported()) {
@@ -173,20 +208,17 @@ public class TestBaseCampApi3 {
 
                 String code = resposta.substring(index + 5, index2);
 
-                
-
-                TokenResponse token = UpdateTokenUtils.getNewToken(client_id, client_secret, redirect_uri, code);
+                TokenResponse token = UpdateTokenUtils.getNewTokenFromCode(client_id, client_secret, redirect_uri,
+                        code);
 
                 UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, token);
 
-                tu.setToken(token.getAccessToken());
+                tu.updateToken(token.getAccessToken());
 
             }
 
         }
     }
-
-    
 
     protected static void addSchedulerEntry(BaseCampApi3 tu, long projectID, Long schedulerID, String title)
             throws Exception {
@@ -398,7 +430,7 @@ public class TestBaseCampApi3 {
 
             for (int i = 0; i < projects.length; i++) {
                 System.out.println("---------- PROJECT[" + i + "] -------------");
-                printProject(projects[i]);
+                System.out.println(projects[i]);
             }
         }
 
@@ -408,23 +440,12 @@ public class TestBaseCampApi3 {
 
         Project project = tu.getProject(projectID);
         System.out.println("---------- PROJECTE " + project.getName() + " -------------------");
-        printProject(project);
+        System.out.println(project);
 
         return project;
     }
 
-    protected static void printProject(Project project) {
 
-        System.out.println("             + name: " + project.getName());
-        System.out.println("             + Desc: " + project.getDescription());
-        System.out.println("             + URL : " + project.getUrl());
-        List<Dock> docks = project.getDock();
-
-        for (Dock dock : docks) {
-            System.out.println("                - Dock: " + dock.getName() + " ( " + dock.getTitle() + " | "
-                    + dock.getUrl() + " | ID: " + dock.getId() + ")");
-        }
-    }
 
     protected static void listFolders(BaseCampApi3 tu, long projectID, Long folderID) throws Exception {
 

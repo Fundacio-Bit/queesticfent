@@ -57,8 +57,21 @@ public class BaseCampApi3 {
 
     private static String getTokenFromFile(File fileToken) {
         try {
+            if (fileToken == null || !fileToken.exists()) {
+                return null;
+            }
+            
             Properties prop = new Properties();
             prop.load(new FileInputStream(fileToken));
+            
+            String expiresStr = prop.getProperty("expires");
+            if (expiresStr != null) {
+                long expires = Long.parseLong(expiresStr);
+                if (System.currentTimeMillis() > expires) {
+                    return null;
+                }
+            }
+
             return prop.getProperty("accessToken");
         } catch (Exception e) {
             System.err.println("Error desconegut llegint token del fitxer " + fileToken.getAbsolutePath());
@@ -81,9 +94,7 @@ public class BaseCampApi3 {
     }
 
     public boolean isNecessaryUpdateToken() {
-
         if (token != null) {
-
             try {
                 //this.getProject(-1);
                 this.ping();
@@ -91,18 +102,12 @@ public class BaseCampApi3 {
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-
         }
-
         return true;
-
     }
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
+    public void updateToken(String token) {
         this.token = token;
     }
 
@@ -369,14 +374,16 @@ public class BaseCampApi3 {
 
     private void ping() throws Exception {
 
-        String endPoint = this.urlBaseCamp + this.organizationID + "/chats.json?page=99999999999999999";
+        //String endPoint = this.urlBaseCamp + this.organizationID + "/chats.json?page=99999999999999999";
 
+        String endPoint = "https://launchpad.37signals.com/authorization.json";
+        
         Response response = commonCall(null, endPoint);
 
-        //String json = 
+        String json = 
         response.readEntity(String.class);
 
-        //System.out.println(" OUTPUT EMPTYCALL  ==> " + json);
+        System.out.println(" OUTPUT EMPTYCALL  ==> " + json);
 
     }
 

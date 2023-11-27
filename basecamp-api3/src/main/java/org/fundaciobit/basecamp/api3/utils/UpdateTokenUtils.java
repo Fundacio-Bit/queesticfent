@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import com.google.gson.Gson;
@@ -30,11 +31,34 @@ public class UpdateTokenUtils {
         return BASECAMP_URL_GET_CODE + "?client_id=" + client_id + "&redirect_uri=" + redirect_uri + "&type=web_server";
     }
 
-    public static TokenResponse getNewToken(String client_id, String client_secret, String redirect_uri, String code)
-            throws Exception {
+    /* https://launchpad.37signals.com/authorization/token?
+       type=refresh
+       &refresh_token=your-current-refresh-token
+       &client_id=your-client-id
+       &redirect_uri=your-redirect-uri
+       &client_secret=your-client-secret
+       
+       */
+    public static TokenResponse getNewTokenFromRefreshToken(String client_id, String client_secret, String redirect_uri,
+            String refreshToken) throws Exception {
+
+        final String urlParameters = "client_id=" + client_id + "&" + "client_secret=" + client_secret + "&"
+                + "type=refresh" + "&" + "redirect_uri=" + redirect_uri + "&" + "refresh_token=" + refreshToken;
+
+        return postCallAuthorizationToken(urlParameters);
+
+    }
+
+    public static TokenResponse getNewTokenFromCode(String client_id, String client_secret, String redirect_uri,
+            String code) throws Exception {
 
         final String urlParameters = "client_id=" + client_id + "&" + "client_secret=" + client_secret + "&"
                 + "type=web_server" + "&" + "redirect_uri=" + redirect_uri + "&" + "code=" + code;
+
+        return postCallAuthorizationToken(urlParameters);
+    }
+
+    private static TokenResponse postCallAuthorizationToken(String urlParameters) throws Exception {
 
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
         int postDataLength = postData.length;
@@ -71,16 +95,21 @@ public class UpdateTokenUtils {
 
     public static void updateBasecampTokenProperties(File basecampTokenFile, TokenResponse token)
             throws IOException, FileNotFoundException {
+
+        Calendar cal = Calendar.getInstance();
+        final long now = cal.getTimeInMillis();
+        cal.add(Calendar.SECOND, token.getExpiresIn());
+        Date expire = cal.getTime();
+
         Properties newProperties = new Properties();
 
         newProperties.setProperty("accessToken", token.getAccessToken());
+        newProperties.setProperty("now", String.valueOf(now));
+        newProperties.setProperty("expires", String.valueOf(expire.getTime()));
         newProperties.setProperty("expiresIn", String.valueOf(token.getExpiresIn()));
         newProperties.setProperty("refreshToken", token.getRefreshToken());
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, token.getExpiresIn());
-
-        newProperties.store(new FileOutputStream(basecampTokenFile), "Token Info (Expira dia " + cal.getTime() + ")");
+        newProperties.store(new FileOutputStream(basecampTokenFile), "Token Info (Expira dia " + expire + ")");
     }
 
 }
