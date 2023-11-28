@@ -42,6 +42,8 @@ public class UpdateTokenUtils {
     public static TokenResponse getNewTokenFromRefreshToken(String client_id, String client_secret, String redirect_uri,
             String refreshToken) throws Exception {
 
+        
+        
         final String urlParameters = "client_id=" + client_id + "&" + "client_secret=" + client_secret + "&"
                 + "type=refresh" + "&" + "redirect_uri=" + redirect_uri + "&" + "refresh_token=" + refreshToken;
 

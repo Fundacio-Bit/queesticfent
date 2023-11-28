@@ -17,6 +17,10 @@
 			<module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
 			<module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
 			<module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
+            
+            <module name="org.jboss.resteasy.resteasy-jaxrs" services="import"/>
+            <module name="org.jboss.resteasy.resteasy-jackson-provider" services="import"/>
+
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

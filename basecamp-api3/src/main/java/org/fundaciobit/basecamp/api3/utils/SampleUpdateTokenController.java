@@ -1,5 +1,6 @@
 package org.fundaciobit.basecamp.api3.utils;
 
+
 //@RestController
 /**
  * @author anadal
@@ -12,7 +13,7 @@ public class SampleUpdateTokenController {
     /*
     @RequestMapping("/")
     public ModelAndView index() {
-        return new ModelAndView(new RedirectView("https://launchpad.37signals.com/authorization/new?client_id=" + client_id + "&redirect_uri=" + redirectUrl + "&type=web_server"));
+        return new ModelAndView(new RedirectView(UpdateTokenUtils.getGetCodeUrl()));
     }
 
     @RequestMapping("/token")
@@ -24,34 +25,25 @@ public class SampleUpdateTokenController {
 
             System.out.println("CODE => ]" + code + "[");
 
-            String url = "https://launchpad.37signals.com/authorization/token";
-
-            String params = "client_id=" + client_id + "&"
-                    + "client_secret=" + client_secret + "&" + "type=web_server" + "&"
-                    + "redirect_uri=" + redirectUrl + "&" + "code=" + code;
-
-            TokenResponse tokenInfo = httpPostCall(url, params);
+            TokenResponse tokenInfo = getNewTokenFromCode(client_id, client_secret, redirect_uri, code);
 
             String token = tokenInfo.getAccessToken();
 
             Properties prop = new Properties();
             prop.load(new FileInputStream(new File("basecamp_api_3.properties")));
+            
+            
+            File basecampTokenFile = new File(prop.getProperty("basecamp_token_properties_file"));
+            
+            updateBasecampTokenProperties(basecampTokenFile, token);
 
-            String urlBase = prop.getProperty("urlBase");
-            long organizationID = Long.parseLong(prop.getProperty("organizationID"));
-
-            BaseCampApi3 tu = new BaseCampApi3(urlBase, organizationID, token, false);
+            BaseCampApi3 tu = new BaseCampApi3(urlBase, organizationID, basecampTokenFile);
 
             long projectID = Long.parseLong(prop.getProperty("projectID"));
 
-            User[] users = tu.getUsers(projectID);
+            Projects[] projects = tu.getProjects();
 
-            StringBuilder str = new StringBuilder();
-            for (User user : users) {
-                str.append(user.toString());
-            }
-
-            return str.toString();
+            return Arrays.toString(projects);
 
         } catch (Exception e) {
             // TODO: handle exception

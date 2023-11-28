@@ -1,6 +1,6 @@
 package org.fundaciobit.basecamp.api3.beans;
 
-
+import com.google.gson.annotations.SerializedName;
 
 /**
  * 
@@ -13,7 +13,10 @@ public class NewEntry {
     protected String starts_at; // - date-time (ISO 8601) for when this schedule entry begins
     protected String ends_at; // - date-time (ISO 8601) for when this schedule entry ends
     
-    protected String[] participant_ids; // Email list seppared by comma
+    @SerializedName("all_day")
+    private Boolean allDay;
+    
+    protected Integer[] participant_ids; // Email list seppared by comma
 
     public String getSummary() {
         return summary;
@@ -39,12 +42,20 @@ public class NewEntry {
         this.ends_at = ends_at;
     }
 
-    public String[] getParticipant_ids() {
+    public Integer[] getParticipant_ids() {
         return participant_ids;
     }
 
-    public void setParticipant_ids(String[] participant_ids) {
+    public void setParticipant_ids(Integer[] participant_ids) {
         this.participant_ids = participant_ids;
+    }
+
+    public Boolean getAllDay() {
+        return allDay;
+    }
+
+    public void setAllDay(Boolean allDay) {
+        this.allDay = allDay;
     }
 
 }

@@ -343,4 +343,108 @@ public class Entry {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class ").append(this.getClass().getSimpleName()).append(" {\n");
+        sb.append("id");
+        sb.append('=');
+        sb.append(((this.id == null) ? "<null>" : this.id));
+        sb.append("\n\t");
+        sb.append("status");
+        sb.append('=');
+        sb.append(((this.status == null) ? "<null>" : this.status));
+        sb.append("\n\t");
+        sb.append("visibleToClients");
+        sb.append('=');
+        sb.append(((this.visibleToClients == null) ? "<null>" : this.visibleToClients));
+        sb.append("\n\t");
+        sb.append("createdAt");
+        sb.append('=');
+        sb.append(((this.createdAt == null) ? "<null>" : this.createdAt));
+        sb.append("\n\t");
+        sb.append("updatedAt");
+        sb.append('=');
+        sb.append(((this.updatedAt == null) ? "<null>" : this.updatedAt));
+        sb.append("\n\t");
+        sb.append("title");
+        sb.append('=');
+        sb.append(((this.title == null) ? "<null>" : this.title));
+        sb.append("\n\t");
+        sb.append("inheritsStatus");
+        sb.append('=');
+        sb.append(((this.inheritsStatus == null) ? "<null>" : this.inheritsStatus));
+        sb.append("\n\t");
+        sb.append("type");
+        sb.append('=');
+        sb.append(((this.type == null) ? "<null>" : this.type));
+        sb.append("\n\t");
+        sb.append("url");
+        sb.append('=');
+        sb.append(((this.url == null) ? "<null>" : this.url));
+        sb.append("\n\t");
+        sb.append("appUrl");
+        sb.append('=');
+        sb.append(((this.appUrl == null) ? "<null>" : this.appUrl));
+        sb.append("\n\t");
+        sb.append("bookmarkUrl");
+        sb.append('=');
+        sb.append(((this.bookmarkUrl == null) ? "<null>" : this.bookmarkUrl));
+        sb.append("\n\t");
+        sb.append("subscriptionUrl");
+        sb.append('=');
+        sb.append(((this.subscriptionUrl == null) ? "<null>" : this.subscriptionUrl));
+        sb.append("\n\t");
+        sb.append("commentsCount");
+        sb.append('=');
+        sb.append(((this.commentsCount == null) ? "<null>" : this.commentsCount));
+        sb.append("\n\t");
+        sb.append("commentsUrl");
+        sb.append('=');
+        sb.append(((this.commentsUrl == null) ? "<null>" : this.commentsUrl));
+        sb.append("\n\t");
+        sb.append("parent");
+        sb.append('=');
+        sb.append(((this.parent == null) ? "<null>" : this.parent));
+        sb.append("\n\t");
+        sb.append("bucket");
+        sb.append('=');
+        sb.append(((this.bucket == null) ? "<null>" : this.bucket));
+        sb.append("\n\t");
+        sb.append("creator");
+        sb.append('=');
+        sb.append(((this.creator == null) ? "<null>" : this.creator));
+        sb.append("\n\t");
+        sb.append("description");
+        sb.append('=');
+        sb.append(((this.description == null) ? "<null>" : this.description));
+        sb.append("\n\t");
+        sb.append("summary");
+        sb.append('=');
+        sb.append(((this.summary == null) ? "<null>" : this.summary));
+        sb.append("\n\t");
+        sb.append("allDay");
+        sb.append('=');
+        sb.append(((this.allDay == null) ? "<null>" : this.allDay));
+        sb.append("\n\t");
+        sb.append("startsAt");
+        sb.append('=');
+        sb.append(((this.startsAt == null) ? "<null>" : this.startsAt));
+        sb.append("\n\t");
+        sb.append("endsAt");
+        sb.append('=');
+        sb.append(((this.endsAt == null) ? "<null>" : this.endsAt));
+        sb.append("\n\t");
+        sb.append("participants");
+        sb.append('=');
+        sb.append(((this.participants == null) ? "<null>" : this.participants));
+        sb.append("\n\t");
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), '}');
+        } else {
+            sb.append('}');
+        }
+        return sb.toString();
+    }
+
 }

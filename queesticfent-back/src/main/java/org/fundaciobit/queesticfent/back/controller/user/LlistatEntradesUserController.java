@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -16,12 +17,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.text.StringEscapeUtils;
+import org.fundaciobit.basecamp.api3.BaseCampApi3;
+import org.fundaciobit.basecamp.api3.beans.Entry;
+import org.fundaciobit.basecamp.api3.beans.NewEntry;
+import org.fundaciobit.basecamp.api3.beans.User;
+import org.fundaciobit.basecamp.api3.utils.TokenResponse;
+import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
@@ -30,11 +38,13 @@ import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.pluginsib.core.utils.ISO8601;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;
 import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.back.utils.Utils;
+import org.fundaciobit.queesticfent.commons.utils.Configuracio;
 import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.fundaciobit.queesticfent.model.bean.AccionsBean;
 import org.fundaciobit.queesticfent.model.bean.ModificacionsQueEsticFentBean;
@@ -57,6 +67,7 @@ import org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA;
 import org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA;
 import org.fundaciobit.queesticfent.persistence.UsuarisJPA;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -73,6 +84,7 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 /**
  * 
  * @author fbosch
+ * @author anadal (Basecamp)
  *
  */
 @Controller
@@ -195,6 +207,31 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 m.setDada1("Vacances");
                 try {
                     this.create(request, m);
+
+                    BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
+                            Configuracio.getBasecampOrganizationID(),
+                            new File(Configuracio.getBasecampTokenPropertiesFile()));
+
+                    if (api3.isNecessaryUpdateToken()) {
+
+                        String client_id = Configuracio.getBasecampClientID();
+                        String redirectUrl = Configuracio.getBasecampRedirectUrl();
+
+                        String getTokenUrl = UpdateTokenUtils.getGetCodeUrl(client_id, redirectUrl);
+
+                        request.getSession().setAttribute("__MODIFICACIOID__", m.getModificacioID());
+
+                        mav.setView(new RedirectView(getTokenUrl, false));
+
+                        return form;
+
+                    }
+
+                    mav.setView(new RedirectView(
+                            getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
+
+                    return form;
+
                 } catch (I18NException e) {
                     String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
                     log.error(msg, e);
@@ -226,8 +263,202 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         return new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
     }
 
-    protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID,
-            List<Long> projectes, Date start, Date end) throws Exception {
+    @RequestMapping("/basecamptoken")
+    public ModelAndView token(HttpServletRequest request, javax.servlet.http.HttpServletResponse response) {
+
+        ModelAndView mav = new ModelAndView();
+        try {
+
+            // TODO XYZ ZZZ falta gestionar si l'usuari cancela, envia parametre error !!!!!
+            String code = request.getParameter("code");
+
+            log.info("CODE => ]" + code + "[");
+
+            //  https://governdigital.fundaciobit.org/queesticfent/user/entrades/basecamptoken
+
+            TokenResponse tokenInfo = UpdateTokenUtils.getNewTokenFromCode(Configuracio.getBasecampClientID(),
+                    Configuracio.getBasecampClientSecret(), Configuracio.getBasecampRedirectUrl(), code);
+
+            File basecampTokenFile = new File(Configuracio.getBasecampTokenPropertiesFile());
+
+            UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, tokenInfo);
+
+            Long modificacioID = (Long) request.getSession().getAttribute("__MODIFICACIOID__");
+
+            mav.setView(new RedirectView(getContextWeb() + "/addbasecampscheduleentries/" + modificacioID, true));
+
+        } catch (Exception e) {
+            String msg = "Error afegint vacances(Error actualitzant token de Basecamp): " + e.getMessage();
+            log.error(msg, e);
+            HtmlUtils.saveMessageError(request, msg);
+
+            mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+
+        }
+
+        return mav;
+    }
+
+    /*
+    @RequestMapping(value = "/testbasecamp", method = RequestMethod.GET)
+    public ModelAndView testBaseCamp(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+        try {
+    
+            String url = Configuracio.getBasecampUrlBase();
+            Long org = Configuracio.getBasecampOrganizationID();
+            String tokenfile = Configuracio.getBasecampTokenPropertiesFile();
+            Long projectID = Configuracio.getBasecampProjectID();
+    
+            log.info("url => " + url);
+            log.info("org => " + org);
+            log.info("tokenfile => " + tokenfile);
+            log.info("projectID => " + projectID);
+    
+            BaseCampApi3 api3 = new BaseCampApi3(url, org, new File(tokenfile));
+    
+            log.info("api3.getToken() => " + api3.getToken());
+    
+            User[] users = api3.getUsers(projectID);
+    
+            StringBuilder str = new StringBuilder();
+            for (User user : users) {
+                str.append(user.getName()).append("<br/>");
+            }
+            HtmlUtils.saveMessageInfo(request, str.toString());
+    
+        } catch (Throwable th) {
+    
+            String msg = "Error no controlat provant comunicació amb Basecamp: " + th.getMessage();
+    
+            log.error(msg, th);
+    
+            HtmlUtils.saveMessageError(request, msg);
+    
+        }
+    
+        ModelAndView mav = new ModelAndView();
+        mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+    
+        return mav;
+    }
+    */
+
+    @Override
+    public void delete(HttpServletRequest request, ModificacionsQueEsticFent modificacionsQueEsticFent)
+            throws I18NException {
+
+        modificacionsQueEsticFentEjb.delete(modificacionsQueEsticFent);
+
+        if (modificacionsQueEsticFent.getAccioID() == Utils.ACCIO_VACANCES) {
+            BaseCampApi3 api3 = getBasecampApi3();
+            Long projectID = Configuracio.getBasecampProjectID();
+
+            String info = modificacionsQueEsticFent.getDada2();
+            Long entryID = null;
+            try {
+                Properties prop = new Properties();
+                prop.load(new StringReader(info));
+
+                String entryIDStr = prop.getProperty("basecamp.entryID");
+
+                if (entryIDStr != null) {
+
+                    entryID = Long.parseLong(entryIDStr);
+                    api3.deleteScheduleEntry(projectID, entryID);
+
+                    HtmlUtils.saveMessageSuccess(request, "Esborrada entrada del Calendari de Basecamp");
+
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+                entryID = null;
+            }
+
+            if (entryID == null) {
+                HtmlUtils.saveMessageWarning(request,
+                        "Ha d'esborrar manualment " + "del Calendari de Basecamp l'entrada de Vacances del dia "
+                                + modificacionsQueEsticFent.getData());
+            }
+
+        }
+
+    }
+
+    @RequestMapping(value = "/addbasecampscheduleentries/{modificacioID}", method = RequestMethod.GET)
+    public ModelAndView addBasecampScheduleEntries(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable Long modificacioID) throws I18NException {
+        try {
+            ModificacionsQueEsticFentJPA m = this.findByPrimaryKey(request, modificacioID);
+
+            BaseCampApi3 api3 = getBasecampApi3();
+
+            Long projectID = Configuracio.getBasecampProjectID();
+
+            Long scheduleID = api3.getScheduleID(projectID);
+
+            NewEntry e = new NewEntry();
+            e.setStarts_at(ISO8601.dateToISO8601(m.getData()));
+            e.setEnds_at(ISO8601.dateToISO8601(m.getData()));
+
+            // XYZ ZZZ  Canviar per EMAIL !!!!!
+            String username = LoginInfo.getInstance().getUsername();
+
+            User user = api3.getUserIdFromEmail(projectID, username + "@fundaciobit.org");
+            e.setSummary("Vacances " + username.toUpperCase());
+            e.setAllDay(true);
+            e.setParticipant_ids(new Integer[] { user.getId() });
+
+            Entry fullEntry = api3.addScheduleEntry(projectID, scheduleID, e);
+
+            m.setDada2("basecamp.entryID=" + fullEntry.getId());
+            
+            this.update(request, m);
+
+            HtmlUtils.saveMessageSuccess(request, "Afegit dia lliure al calendari de BaseCamp");
+
+        } catch (Throwable th) {
+
+            String msg = "Error no controlat intentant donat d'alta l'entrada al calendari de Basecamp: "
+                    + th.getMessage();
+
+            log.error(msg, th);
+
+            HtmlUtils.saveMessageError(request, msg);
+
+        }
+
+        ModelAndView mav = new ModelAndView();
+        mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+
+        return mav;
+    }
+
+    protected BaseCampApi3 getBasecampApi3() {
+        BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
+                Configuracio.getBasecampOrganizationID(), new File(Configuracio.getBasecampTokenPropertiesFile()));
+        return api3;
+    }
+
+    /*
+    @Override
+    public ModificacionsQueEsticFentJPA create(HttpServletRequest request,
+            ModificacionsQueEsticFentJPA modificacionsQueEsticFent) throws I18NException, I18NValidationException {
+    
+        ModificacionsQueEsticFentJPA m;
+        m = (ModificacionsQueEsticFentJPA) modificacionsQueEsticFentEjb.create(modificacionsQueEsticFent);
+        
+        return m;
+        
+        
+        
+    }
+    */
+
+    // TODO Falta DELETE De tipus Vacances
+
+    protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID, List<Long> projectes,
+            Date start, Date end) throws Exception {
 
         // 1.- Llegir Accions
         Map<Long, Accions> accionsByID = new HashMap<Long, Accions>();
@@ -279,7 +510,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         //IModificacionsQueEsticFent[] modificacions = ModificacionsQueEsticFentManager.selectForOnlyRead(wm);
         List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm);
-        log.info("XYZ ZZZ Modificacions = "+modificacions.size());
+        log.info("XYZ ZZZ Modificacions = " + modificacions.size());
 
         // 4.2.- Adaptar entrades
         QueEsticFentItem item;
@@ -293,7 +524,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 //    '-3', 'Afegir Nova Entrada'                  usuari, data, dada1  
                 case (int) Utils.ACCIO_NOVA_ENTRADA: {
                     Date date = toDate000000(modificacio.getData().getTime());
-                    log.info("XXX XYZ Dia = "+modificacio.getData() + "       --- Titol Dia mes: "+date);
+                    log.info("XXX XYZ Dia = " + modificacio.getData() + "       --- Titol Dia mes: " + date);
                     item = new QueEsticFentItem(usuariID, modificacio.getData(), modificacio.getDada1());
                     item.addModificacioItem(
                             new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
@@ -340,21 +571,16 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
                 break;
                 //    '-1'   Festiu                                        data
-                case (int)  Utils.ACCIO_FESTIU:
+                case (int) Utils.ACCIO_FESTIU:
                 // Es realitza amb la taula de Fesius
-                    
-                    
-                    
-                    
-                    
-                    
+
                 break;
                 //    '0'    no mostrar entrada                ID, usuari, data    
                 case (int) Utils.ACCIO_AMAGAR_ENTRADA: {
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
-                        System.out.println("Modificaci� amb ID " + modificacio.getModificacioID()
-                                + " fa refer�ncia a entrada no arregada amb ID " + modificacio.getQueEsticFentID());
+                        log.info("Modificació amb ID " + modificacio.getModificacioID()
+                                + " fa referència a entrada no arregada amb ID " + modificacio.getQueEsticFentID());
                     } else {
                         item.addModificacioItem(
                                 new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
@@ -374,9 +600,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                             dada2 = "";
                         }
                         /*
-                        System.out.println("DADA1: ]" + modificacio.getDada1() + "[");
-                        System.out.println("DADA2: ]" + dada2 + "[");
-                        System.out.println("DESC: ]" + item.getDescripcio() + "[");
+                        log.info("DADA1: ]" + modificacio.getDada1() + "[");
+                        log.info("DADA2: ]" + dada2 + "[");
+                        log.info("DESC: ]" + item.getDescripcio() + "[");
                         */
 
                         String newText = item.getDescripcio().replace(modificacio.getDada1(), dada2);
@@ -412,7 +638,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 break;
                 //    '3',  'Canvi Data',                          usuari, data  
                 case (int) Utils.ACCIO_CANVI_DATA: {
-                    //System.out.println(" + Modificacio QEF_ID: " + modificacio.getQueEsticFentID());
+                    //log.info(" + Modificacio QEF_ID: " + modificacio.getQueEsticFentID());
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
                         ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
@@ -433,14 +659,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         if (items != null) {
                             //QueEsticFentItem aborrar = null;
                             //for (QueEsticFentItem qefi : items) {
-                                //System.out.println(" ID original: " + qefi.getQueesticfentOriginal().getQueesticfentID());
-                                //System.out.println(" Modificacio ID: " + modificacio.getQueEsticFentID());
-                                /*if (qefi.getQueesticfentOriginal().getQueesticfentID() == modificacio.getQueesticfentId()) {                    
-                                  aborrar = qefi;
-                                  break;
-                                }*/
+                            //log.info(" ID original: " + qefi.getQueesticfentOriginal().getQueesticfentID());
+                            //log.info(" Modificacio ID: " + modificacio.getQueEsticFentID());
+                            /*if (qefi.getQueesticfentOriginal().getQueesticfentID() == modificacio.getQueesticfentId()) {                    
+                              aborrar = qefi;
+                              break;
+                            }*/
                             //}
-                            
+
                         }
 
                         // Afegir al nou Map per data
@@ -461,7 +687,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         item.setAccio(accionsByID.get(modificacio.getAccioID()));
                         */
 
-                    } 
+                    }
                 }
                 break;
 
@@ -488,11 +714,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 //item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
                 Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
 
-                //System.out.println("Accio Festa : " + accFesta);
+                //log.info("Accio Festa : " + accFesta);
                 ModificacionsQueEsticFent mqef = new ModificacionsQueEsticFentBean();
                 mqef.setAccioID(Utils.ACCIO_FESTIU);
                 mqef.setModificacioID(0);
-                                
+
                 item.addModificacioItem(new ModificacioItem(mqef, accFesta));
 
                 List<QueEsticFentItem> items = llista.get(date);
@@ -665,7 +891,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         {
             String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");
             if (mostrarEntradesAmagadesStr != null) {
-                System.out.println("mostrarEntradesAmagades: " + mostrarEntradesAmagadesStr);
+                log.info("mostrarEntradesAmagades: " + mostrarEntradesAmagadesStr);
                 mostrarEntradesAmagades = ("on".compareTo(mostrarEntradesAmagadesStr) == 0);
             }
             mav.addObject("mostrarEntradesAmagades", mostrarEntradesAmagades);
@@ -707,7 +933,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
-        
+
         itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, start.getTime(), end.getTime());
         //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
         mav.addObject("start", start);
@@ -777,7 +1003,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // Put it back in the Date object  
         return cal.getTime();
-        
+
     }
 
     @Override
@@ -854,7 +1080,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
             response.setContentType("application/application/vnd.oasis.opendocument.text");
             response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
-                    
+
                     + StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
 
             List<String> usuarisList;
@@ -877,11 +1103,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             // XYZ Passar a log
             for (String usr : usuarisList) {
 
-                System.out.println("Personal projecte " + projecteID + ": " + usr);
+                log.info("Personal projecte " + projecteID + ": " + usr);
             }
-
-            System.out.println();
-            System.out.println();
 
             //DocumentTemplateFactory documentTemplateFactory = new DocumentTemplateFactory();
 
@@ -911,7 +1134,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
             //template.createDocument(map, baos);
 
-            
             OutputStream outStream = response.getOutputStream();
             generateUsingXDocReport(map, templateFile, outStream);
             //generateUsingJooReports(map, templateFile, outStream);
@@ -938,18 +1160,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             throws IOException, XDocReportException {
         InputStream in = new FileInputStream(templateFile);
         IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Freemarker);
-        
-        
 
-                // 2) Create fields metadata to manage lazy loop ([#list Freemarker) for table row and manage dynamic image
-                FieldsMetadata metadata = report.createFieldsMetadata();
+        // 2) Create fields metadata to manage lazy loop ([#list Freemarker) for table row and manage dynamic image
+        FieldsMetadata metadata = report.createFieldsMetadata();
 
-                metadata.load( "items", Item.class, true );
-                report.setFieldsMetadata(metadata);
-        
-        
-        
-        
+        metadata.load("items", Item.class, true);
+        report.setFieldsMetadata(metadata);
+
         // Create context Java model
         IContext context = report.createContext();
         context.putMap(map);
@@ -995,11 +1212,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             Map<Date, List<QueEsticFentItem>> itemsByDate;
             itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, start.getTime(), end.getTime());
 
-            System.out.println("=========================");
-            System.out.println(": " + itemsByDate.size());
-            System.out.println("Llista: " + itemsByDate.size());
-            System.out.println("MAX DAY: " + maxDay);
-            System.out.println("Usuari: " + usuariID);
+            log.info("=========================");
+            log.info(": " + itemsByDate.size());
+            log.info("Llista: " + itemsByDate.size());
+            log.info("MAX DAY: " + maxDay);
+            log.info("Usuari: " + usuariID);
 
             List<Item> items = new ArrayList<Item>();
             List<QueEsticFentItem> llista;
@@ -1047,7 +1264,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
                         }
                         item.setComentari(comment.toString());
-                        //System.out.println("DIA " + d + ": " + comment.toString());
+                        //log.info("DIA " + d + ": " + comment.toString());
                     }
                 }
                 items.add(item);

@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 //import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 //@JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonPropertyOrder({ "id", "attachable_sgid", "name", "email_address", "personable_type", "title", "bio", "created_at",    "updated_at", "admin", "owner", "client", "time_zone", "avatar_url", "company" })
+
 public class Creator {
 
     @SerializedName("id")
@@ -45,13 +45,8 @@ public class Creator {
     @SerializedName("company")
     private Company company;
 
-    public String attachable_sgid;
-    public String email_address;
-    public String personable_type;
     public Object location;
     public boolean employee;
-    public String time_zone;
-    public String avatar_url;
     public boolean can_ping;
     public boolean can_manage_projects;
     public boolean can_manage_people;
@@ -75,12 +70,12 @@ public class Creator {
         this.id = id;
     }
 
-    @SerializedName("attachable_sgid")
+    //@SerializedName("attachable_sgid")
     public String getAttachableSgid() {
         return attachableSgid;
     }
 
-    @SerializedName("attachable_sgid")
+    //@SerializedName("attachable_sgid")
     public void setAttachableSgid(String attachableSgid) {
         this.attachableSgid = attachableSgid;
     }
@@ -225,30 +220,6 @@ public class Creator {
         this.additionalProperties.put(name, value);
     }
 
-    public String getAttachable_sgid() {
-        return attachable_sgid;
-    }
-
-    public void setAttachable_sgid(String attachable_sgid) {
-        this.attachable_sgid = attachable_sgid;
-    }
-
-    public String getEmail_address() {
-        return email_address;
-    }
-
-    public void setEmail_address(String email_address) {
-        this.email_address = email_address;
-    }
-
-    public String getPersonable_type() {
-        return personable_type;
-    }
-
-    public void setPersonable_type(String personable_type) {
-        this.personable_type = personable_type;
-    }
-
     public Object getLocation() {
         return location;
     }
@@ -263,22 +234,6 @@ public class Creator {
 
     public void setEmployee(boolean employee) {
         this.employee = employee;
-    }
-
-    public String getTime_zone() {
-        return time_zone;
-    }
-
-    public void setTime_zone(String time_zone) {
-        this.time_zone = time_zone;
-    }
-
-    public String getAvatar_url() {
-        return avatar_url;
-    }
-
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
     }
 
     public boolean isCan_ping() {

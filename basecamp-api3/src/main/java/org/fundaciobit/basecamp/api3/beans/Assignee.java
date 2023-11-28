@@ -7,8 +7,6 @@ import com.google.gson.annotations.SerializedName;
 //import com.google.gson.annotations.SerializedName;
 ////import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonPropertyOrder({ "id", "attachable_sgid", "name", "email_address", "personable_type", "title", "bio", "created_at",        "updated_at", "admin", "owner", "client", "time_zone", "avatar_url", "company" })
 public class Assignee {
 
     @SerializedName("id")
@@ -98,12 +96,12 @@ public class Assignee {
         this.id = id;
     }
 
-    @SerializedName("attachable_sgid")
+
     public String getAttachableSgid() {
         return attachableSgid;
     }
 
-    @SerializedName("attachable_sgid")
+
     public void setAttachableSgid(String attachableSgid) {
         this.attachableSgid = attachableSgid;
     }

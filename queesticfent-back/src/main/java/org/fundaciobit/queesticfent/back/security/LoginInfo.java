@@ -67,9 +67,9 @@ public class LoginInfo {
 
     public static boolean hasRole(String role) {
         try {
-            for (String rol : LoginInfo.getInstance().getRoles()) {
-                System.out.println("XYZ ZZZZZZ Rol = "+rol);
-            }
+//            for (String rol : LoginInfo.getInstance().getRoles()) {
+//                log.info("XYZ ZZZZZZ Rol = "+rol);
+//            }
             
             return LoginInfo.getInstance().getRoles().contains(role);
         } catch (Throwable th) {

@@ -27,6 +27,7 @@ import java.util.TreeMap;
 
 import org.fundaciobit.basecamp.api3.BaseCampApi3;
 import org.fundaciobit.basecamp.api3.beans.Assignee;
+import org.fundaciobit.basecamp.api3.beans.Dock;
 import org.fundaciobit.basecamp.api3.beans.Entries;
 import org.fundaciobit.basecamp.api3.beans.Entry;
 import org.fundaciobit.basecamp.api3.beans.Folder;
@@ -86,7 +87,7 @@ public class TestBaseCampApi3 {
 
                         UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, token);
 
-                        tu.updateToken(token.getAccessToken());
+                        tu.setToken(token.getAccessToken());
 
                         System.out.println("\n\n REFRESCAT TOKEN SENSE PROBLEMES \n\n");
 
@@ -120,7 +121,7 @@ public class TestBaseCampApi3 {
             System.out.println(project);
             
             
-            /*
+            
             Long folderRootID = null;
             Long schedulerID = null;
             {
@@ -134,7 +135,7 @@ public class TestBaseCampApi3 {
                }
             }
             
-            */
+            
 
             /*
             // Test users
@@ -145,7 +146,16 @@ public class TestBaseCampApi3 {
             }
             */
 
-            //addSchedulerEntry(tu, projectID, schedulerID);
+            Entry e = addSchedulerEntry(tu, projectID, schedulerID, "Vacances AN");
+            
+            System.out.println("Pitja enter per esborrar entrada del Calendari ...");
+            System.in.read();
+            
+            
+            long entryID = e.getId();
+            
+            tu.deleteScheduleEntry(projectID, entryID);
+            
 
             //listSchedulerEntries(tu, projectID, scheduleID);
 
@@ -195,6 +205,8 @@ public class TestBaseCampApi3 {
 
         String resposta = readFromSocket(uri.getPort() == -1 ? 80 : uri.getPort());
 
+        // token?error=access_denied
+        
         int index = resposta.indexOf("code=");
         if (index == -1) {
             throw new Exception("Error processant resposta del servidor de Basecamp => " + resposta);
@@ -213,14 +225,14 @@ public class TestBaseCampApi3 {
 
                 UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, token);
 
-                tu.updateToken(token.getAccessToken());
+                tu.setToken(token.getAccessToken());
 
             }
 
         }
     }
 
-    protected static void addSchedulerEntry(BaseCampApi3 tu, long projectID, Long schedulerID, String title)
+    protected static Entry addSchedulerEntry(BaseCampApi3 tu, long projectID, Long schedulerID, String title)
             throws Exception {
         NewEntry e = new NewEntry();
         e.setSummary(title);
@@ -232,10 +244,12 @@ public class TestBaseCampApi3 {
 
         e.setEnds_at(ISO8601.dateToISO8601(cal.getTime()));
 
+        e.setAllDay(true);
+        
         // Només funciona un participant ...
-        e.setParticipant_ids(new String[] { "31907487", "29712337" }); // Juan Antonio 31907487 // Atrobat 29712337
+        e.setParticipant_ids(new Integer[] { 27011117  }); // Juan Antonio 31907487 // Atrobat 29712337
 
-        tu.addScheduleEntry(projectID, schedulerID, e);
+        return tu.addScheduleEntry(projectID, schedulerID, e);
     }
 
     protected static void listSchedulerEntries(BaseCampApi3 tu, long projectID, Long scheduleID) throws Exception {

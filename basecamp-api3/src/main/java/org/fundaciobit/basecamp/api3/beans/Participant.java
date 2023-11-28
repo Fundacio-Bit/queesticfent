@@ -90,12 +90,12 @@ public class Participant {
         this.id = id;
     }
 
-    @SerializedName("attachable_sgid")
+    //@SerializedName("attachable_sgid")
     public String getAttachableSgid() {
         return attachableSgid;
     }
 
-    @SerializedName("attachable_sgid")
+    //@SerializedName("attachable_sgid")
     public void setAttachableSgid(String attachableSgid) {
         this.attachableSgid = attachableSgid;
     }

@@ -254,8 +254,12 @@ Afegir Entrada
    </a>
    
 <td>
- --%>
  
+ 
+ <td>
+   <a href="<c:url value="/user/entrades/testbasecamp"/>"> BASECAMP TEST</a>
+ </td>
+ --%>
 </tr>
 </table>
 </FORM>

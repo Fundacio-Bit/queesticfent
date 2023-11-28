@@ -8,11 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,7 +22,9 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import org.fundaciobit.basecamp.api3.beans.AttachFile;
+import org.fundaciobit.basecamp.api3.beans.Dock;
 import org.fundaciobit.basecamp.api3.beans.Entries;
 import org.fundaciobit.basecamp.api3.beans.Entry;
 import org.fundaciobit.basecamp.api3.beans.Folder;
@@ -35,7 +34,9 @@ import org.fundaciobit.basecamp.api3.beans.Root;
 import org.fundaciobit.basecamp.api3.beans.Todo;
 import org.fundaciobit.basecamp.api3.beans.Upload;
 import org.fundaciobit.basecamp.api3.beans.User;
-import org.glassfish.jersey.client.ClientConfig;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,6 +47,8 @@ import com.google.gson.GsonBuilder;
  *
  */
 public class BaseCampApi3 {
+    
+    private static Logger log = Logger.getLogger(BaseCampApi3.class);
 
     private final String urlBaseCamp;
 
@@ -74,10 +77,17 @@ public class BaseCampApi3 {
 
             return prop.getProperty("accessToken");
         } catch (Exception e) {
-            System.err.println("Error desconegut llegint token del fitxer " + fileToken.getAbsolutePath());
-            e.printStackTrace();
+            log.error("Error desconegut llegint token del fitxer " + fileToken.getAbsolutePath(), e);
             return null;
         }
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public BaseCampApi3(String urlBaseCamp, long organizationID, File fileToken) {
@@ -107,9 +117,6 @@ public class BaseCampApi3 {
     }
 
 
-    public void updateToken(String token) {
-        this.token = token;
-    }
 
     public Upload uploadFile(File f, String mime, long projectID, long folderID) throws Exception {
 
@@ -121,7 +128,7 @@ public class BaseCampApi3 {
 
         AttachFile af = attacheFile(f, mime);
 
-        System.out.println("RESPONSE UPLOAD: " + af.getAttachableSgid());
+        log.info("RESPONSE UPLOAD: " + af.getAttachableSgid());
 
         // REM PUJAR FITXER
 
@@ -139,7 +146,7 @@ public class BaseCampApi3 {
 
         String rjson = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT UPLOAD FILE ==> " + rjson);
+        log.info(" OUTPUT UPLOAD FILE ==> " + rjson);
 
         Upload upload = deserializeJson(rjson, Upload.class); // response.readEntity(Upload[].class);
 
@@ -163,11 +170,11 @@ public class BaseCampApi3 {
         String json;
 
         try {
-            System.out.println("STATUS LINE: " + httResponse.getStatusLine());
+            log.info("STATUS LINE: " + httResponse.getStatusLine());
 
             json = EntityUtils.toString(httResponse.getEntity());
 
-            System.out.println("JSON UPLOAD: " + json);
+            log.info("JSON UPLOAD: " + json);
 
         } finally {
             httResponse.close();
@@ -188,7 +195,7 @@ public class BaseCampApi3 {
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT ==> " + json);
+        log.info(" OUTPUT ==> " + json);
 
         Upload[] uploads = deserializeJson(json, Upload[].class);
 
@@ -205,7 +212,7 @@ public class BaseCampApi3 {
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT ==> " + json);
+        log.info(" OUTPUT ==> " + json);
 
         Folder[] folders = deserializeJson(json, Folder[].class);
 
@@ -236,10 +243,10 @@ public class BaseCampApi3 {
 
             String json = response.readEntity(String.class);
 
-            // System.out.println(" OUTPUT ==> " + json);
-            // System.out.println(" NEXT ==> " + response.getHeaderString("Link"));
+            // log.info(" OUTPUT ==> " + json);
+            // log.info(" NEXT ==> " + response.getHeaderString("Link"));
             if (total == -1) {
-                // System.out.println(" X-Total-Count ==> " +
+                // log.info(" X-Total-Count ==> " +
                 // response.getHeaderString("X-Total-Count"));
                 total = Integer.parseInt(response.getHeaderString("X-Total-Count"));
             }
@@ -250,7 +257,7 @@ public class BaseCampApi3 {
 
             todos.addAll(newListObject);
 
-            System.out.println(todos.size() + " de " + total);
+            log.info(todos.size() + " de " + total);
 
         } while (todos.size() < total && currenttodos.length != 0);
 
@@ -268,7 +275,7 @@ public class BaseCampApi3 {
 
         String json = response.readEntity(String.class);
 
-        //System.out.println(" OUTPUT ==> " + json);
+        //log.info(" OUTPUT ==> " + json);
 
         Project[] projects = deserializeJson(json, Project[].class);
 
@@ -288,41 +295,80 @@ public class BaseCampApi3 {
 
         String endPointEntries;
         endPointEntries = getScheduleEntriesEndPoint(projectID, scheduleID);
-        System.out.println("ENTRIES URL => " + endPointEntries);
+        log.info("ENTRIES URL => " + endPointEntries);
 
         //   /buckets/1/schedule_entries/2/occurrences/20190218.json
 
         //endPoint = base + "/schedule_entries/" + scheduleID + "/occurrences/20231122.json";
-        //System.out.println("ENTRIES URL => " + endPoint);
+        //log.info("ENTRIES URL => " + endPoint);
         Response response;
         response = commonCall(null, endPointEntries + "?page=" + page);
 
-        System.out.println("X-Total-Count => " + response.getHeaderString("X-Total-Count"));
+        log.info("X-Total-Count => " + response.getHeaderString("X-Total-Count"));
         long total = Long.parseLong(response.getHeaderString("X-Total-Count"));
         //response = commonCall(null, root.getEntries_url() + "?on=2023-11-22");
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT ==> " + json);
+        log.info(" OUTPUT ==> " + json);
 
         Entry[] entrades = deserializeJson(json, Entry[].class);
 
         return new Entries(entrades, total, page);
 
     }
+    
+    
+    
+    public Long getScheduleID(Long projectID) throws Exception {
+        Project project = this.getProject(projectID);
 
-    public void addScheduleEntry(long projectID, long scheduleID, NewEntry entry) throws Exception {
+        Long schedulerID = null;
+
+        for (Dock d : project.getDock()) {
+
+            if ("schedule".equals(d.getName())) {
+                schedulerID = d.getId();
+                break;
+            }
+        }
+        return schedulerID;
+    }
+    
+    
+    
+
+    public Entry addScheduleEntry(long projectID, long scheduleID, NewEntry entry) throws Exception {
 
         String endPointEntries;
         endPointEntries = getScheduleEntriesEndPoint(projectID, scheduleID);
-        System.out.println("ENTRIES URL => " + endPointEntries);
-
+        log.info("ENTRIES URL => " + endPointEntries);
+        
+        
         Response response;
         response = commonCall(entry, endPointEntries);
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT NEW ENTRY ==> " + json);
+        //log.info(" OUTPUT NEW ENTRY ==> " + json);
+        
+        Entry fullentry = deserializeJson(json, Entry.class);
+        
+        return fullentry;
+        
+    }
+
+
+    public void deleteScheduleEntry(long projectID, long entryID) throws Exception {
+
+    
+        String base = this.urlBaseCamp + this.organizationID + "/buckets/" + projectID;
+        String endPoint = base + "/recordings/" + entryID + "/status/trashed.json";
+        
+        Response response = commonCall(null, endPoint, true);
+        String json = response.readEntity(String.class);
+        log.info(" OUTPUT DELETE ENTRY ==> " + json);
+    
     }
 
     protected String getScheduleEntriesEndPoint(long projectID, long scheduleID) throws Exception {
@@ -331,7 +377,7 @@ public class BaseCampApi3 {
         String endPoint = base + "/schedules/" + scheduleID + ".json";
         Response response = commonCall(null, endPoint);
         String json = response.readEntity(String.class);
-        System.out.println(" OUTPUT SHEDULE ==> " + json);
+        log.info(" OUTPUT SHEDULE ==> " + json);
         Root root = deserializeJson(json, Root.class);
         endPoint = root.getEntries_url();
         endPointEntries = endPoint;
@@ -346,7 +392,7 @@ public class BaseCampApi3 {
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT ==> " + json);
+        log.info(" OUTPUT ==> " + json);
 
         Project project = deserializeJson(json, Project.class);
 
@@ -364,26 +410,41 @@ public class BaseCampApi3 {
 
         String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT GETUSERS  ==> " + json);
+        log.info(" OUTPUT GETUSERS  ==> " + json);
 
         User[] users = deserializeJson(json, User[].class);
 
         return users;
 
     }
+    
+    
+    public User getUserIdFromEmail(long projectID, String email)  throws Exception {
+        User[] users = this.getUsers(projectID);
+        
+        
+        for (User user : users) {
+            if (email.equalsIgnoreCase(user.getEmailAddress())) {
+                return user;
+            }
+        }
+        
+        return null;
+        
+    }
+    
 
     private void ping() throws Exception {
 
-        //String endPoint = this.urlBaseCamp + this.organizationID + "/chats.json?page=99999999999999999";
+        String endPoint = this.urlBaseCamp + this.organizationID + "/chats.json?page=99999999999999999";
 
-        String endPoint = "https://launchpad.37signals.com/authorization.json";
+        //String endPoint = "https://launchpad.37signals.com/authorization.json";
         
         Response response = commonCall(null, endPoint);
 
-        String json = 
-        response.readEntity(String.class);
+        String json = response.readEntity(String.class);
 
-        System.out.println(" OUTPUT EMPTYCALL  ==> " + json);
+        log.info(" OUTPUT EMPTYCALL  ==> " + json);
 
     }
 
@@ -404,12 +465,33 @@ public class BaseCampApi3 {
         return gson.fromJson(pojo, classe);
 
     }
-
+    
+    
     protected Response commonCall(Object parameter, String endPoint) throws Exception {
+        return commonCall(parameter, endPoint, false);
+    }
+
+    protected Response commonCall(Object parameter, String endPoint, boolean usePut) throws Exception {
+
+        log.info(" COMMON CALL URL: " + endPoint);
+        log.info(" COMMON CALL TOK: " + token);
 
         Response response;
+        
         try {
 
+            
+            ResteasyClient client = new ResteasyClientBuilder().build();
+            
+            ResteasyWebTarget webTarget = client.target(endPoint);
+            
+                        
+            Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON)
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + this.token);
+                    
+            
+            
+            /*
             ClientConfig config = new ClientConfig();
 
             ClientBuilder clientBuilder = ClientBuilder.newBuilder().withConfig(config);
@@ -417,38 +499,58 @@ public class BaseCampApi3 {
             final Client client = clientBuilder.build();
 
             WebTarget webTarget = client.target(endPoint);
+            log.info(" COMMON CALL : " + endPoint);
+            log.info(" COMMON CALL : " + token);
 
             Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 
             invocationBuilder.header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-
+*/
+            
+            
             if (parameter == null) {
-                response = invocationBuilder.get(); // Entity.json(null));
+                if (usePut) {
+                    response = invocationBuilder.put(null);
+                } else {
+                    response = invocationBuilder.get(); // Entity.json(null));
+                }
             } else {
 
                 String data = serializeJson(parameter);
 
-                System.out.println(" OBJECT PARAMETER: " + data);
+                log.info(" OBJECT PARAMETER: " + data);
 
                 Entity<?> json = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
 
                 response = invocationBuilder.post(json);
             }
+            
 
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e);
         }
 
-        if (response.getStatus() == 200 || response.getStatus() == 201) {
+        if (response.getStatus() == 200 || response.getStatus() == 201 || response.getStatus() == 204) {
             return response;
         } else {
 
-            // System.out.println(" ERROR SIMPLE: ]" + simple + "[");
+            log.error(" ERROR STATUS: ]" + response.getStatus() + "[");
 
             // Error de Comunicació o no controlat
-            String raw_msg = response.readEntity(String.class);
-            throw new Exception("Error desconegut (Codi de servidor " + response.getStatus() + "): " + raw_msg
-                    + response.toString());
+            String raw_msg;
+            try {
+              raw_msg = response.readEntity(String.class);
+            } catch(Throwable th) {
+               Object obj = response.getEntity();
+               raw_msg = String.valueOf(obj);
+            }
+              
+            String msg = "Error desconegut (Codi de servidor " + response.getStatus() + "): " + raw_msg
+                    + response.toString();
+            
+            log.error(msg);
+              
+            throw new Exception(msg);
 
         }
 

@@ -123,12 +123,43 @@ public class Configuracio implements Constants {
     }
 
     public static Long getMaxUploadSizeInBytes() {
-        return Long.getLong(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes");
+        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes"));
     }
 
     public static Long getMaxFitxerAdaptatSizeInBytes() {
-        return Long.getLong(QUEESTICFENT_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
+        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes"));
     }
+
+    public static Long getBasecampOrganizationID() {
+        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.organizationID"));
+    }
+    
+    
+    
+    public static Long getBasecampProjectID() {
+        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.projectID"));
+    }
+
+    public static String getBasecampUrlBase() {
+        return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.urlBase");
+    }
+    
+    public static String getBasecampClientID() {
+        return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.client_id");
+    }
+    
+    public static String getBasecampClientSecret() {
+        return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.client_secret");
+    }
+
+    public static String getBasecampRedirectUrl() {
+        return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.redirect_uri");
+    }
+    
+    public static String getBasecampTokenPropertiesFile() {
+        return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.token_properties_file");
+    }
+    
 
     public static File getFilesDirectory() {
         String path = getProperty(QUEESTICFENT_PROPERTY_BASE + "filesdirectory");
