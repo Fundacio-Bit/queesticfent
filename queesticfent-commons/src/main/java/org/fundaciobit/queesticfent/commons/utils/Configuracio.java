@@ -123,11 +123,8 @@ public class Configuracio implements Constants {
     }
 
     public static Long getMaxUploadSizeInBytes() {
-        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes"));
-    }
-
-    public static Long getMaxFitxerAdaptatSizeInBytes() {
-        return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes"));
+        String maxStr =  getProperty(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes");
+        return maxStr == null? null: Long.parseLong(maxStr);
     }
 
     public static Long getBasecampOrganizationID() {

@@ -97,6 +97,14 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentForm.jsp" />
     </definition>
     
+    <definition name="modificacionsQueEsticFentListUser" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentList.jsp" />
+    </definition>
+    
+    <definition name="taulaDeVacances" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/user/tauladevacances.jsp" />
+    </definition>
+    
     <!--  ===========  ADMIN  ================== -->
         
     <definition name="admin" extends="base.definition">

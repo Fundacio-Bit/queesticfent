@@ -13,6 +13,11 @@
     </li>
     
     
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/user/vacances/vacancespermes"/>">
+        <span style="${(fn:contains(url, '/user/vacances/vacancespermes'))? "font-weight: bold;" : ""}">Vacances</span>
+      </a>
+    </li>
 
    <%-- Example with security: virtual roles  --%>
    <%--
