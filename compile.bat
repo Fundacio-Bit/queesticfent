@@ -1,5 +1,7 @@
 @echo off
 
+set "MAVEN_OPTS=-XX:TieredStopAtLevel=1"
+
 echo optional parameters -Dcaib -Psqlgen
 
 cmd /C mvn clean install -DskipTests %* 

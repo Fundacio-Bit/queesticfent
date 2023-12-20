@@ -103,30 +103,5 @@ public class queesticfentCommonsMultipartResolver extends
     return maxUploadSize;
   }
 
-  protected Long getMaxFitxerAdaptatSize() {
-    Long maxFitxerAdaptatSizeGlobal = Configuracio.getMaxFitxerAdaptatSizeInBytes();
-    if (log.isDebugEnabled()) {
-      if (maxFitxerAdaptatSizeGlobal == null) {
-        log.info("No s'ha definit limit de tamany global en el fitxer adaptat");
-      } else {
-        log.info("S'ha definit un tamany màxim de Fitxer Adaptat a "
-            + maxFitxerAdaptatSizeGlobal + " bytes");
-      }
-    }
-/*
-    Long maxFitxerAdaptatSizeEntitat;
-    try {
-      maxFitxerAdaptatSizeEntitat = LoginInfo.getInstance().getEntitat()
-          .getMaxSizeFitxerAdaptat();
-    } catch (Throwable th) {
-      maxFitxerAdaptatSizeEntitat = null;
-    }
-
-    Long maxFitxerAdaptatSize = PdfUtils.selectMin(maxFitxerAdaptatSizeGlobal,
-        maxFitxerAdaptatSizeEntitat);
-*/
-    Long maxFitxerAdaptatSize = maxFitxerAdaptatSizeGlobal;
-    return maxFitxerAdaptatSize;
-  }
 
 }
