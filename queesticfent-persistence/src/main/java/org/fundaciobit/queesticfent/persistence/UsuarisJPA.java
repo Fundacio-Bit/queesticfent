@@ -52,7 +52,7 @@ public class UsuarisJPA implements Usuaris {
     java.lang.String telefonmobil;
 
     @Column(name="contrasenya",length = 100)
-    java.lang.String contrasenya;
+    java.lang.String color;
 
 
 
@@ -61,7 +61,7 @@ public class UsuarisJPA implements Usuaris {
   }
 
   /** Constructor amb tots els camps  */
-  public UsuarisJPA(java.lang.String usuariID , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String contrasenya) {
+  public UsuarisJPA(java.lang.String usuariID , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String nom , java.lang.String correu , java.lang.String descripcio , java.lang.String extensio , java.sql.Date naixement , java.lang.String telefoncasa , java.lang.String telefonmobil , java.lang.String color) {
     this.usuariID=usuariID;
     this.llinatge1=llinatge1;
     this.llinatge2=llinatge2;
@@ -72,7 +72,7 @@ public class UsuarisJPA implements Usuaris {
     this.naixement=naixement;
     this.telefoncasa=telefoncasa;
     this.telefonmobil=telefonmobil;
-    this.contrasenya=contrasenya;
+    this.color=color;
 }
   /** Constructor dels valors Not Null */
   public UsuarisJPA(java.lang.String usuariID , java.lang.String nom , java.lang.String correu) {
@@ -91,7 +91,7 @@ public class UsuarisJPA implements Usuaris {
     this.setNaixement(__bean.getNaixement());
     this.setTelefoncasa(__bean.getTelefoncasa());
     this.setTelefonmobil(__bean.getTelefonmobil());
-    this.setContrasenya(__bean.getContrasenya());
+    this.setColor(__bean.getColor());
 	}
 
 	public java.lang.String getUsuariID() {
@@ -164,11 +164,11 @@ public class UsuarisJPA implements Usuaris {
 		this.telefonmobil = _telefonmobil_;
 	};
 
-	public java.lang.String getContrasenya() {
-		return(contrasenya);
+	public java.lang.String getColor() {
+		return(color);
 	};
-	public void setContrasenya(java.lang.String _contrasenya_) {
-		this.contrasenya = _contrasenya_;
+	public void setColor(java.lang.String _color_) {
+		this.color = _color_;
 	};
 
 
@@ -232,7 +232,7 @@ public class UsuarisJPA implements Usuaris {
     __tmp.setNaixement(__bean.getNaixement());
     __tmp.setTelefoncasa(__bean.getTelefoncasa());
     __tmp.setTelefonmobil(__bean.getTelefonmobil());
-    __tmp.setContrasenya(__bean.getContrasenya());
+    __tmp.setColor(__bean.getColor());
 		return __tmp;
 	}
 

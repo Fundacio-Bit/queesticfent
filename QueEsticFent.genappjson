@@ -2316,10 +2316,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Contrasenya",
-            "es": "Contraseña"
+            "ca": "Color",
+            "es": "Color"
           },
-          "javaName": "contrasenya",
+          "javaName": "color",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,

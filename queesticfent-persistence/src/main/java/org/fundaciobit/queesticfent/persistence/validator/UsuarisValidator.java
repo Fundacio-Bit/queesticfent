@@ -115,11 +115,11 @@ public class UsuarisValidator<I extends Usuaris>
       }
     }
 
-    if (__vr.getFieldErrorCount(CONTRASENYA) == 0) {
-      java.lang.String __contrasenya = __target__.getContrasenya();
-      if (__contrasenya!= null && __contrasenya.length() > 100) {
-        __vr.rejectValue(CONTRASENYA, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTRASENYA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+    if (__vr.getFieldErrorCount(COLOR) == 0) {
+      java.lang.String __color = __target__.getColor();
+      if (__color!= null && __color.length() > 100) {
+        __vr.rejectValue(COLOR, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(COLOR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 

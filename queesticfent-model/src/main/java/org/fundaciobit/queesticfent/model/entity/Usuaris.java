@@ -32,8 +32,8 @@ public interface Usuaris extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getTelefonmobil();
 	public void setTelefonmobil(java.lang.String _telefonmobil_);
 
-	public java.lang.String getContrasenya();
-	public void setContrasenya(java.lang.String _contrasenya_);
+	public java.lang.String getColor();
+	public void setColor(java.lang.String _color_);
 
 
 

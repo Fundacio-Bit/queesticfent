@@ -9,7 +9,7 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 3px;
     text-align: center;
     white-space: nowrap;
 }
@@ -64,7 +64,7 @@ td:first-child, th:first-child {
                                
                       </c:when>
                       <c:when test="${ vacancesmes.capdesetmanes.get(day)}">
-                               <td width="3%" bgcolor="#F6F6F6">  &nbsp;                  
+                               <td width="3%" bgcolor="#F1F1F1">  &nbsp;                  
                                </td>
                       </c:when>
                       <c:when test="${empty personainfo}"><td width="3%">&nbsp;</td></c:when>

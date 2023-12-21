@@ -217,15 +217,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisFields.CONTRASENYA)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuarisFields.COLOR)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="usuaris.contrasenya" var="contrasenya" />
-              <fmt:message key="genapp.form.searchby" var="cercapercontrasenya" >                
-                 <fmt:param value="${contrasenya}"/>
+              <fmt:message key="usuaris.color" var="color" />
+              <fmt:message key="genapp.form.searchby" var="cercapercolor" >                
+                 <fmt:param value="${color}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${contrasenya}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercontrasenya}" path="contrasenya" />
+              <span class="add-on"><c:out value="${color}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercolor}" path="color" />
             </div>
 
 

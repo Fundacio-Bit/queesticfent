@@ -42,8 +42,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuarisFields.TELEFONMOBIL)}">
         <th>${qef:getSortIcons(__theFilterForm,UsuarisFields.TELEFONMOBIL)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuarisFields.CONTRASENYA)}">
-        <th>${qef:getSortIcons(__theFilterForm,UsuarisFields.CONTRASENYA)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuarisFields.COLOR)}">
+        <th>${qef:getSortIcons(__theFilterForm,UsuarisFields.COLOR)}</th>
         </c:if>
 
 

@@ -22,7 +22,7 @@ public interface UsuarisFields extends java.io.Serializable {
 	 public static final DateField NAIXEMENT = new DateField(_TABLE_MODEL, "naixement", "naixement");
 	 public static final StringField TELEFONCASA = new StringField(_TABLE_MODEL, "telefoncasa", "telefoncasa");
 	 public static final StringField TELEFONMOBIL = new StringField(_TABLE_MODEL, "telefonmobil", "telefonmobil");
-	 public static final StringField CONTRASENYA = new StringField(_TABLE_MODEL, "contrasenya", "contrasenya");
+	 public static final StringField COLOR = new StringField(_TABLE_MODEL, "color", "contrasenya");
 
 
   public static final Field<?>[] ALL_USUARIS_FIELDS = {
@@ -36,7 +36,7 @@ public interface UsuarisFields extends java.io.Serializable {
     NAIXEMENT,
     TELEFONCASA,
     TELEFONMOBIL,
-    CONTRASENYA
+    COLOR
   };
 
 

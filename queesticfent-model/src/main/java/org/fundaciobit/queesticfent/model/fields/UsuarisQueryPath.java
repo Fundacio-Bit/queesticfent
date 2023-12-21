@@ -51,8 +51,8 @@ public class UsuarisQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new StringField(getQueryPath(), UsuarisFields.TELEFONMOBIL);
   }
 
-  public StringField CONTRASENYA() {
-    return new StringField(getQueryPath(), UsuarisFields.CONTRASENYA);
+  public StringField COLOR() {
+    return new StringField(getQueryPath(), UsuarisFields.COLOR);
   }
 
 
