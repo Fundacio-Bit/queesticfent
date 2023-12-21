@@ -60,11 +60,10 @@ td:first-child, th:first-child {
                     <c:forEach begin="1" end="${vacancesmes.numberofdays}" var="day">
                     <c:choose>
                       <c:when test="${ vacancesmes.festius.get(day)}">
-                              <td width="3%" style="background-image:url(<c:url value="/img/festiu.jpg"/>);background-repeat:no-repeat;">   
+                              <td width="3%" style="background-image:url(<c:url value="/img/festiu.jpg"/>);background-repeat:repeat;">   
                                
                       </c:when>
                       <c:when test="${ vacancesmes.capdesetmanes.get(day)}">
-                              <%-- <td style="background-image:url(<c:url value="/img/festiu.jpg"/>);background-repeat:no-repeat;"> --%>  
                                <td width="3%" bgcolor="#F6F6F6">  &nbsp;                  
                                </td>
                       </c:when>
