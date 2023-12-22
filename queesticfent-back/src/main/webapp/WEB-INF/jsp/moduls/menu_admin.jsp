@@ -26,6 +26,13 @@
         <span style="${(fn:contains(url, 'gestiousuarisprojecte'))? "font-weight: bold;" : ""}">Gestió d'Usuaris Projecte</span>
       </a>
     </li>
+    
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/gestiousuaris/list"/>">
+        <span style="${(fn:contains(url, 'gestiousuaris'))? "font-weight: bold;" : ""}">Gestió d'Usuaris</span>
+      </a>
+    </li>
 
    <%-- Example with security: virtual roles  --%>
    <%--

@@ -139,6 +139,14 @@
     <definition name="gestioUsuarisProjecteList" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/personalProjecteList.jsp" />
     </definition>
+    
+    <definition name="gestioUsuarisForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisForm.jsp" />
+    </definition>
+    
+    <definition name="gestioUsuarisList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisList.jsp" />
+    </definition>
      
     
     
