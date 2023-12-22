@@ -221,19 +221,19 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuarisFields.CONTRASENYA)}">
-        <tr id="usuaris_contrasenya_rowid">
-          <td id="usuaris_contrasenya_columnlabelid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuarisFields.COLOR)}">
+        <tr id="usuaris_color_rowid">
+          <td id="usuaris_color_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[UsuarisFields.CONTRASENYA])?'usuaris.contrasenya':__theForm.labels[UsuarisFields.CONTRASENYA]}" />
+              <fmt:message key="${(empty __theForm.labels[UsuarisFields.COLOR])?'usuaris.color':__theForm.labels[UsuarisFields.COLOR]}" />
              </label>
-              <c:if test="${not empty __theForm.help[UsuarisFields.CONTRASENYA]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[UsuarisFields.CONTRASENYA]}" ></i>
+              <c:if test="${not empty __theForm.help[UsuarisFields.COLOR]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[UsuarisFields.COLOR]}" ></i>
               </c:if>
             </td>
-          <td id="usuaris_contrasenya_columnvalueid">
-            <form:errors path="usuaris.contrasenya" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuarisFields.CONTRASENYA)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuarisFields.CONTRASENYA)? ' uneditable-input' : ''}"  style="" maxlength="100" path="usuaris.contrasenya"   />
+          <td id="usuaris_color_columnvalueid">
+            <form:errors path="usuaris.color" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuarisFields.COLOR)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuarisFields.COLOR)? ' uneditable-input' : ''}"  style="" maxlength="100" path="usuaris.color"   />
 
            </td>
         </tr>

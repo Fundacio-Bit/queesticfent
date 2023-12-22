@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +22,10 @@ import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFil
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;
 import org.fundaciobit.queesticfent.model.entity.Festius;
 import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
+import org.fundaciobit.queesticfent.model.entity.Usuaris;
 import org.fundaciobit.queesticfent.model.fields.FestiusFields;
 import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,37 +43,14 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class VacancesUserController extends ModificacionsQueEsticFentController {
 
-    
-    public static final String[] MESOS = { "Gener ", "Febrer ", "Març ", "Abril ", "Maig ", "Juny ", "Juliol ",
-            "Agost ", "Setembre ", "Octubre ", "Novembre ", "Desembre" };
+    public static final String[] MESOS = { "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost",
+            "Setembre", "Octubre", "Novembre", "Desembre" };
 
-    
-    public static final Map<String, String> COLORS = new HashMap<String, String>();
-
-    public static final Map<String, String> NOMS = new HashMap<String, String>();
-
-    static {
-        COLORS.put("fbosch", "#F1C232");
-        COLORS.put("jagarcia", "#B6D7A8");
-        COLORS.put("anadal", "#00FF00");
-        COLORS.put("gdeignacio", "#FF6D01");
-        COLORS.put("mgonzalez", "#00FFFF");
-        COLORS.put("ptrias", "#3C78D8");
-        COLORS.put("atrobat", "#FF0000");
-        COLORS.put("pvico", "#8E7CC3");
-
-        NOMS.put("fbosch", "Francesc Bosch");
-        NOMS.put("jagarcia", "Juan Antonio Garcia");
-        NOMS.put("anadal", "Antoni Nadal");
-        NOMS.put("gdeignacio", "Guillem de Ignacio");
-        NOMS.put("mgonzalez", "Marilen Gonzalez");
-        NOMS.put("ptrias", "Pau Trias");
-        NOMS.put("atrobat", "Antoni Trobat");
-        NOMS.put("pvico", "Pilar Vico");
-    }
-    
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
+
+    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
+    protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
 
     @Override
     public String getEntityNameCode() {
@@ -122,12 +100,11 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
         return modificacionsQueEsticFentFilterForm;
     }
 
-
     @RequestMapping(value = "/vacancespermes", method = RequestMethod.GET)
     public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-        
+
         Where w;
-        Timestamp from,to;
+        Timestamp from, to;
         {
             Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
@@ -145,32 +122,27 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
             Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
             w = Where.AND(w1, w2);
         }
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         Set<String> festius = new HashSet<String>();
         {
-            List<Festius> festiusList = festiusEjb.select(FestiusFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
-            
-            
-            
-            for (Festius f : festiusList) {
-                
-                festius.add(sdf.format(f.getData()));            }
-            
-            
-        }
-        
+            List<Festius> festiusList = festiusEjb.select(
+                    FestiusFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
 
-        List<ModificacionsQueEsticFent> vacances = this.modificacionsQueEsticFentEjb
-                .select(w);
+            for (Festius f : festiusList) {
+
+                festius.add(sdf.format(f.getData()));
+            }
+
+        }
+
+        List<ModificacionsQueEsticFent> vacances = this.modificacionsQueEsticFentEjb.select(w);
 
         log.info("vacances.size() =>" + vacances.size());
 
         Map<String, VacancesMes> vacancesmesos = new TreeMap<String, VacancesUserController.VacancesMes>();
 
-        Set<UsuariInfo> persones = new TreeSet<UsuariInfo>();
-
-        //Map<String, Map<Integer, BitSet>> vacancesPerUsuariMes = new HashMap<String, Map<Integer,BitSet>>();
+        Set<String> usuaris = new HashSet<String>();
 
         for (ModificacionsQueEsticFent m : vacances) {
 
@@ -209,7 +181,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
                     if (diaset == Calendar.SATURDAY || diaset == Calendar.SUNDAY) {
                         capdesetmanes.set(i);
                     } else {
-                        
+
                         if (festius.contains(sdf.format(dia.getTime()))) {
                             festiusMes.set(i);
                         }
@@ -226,11 +198,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
             String user = m.getUsuariID();
 
-            UsuariInfo p = new UsuariInfo();
-            p.username = user;
-            p.color = COLORS.get(user);
-            p.nom = NOMS.get(user);
-            persones.add(p);
+            usuaris.add(user);
 
             PersonaVacancesInfo persona = vacancesPerMes.personesMap.get(user);
             if (persona == null) {
@@ -245,7 +213,15 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
             persona.vacances.set(cal.get(Calendar.DATE));
         }
 
-        log.info("vacancesmesos.size() =>" + vacancesmesos.size());
+        List<Usuaris> usuarisList = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
+        Set<UsuariInfo> persones = new TreeSet<UsuariInfo>();
+        for (Usuaris u : usuarisList) {
+            UsuariInfo p = new UsuariInfo();
+            p.username = u.getUsuariID();
+            p.color = u.getColor();
+            p.nom = u.getNom() + " " + u.getLlinatge1() + " " + u.getLlinatge2();
+            persones.add(p);
+        }
 
         ModelAndView mav = new ModelAndView("taulaDeVacances");
         mav.addObject("vacancesmesos", vacancesmesos.values());
@@ -262,7 +238,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
         Map<String, PersonaVacancesInfo> personesMap;
 
         BitSet festius;
-        
+
         BitSet capdesetmanes;
 
         public int getAnyo() {

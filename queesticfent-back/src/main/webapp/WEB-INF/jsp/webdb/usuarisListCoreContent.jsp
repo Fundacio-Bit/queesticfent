@@ -72,9 +72,9 @@
           ${usuaris.telefonmobil}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuarisFields.CONTRASENYA)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuarisFields.COLOR)}">
           <td>
-          ${usuaris.contrasenya}
+          ${usuaris.color}
           </td>
         </c:if>
 

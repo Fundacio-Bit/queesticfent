@@ -141,14 +141,14 @@ public class UsuarisFilterForm extends queesticfentBaseFilterForm implements Usu
   }
 
 
-  private java.lang.String contrasenya;
+  private java.lang.String color;
 
-  public java.lang.String getContrasenya() {
-    return this.contrasenya;
+  public java.lang.String getColor() {
+    return this.color;
   }
 
-  public void setContrasenya(java.lang.String contrasenya) {
-    this.contrasenya = contrasenya;
+  public void setColor(java.lang.String color) {
+    this.color = color;
   }
 
 
@@ -168,7 +168,7 @@ public class UsuarisFilterForm extends queesticfentBaseFilterForm implements Usu
     this.naixementFins = __toClone.naixementFins;
     this.telefoncasa = __toClone.telefoncasa;
     this.telefonmobil = __toClone.telefonmobil;
-    this.contrasenya = __toClone.contrasenya;
+    this.color = __toClone.color;
   }
   
   /* ========= UTILS ========== */
