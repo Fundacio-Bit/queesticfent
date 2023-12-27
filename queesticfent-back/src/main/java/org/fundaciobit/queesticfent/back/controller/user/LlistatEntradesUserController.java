@@ -254,7 +254,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         form.addReadOnlyField(USUARIID);
         form.addReadOnlyField(ACCIOID);
         form.addHiddenField(QUEESTICFENTID);
-        form.addReadOnlyField(PROJECTEID);
+        //form.addReadOnlyField(PROJECTEID);
 
         return form;
     }

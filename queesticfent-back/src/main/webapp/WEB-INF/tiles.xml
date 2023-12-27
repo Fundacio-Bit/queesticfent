@@ -74,20 +74,6 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
     </definition>
     
-    <!-- <definition name="entradesFormUser" extends="user">
-        <put-attribute name="titol" value="modificacionsQueEsticFent.modificacionsQueEsticFent" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentForm.jsp" />
-    </definition>
-    
-    <definition name="entradesListUser" extends="user">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentList.jsp" />
-    </definition> -->
-    
-    <!--<definition name="entradesListFormUser" extends="user">
-        <put-attribute name="titol" value="modificacionsQueEsticFent.modificacionsQueEsticFent" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentForm.jsp" />
-    </definition> -->
-    
     <definition name="entradesListUser" extends="user">
         <put-attribute name="contingut" value="/WEB-INF/jsp/user/LlistatEntrades.jsp" />
     </definition>
@@ -146,6 +132,14 @@
     
     <definition name="gestioUsuarisList" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisList.jsp" />
+    </definition>
+    
+    <definition name="gestioProjectesForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesForm.jsp" />
+    </definition>
+    
+    <definition name="gestioProjectesList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesList.jsp" />
     </definition>
      
     
