@@ -498,7 +498,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         final IAccions accioSinonim = accionsByID.get(Utils.ACCIO_SINONIM);
         afegirEntrades(usuariID, all_Sin, itemsByQueEsticFentID, llista, accioSinonim);
         */
-
+        log.info("XYZ ZZZ Projectes = "+Arrays.toString(projectes.toArray()));
         // 4.- Aplicar Modificacions
         // 4.1.- Cercar Modificacions
         Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
@@ -842,7 +842,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         Long projecteID = null; // null == TOTS
         List<Long> projectesSeleccionats = projectes;
         {
-            String projecteStr = "28"; //request.getParameter("projecteID");
+            String projecteStr = null;
+            if(request.getParameter("projecteID")!= null) {
+                projecteStr = request.getParameter("projecteID");
+            }
+            
             if (projecteStr != null && projecteStr.length() != 0) {
                 projecteID = Long.parseLong(projecteStr);
                 // Projecte per parï¿½metre no esta en la llista de disponibles

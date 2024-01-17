@@ -170,17 +170,21 @@ noms.put(usuariID, info.getUserInfo().getFullName());
   
   <%-- /* PROJECTE */ --%>
   <td align="left" style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
-     <%  { %>
+     <%  
+     Map<Long, String> projectesMap = new HashMap<Long, String>();
+     { %>
       Projectes:<br>
       <select name="projecteID"  onchange="document.REB2010.submit()" >
           <%  %>
-            <option value="">Tots</option>
+            <option value="" <%=projecteID == null ? "selected":"" %> >Tots</option>
           <% {
             
             //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
             String __def;
             for(Projectes proj : projectesList) {
-              __def = projecteID.equals(proj.getProjecteID())? "selected" : "";
+                
+              __def = (projecteID != null && proj.getProjecteID() == projecteID) ? "selected" : "";
+              projectesMap.put(proj.getProjecteID(), proj.getNom());
             %>
                <option value="<%=proj.getProjecteID()%>" <%=__def%> ><%=proj.getNom()%></option>
           <% } %>
@@ -282,6 +286,7 @@ Afegir Entrada
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
+<td>Projecte</td>
 <td>Comentari</td>
 </tr>
 <%
@@ -348,6 +353,97 @@ for(int d=1; d <= maxDay; d++) {
    </a>
  <% } %>
 </td>
+
+
+<%-- COLUMNA DE PROJECTE --%>
+<td>
+<% if (llista == null) { %>
+   &nbsp;
+<% } else { %> 
+  <table border=0 width="100%" height="100%" cellpadding="0" cellspacing="0">
+  <%
+  String topBorder = "";
+  String bgColor;
+  for (QueEsticFentItem qefi : llista) {
+    List<ModificacioItem> modificacions = qefi.getModificacions(); 
+    if (modificacions.size() != 0) {
+      
+    }
+    if (modificacions.size() == 0) {
+      bgColor = "";  
+    } else {
+      if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null && !mostrarEntradesAmagades) {
+        continue;
+      }
+      if (modificacions.size() == 1) {
+        ModificacioItem mi = modificacions.get(0);
+        bgColor = "bgcolor=\"#" + mi.getAccio().getColor() +"\"";        
+      } else {
+        bgColor = "bgcolor=\"#ffff00\"";
+      }
+    }
+    
+    String ID= null;
+    /*if (qefi.getQueesticfentOriginal() != null) {
+      ID = String.valueOf(qefi.getQueesticfentOriginal().getQueesticfentID());
+    }*/
+%>
+    <tr <%=bgColor %> >
+       <td <%=topBorder%> width="100%" >
+       
+       
+        
+        <% for(ModificacioItem mi : modificacions){%>
+        <%=ID == null? "" : ("[" + ID + "]")%> <%= projectesMap.get(mi.getModificacio().getProjecteID())%>
+        <%} %>
+        
+       </td>
+       <td <%=topBorder%> align="right" valign="middle">
+       
+       <% if (projecteID != null) { %>
+       
+          <table border="0" cellspacing="0" cellpadding="0"><tr>
+          
+          <%--  Llista de canvis que puc borrar --%>
+          <% if (modificacions.size() != 0) { 
+               for(ModificacioItem mi : modificacions) {
+                 ModificacionsQueEsticFent mod = mi.getModificacio();
+                 if (mod != null) {
+               %>
+               <td style="padding-left:5px;">
+<table cellpadding="0" cellspacing="0">
+<tr><td>
+             <a href="<%=mod.getModificacioID()%>/delete"  onmouseover="toolTip('Eliminar <%=mi.getAccio().getNomLlegenda().replace('\'','_')%>', this)" >
+                 <img alt="Eliminar modificacio" src="<c:url value="/img"/>/delete_12x12.gif"/>
+             </a>
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+              <a                      href="<%=mod.getModificacioID()%>/edit" onmouseover="toolTip('Editar <%=mi.getAccio().getNomLlegenda().replace('\'','_')%>', this)" >
+                 <img alt="Editar modificacio" src="<c:url value="/img"/>/link.gif"/>
+             </a>
+</td></tr></table>
+             </td>
+              <% }
+              }
+            }
+           %>
+         
+         <td valign="middle">          
+          </td></tr></table>
+          <% } %>
+       </td>
+    </tr>   
+<% 
+    if (topBorder.length() == 0) {
+       topBorder = " style=\"border-top-style: solid; border-top-width: 1px;\""; 
+    }
+   } %>
+  </table> 
+<% } %>
+
+</td>
+
+<%-- FI DE LA COLUMNA DE PROJECTE --%>
+
 <td>
 <% if (llista == null) { %>
    &nbsp;
