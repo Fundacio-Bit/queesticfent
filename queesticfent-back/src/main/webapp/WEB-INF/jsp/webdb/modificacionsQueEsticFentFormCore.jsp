@@ -116,7 +116,7 @@
         <script type="text/javascript">
             $(function () {
                 $('#modificacionsQueEsticFent_data').datetimepicker({
-                    format: '${gen:getJSDateTimePattern()}',
+                    format: '${gen:getJSDatePattern()}',
                     locale: '${lang}',
                     icons: {
                        time: 'far fa-clock'

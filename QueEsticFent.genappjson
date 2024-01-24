@@ -1179,7 +1179,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 7
+            "webtype": 5
           },
           "foreignKeys": []
         },

@@ -220,14 +220,8 @@ noms.put(usuariID, info.getUserInfo().getFullName());
 <td align="center" style="border-left: 1px solid; padding-right:10px; padding-left:10px;"> 
    <% String href;
       String target;
-      if (projecteID == null) { 
-        href = "javascript:alert('Has de triar un sol projecte.')";
-        target = "";
-      } else {
-        href = "mostrarodt?" + redirectUrlParams +"&multiple=true";
-        target = "target=\"_blank\"";
-      }
-      
+      href = "mostrarodt?" + redirectUrlParams +"&multiple=true";
+      target = "target=\"_blank\"";
    %>
    <a href="<%=href%>" <%=target%>  onmouseover="toolTip('ODT de Tasques de tot el personal', this)" >
       <img border="0" src="<c:url value="/img"/>/odtmultiple.gif">
@@ -364,16 +358,17 @@ for(int d=1; d <= maxDay; d++) {
   <%
   String topBorder = "";
   String bgColor;
+  String projectName="";
+
   for (QueEsticFentItem qefi : llista) {
     List<ModificacioItem> modificacions = qefi.getModificacions(); 
-    if (modificacions.size() != 0) {
-      
-    }
     if (modificacions.size() == 0) {
       bgColor = "";  
     } else {
-      if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null && !mostrarEntradesAmagades) {
-        continue;
+      if(qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_FESTIU && qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_VACANCES){
+          projectName = projectesMap.get(modificacions.get(0).getModificacio().getProjecteID());
+      }else{
+          projectName = "&nbsp";
       }
       if (modificacions.size() == 1) {
         ModificacioItem mi = modificacions.get(0);
@@ -383,53 +378,10 @@ for(int d=1; d <= maxDay; d++) {
       }
     }
     
-    String ID= null;
-    /*if (qefi.getQueesticfentOriginal() != null) {
-      ID = String.valueOf(qefi.getQueesticfentOriginal().getQueesticfentID());
-    }*/
 %>
     <tr <%=bgColor %> >
-       <td <%=topBorder%> width="100%" >
-       
-       
-        
-        <% for(ModificacioItem mi : modificacions){%>
-        <%=ID == null? "" : ("[" + ID + "]")%> <%= projectesMap.get(mi.getModificacio().getProjecteID())%>
-        <%} %>
-        
-       </td>
-       <td <%=topBorder%> align="right" valign="middle">
-       
-       <% if (projecteID != null) { %>
-       
-          <table border="0" cellspacing="0" cellpadding="0"><tr>
-          
-          <%--  Llista de canvis que puc borrar --%>
-          <% if (modificacions.size() != 0) { 
-               for(ModificacioItem mi : modificacions) {
-                 ModificacionsQueEsticFent mod = mi.getModificacio();
-                 if (mod != null) {
-               %>
-               <td style="padding-left:5px;">
-<table cellpadding="0" cellspacing="0">
-<tr><td>
-             <a href="<%=mod.getModificacioID()%>/delete"  onmouseover="toolTip('Eliminar <%=mi.getAccio().getNomLlegenda().replace('\'','_')%>', this)" >
-                 <img alt="Eliminar modificacio" src="<c:url value="/img"/>/delete_12x12.gif"/>
-             </a>
-</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
-              <a                      href="<%=mod.getModificacioID()%>/edit" onmouseover="toolTip('Editar <%=mi.getAccio().getNomLlegenda().replace('\'','_')%>', this)" >
-                 <img alt="Editar modificacio" src="<c:url value="/img"/>/link.gif"/>
-             </a>
-</td></tr></table>
-             </td>
-              <% }
-              }
-            }
-           %>
-         
-         <td valign="middle">          
-          </td></tr></table>
-          <% } %>
+       <td <%=topBorder%> width="100%" height="100%">
+         <%= projectName %>
        </td>
     </tr>   
 <% 
@@ -471,18 +423,14 @@ for(int d=1; d <= maxDay; d++) {
       }
     }
     
-    String ID= null;
-    /*if (qefi.getQueesticfentOriginal() != null) {
-      ID = String.valueOf(qefi.getQueesticfentOriginal().getQueesticfentID());
-    }*/
+    
 %>
     <tr <%=bgColor %> >
        <td <%=topBorder%> width="100%" >
-        <%=ID == null? "" : ("[" + ID + "]")%> <%= qefi.getDescripcio() %>
+        <%= qefi.getDescripcio() %>
        </td>
        <td <%=topBorder%> align="right" valign="middle">
        
-       <% if (projecteID != null) { %>
        
           <table border="0" cellspacing="0" cellpadding="0"><tr>
           
@@ -506,7 +454,7 @@ for(int d=1; d <= maxDay; d++) {
              </td>
               <% }
               }
-            }
+            
            %>
          
          <td valign="middle">          

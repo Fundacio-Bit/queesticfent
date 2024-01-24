@@ -30,11 +30,13 @@ import org.fundaciobit.basecamp.api3.beans.NewEntry;
 import org.fundaciobit.basecamp.api3.beans.User;
 import org.fundaciobit.basecamp.api3.utils.TokenResponse;
 import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
+import org.fundaciobit.genapp.common.KeyValue;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
+import org.fundaciobit.genapp.common.query.SelectMultipleKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -1038,12 +1040,12 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
     @RequestMapping(value = "mostrarodt", method = { RequestMethod.GET, RequestMethod.POST })
     public void mostrarODT(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        //Usuari seleccionat
         String usuariID = request.getParameter("usuariID");
 
         try {
             Calendar start = Calendar.getInstance();
-
+            //Mes seleccionat
             int mes;
             {
                 String mesStr = request.getParameter("mes");
@@ -1054,7 +1056,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
             }
 
-            // Seleccionar any
+            // Any Seleccionat
             int any;
             {
                 String anyStr = request.getParameter("any");
@@ -1065,52 +1067,62 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
             }
 
-            //============== PROJECTES
-
-            Long projecteID; // REQUERIT
-            {
-                String projecteStr = request.getParameter("projecteID");
-                if (projecteStr == null || projecteStr.trim().length() == 0) {
-                    //XYZ Gestio d'errors?
-                    //throw new Exception("No s'ha passat el paràmetre projecteID.");
-                    log.error("No s'ha passat el paràmetre projecteID.");
+            
+            //Projecte seleccionat
+            
+            
+            String projecteStr = request.getParameter("projecteID");
+            String projectName = "OTAE";
+            
+            List<String> usuarisList;
+            List<Long> projectesID = new ArrayList<Long>(); 
+            List<Projectes> projectes;
+            Where w;
+           
+            
+            if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr)>0) {
+                //En cas de que arribi un projecte per parametre: Seleccionam 1 projecte
+                Long projecteID = Long.parseLong(projecteStr);
+                projectesID.add(projecteID);
+                
+                Where equalProjecteId = PersonalProjecteFields.PROJECTEID.equal(projecteID);
+                Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
+                
+                if ("true".equals(request.getParameter("multiple"))) {
+                    log.info("S'HA ENTRAT A MULTIPLES USUARI");
+                    w = equalProjecteId;
+                } else {
+                    log.info("S'HA ENTRAT A UN USUARI");
+                    w = Where.AND(equalProjecteId, equalUsuariId);
                 }
-                projecteID = Long.parseLong(projecteStr);
+                
+            }else {
+                // No arriba projecte per parametre: Tots els projectes
+                projectName = "OTAE";
+                
+                //Agafam el llistat complet de projectes
+                projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID, new OrderBy(ProjectesFields.PROJECTEID));
+               
+                if ("true".equals(request.getParameter("multiple"))) {
+                    log.info("S'HA ENTRAT A MULTIPLES USUARI");
+                    Where equalProjecteId= PersonalProjecteFields.PROJECTEID.in(projectesID);
+                    w = equalProjecteId;
+                } else {
+                    log.info("S'HA ENTRAT A UN USUARI");
+                    Where equalProjecteId= PersonalProjecteFields.PROJECTEID.in(projectesID);
+                    Where equalUsuariId= PersonalProjecteFields.USUARIID.equal(usuariID);
+                    w = Where.AND(equalProjecteId, equalUsuariId);
+                }
             }
-            String projectName = projectesEjb.findByPrimaryKey(projecteID).getNom();
-
-            log.info("XYZ ProjectID: " + projecteID);
-            log.info("XYZ projectName: " + projectName);
-
+            
+            
+            usuarisList = personalProjecteEjb.executeQuery(PersonalProjecteFields.USUARIID, w,
+                    new OrderBy(PersonalProjecteFields.ORDRE));
+                        
             response.setContentType("application/application/vnd.oasis.opendocument.text");
             response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
 
                     + StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
-
-            List<String> usuarisList;
-            {
-                Where w;
-                Where w1 = PersonalProjecteFields.PROJECTEID.equal(projecteID);
-                if ("true".equals(request.getParameter("multiple"))) {
-                    w = w1;
-                } else {
-                    Where w2 = PersonalProjecteFields.USUARIID.equal(usuariID);
-                    w = Where.AND(w1, w2);
-                }
-
-                usuarisList = personalProjecteEjb.executeQuery(PersonalProjecteFields.USUARIID, w,
-                        new OrderBy(PersonalProjecteFields.ORDRE));
-            }
-
-            log.info("XYZ usuarisList: " + usuarisList.toArray());
-
-            // XYZ Passar a log
-            for (String usr : usuarisList) {
-
-                log.info("Personal projecte " + projecteID + ": " + usr);
-            }
-
-            //DocumentTemplateFactory documentTemplateFactory = new DocumentTemplateFactory();
 
             File webInfDir = new File(FileSystemManager.getFilesPath(), "plantilles");
             webInfDir.mkdirs();
@@ -1120,9 +1132,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 templateFile = new File("DEFAULT_Template.odt");
             }
 
-            //DocumentTemplate template = documentTemplateFactory.getTemplate(templateFile);
-
-            Map<String, Object> map = generateUserInfo(usuarisList, projecteID, any, mes);
+            Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
 
             ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map
                     .get("usuaris");
@@ -1184,6 +1194,15 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
     private Map<String, Object> generateUserInfo(List<String> usuaris, List<Long> projectes, int any, int mes)
             throws Exception {
+        
+        List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select), new OrderBy(ProjectesFields.PROJECTEID));
+        
+        Map<Long, String> projectesMap = new HashMap<Long, String>();
+        
+        for (KeyValue<Long> keyValue : projectesList) {
+            projectesMap.put(keyValue.getKey(), keyValue.getValue());
+        }
+        
 
         Calendar start = Calendar.getInstance();
 
@@ -1233,12 +1252,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
                 boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
                 llista = itemsByDate.get(start.getTime());
-                /*if(llista != null) {
-                    log.info("XYZ llista itembsByDate["+d+"] = " +llista.size());
-                    for (QueEsticFentItem userInfo : llista) {
-                        log.info("    -"+userInfo.getDescripcio());
-                    } 
-                }*/
 
                 Item item = new Item();
                 item.setDia(dStr);
@@ -1251,11 +1264,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     } else {
                         StringBuffer comment = new StringBuffer();
                         for (QueEsticFentItem qefi : llista) {
-                            /*
-                            if (qefi.getAccio() != null && qefi.getAccio().getAccioID() == Utils.ACCIO_AMAGAR_ENTRADA) {
-                              continue;
-                            }
-                            */
                             if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null) {
                                 continue;
                             }
@@ -1263,12 +1271,19 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                             if (comment.length() != 0) {
                                 comment.append('\n');
                             }
-                            log.info("    *" + qefi.getDescripcio());
-                            comment.append(qefi.getDescripcio());
+                            String descripcioItem="";
+                            if(qefi.getModificacions().get(0).getModificacio().getProjecteID() != null) {
+                                descripcioItem = projectesMap.get(qefi.getModificacions().get(0).getModificacio().getProjecteID())+": "+qefi.getDescripcio();
+                            }else {
+                                descripcioItem = qefi.getDescripcio();
+                            }
+                            
+                            log.info("    *" + descripcioItem);
 
+                            comment.append(descripcioItem);
+                            
                         }
                         item.setComentari(comment.toString());
-                        //log.info("DIA " + d + ": " + comment.toString());
                     }
                 }
                 items.add(item);

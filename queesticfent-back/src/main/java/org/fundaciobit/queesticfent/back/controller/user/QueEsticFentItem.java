@@ -14,7 +14,7 @@ public class QueEsticFentItem {
   
   private Timestamp data;
   
-  private String descripcio; 
+  private String descripcio;
   
   //private IQueEsticFent queesticfentOriginal;
  

@@ -51,7 +51,7 @@
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.DATA)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${modificacionsQueEsticFent.data}" /></td>
+          <td> <fmt:formatDate pattern="${gen:getDatePattern()}" value="${modificacionsQueEsticFent.data}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ModificacionsQueEsticFentFields.QUEESTICFENTID)}">
           <td>
