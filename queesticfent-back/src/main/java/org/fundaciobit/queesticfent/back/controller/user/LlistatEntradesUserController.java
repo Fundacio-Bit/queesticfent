@@ -7,13 +7,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,11 @@ import org.fundaciobit.basecamp.api3.utils.TokenResponse;
 import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
 import org.fundaciobit.genapp.common.KeyValue;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.i18n.I18NArgument;
+import org.fundaciobit.genapp.common.i18n.I18NArgumentCode;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NFieldError;
+import org.fundaciobit.genapp.common.i18n.I18NTranslation;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
@@ -40,6 +43,7 @@ import org.fundaciobit.genapp.common.query.SelectMultipleKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
 import org.fundaciobit.pluginsib.core.utils.ISO8601;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
@@ -69,6 +73,7 @@ import org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA;
 import org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA;
 import org.fundaciobit.queesticfent.persistence.UsuarisJPA;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -193,7 +198,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             form.addReadOnlyField(DATA);
 
             try {
-                m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
+                m.setData(new Date(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
             } catch (ParseException e) {
                 // TODO XYZ 
                 e.printStackTrace();
@@ -414,15 +419,15 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             Entry fullEntry = api3.addScheduleEntry(projectID, scheduleID, e);
 
             m.setDada2("basecamp.entryID=" + fullEntry.getId());
-            
+
             this.update(request, m);
 
             HtmlUtils.saveMessageSuccess(request, "Afegit dia lliure al calendari de BaseCamp");
 
         } catch (Throwable th) {
 
-            String msg = "Error no controlat intentant donat d'alta l'entrada al calendari de Basecamp: "
-                    + th.getMessage();
+            String msg = "Error no controlat intentant donat d'alta l'entrada al calendari de Basecamp."
+                    + " L'haurà de donat d'alta manualment. Error: " + th.getMessage();
 
             log.error(msg, th);
 
@@ -500,12 +505,12 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         final IAccions accioSinonim = accionsByID.get(Utils.ACCIO_SINONIM);
         afegirEntrades(usuariID, all_Sin, itemsByQueEsticFentID, llista, accioSinonim);
         */
-        log.info("XYZ ZZZ Projectes = "+Arrays.toString(projectes.toArray()));
+        log.info("XYZ ZZZ Projectes = " + Arrays.toString(projectes.toArray()));
         // 4.- Aplicar Modificacions
         // 4.1.- Cercar Modificacions
         Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
-        Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(new Timestamp(start.getTime()));
-        Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(new Timestamp(end.getTime()));
+        Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
+        Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
         Where wm4a = ModificacionsQueEsticFentFields.PROJECTEID.in(projectes.toArray(new Long[projectes.size()]));
         Where wm4b = ModificacionsQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_VACANCES);
         Where wm = Where.AND(wm1, wm2, wm3, Where.OR(wm4a, wm4b));
@@ -711,7 +716,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
                 Date date = toDate000000(festa.getData().getTime());
 
-                item = new QueEsticFentItem(null, new Timestamp(festa.getData().getTime()),
+                item = new QueEsticFentItem(null, new Date(festa.getData().getTime()),
                         "Festiu - " + festa.getNom());
                 //item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
                 Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
@@ -845,10 +850,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         List<Long> projectesSeleccionats = projectes;
         {
             String projecteStr = null;
-            if(request.getParameter("projecteID")!= null) {
+            if (request.getParameter("projecteID") != null) {
                 projecteStr = request.getParameter("projecteID");
             }
-            
+
             if (projecteStr != null && projecteStr.length() != 0) {
                 projecteID = Long.parseLong(projecteStr);
                 // Projecte per parï¿½metre no esta en la llista de disponibles
@@ -940,7 +945,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-        itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, start.getTime(), end.getTime());
+        itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()));
         //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
         mav.addObject("start", start);
         mav.addObject("itemsByDate", itemsByDate);
@@ -1008,7 +1013,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         cal.set(Calendar.MILLISECOND, 0);
 
         // Put it back in the Date object  
-        return cal.getTime();
+        return new Date(cal.getTimeInMillis());
 
     }
 
@@ -1067,27 +1072,24 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 }
             }
 
-            
             //Projecte seleccionat
-            
-            
+
             String projecteStr = request.getParameter("projecteID");
             String projectName = "OTAE";
-            
+
             List<String> usuarisList;
-            List<Long> projectesID = new ArrayList<Long>(); 
+            List<Long> projectesID = new ArrayList<Long>();
             List<Projectes> projectes;
             Where w;
-           
-            
-            if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr)>0) {
+
+            if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr) > 0) {
                 //En cas de que arribi un projecte per parametre: Seleccionam 1 projecte
                 Long projecteID = Long.parseLong(projecteStr);
                 projectesID.add(projecteID);
-                
+
                 Where equalProjecteId = PersonalProjecteFields.PROJECTEID.equal(projecteID);
                 Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
-                
+
                 if ("true".equals(request.getParameter("multiple"))) {
                     log.info("S'HA ENTRAT A MULTIPLES USUARI");
                     w = equalProjecteId;
@@ -1095,30 +1097,30 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     log.info("S'HA ENTRAT A UN USUARI");
                     w = Where.AND(equalProjecteId, equalUsuariId);
                 }
-                
-            }else {
+
+            } else {
                 // No arriba projecte per parametre: Tots els projectes
                 projectName = "OTAE";
-                
+
                 //Agafam el llistat complet de projectes
-                projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID, new OrderBy(ProjectesFields.PROJECTEID));
-               
+                projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID,
+                        new OrderBy(ProjectesFields.PROJECTEID));
+
                 if ("true".equals(request.getParameter("multiple"))) {
                     log.info("S'HA ENTRAT A MULTIPLES USUARI");
-                    Where equalProjecteId= PersonalProjecteFields.PROJECTEID.in(projectesID);
+                    Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
                     w = equalProjecteId;
                 } else {
                     log.info("S'HA ENTRAT A UN USUARI");
-                    Where equalProjecteId= PersonalProjecteFields.PROJECTEID.in(projectesID);
-                    Where equalUsuariId= PersonalProjecteFields.USUARIID.equal(usuariID);
+                    Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
+                    Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
                     w = Where.AND(equalProjecteId, equalUsuariId);
                 }
             }
-            
-            
+
             usuarisList = personalProjecteEjb.executeQuery(PersonalProjecteFields.USUARIID, w,
                     new OrderBy(PersonalProjecteFields.ORDRE));
-                        
+
             response.setContentType("application/application/vnd.oasis.opendocument.text");
             response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
 
@@ -1194,15 +1196,16 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
     private Map<String, Object> generateUserInfo(List<String> usuaris, List<Long> projectes, int any, int mes)
             throws Exception {
-        
-        List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select), new OrderBy(ProjectesFields.PROJECTEID));
-        
+
+        List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(
+                new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select),
+                new OrderBy(ProjectesFields.PROJECTEID));
+
         Map<Long, String> projectesMap = new HashMap<Long, String>();
-        
+
         for (KeyValue<Long> keyValue : projectesList) {
             projectesMap.put(keyValue.getKey(), keyValue.getValue());
         }
-        
 
         Calendar start = Calendar.getInstance();
 
@@ -1233,7 +1236,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             start.set(Calendar.DATE, 1);
 
             Map<Date, List<QueEsticFentItem>> itemsByDate;
-            itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, start.getTime(), end.getTime());
+            itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()));
 
             log.info("=========================");
             log.info(": " + itemsByDate.size());
@@ -1271,17 +1274,19 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                             if (comment.length() != 0) {
                                 comment.append('\n');
                             }
-                            String descripcioItem="";
-                            if(qefi.getModificacions().get(0).getModificacio().getProjecteID() != null) {
-                                descripcioItem = projectesMap.get(qefi.getModificacions().get(0).getModificacio().getProjecteID())+": "+qefi.getDescripcio();
-                            }else {
+                            String descripcioItem = "";
+                            if (qefi.getModificacions().get(0).getModificacio().getProjecteID() != null) {
+                                descripcioItem = projectesMap
+                                        .get(qefi.getModificacions().get(0).getModificacio().getProjecteID()) + ": "
+                                        + qefi.getDescripcio();
+                            } else {
                                 descripcioItem = qefi.getDescripcio();
                             }
-                            
+
                             log.info("    *" + descripcioItem);
 
                             comment.append(descripcioItem);
-                            
+
                         }
                         item.setComentari(comment.toString());
                     }
@@ -1305,6 +1310,20 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         data.put("usuaris", llistaDeUserInfo);
 
         return data;
+    }
+
+    @Override
+    public void postValidate(HttpServletRequest request,ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, BindingResult result)  throws I18NException {
+    
+        if (modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteID() == null) {
+            
+            I18NFieldError fieldError = new I18NFieldError(PROJECTEID, new I18NTranslation  ("genapp.validation.required", 
+                    new I18NArgument[] { new I18NArgumentCode(get(PROJECTEID)) } ));
+            
+
+            ValidationWebUtils.addFieldErrorsToBindingResult(result, new I18NValidationException(fieldError));
+        }
+    
     }
 
 }

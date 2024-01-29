@@ -74,3 +74,6 @@ queesticfent-api-externa/target/
 /queesticfent-api-externa-client/gradle.properties
 /queesticfent-api-externa-client/gradlew
 /queesticfent-api-externa-client/gradlew.bat
+/queesticfent-api-externa/.settings
+/queesticfent-api-externa/.project
+/queesticfent-api-externa/.classpath

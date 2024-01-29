@@ -14,8 +14,8 @@ public interface ModificacionsQueEsticFent extends org.fundaciobit.genapp.common
 	public java.lang.Long getProjecteID();
 	public void setProjecteID(java.lang.Long _projecteID_);
 
-	public java.sql.Timestamp getData();
-	public void setData(java.sql.Timestamp _data_);
+	public java.sql.Date getData();
+	public void setData(java.sql.Date _data_);
 
 	public java.lang.Long getQueEsticFentID();
 	public void setQueEsticFentID(java.lang.Long _queEsticFentID_);

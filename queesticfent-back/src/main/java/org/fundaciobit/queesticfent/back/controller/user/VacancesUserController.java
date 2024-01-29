@@ -1,6 +1,6 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
 import java.util.Calendar;
@@ -76,12 +76,12 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, -2);
 
-        Timestamp from = new Timestamp(cal.getTimeInMillis());
+        Date from = new Date(cal.getTimeInMillis());
 
         cal.add(Calendar.MONTH, +10);
         cal.set(Calendar.DATE, -1);
 
-        Timestamp to = new Timestamp(cal.getTimeInMillis());
+        Date to = new Date(cal.getTimeInMillis());
 
         Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
         return Where.AND(w1, w2);
@@ -104,7 +104,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
     public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         Where w;
-        Timestamp from, to;
+        Date from, to;
         {
             Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
@@ -112,12 +112,12 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
             cal.set(Calendar.DATE, 1);
             cal.add(Calendar.MONTH, -2);
 
-            from = new Timestamp(cal.getTimeInMillis());
+            from = new Date(cal.getTimeInMillis());
 
             cal.add(Calendar.MONTH, +10);
             cal.set(Calendar.DATE, -1);
 
-            to = new Timestamp(cal.getTimeInMillis());
+            to = new Date(cal.getTimeInMillis());
 
             Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
             w = Where.AND(w1, w2);
@@ -146,7 +146,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
         for (ModificacionsQueEsticFent m : vacances) {
 
-            Timestamp date = m.getData();
+            Date date = m.getData();
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);

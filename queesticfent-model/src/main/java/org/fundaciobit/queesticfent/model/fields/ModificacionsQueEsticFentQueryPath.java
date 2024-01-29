@@ -27,8 +27,8 @@ public class ModificacionsQueEsticFentQueryPath extends org.fundaciobit.genapp.c
     return new LongField(getQueryPath(), ModificacionsQueEsticFentFields.PROJECTEID);
   }
 
-  public TimestampField DATA() {
-    return new TimestampField(getQueryPath(), ModificacionsQueEsticFentFields.DATA);
+  public DateField DATA() {
+    return new DateField(getQueryPath(), ModificacionsQueEsticFentFields.DATA);
   }
 
   public LongField QUEESTICFENTID() {

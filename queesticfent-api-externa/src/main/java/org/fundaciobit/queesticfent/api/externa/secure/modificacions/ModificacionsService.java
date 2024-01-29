@@ -1,6 +1,6 @@
 package org.fundaciobit.queesticfent.api.externa.secure.modificacions;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Locale;
 
 import javax.annotation.security.RolesAllowed;
@@ -109,7 +109,7 @@ public class ModificacionsService extends RestUtils{
             
             ModificacionsQueEsticFent modif = new ModificacionsQueEsticFentJPA();
             modif.setDada1(modificacio.getDada1());
-            modif.setData(new Timestamp(modificacio.getData().getTime()));
+            modif.setData(new Date(modificacio.getData().getTime()));
             modif.setProjecteID(modificacio.getProjecteID());
             modif.setUsuariID(modificacio.getUsuariID());
             modif = modificacionsQueEsticFentEjb.create(modif);

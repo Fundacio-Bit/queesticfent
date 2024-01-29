@@ -55,7 +55,7 @@ public class ModificacionsQueEsticFentJPAManager
         return list.toArray(new ModificacionsQueEsticFent[list.size()]);
     };
 
-    public ModificacionsQueEsticFent create( long _accioID_, java.lang.String _usuariID_, java.lang.Long _projecteID_, java.sql.Timestamp _data_, java.lang.Long _queEsticFentID_, java.lang.String _dada1_, java.lang.String _dada2_) throws I18NException {
+    public ModificacionsQueEsticFent create( long _accioID_, java.lang.String _usuariID_, java.lang.Long _projecteID_, java.sql.Date _data_, java.lang.Long _queEsticFentID_, java.lang.String _dada1_, java.lang.String _dada2_) throws I18NException {
         ModificacionsQueEsticFentJPA __bean =  new ModificacionsQueEsticFentJPA(_accioID_,_usuariID_,_projecteID_,_data_,_queEsticFentID_,_dada1_,_dada2_);
         return create(__bean);
     }

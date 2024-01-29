@@ -98,24 +98,24 @@ public class ModificacionsQueEsticFentFilterForm extends queesticfentBaseFilterF
   }
 
 
-  private java.sql.Timestamp dataDesde;
+  private java.sql.Date dataDesde;
 
-  public java.sql.Timestamp getDataDesde() {
+  public java.sql.Date getDataDesde() {
     return this.dataDesde;
   }
 
-  public void setDataDesde(java.sql.Timestamp dataDesde) {
+  public void setDataDesde(java.sql.Date dataDesde) {
     this.dataDesde = dataDesde;
   }
 
 
-  private java.sql.Timestamp dataFins;
+  private java.sql.Date dataFins;
 
-  public java.sql.Timestamp getDataFins() {
+  public java.sql.Date getDataFins() {
     return this.dataFins;
   }
 
-  public void setDataFins(java.sql.Timestamp dataFins) {
+  public void setDataFins(java.sql.Date dataFins) {
     this.dataFins = dataFins;
   }
 
