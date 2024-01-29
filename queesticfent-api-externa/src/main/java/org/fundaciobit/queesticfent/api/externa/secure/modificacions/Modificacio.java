@@ -2,8 +2,11 @@ package org.fundaciobit.queesticfent.api.externa.secure.modificacions;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
+/**
+ * 
+ * @author anadal
+ *
+ */
 public class Modificacio {
     
     protected String language;
