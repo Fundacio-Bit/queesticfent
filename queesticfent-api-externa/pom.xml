@@ -87,7 +87,7 @@
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
                 <version>2.2.15</version>
-                
+
                 <executions>
                     <execution>
                         <id>openapi1</id>
@@ -116,7 +116,7 @@
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.6.0</version>
+                <version>7.3.0</version>
 
                 <executions>
                     <execution>
@@ -125,14 +125,14 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            
+
                             <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <generatorName>java</generatorName>
                             <skipValidateSpec>true</skipValidateSpec>
                             <configHelp>java</configHelp>
                             <library>resteasy</library>
                             <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
+                             <!--<configHelp>true</configHelp>-->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <output>${project.basedir}/../queesticfent-api-externa-client</output>
                             <apiPackage>${client.default.package}.api</apiPackage>
@@ -149,6 +149,13 @@
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
                             </configOptions>
+                            <!--<typeMappings>
+                                <typeMapping>TimeStamp=Timestamp</typeMapping>
+                                <typeMapping>DateTime=Timestamp</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>Timestamp=java.sql.Timestamp</importMapping>
+                            </importMappings>-->
                         </configuration>
                     </execution>
                 </executions>

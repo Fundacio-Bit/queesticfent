@@ -77,3 +77,13 @@ queesticfent-api-externa/target/
 /queesticfent-api-externa/.settings
 /queesticfent-api-externa/.project
 /queesticfent-api-externa/.classpath
+test.properties
+installCerts.bat
+scripts/.project
+scripts/.settings/org.eclipse.core.resources.prefs
+scripts/.settings/org.eclipse.m2e.core.prefs
+.project
+api.bat
+queesticfent-api-externa-client/.classpath
+pemfiles/
+.settings/

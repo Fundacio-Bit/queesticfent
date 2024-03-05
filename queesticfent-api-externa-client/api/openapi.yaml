@@ -31,7 +31,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Modificacio'
+              $ref: '#/components/schemas/AddModificacioRequest'
         required: true
       responses:
         "200":
@@ -78,10 +78,101 @@ paths:
       - Modificacions
       x-content-type: application/json
       x-accepts: application/json
+  /secure/modificacions/getmodificacions:
+    post:
+      operationId: getmodificacions
+      parameters:
+      - description: Identificador de l'usuari
+        example: jgarcia
+        explode: true
+        in: query
+        name: usuariID
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Filtre Data de la consulta. Format yyyy-MM-dd (ISO 8601)
+        example: 2023-07-19
+        explode: true
+        in: query
+        name: date
+        required: true
+        schema:
+          pattern: "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\
+            d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$"
+          type: string
+        style: form
+      - description: Idioma en que s'han de retornar les dades(Només suportat 'ca'
+          o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          default: ca
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetModificacionsResponse'
+          description: Operació finalitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: "QEFI: Paràmetres incorrectes"
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: "QEFI: No Autenticat"
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: "QEFI: No Autoritzat"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: "QEFI: Error durant la consulta de les dades obertes"
+        "510":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificacionsConstants'
+          description: Només s'utilitza per crear fitxer de constants...
+      security:
+      - BasicAuth: []
+      summary: Retorna les modificacions segons a un rang de temps. Permet filtrar
+        per usuaris
+      tags:
+      - Modificacions
+      x-accepts: application/json
 components:
   schemas:
     RestExceptionInfo:
       description: Estructura de dades utilitzada per passar informació d'un error
+      example:
+        code: 0
+        causeStackTrace: causeStackTrace
+        causeException: causeException
+        errorMessage: errorMessage
+        stackTrace: stackTrace
       properties:
         code:
           description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
@@ -104,6 +195,10 @@ components:
       - errorMessage
       type: object
     ModificacionsConstants:
+      example:
+        ROLE_EJB_FULL_ACCESS: QEF_ADMIN
+        ROLE_EJB_BASIC_ACCESS: 6
+        ROLE_EJB_WS_ACCESS: 1
       properties:
         ROLE_EJB_FULL_ACCESS:
           default: QEF_ADMIN
@@ -125,7 +220,7 @@ components:
       - ROLE_EJB_FULL_ACCESS
       - ROLE_EJB_WS_ACCESS
       type: object
-    Modificacio:
+    AddModificacioRequest:
       example:
         projecteID: 0
         data: 2000-01-23T04:56:07.000+00:00
@@ -144,6 +239,61 @@ components:
           format: date-time
           type: string
         dada1:
+          type: string
+      type: object
+    GetModificacionsResponse:
+      example:
+        modificacions:
+        - accioID: 6
+          projecteID: 1
+          modificacioID: 0
+          data: 2000-01-23T04:56:07.000+00:00
+          usuariID: usuariID
+          dada2: dada2
+          dada1: dada1
+        - accioID: 6
+          projecteID: 1
+          modificacioID: 0
+          data: 2000-01-23T04:56:07.000+00:00
+          usuariID: usuariID
+          dada2: dada2
+          dada1: dada1
+      properties:
+        modificacions:
+          items:
+            $ref: '#/components/schemas/ModificacioRest'
+          type: array
+      type: object
+    ModificacioRest:
+      description: Bean que inclou informació d'una entrada.
+      example:
+        accioID: 6
+        projecteID: 1
+        modificacioID: 0
+        data: 2000-01-23T04:56:07.000+00:00
+        usuariID: usuariID
+        dada2: dada2
+        dada1: dada1
+      properties:
+        modificacioID:
+          format: int64
+          type: integer
+        accioID:
+          format: int64
+          type: integer
+        usuariID:
+          type: string
+        projecteID:
+          format: int64
+          type: integer
+        dada1:
+          type: string
+        dada2:
+          type: string
+        data:
+          description: Data de l'entrada
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ssX
           type: string
       type: object
   securitySchemes:

@@ -25,17 +25,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Modificacio
+ * AddModificacioRequest
  */
 @JsonPropertyOrder({
-  Modificacio.JSON_PROPERTY_LANGUAGE,
-  Modificacio.JSON_PROPERTY_USUARI_I_D,
-  Modificacio.JSON_PROPERTY_PROJECTE_I_D,
-  Modificacio.JSON_PROPERTY_DATA,
-  Modificacio.JSON_PROPERTY_DADA1
+  AddModificacioRequest.JSON_PROPERTY_LANGUAGE,
+  AddModificacioRequest.JSON_PROPERTY_USUARI_I_D,
+  AddModificacioRequest.JSON_PROPERTY_PROJECTE_I_D,
+  AddModificacioRequest.JSON_PROPERTY_DATA,
+  AddModificacioRequest.JSON_PROPERTY_DADA1
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class Modificacio {
+public class AddModificacioRequest {
   public static final String JSON_PROPERTY_LANGUAGE = "language";
   private String language;
 
@@ -51,10 +51,10 @@ public class Modificacio {
   public static final String JSON_PROPERTY_DADA1 = "dada1";
   private String dada1;
 
-  public Modificacio() {
+  public AddModificacioRequest() {
   }
 
-  public Modificacio language(String language) {
+  public AddModificacioRequest language(String language) {
     
     this.language = language;
     return this;
@@ -80,7 +80,7 @@ public class Modificacio {
   }
 
 
-  public Modificacio usuariID(String usuariID) {
+  public AddModificacioRequest usuariID(String usuariID) {
     
     this.usuariID = usuariID;
     return this;
@@ -106,7 +106,7 @@ public class Modificacio {
   }
 
 
-  public Modificacio projecteID(Long projecteID) {
+  public AddModificacioRequest projecteID(Long projecteID) {
     
     this.projecteID = projecteID;
     return this;
@@ -132,7 +132,7 @@ public class Modificacio {
   }
 
 
-  public Modificacio data(OffsetDateTime data) {
+  public AddModificacioRequest data(OffsetDateTime data) {
     
     this.data = data;
     return this;
@@ -158,7 +158,7 @@ public class Modificacio {
   }
 
 
-  public Modificacio dada1(String dada1) {
+  public AddModificacioRequest dada1(String dada1) {
     
     this.dada1 = dada1;
     return this;
@@ -191,12 +191,12 @@ public class Modificacio {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Modificacio modificacio = (Modificacio) o;
-    return Objects.equals(this.language, modificacio.language) &&
-        Objects.equals(this.usuariID, modificacio.usuariID) &&
-        Objects.equals(this.projecteID, modificacio.projecteID) &&
-        Objects.equals(this.data, modificacio.data) &&
-        Objects.equals(this.dada1, modificacio.dada1);
+    AddModificacioRequest addModificacioRequest = (AddModificacioRequest) o;
+    return Objects.equals(this.language, addModificacioRequest.language) &&
+        Objects.equals(this.usuariID, addModificacioRequest.usuariID) &&
+        Objects.equals(this.projecteID, addModificacioRequest.projecteID) &&
+        Objects.equals(this.data, addModificacioRequest.data) &&
+        Objects.equals(this.dada1, addModificacioRequest.dada1);
   }
 
   @Override
@@ -207,7 +207,7 @@ public class Modificacio {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Modificacio {\n");
+    sb.append("class AddModificacioRequest {\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    usuariID: ").append(toIndentedString(usuariID)).append("\n");
     sb.append("    projecteID: ").append(toIndentedString(projecteID)).append("\n");

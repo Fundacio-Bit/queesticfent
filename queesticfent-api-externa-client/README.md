@@ -97,9 +97,9 @@ public class ModificacionsApiExample {
         BasicAuth.setPassword("YOUR PASSWORD");
 
         ModificacionsApi apiInstance = new ModificacionsApi(defaultClient);
-        Modificacio modificacio = new Modificacio(); // Modificacio | 
+        AddModificacioRequest addModificacioRequest = new AddModificacioRequest(); // AddModificacioRequest | 
         try {
-            Long result = apiInstance.add(modificacio);
+            Long result = apiInstance.add(addModificacioRequest);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ModificacionsApi#add");
@@ -120,11 +120,14 @@ All URIs are relative to */queesticfentapi/externa*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ModificacionsApi* | [**add**](docs/ModificacionsApi.md#add) | **POST** /secure/modificacions/add | Afegeix una nova entrada
+*ModificacionsApi* | [**getmodificacions**](docs/ModificacionsApi.md#getmodificacions) | **POST** /secure/modificacions/getmodificacions | Retorna les modificacions segons a un rang de temps. Permet filtrar per usuaris
 
 
 ## Documentation for Models
 
- - [Modificacio](docs/Modificacio.md)
+ - [AddModificacioRequest](docs/AddModificacioRequest.md)
+ - [GetModificacionsResponse](docs/GetModificacionsResponse.md)
+ - [ModificacioRest](docs/ModificacioRest.md)
  - [ModificacionsConstants](docs/ModificacionsConstants.md)
  - [RestExceptionInfo](docs/RestExceptionInfo.md)
 

@@ -7,7 +7,7 @@ import java.util.Date;
  * @author anadal
  *
  */
-public class Modificacio {
+public class AddModificacioRequest {
     
     protected String language;
     

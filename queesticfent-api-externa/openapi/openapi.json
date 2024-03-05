@@ -45,7 +45,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/Modificacio"
+                "$ref" : "#/components/schemas/AddModificacioRequest"
               }
             }
           },
@@ -95,6 +95,116 @@
           },
           "500" : {
             "description" : "EFIB: Error durant la consulta de les dades obertes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ModificacionsConstants"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/modificacions/getmodificacions" : {
+      "post" : {
+        "tags" : [ "Modificacions" ],
+        "summary" : "Retorna les modificacions segons a un rang de temps. Permet filtrar per usuaris",
+        "operationId" : "getmodificacions",
+        "parameters" : [ {
+          "name" : "usuariID",
+          "in" : "query",
+          "description" : "Identificador de l'usuari",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "jgarcia"
+        }, {
+          "name" : "date",
+          "in" : "query",
+          "description" : "Filtre Data de la consulta. Format yyyy-MM-dd (ISO 8601)",
+          "required" : true,
+          "schema" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$",
+            "type" : "string"
+          },
+          "example" : "2023-07-19"
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')",
+          "schema" : {
+            "type" : "string",
+            "default" : "ca"
+          },
+          "examples" : {
+            "Català" : {
+              "description" : "Català",
+              "value" : "ca"
+            },
+            "Castellano" : {
+              "description" : "Castellano",
+              "value" : "es"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operació finalitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetModificacionsResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "QEFI: Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "QEFI: No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "QEFI: No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "QEFI: Error durant la consulta de les dades obertes",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -174,7 +284,7 @@
           }
         }
       },
-      "Modificacio" : {
+      "AddModificacioRequest" : {
         "type" : "object",
         "properties" : {
           "language" : {
@@ -195,6 +305,50 @@
             "type" : "string"
           }
         }
+      },
+      "GetModificacionsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "modificacions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ModificacioRest"
+            }
+          }
+        }
+      },
+      "ModificacioRest" : {
+        "type" : "object",
+        "properties" : {
+          "modificacioID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "accioID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "usuariID" : {
+            "type" : "string"
+          },
+          "projecteID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "dada1" : {
+            "type" : "string"
+          },
+          "dada2" : {
+            "type" : "string"
+          },
+          "data" : {
+            "pattern" : "yyyy-MM-dd'T'HH:mm:ssX",
+            "type" : "string",
+            "description" : "Data de l'entrada",
+            "format" : "date-time"
+          }
+        },
+        "description" : "Bean que inclou informació d'una entrada."
       }
     },
     "securitySchemes" : {

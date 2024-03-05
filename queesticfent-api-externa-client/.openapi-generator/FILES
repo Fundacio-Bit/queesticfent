@@ -5,7 +5,9 @@ README.md
 api/openapi.yaml
 build.gradle
 build.sbt
-docs/Modificacio.md
+docs/AddModificacioRequest.md
+docs/GetModificacionsResponse.md
+docs/ModificacioRest.md
 docs/ModificacionsApi.md
 docs/ModificacionsConstants.md
 docs/RestExceptionInfo.md
@@ -19,7 +21,9 @@ pom.xml
 settings.gradle
 src/main/AndroidManifest.xml
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/api/ModificacionsApi.java
-src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/Modificacio.java
+src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/AddModificacioRequest.java
+src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/GetModificacionsResponse.java
+src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/ModificacioRest.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/ModificacionsConstants.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/model/RestExceptionInfo.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/ApiClient.java

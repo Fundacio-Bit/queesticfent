@@ -1,0 +1,13 @@
+[05/03/2024, 10:49:23,25] 
+depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FortiGate CA, emailAddress = support@fortinet.com
+verify error:num=19:self-signed certificate in certificate chain
+verify return:1
+depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FortiGate CA, emailAddress = support@fortinet.com
+verify return:1
+depth=0 CN = repo.maven.apache.org
+verify return:1
+40350000:error:0A000126:SSL routines:ssl3_read_n:unexpected eof while reading:ssl\record\rec_layer_s3.c:309:
+Warning: use -cacerts option to access cacerts keystore
+keytool error: java.lang.Exception: Alias <repo_maven_apache_org> does not exist
+Warning: use -cacerts option to access cacerts keystore
+Certificate was added to keystore
