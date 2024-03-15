@@ -1170,7 +1170,7 @@
             "es": "Fecha"
           },
           "javaName": "data",
-          "javaType": "java.sql.Date",
+          "javaType": "java.sql.Timestamp",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": true,

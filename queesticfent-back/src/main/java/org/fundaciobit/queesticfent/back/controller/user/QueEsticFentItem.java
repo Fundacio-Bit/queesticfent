@@ -1,6 +1,6 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ public class QueEsticFentItem {
   
   private String usuariID;
   
-  private Date data;
+  private Timestamp data;
   
   private String descripcio;
   
@@ -42,7 +42,7 @@ public class QueEsticFentItem {
    * @param data
    * @param descripcio
    */
-  public QueEsticFentItem(String usuariID, Date data, String descripcio) {
+  public QueEsticFentItem(String usuariID, Timestamp data, String descripcio) {
     super();
     this.usuariID = usuariID;
     this.data = data;
@@ -57,11 +57,11 @@ public class QueEsticFentItem {
     this.usuariID = usuariID;
   }
 
-  public Date getData() {
+  public Timestamp getData() {
     return data;
   }
 
-  public void setData(Date data) {
+  public void setData(Timestamp data) {
     this.data = data;
   }
 

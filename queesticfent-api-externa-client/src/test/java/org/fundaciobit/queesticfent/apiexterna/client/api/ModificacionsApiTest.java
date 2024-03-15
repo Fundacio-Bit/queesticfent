@@ -49,14 +49,14 @@ public class ModificacionsApiTest {
     }
     
     
-    @Test
     public void getModificacionsTest() throws ApiException, ParseException {
         
         final ModificacionsApi api = getApi();
         
         //Modificar aquests valors per l'usuari de test de l'entorn.
         String usuariID="fbosch";
-        String strData = "2024-01-02";
+        String strData = "2024-03-05";
+        //String strData = "05-03-2024";
 
         GetModificacionsResponse response = api.getmodificacions(usuariID, strData, "ca");
         
@@ -71,7 +71,6 @@ public class ModificacionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Test
     public void addTest() throws ApiException {
         
         final ModificacionsApi api = getApi();

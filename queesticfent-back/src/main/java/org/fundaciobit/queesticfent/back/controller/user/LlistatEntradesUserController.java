@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URLEncoder;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             form.addReadOnlyField(DATA);
 
             try {
-                m.setData(new Date(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
+                m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
             } catch (ParseException e) {
                 // TODO XYZ 
                 e.printStackTrace();
@@ -465,7 +466,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
     // TODO Falta DELETE De tipus Vacances
 
     protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID, List<Long> projectes,
-            Date start, Date end) throws Exception {
+            Timestamp start, Timestamp end) throws Exception {
 
         // 1.- Llegir Accions
         Map<Long, Accions> accionsByID = new HashMap<Long, Accions>();
@@ -505,7 +506,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         final IAccions accioSinonim = accionsByID.get(Utils.ACCIO_SINONIM);
         afegirEntrades(usuariID, all_Sin, itemsByQueEsticFentID, llista, accioSinonim);
         */
-        log.info("XYZ ZZZ Projectes = " + Arrays.toString(projectes.toArray()));
+        //log.info("XYZ ZZZ Projectes = " + Arrays.toString(projectes.toArray()));
         // 4.- Aplicar Modificacions
         // 4.1.- Cercar Modificacions
         Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
@@ -517,7 +518,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         //IModificacionsQueEsticFent[] modificacions = ModificacionsQueEsticFentManager.selectForOnlyRead(wm);
         List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm);
-        log.info("XYZ ZZZ Modificacions = " + modificacions.size());
+        //log.info("XYZ ZZZ Modificacions = " + modificacions.size());
 
         // 4.2.- Adaptar entrades
         QueEsticFentItem item;
@@ -716,7 +717,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
                 Date date = toDate000000(festa.getData().getTime());
 
-                item = new QueEsticFentItem(null, new Date(festa.getData().getTime()),
+                item = new QueEsticFentItem(null, new Timestamp(festa.getData().getTime()),
                         "Festiu - " + festa.getNom());
                 //item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
                 Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
@@ -945,7 +946,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-        itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()));
+        itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
         //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
         mav.addObject("start", start);
         mav.addObject("itemsByDate", itemsByDate);
@@ -1236,7 +1237,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             start.set(Calendar.DATE, 1);
 
             Map<Date, List<QueEsticFentItem>> itemsByDate;
-            itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()));
+            itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
 
             log.info("=========================");
             log.info(": " + itemsByDate.size());

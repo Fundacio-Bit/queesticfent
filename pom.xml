@@ -14,9 +14,6 @@
         <module>queesticfent-api-externa</module>
         <module>queesticfent-api-externa-client</module>
         <module>queesticfent-back</module>
-        <!--
-        <module>queesticfent-front</module>
-        -->
         <module>queesticfent-ear</module>
         <module>scripts</module>
     </modules>
@@ -463,9 +460,7 @@
                     </replacements>
                 </configuration>
             </plugin>
-<!--
             <plugin>
-
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
@@ -493,10 +488,9 @@
                     </execution>
                 </executions>
             </plugin>
--->
+
         </plugins>
     </build>
-<!--
     <distributionManagement>
         <repository>
             <id>github_governib_maven</id>
@@ -504,7 +498,6 @@
             <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
--->
     <profiles>
         <profile>
             <id>revisionnumber</id>

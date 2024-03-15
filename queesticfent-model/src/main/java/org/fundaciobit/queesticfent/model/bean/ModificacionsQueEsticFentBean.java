@@ -12,7 +12,7 @@ public class ModificacionsQueEsticFentBean implements ModificacionsQueEsticFent 
 	long accioID;
 	java.lang.String usuariID;
 	java.lang.Long projecteID;
-	java.sql.Date data;
+	java.sql.Timestamp data;
 	java.lang.Long queEsticFentID;
 	java.lang.String dada1;
 	java.lang.String dada2;
@@ -23,7 +23,7 @@ public class ModificacionsQueEsticFentBean implements ModificacionsQueEsticFent 
   }
 
   /** Constructor amb tots els camps  */
-  public ModificacionsQueEsticFentBean(long modificacioID , long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Date data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+  public ModificacionsQueEsticFentBean(long modificacioID , long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
     this.modificacioID=modificacioID;
     this.accioID=accioID;
     this.usuariID=usuariID;
@@ -34,7 +34,7 @@ public class ModificacionsQueEsticFentBean implements ModificacionsQueEsticFent 
     this.dada2=dada2;
 }
   /** Constructor sense valors autoincrementals */
-  public ModificacionsQueEsticFentBean(long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Date data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+  public ModificacionsQueEsticFentBean(long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
     this.accioID=accioID;
     this.usuariID=usuariID;
     this.projecteID=projecteID;
@@ -44,7 +44,7 @@ public class ModificacionsQueEsticFentBean implements ModificacionsQueEsticFent 
     this.dada2=dada2;
 }
   /** Constructor dels valors Not Null */
-  public ModificacionsQueEsticFentBean(long modificacioID , long accioID , java.lang.String usuariID , java.sql.Date data) {
+  public ModificacionsQueEsticFentBean(long modificacioID , long accioID , java.lang.String usuariID , java.sql.Timestamp data) {
     this.modificacioID=modificacioID;
     this.accioID=accioID;
     this.usuariID=usuariID;
@@ -89,10 +89,10 @@ public class ModificacionsQueEsticFentBean implements ModificacionsQueEsticFent 
 		this.projecteID = _projecteID_;
 	};
 
-	public java.sql.Date getData() {
+	public java.sql.Timestamp getData() {
 		return(data);
 	};
-	public void setData(java.sql.Date _data_) {
+	public void setData(java.sql.Timestamp _data_) {
 		this.data = _data_;
 	};
 

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -100,7 +101,7 @@ public class ModificacionsService extends RestUtils {
 
             ModificacionsQueEsticFent modif = new ModificacionsQueEsticFentJPA();
             modif.setDada1(modificacio.getDada1());
-            modif.setData(new Date(modificacio.getData().getTime()));
+            modif.setData(new Timestamp(modificacio.getData().getTime()));
             modif.setProjecteID(modificacio.getProjecteID());
             modif.setUsuariID(modificacio.getUsuariID());
             modif = modificacionsQueEsticFentEjb.create(modif);
@@ -158,8 +159,6 @@ public class ModificacionsService extends RestUtils {
 
     ) throws RestException {
 
-        log.info(" Entra a getModificacions ... ");
-
         try {
 
             language = RestUtils.checkLanguage(language);
@@ -170,13 +169,18 @@ public class ModificacionsService extends RestUtils {
             if (data2 == null) {
                 throw new RestException("Data es buida");
             }
-            Where whereDateStart = ModificacionsQueEsticFentFields.DATA.equal(new Date(data2.getTime()));
-            Where whereGetModificacions = Where.AND(whereUserId, whereDateStart);
+            
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(data2);
+            Where whereDateStart = ModificacionsQueEsticFentFields.DATA.greaterThan(new Timestamp(cal.getTimeInMillis()));
+            cal.add(Calendar.DATE, 1);
+            Where whereDateFinish = ModificacionsQueEsticFentFields.DATA.lessThan(new Timestamp(cal.getTimeInMillis()));
+            Where whereGetModificacions = Where.AND(whereUserId, whereDateStart, whereDateFinish);
 
             GetModificacionsResponse modificacionsResponse = new GetModificacionsResponse();
             List<ModificacionsQueEsticFent> select = modificacionsQueEsticFentEjb.select(whereGetModificacions);
             List<ModificacioRest> list = new ArrayList<ModificacioRest>();
-
+            
             for (ModificacionsQueEsticFent modificacionsQueEsticFent : select) {
                 list.add(new ModificacioRest(modificacionsQueEsticFent.getModificacioID(),
                         modificacionsQueEsticFent.getAccioID(), modificacionsQueEsticFent.getUsuariID(),

@@ -1,6 +1,7 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
 import java.util.Calendar;
@@ -76,12 +77,12 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, -2);
 
-        Date from = new Date(cal.getTimeInMillis());
+        Timestamp from = new Timestamp(cal.getTimeInMillis());
 
         cal.add(Calendar.MONTH, +10);
         cal.set(Calendar.DATE, -1);
 
-        Date to = new Date(cal.getTimeInMillis());
+        Timestamp to = new Timestamp(cal.getTimeInMillis());
 
         Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
         return Where.AND(w1, w2);
@@ -104,7 +105,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
     public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         Where w;
-        Date from, to;
+        Timestamp from, to;
         {
             Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
@@ -112,12 +113,12 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
             cal.set(Calendar.DATE, 1);
             cal.add(Calendar.MONTH, -2);
 
-            from = new Date(cal.getTimeInMillis());
+            from = new Timestamp(cal.getTimeInMillis());
 
             cal.add(Calendar.MONTH, +10);
             cal.set(Calendar.DATE, -1);
 
-            to = new Date(cal.getTimeInMillis());
+            to = new Timestamp(cal.getTimeInMillis());
 
             Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
             w = Where.AND(w1, w2);
@@ -146,7 +147,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
         for (ModificacionsQueEsticFent m : vacances) {
 
-            Date date = m.getData();
+        	Timestamp date = m.getData();
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
@@ -344,7 +345,6 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
         @Override
         public int compareTo(UsuariInfo o) {
-            // XYZ ZZZ
             return this.username.compareTo(o.username);
         }
 

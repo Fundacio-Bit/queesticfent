@@ -1,6 +1,5 @@
 package org.fundaciobit.queesticfent.api.externa.config;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -14,9 +13,7 @@ import org.fundaciobit.pluginsib.utils.rest.ISO8601TimestampSerializer;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;

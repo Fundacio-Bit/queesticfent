@@ -39,7 +39,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     java.lang.Long projecteID;
 
     @Column(name="data",nullable = false,length = 29,precision = 6)
-    java.sql.Date data;
+    java.sql.Timestamp data;
 
   /** -1 significa nou */
     @Column(name="queesticfentid",length = 19)
@@ -58,7 +58,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
   }
 
   /** Constructor amb tots els camps  */
-  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Date data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
     this.modificacioID=modificacioID;
     this.accioID=accioID;
     this.usuariID=usuariID;
@@ -69,7 +69,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     this.dada2=dada2;
 }
   /** Constructor sense valors autoincrementals */
-  public ModificacionsQueEsticFentJPA(long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Date data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
+  public ModificacionsQueEsticFentJPA(long accioID , java.lang.String usuariID , java.lang.Long projecteID , java.sql.Timestamp data , java.lang.Long queEsticFentID , java.lang.String dada1 , java.lang.String dada2) {
     this.accioID=accioID;
     this.usuariID=usuariID;
     this.projecteID=projecteID;
@@ -79,7 +79,7 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
     this.dada2=dada2;
 }
   /** Constructor dels valors Not Null */
-  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.sql.Date data) {
+  public ModificacionsQueEsticFentJPA(long modificacioID , long accioID , java.lang.String usuariID , java.sql.Timestamp data) {
     this.modificacioID=modificacioID;
     this.accioID=accioID;
     this.usuariID=usuariID;
@@ -124,10 +124,10 @@ public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 		this.projecteID = _projecteID_;
 	};
 
-	public java.sql.Date getData() {
+	public java.sql.Timestamp getData() {
 		return(data);
 	};
-	public void setData(java.sql.Date _data_) {
+	public void setData(java.sql.Timestamp _data_) {
 		this.data = _data_;
 	};
 
