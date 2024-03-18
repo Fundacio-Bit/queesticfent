@@ -1,0 +1,1 @@
+﻿DELETE FROM qef_modificacionsqueesticfent M WHERE NOT EXISTS( SELECT 1 FROM qef_usuaris U WHERE M.usuariid = U.usuariid)
