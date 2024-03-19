@@ -87,3 +87,7 @@ api.bat
 queesticfent-api-externa-client/.classpath
 pemfiles/
 .settings/
+queesticfent-api-externa-client/.gradle/
+scripts/linux/java.sh
+scripts/linux/jboss.sh
+scripts/linux/jboss7
