@@ -67,6 +67,18 @@
     }
 
     $("#modificacionsQueEsticFentForm").on("submit", function(event) {
+        
+        var combo = document.getElementById("modificacionsQueEsticFent_projecteID");
+        var projecteID = combo.value;
+        
+        for (var i = 1; i < 6; i++) {
+            
+            var val = getCookie("preferit.cookie.value." + i);
+            if (projecteID == val) {
+               return;
+            }
+        }
+        
 
         for (var i = 5; i > 1; i--) {
             var h = i - 1;
@@ -80,8 +92,7 @@
             }
         }
 
-        var combo = document.getElementById("modificacionsQueEsticFent_projecteID");
-        var projecteID = combo.value;
+       
         // get label of combobox modificacionsQueEsticFent_projecteID
         var projecteNom = combo.options[combo.selectedIndex].text;
 
