@@ -53,6 +53,9 @@ import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.back.utils.Utils;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
 import org.fundaciobit.queesticfent.commons.utils.Constants;
+import org.fundaciobit.queesticfent.model.LlistatEntradesModel;
+import org.fundaciobit.queesticfent.model.ModificacioItem;
+import org.fundaciobit.queesticfent.model.QueEsticFentItem;
 import org.fundaciobit.queesticfent.model.bean.AccionsBean;
 import org.fundaciobit.queesticfent.model.bean.ModificacionsQueEsticFentBean;
 import org.fundaciobit.queesticfent.model.entity.Accions;
@@ -113,9 +116,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjectesService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.ProjectesService projectesEjb;
-
-    //@EJB(mappedName = org.fundaciobit.queesticfent.ejb.ModificacionsQueEsticFentService.JNDI_NAME)
-    //protected org.fundaciobit.queesticfent.ejb.ModificacionsQueEsticFentService modificacionsQueEsticFentEjb;
 
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
@@ -191,6 +191,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
 
         ModificacionsQueEsticFentForm form = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
+        
+        
+        
+        
         if (form.isNou()) {
             ModificacionsQueEsticFentJPA m = form.getModificacionsQueEsticFent();
             //TODO XYZ Falta UsuariID, Data, Accio com a readonly
@@ -307,50 +311,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         return mav;
     }
-
-    /*
-    @RequestMapping(value = "/testbasecamp", method = RequestMethod.GET)
-    public ModelAndView testBaseCamp(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-        try {
-    
-            String url = Configuracio.getBasecampUrlBase();
-            Long org = Configuracio.getBasecampOrganizationID();
-            String tokenfile = Configuracio.getBasecampTokenPropertiesFile();
-            Long projectID = Configuracio.getBasecampProjectID();
-    
-            log.info("url => " + url);
-            log.info("org => " + org);
-            log.info("tokenfile => " + tokenfile);
-            log.info("projectID => " + projectID);
-    
-            BaseCampApi3 api3 = new BaseCampApi3(url, org, new File(tokenfile));
-    
-            log.info("api3.getToken() => " + api3.getToken());
-    
-            User[] users = api3.getUsers(projectID);
-    
-            StringBuilder str = new StringBuilder();
-            for (User user : users) {
-                str.append(user.getName()).append("<br/>");
-            }
-            HtmlUtils.saveMessageInfo(request, str.toString());
-    
-        } catch (Throwable th) {
-    
-            String msg = "Error no controlat provant comunicació amb Basecamp: " + th.getMessage();
-    
-            log.error(msg, th);
-    
-            HtmlUtils.saveMessageError(request, msg);
-    
-        }
-    
-        ModelAndView mav = new ModelAndView();
-        mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
-    
-        return mav;
-    }
-    */
 
     @Override
     public void delete(HttpServletRequest request, ModificacionsQueEsticFent modificacionsQueEsticFent)
@@ -652,7 +612,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     if (item == null) {
                         ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
                                 .findByPrimaryKey(modificacio.getQueEsticFentID());
-                        QueEsticFentItem qef = new QueEsticFentItem(mqef.getUsuariID(), mqef.getData(),
+                        QueEsticFentItem_Old qef = new QueEsticFentItem_Old(mqef.getUsuariID(), mqef.getData(),
                                 mqef.getDada1());
                         if (qef != null) {
                             item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDescripcio());
@@ -752,6 +712,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
     public ModelAndView llistatEntrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ModelAndView mav = new ModelAndView("entradesListUser");
+        LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
+        
 
         String loggedUser = LoginInfo.getInstance().getUsername();
 
@@ -759,38 +721,21 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         {
 
             boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
-
-            /*boolean esCoordinador;
-            {
-            
-            IDepartaments[] list = DepartamentsManager.selectForOnlyRead(IDepartaments.COORDINADORID.equal(loggedUser));
-            esCoordinador = (list.length != 0);
-            }*/
-
-            //Utils.CAP_DE_PROJECTE
-            /*boolean esCapDeProjecte = false;
-            {
-            int[] roles = getSecurity().getRolesOfUser(loggedUser);
-            List<KeyValue<Integer>> list = getSecurity().getAllRoleNames();
-            for(int rol : roles) {
-              String roleName = getSecurity().getFullNameOfRole(rol);
-              if (Utils.CAP_DE_PROJECTE.equals(roleName)) {
-                esCapDeProjecte = true;
-                break;
-              }
-            }
-            }*/
             tePermisos = esAdministrador; //|| esCoordinador || esCapDeProjecte;
         }
-
+        
+        
         mav.addObject("tePermisos", tePermisos);
+        llistatEntradesModel.setTePermisos(tePermisos);
+
 
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
         mav.addObject("yesterday", yesterday);
+        llistatEntradesModel.setYesterday(yesterday);
         Calendar today = Calendar.getInstance();
         mav.addObject("today", today);
-
+        llistatEntradesModel.setToday(today);
         Calendar start = Calendar.getInstance();
         start.set(Calendar.HOUR_OF_DAY, 0);
         start.set(Calendar.MINUTE, 0);
@@ -802,13 +747,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             usuariID = loggedUser;
         }
         mav.addObject("usuariID", usuariID);
-
+        llistatEntradesModel.setUsuariId(usuariID);
+        
         // Cercar departaments de l'usuari
         List<Long> departaments;
         //UsuarisDepartament[] departamentsUsuari;
         {
             Where wud = UsuarisDepartamentFields.USUARIID.equal(usuariID);
-
             departaments = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.DEPARTAMENTID, wud);
         }
 
@@ -828,7 +773,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         }
 
         mav.addObject("departaments", departaments);
+        llistatEntradesModel.setDepartaments(departaments);
         mav.addObject("departamentID", departamentID);
+        llistatEntradesModel.setDepartamentId(departamentID);
 
         // ============== PROJECTES
         List<Long> projectes;
@@ -873,8 +820,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 projecteID = projectes.get(0);
             }
         }
-
+        
+        
         mav.addObject("projecteID", projecteID);
+        llistatEntradesModel.setProjecteId(projecteID);
 
         int mes;
         {
@@ -887,6 +836,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         }
 
         mav.addObject("mes", mes);
+        llistatEntradesModel.setMes(mes);
 
         // Seleccionar any
         int any;
@@ -899,6 +849,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             }
         }
         mav.addObject("any", any);
+        llistatEntradesModel.setAny(any);
 
         boolean mostrarEntradesAmagades = false;
         {
@@ -908,6 +859,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 mostrarEntradesAmagades = ("on".compareTo(mostrarEntradesAmagadesStr) == 0);
             }
             mav.addObject("mostrarEntradesAmagades", mostrarEntradesAmagades);
+            llistatEntradesModel.setMostrarEntradesAmagades(mostrarEntradesAmagades);
         }
 
         int mesAnterior = mes - 1;
@@ -918,7 +870,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         }
 
         mav.addObject("anyAnterior", anyAnterior);
+        llistatEntradesModel.setAnyAnterior(anyAnterior);
         mav.addObject("mesAnterior", mesAnterior);
+        llistatEntradesModel.setMesAnterior(mesAnterior);
 
         int anySeguent = any;
         int mesSeguent = mes + 1;
@@ -927,7 +881,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             anySeguent = any + 1;
         }
         mav.addObject("anySeguent", anySeguent);
+        llistatEntradesModel.setAnySeguent(anySeguent);
         mav.addObject("mesSeguent", mesSeguent);
+        llistatEntradesModel.setMesSeguent(mesSeguent);
 
         start.set(Calendar.MONTH, mes);
         start.set(Calendar.YEAR, any);
@@ -935,7 +891,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         int maxDay = start.getActualMaximum(Calendar.DAY_OF_MONTH);
         mav.addObject("maxDay", maxDay);
-
+        llistatEntradesModel.setMaxDay(maxDay);
+        
+        
         Calendar end = Calendar.getInstance();
         end.setTimeInMillis(start.getTimeInMillis());
         end.set(Calendar.DATE, maxDay);
@@ -950,7 +908,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
         //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
         mav.addObject("start", start);
+        llistatEntradesModel.setStart(start);
         mav.addObject("itemsByDate", itemsByDate);
+        llistatEntradesModel.setItemsByDate(itemsByDate);
 
         {
             List<Accions> allAccions;
@@ -960,6 +920,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             allAccions = accionsEjb.select(wa, new OrderBy(AccionsFields.NOM, OrderType.ASC));
             //allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC, AccionsFields.NOM);
             mav.addObject("allAccions", allAccions);
+            llistatEntradesModel.setAllAccions(allAccions);
         }
 
         String redirectUrlParams = "mes=" + mes + "&any=" + any + "&usuariID=" + usuariID;
@@ -967,9 +928,12 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteID.intValue();
         }
         mav.addObject("redirectUrlParams", redirectUrlParams);
+        llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
         String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
         mav.addObject("redirectUrl", redirectUrl);
+        llistatEntradesModel.setRedirectUrl(redirectUrl);
         mav.addObject("projecteID", projecteID);
+        llistatEntradesModel.setProjecteId(maxDay);
         {
             //ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
             Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);
@@ -981,25 +945,30 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 usuarisDepartamentJpa.setUsuaris(usuari);
             }
             mav.addObject("personalCap", personalCap);
+            llistatEntradesModel.setPersonalCap(personalCap);
         }
         {
             List<Accions> actions = this.accionsEjb.select(AccionsFields.COLOR.isNotNull(),
                     new OrderBy(AccionsFields.ACCIOID, OrderType.ASC));
             actions.add(new AccionsBean(-10, null, "Multiples Canvis", "ffff00", null));
             mav.addObject("actions", actions);
+            llistatEntradesModel.setActions(actions);
         }
         {
             Where where = ProjectesFields.PROJECTEID.in(projectes);
             List<Projectes> projectesList = this.projectesEjb.select(where);
             mav.addObject("projectesList", projectesList);
+            llistatEntradesModel.setProjectesList(projectesList);
         }
         {
             Where where = DepartamentsFields.DEPARTAMENTID.in(departaments);
             List<Departaments> departamentsInfo = this.departamentsEjb.select(where);
             mav.addObject("departamentsInfo", departamentsInfo);
+            llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
         }
-
-        log.info("\n\n XYZ redirectUrlParams: " + redirectUrlParams);
+        
+        
+        mav.addObject("model", llistatEntradesModel);
         return mav;
     }
 

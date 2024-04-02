@@ -1,4 +1,4 @@
-package org.fundaciobit.queesticfent.back.controller.user;
+package org.fundaciobit.queesticfent.model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

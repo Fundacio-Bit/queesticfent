@@ -1,3 +1,4 @@
+<%@page import="org.fundaciobit.queesticfent.model.LlistatEntradesModel"%>
 <%@page import="org.fundaciobit.queesticfent.back.controller.user.LlistatEntradesUserController"%>
 <%@page import="java.util.HashMap"
 %><%@page import="org.fundaciobit.queesticfent.back.security.LoginInfo"
@@ -8,8 +9,12 @@
 %><%@ page language="java" contentType="text/html;"
 %><%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.fundaciobit.queesticfent.back.utils.Utils"%>
-<%@page import="org.fundaciobit.queesticfent.back.controller.user.QueEsticFentItem"%>
-<%@page import="org.fundaciobit.queesticfent.back.controller.user.ModificacioItem"%>
+<%@page import="org.fundaciobit.queesticfent.back.controller.user.QueEsticFentItem_Old"%>
+<%@page import="org.fundaciobit.queesticfent.back.controller.user.ModificacioItem_Old"%>
+
+<%@page import="org.fundaciobit.queesticfent.model.QueEsticFentItem"%>
+<%@page import="org.fundaciobit.queesticfent.model.ModificacioItem"%>
+
 <%@page import="org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent"%>
 <%@page import="org.fundaciobit.queesticfent.model.entity.Accions"%>
 <%@page import="org.fundaciobit.queesticfent.model.fields.AccionsFields"%>
@@ -26,9 +31,7 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
-<%! 
-
-public SimpleDateFormat getSimpleDateFormat() {
+<%!public SimpleDateFormat getSimpleDateFormat() {
     return new SimpleDateFormat("dd/MM/yyyy");
   }
   
@@ -44,13 +47,12 @@ public SimpleDateFormat getSimpleDateFormat() {
   public boolean getBoolean(HttpServletRequest request, String name) {
     String str = request.getParameter(name);
     return Boolean.parseBoolean(str);    
-  }
-
-
-%>
+  }%>
 <%
 
-List<Long> departaments = (List<Long>) request.getAttribute("departaments");
+LlistatEntradesModel model = (LlistatEntradesModel) request.getAttribute("model");
+
+/*List<Long> departaments = (List<Long>) request.getAttribute("departaments");
 Boolean tePermisos = (Boolean) request.getAttribute("tePermisos");
 List<Accions> actions = (List<Accions>) request.getAttribute("actions");
 Boolean mostrarEntradesAmagades = (Boolean) request.getAttribute("mostrarEntradesAmagades");
@@ -62,7 +64,7 @@ Calendar start = (Calendar) request.getAttribute("start");
 Calendar yesterday = (Calendar) request.getAttribute("yesterday");
 Calendar today = (Calendar) request.getAttribute("today");
 String usuariID = (String) request.getAttribute("usuariID");
-Map<Date, List<QueEsticFentItem>> itemsByDate = (Map<Date, List<QueEsticFentItem>>) request.getAttribute("itemsByDate");
+Map<Date, List<QueEsticFentItem_Old>> itemsByDate = (Map<Date, List<QueEsticFentItem_Old>>) request.getAttribute("itemsByDate");
 int maxDay = (int) request.getAttribute("maxDay");
 String redirectUrlParams = (String) request.getAttribute("redirectUrlParams");
 
@@ -77,12 +79,11 @@ int any = (int) request.getAttribute("any");
 Long departamentID = (Long)request.getAttribute("departamentID");
 List<Projectes> projectesList = (List<Projectes>) request.getAttribute("projectesList");
 
-List<Departaments> departamentsInfo = (List<Departaments>) request.getAttribute("departamentsInfo");
+List<Departaments> departamentsInfo = (List<Departaments>) request.getAttribute("departamentsInfo");*/
 
 Map<String, String> noms = new HashMap<String, String>();
 LoginInfo info = LoginInfo.getInstance();
-noms.put(usuariID, info.getUserInfo().getFullName());
-
+noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -107,8 +108,8 @@ noms.put(usuariID, info.getUserInfo().getFullName());
   <td>
   <FORM name="REB2010" method="post">
   <span id="toolTipBox" width="200"></span>
-<input type="hidden" name="mes" value="<%=mes%>">
-<input type="hidden" name="any" value="<%=any%>">
+<input type="hidden" name="mes" value="<%=model.getMes()%>">
+<input type="hidden" name="any" value="<%=model.getAny()%>">
   <table border="0" cellpadding="0" cellspacing="0" >
     <tr>
       <td style="padding-right:10px;">
@@ -116,9 +117,12 @@ noms.put(usuariID, info.getUserInfo().getFullName());
      
      
          
-<% if (tePermisos) {%>
+<%
+                     if (model.isTePermisos()) {
+                     %>
     <select name="usuariID"  onchange="document.REB2010.submit()" >
-<% {
+<%
+{
 
     List<UsuarisDepartament> personalCap = (List<UsuarisDepartament>) request.getAttribute("personalCap");  
   
@@ -127,107 +131,141 @@ noms.put(usuariID, info.getUserInfo().getFullName());
     String __def;
     
           for(UsuarisDepartament po : personalCap) {
-            __def = po.getUsuariID().equals(usuariID) ? "selected" : "";
+            __def = po.getUsuariID().equals(model.getUsuariId()) ? "selected" : "";
             UsuarisJPA usu =((UsuarisDepartamentJPA) po).getUsuaris();
-          %>
+%>
           
-             <option value="<%=po.getUsuariID()%>" <%=__def%> ><%= (usu.getNom()+" "+usu.getLlinatge1()+" "+usu.getLlinatge2())%></option>
-        <% } %>
- <% } %>
+             <option value="<%=po.getUsuariID()%>" <%=__def%> ><%=(usu.getNom()+" "+usu.getLlinatge1()+" "+usu.getLlinatge2())%></option>
+        <%
+        }
+        %>
+ <%
+ }
+ %>
 </select>
 
-<% } else { %>
-    <b><%= noms.get(usuariID)%></b>
- <% } %>
+<%
+} else {
+%>
+    <b><%=noms.get(model.getUsuariId())%></b>
+ <%
+ }
+ %>
   </td> 
   
   <%-- /* DEPARTAMENTS   */  --%>
   <td align="left"  style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
-     <% if (departaments.size() == 1) { %>
-         <input type="hidden" name="departamentID" value="<%=departamentID%>"> 
+     <%
+     if (model.getDepartaments().size() == 1) {
+     %>
+         <input type="hidden" name="departamentID" value="<%=model.getDepartamentId()%>"> 
      Departament:<br>
-     <b> <%=departamentsInfo.get(0).getNom()%></b>
+     <b> <%=model.getDepartamentsInfo().get(0).getNom()%></b>
       
-     <%  } else { %>
+     <%
+           } else {
+           %>
      Departaments:<br>
      <select name="departamentID"  onchange="document.REB2010.submit()" >
-          <% {
-            
-            
-            
-            //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
-            String __def;
-            for(Departaments dep : departamentsInfo) {
-              __def = departamentID.equals(dep.getDepartamentID()) ? "selected" : "";
-            %>
+          <%
+          {
+                                
+                                
+                                
+                                //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
+                                String __def;
+                                for(Departaments dep : model.getDepartamentsInfo()) {
+                                  __def = model.getDepartamentId() == dep.getDepartamentID() ? "selected" : "";
+          %>
                <option value="<%=dep.getDepartamentID()%>" <%=__def%> ><%=dep.getNom() + " (getSecurity().getFullNameOfUser(dep.getCoordinadorID())"%></option>
-          <% } %>
-          <% } %>
+          <%
+          }
+          %>
+          <%
+          }
+          %>
           </select>
-     <% } %>
+     <%
+     }
+     %>
       
   </td>
   
   <%-- /* PROJECTE */ --%>
   <td align="left" style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
-     <%  
+     <%
      Map<Long, String> projectesMap = new HashMap<Long, String>();
-     { %>
+               {
+     %>
       Projectes:<br>
       <select name="projecteID"  onchange="document.REB2010.submit()" >
-          <%  %>
-            <option value="" <%=projecteID == null ? "selected":"" %> >Tots</option>
-          <% {
-            
-            //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
-            String __def;
-            for(Projectes proj : projectesList) {
-                
-              __def = (projecteID != null && proj.getProjecteID() == projecteID) ? "selected" : "";
-              projectesMap.put(proj.getProjecteID(), proj.getNom());
-            %>
+          <%
+
+          %>
+            <option value="" <%=model.getProjecteId() == 0L ? "selected":""%> >Tots</option>
+          <%
+          {
+                                
+                                //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
+                                String __def;
+                                for(Projectes proj : model.getProjectesList()) {
+                                    
+                                  __def = (model.getProjecteId() != 0L && proj.getProjecteID() == model.getProjecteId()) ? "selected" : "";
+                                  projectesMap.put(proj.getProjecteID(), proj.getNom());
+          %>
                <option value="<%=proj.getProjecteID()%>" <%=__def%> ><%=proj.getNom()%></option>
-          <% } %>
-          <% } %>
+          <%
+          }
+          %>
+          <%
+          }
+          %>
           </select>
-     <% } %>
+     <%
+     }
+     %>
   </td>
 
   <td align="right" width="40px" style="border-left: 1px solid">
-     &nbsp;&nbsp;<img onclick="document.REB2010.mes.value=<%=mesAnterior%>;document.REB2010.any.value=<%=anyAnterior%>;document.REB2010.submit()" src="<c:url value="/img"/>/previous.jpg">  
+     &nbsp;&nbsp;<img onclick="document.REB2010.mes.value=<%=model.getMesAnterior()%>;document.REB2010.any.value=<%=model.getAnyAnterior()%>;document.REB2010.submit()" src="<c:url value="/img"/>/previous.jpg">  
   </td>
 <td align="center" >
   
   <span style="font-family: helvetica, impact, sans-serif;font-size: 12pt; font-weight: bold;">
-   <%= Utils.mesos[mes] %> <%=any%>
+   <%=Utils.mesos[model.getMes()]%> <%=model.getAny()%>
   </span>
  
 </td> 
 <td align="left"  width="40px">
-  <img onclick="document.REB2010.mes.value=<%=mesSeguent%>;document.REB2010.any.value=<%=anySeguent%>;document.REB2010.submit()" src="<c:url value="/img"/>/next.jpg">
+  <img onclick="document.REB2010.mes.value=<%=model.getMesSeguent()%>;document.REB2010.any.value=<%=model.getAnySeguent()%>;document.REB2010.submit()" src="<c:url value="/img"/>/next.jpg">
 </td>
 
 
 
 <td align="center" style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
    
-   <a href="mostrarodt?<%=redirectUrlParams%>&usuariID=<%=usuariID%>" target="_blank" onmouseover="toolTip('ODT de Tasques de getSecurity().getFullNameOfUser(usuariID)', this)">
+   <a href="mostrarodt?<%=model.getRedirectUrlParams()%>&usuariID=<%=model.getUsuariId()%>" target="_blank" onmouseover="toolTip('ODT de Tasques de getSecurity().getFullNameOfUser(usuariID)', this)">
       <img border="0" src="<c:url value="/img"/>/odt.gif"></a>
    
  </td>
- <% if (tePermisos) {%><td>&nbsp;</td>
+ <%
+ if (model.isTePermisos()) {
+ %><td>&nbsp;</td>
 
 <td align="center" style="border-left: 1px solid; padding-right:10px; padding-left:10px;"> 
-   <% String href;
-      String target;
-      href = "mostrarodt?" + redirectUrlParams +"&multiple=true";
-      target = "target=\"_blank\"";
-   %>
+   <%
+    String href;
+              String target;
+              href = "mostrarodt?" + model.getRedirectUrlParams() +"&multiple=true";
+              target = "target=\"_blank\"";
+    %>
    <a href="<%=href%>" <%=target%>  onmouseover="toolTip('ODT de Tasques de tot el personal', this)" >
       <img border="0" src="<c:url value="/img"/>/odtmultiple.gif">
    </a>
  </td>
- <% } %>
+ <%
+ }
+ %>
  
  <%--
  
@@ -283,102 +321,105 @@ Afegir Entrada
 <td>Comentari</td>
 </tr>
 <%
-
 List<QueEsticFentItem> llista;
-for(int d=1; d <= maxDay; d++) {
+for(int d=1; d <= model.getMaxDay(); d++) {
 
- start.set(Calendar.DATE, d);
- int dayOfWeek = start.get(Calendar.DAY_OF_WEEK);
+ model.getStart().set(Calendar.DATE, d);
+ int dayOfWeek = model.getStart().get(Calendar.DAY_OF_WEEK);
  
 
  boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
  //llista = itemsByDate.get(d);
- llista = itemsByDate.get(start.getTime());
+ llista = model.getItemsByDate().get(model.getStart().getTime());
  String rowbgcolor = null;
  if (isCapDeSetmana) {
    rowbgcolor = "cccccc";
  } else {
-   if ((llista == null || llista.size() ==0) && start.compareTo(yesterday) == -1) {
+   if ((llista == null || llista.size() ==0) && model.getStart().compareTo(model.getYesterday()) == -1) {
      rowbgcolor = "ff0000";
    }
  }
- 
 %>
 <tr <%=(rowbgcolor == null)? "" : ("bgcolor=\"#" + rowbgcolor + "\"")%> >
-<td><%=start.get(Calendar.DAY_OF_MONTH)%></td>
-<td onmouseover="toolTip('<%=Utils.diesFull[dayOfWeek] %>', this)" ><%=Utils.dies[dayOfWeek] %></td>
+<td><%=model.getStart().get(Calendar.DAY_OF_MONTH)%></td>
+<td onmouseover="toolTip('<%=Utils.diesFull[dayOfWeek]%>', this)" ><%=Utils.dies[dayOfWeek]%></td>
 <%
-   String novaAccioURL ="new?usuariID=" + usuariID 
+String novaAccioURL ="new?usuariID=" + model.getUsuariId() 
              + "&data=" 
-             + URLEncoder.encode(getSimpleDateTimeFormat().format(start.getTime()))
-             + ((projecteID == null)? "": ("&projecteID=" + projecteID))
-             + "&redirectUrl=" + redirectUrl;
-   
-
-
+             + URLEncoder.encode(getSimpleDateTimeFormat().format(model.getStart().getTime()))
+             + ((model.getProjecteId() == 0L)? "": ("&projecteID=" + model.getProjecteId()))
+             + "&redirectUrl=" + model.getRedirectUrl();
 %>
 <td align="center">
- <% if (!isCapDeSetmana) { 
-
+ <%
+ if (!isCapDeSetmana) {
  %>
  <%-- <%=novaAccioURL%>&accioID=<%=Utils.ACCIO_NOVA_ENTRADA%> --%>
  <%--  <a href="javascript:alert('<%=msg%>')"> --%>
         <a href="<%=novaAccioURL%>&accioID=<%=Utils.ACCIO_NOVA_ENTRADA%>"> 
         <img onmouseover="toolTip('Afegir Nova Entrada', this)" src="<c:url value="/img"/>/add.gif">
    </a>
- <% } %>
+ <%
+ }
+ %>
 </td>
 <td align="center">
- <% if (!isCapDeSetmana) { %>
+ <%
+ if (!isCapDeSetmana) {
+ %>
    <a href="<%=novaAccioURL%>&accioID=<%=Utils.ACCIO_VACANCES%>">
         <img onmouseover="toolTip('Marcar de vacances', this)" src="<c:url value="/img/add2.gif"/>">
    </a>
- <% } %>
+ <%
+ }
+ %>
 </td>
 
 
 <td>
-<% if (llista == null) { %>
+<%
+if (llista == null) {
+%>
    &nbsp;
-<% } else { %> 
+<%
+} else {
+%> 
   <table border=0 width="100%" height="100%" cellpadding="0" cellspacing="0">
   <%
   String topBorder = "";
-  String bgColor;
-  String entradaStr = "";
-  String projectName = "";
-  for (QueEsticFentItem qefi : llista) {
-    List<ModificacioItem> modificacions = qefi.getModificacions(); 
-    if (modificacions.size() != 0) {
-      
-    }
-    if (modificacions.size() == 0) {
-      bgColor = "";  
-    } else {
-      if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null && !mostrarEntradesAmagades) {
-        continue;
-      }
-      if (modificacions.size() == 1) {
-        ModificacioItem mi = modificacions.get(0);
-        bgColor = "bgcolor=\"#" + mi.getAccio().getColor() +"\"";        
-      } else {
-        bgColor = "bgcolor=\"#ffff00\"";
-      }
-      
-      if(qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_FESTIU && qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_VACANCES){
-          projectName = projectesMap.get(modificacions.get(0).getModificacio().getProjecteID());
-          entradaStr = projectName +": " +qefi.getDescripcio();
-      }else{
-          projectName = "&nbsp";
-          entradaStr = qefi.getDescripcio();
-      }
-    }
-    
-    
-%>
-    <tr <%=bgColor %> >
+      String bgColor;
+      String entradaStr = "";
+      String projectName = "";
+      for (QueEsticFentItem qefi : llista) {
+        List<ModificacioItem> modificacions = qefi.getModificacions(); 
+        if (modificacions.size() != 0) {
+          
+        }
+        if (modificacions.size() == 0) {
+          bgColor = "";  
+        } else {
+          if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null && !model.isMostrarEntradesAmagades()) {
+            continue;
+          }
+          if (modificacions.size() == 1) {
+            ModificacioItem mi = modificacions.get(0);
+            bgColor = "bgcolor=\"#" + mi.getAccio().getColor() +"\"";        
+          } else {
+            bgColor = "bgcolor=\"#ffff00\"";
+          }
+          
+          if(qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_FESTIU && qefi.getModificacions().get(0).getAccio().getAccioID() != Utils.ACCIO_VACANCES){
+              projectName = projectesMap.get(modificacions.get(0).getModificacio().getProjecteID());
+              entradaStr = projectName +": " +qefi.getDescripcio();
+          }else{
+              projectName = "&nbsp";
+              entradaStr = qefi.getDescripcio();
+          }
+        }
+  %>
+    <tr <%=bgColor%> >
        <td <%=topBorder%> width="100%" >
-        <%= entradaStr %>
+        <%=entradaStr%>
        </td>
        <td <%=topBorder%> align="right" valign="middle">
        
@@ -386,11 +427,12 @@ for(int d=1; d <= maxDay; d++) {
           <table border="0" cellspacing="0" cellpadding="0"><tr>
           
           <%--  Llista de canvis que puc borrar --%>
-          <% if (modificacions.size() != 0) { 
-               for(ModificacioItem mi : modificacions) {
-                 ModificacionsQueEsticFent mod = mi.getModificacio();
-                 if (mod != null) {
-               %>
+          <%
+          if (modificacions.size() != 0) { 
+                         for(ModificacioItem mi : modificacions) {
+                           ModificacionsQueEsticFent mod = mi.getModificacio();
+                           if (mod != null) {
+          %>
                <td style="padding-left:5px;">
 <table cellpadding="0" cellspacing="0">
 <tr><td>
@@ -473,7 +515,7 @@ for(int d=1; d <= maxDay; d++) {
   <% 
     
     counter = -1;
-    for(Accions lleg : actions) {
+    for(Accions lleg : model.getActions()) {
       counter ++;
       
       if (counter > 0 && counter % 4 == 0) {

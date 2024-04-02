@@ -3,7 +3,7 @@ package org.fundaciobit.queesticfent.back.controller.user;
 import org.fundaciobit.queesticfent.model.entity.Accions;
 import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
 
-public class ModificacioItem {
+public class ModificacioItem_Old {
   public final ModificacionsQueEsticFent modificacio;;
   
   public final Accions accio;
@@ -12,7 +12,7 @@ public class ModificacioItem {
    * @param modificacio
    * @param accio
    */
-  public ModificacioItem(ModificacionsQueEsticFent modificacio, Accions accio) {
+  public ModificacioItem_Old(ModificacionsQueEsticFent modificacio, Accions accio) {
     super();
     this.modificacio = modificacio;
     this.accio = accio;
