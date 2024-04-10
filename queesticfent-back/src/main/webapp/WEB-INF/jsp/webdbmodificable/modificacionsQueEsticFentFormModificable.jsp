@@ -12,6 +12,10 @@
 
 
 <script type="text/javascript">
+<c:if test="${modificacionsQueEsticFentForm.nou}">
+
+    // Si es nou posam el darrer projecte seleccionat
+
     $(document).ready(
             function() {
 
@@ -32,7 +36,7 @@
                 }
 
             });
-
+</c:if>
     function setCategoria(categoria) {
 
         var projecteID = getCookie("preferit.cookie.value." + categoria);
