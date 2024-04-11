@@ -75,10 +75,21 @@
         var combo = document.getElementById("modificacionsQueEsticFent_projecteID");
         var projecteID = combo.value;
         
+        // Existeix el projecte en les cookies?
         for (var i = 1; i < 6; i++) {
-            
             var val = getCookie("preferit.cookie.value." + i);
             if (projecteID == val) {
+                // Si existeix canviam aquest pel primer
+                
+                var id = getCookie("preferit.cookie.value.1");
+                var lab = getCookie("preferit.cookie.label.1");
+
+                setCookie("preferit.cookie.value.1", getCookie("preferit.cookie.value." + i), 300);
+                setCookie("preferit.cookie.label.1", getCookie("preferit.cookie.label." + i), 300);
+                
+                setCookie("preferit.cookie.value." + i, id, 300);
+                setCookie("preferit.cookie.label." + i, lab, 300);
+                
                return;
             }
         }
