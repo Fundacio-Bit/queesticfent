@@ -52,6 +52,9 @@
 
 LlistatEntradesModel model = (LlistatEntradesModel) request.getAttribute("model");
 
+Long projecteID = (Long) request.getAttribute("projecteID");
+
+
 /*List<Long> departaments = (List<Long>) request.getAttribute("departaments");
 Boolean tePermisos = (Boolean) request.getAttribute("tePermisos");
 List<Accions> actions = (List<Accions>) request.getAttribute("actions");
@@ -347,7 +350,7 @@ for(int d=1; d <= model.getMaxDay(); d++) {
 String novaAccioURL ="new?usuariID=" + model.getUsuariId() 
              + "&data=" 
              + URLEncoder.encode(getSimpleDateTimeFormat().format(model.getStart().getTime()))
-             + ((model.getProjecteId() == 0L)? "": ("&projecteID=" + model.getProjecteId()))
+             + ((projecteID == null)? "": ("&projecteID=" + projecteID))
              + "&redirectUrl=" + model.getRedirectUrl();
 %>
 <td align="center">
