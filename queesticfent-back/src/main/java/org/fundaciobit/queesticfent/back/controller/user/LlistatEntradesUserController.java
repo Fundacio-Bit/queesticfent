@@ -191,10 +191,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
 
         ModificacionsQueEsticFentForm form = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
-        
-        
-        
-        
         if (form.isNou()) {
             ModificacionsQueEsticFentJPA m = form.getModificacionsQueEsticFent();
             //TODO XYZ Falta UsuariID, Data, Accio com a readonly
@@ -241,6 +237,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
                     mav.setView(new RedirectView(
                             getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
+                    
+
 
                     return form;
 
@@ -826,14 +824,26 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         llistatEntradesModel.setProjecteId(projecteID);
 
         int mes;
-        {
-            String mesStr = request.getParameter("mes");
-            if (mesStr == null) {
-                mes = start.get(Calendar.MONTH);
-            } else {
-                mes = Integer.parseInt(mesStr);
-            }
-        }
+        
+        if (request.getParameter("mes") != null) {
+        	 // Quan canviam   des del llistat
+        	 mes = Integer.valueOf(request.getParameter("mes"));
+        	 request.getSession().setAttribute("MES_LLISTAT", mes); 
+        	} else {
+        	    // Quan venim d'un altre pagina
+        	     if (request.getSession().getAttribute("MES_LLISTAT") == null)    {
+        	    	 String mesStr = request.getParameter("mes");
+        	            if (mesStr == null) {
+        	                mes = start.get(Calendar.MONTH);
+        	            } else {
+        	                mes = Integer.parseInt(mesStr);
+        	            }
+        	         request.getSession().setAttribute("MES_LLISTAT", mes); 
+        	      } else {
+        	          mes = (int)request.getSession().getAttribute("MES_LLISTAT");
+        	       } 
+        	}
+
 
         mav.addObject("mes", mes);
         llistatEntradesModel.setMes(mes);
