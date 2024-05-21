@@ -7,14 +7,11 @@ public interface IqueesticfentDaoManagers {
 	public IDepartamentsManager getDepartamentsManager();
 	public IFestiusManager getFestiusManager();
 	public IFitxerManager getFitxerManager();
-	public IGrupsManager getGrupsManager();
-	public IGrupsusuariManager getGrupsusuariManager();
 	public IIdiomaManager getIdiomaManager();
 	public IModificacionsQueEsticFentManager getModificacionsQueEsticFentManager();
 	public IPersonalProjecteManager getPersonalProjecteManager();
 	public IProjectesManager getProjectesManager();
 	public ITraduccioManager getTraduccioManager();
-	public ITwitterManager getTwitterManager();
 	public IUsuarisManager getUsuarisManager();
 	public IUsuarisDepartamentManager getUsuarisDepartamentManager();
 

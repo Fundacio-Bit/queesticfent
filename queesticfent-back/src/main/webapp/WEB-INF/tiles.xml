@@ -219,26 +219,6 @@
     </definition>
 
 
-    <definition name="grupsFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="grups.grups" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/grupsForm.jsp" />
-    </definition>
-    
-    <definition name="grupsListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/grupsList.jsp" />
-    </definition>
-
-
-    <definition name="grupsusuariFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="grupsusuari.grupsusuari" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/grupsusuariForm.jsp" />
-    </definition>
-    
-    <definition name="grupsusuariListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/grupsusuariList.jsp" />
-    </definition>
-
-
     <definition name="idiomaFormWebDB" extends="webdb">
         <put-attribute name="titol" value="idioma.idioma" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaForm.jsp" />
@@ -286,16 +266,6 @@
     
     <definition name="traduccioListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/traduccioList.jsp" />
-    </definition>
-
-
-    <definition name="twitterFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="twitter.twitter" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/twitterForm.jsp" />
-    </definition>
-    
-    <definition name="twitterListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/twitterList.jsp" />
     </definition>
 
 

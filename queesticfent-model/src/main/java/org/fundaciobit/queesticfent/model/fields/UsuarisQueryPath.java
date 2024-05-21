@@ -69,20 +69,6 @@ public class UsuarisQueryPath extends org.fundaciobit.genapp.common.query.QueryP
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public GrupsusuariQueryPath GRUPSUSUARIS() {
-    return new GrupsusuariQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return UsuarisQueryPath.this.getQueryPath() + "grupsusuaris" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
   public UsuarisDepartamentQueryPath USUARISDEPARTAMENTS() {
     return new UsuarisDepartamentQueryPath(new QueryPath() {
       public String getQueryPath() {

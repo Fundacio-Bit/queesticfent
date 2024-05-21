@@ -35,30 +35,9 @@ ${entityname}
         </span></a>
         </li>
 
-    <%-- Grups --%>
-       <fmt:message var="entityname" key="grups.grups.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/grups/list/1"/>" ><span style="${(fn:contains(url, 'grups/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Grupsusuari --%>
-       <fmt:message var="entityname" key="grupsusuari.grupsusuari.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/grupsusuari/list/1"/>" ><span style="${(fn:contains(url, 'grupsusuari/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
     <%-- Idioma --%>
        <fmt:message var="entityname" key="idioma.idioma.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/idioma/list/1"/>" ><span style="${(fn:contains(url, 'idioma/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Twitter --%>
-       <fmt:message var="entityname" key="twitter.twitter.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/twitter/list/1"/>" ><span style="${(fn:contains(url, 'twitter/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
 ${entityname}
         </span></a>
         </li>

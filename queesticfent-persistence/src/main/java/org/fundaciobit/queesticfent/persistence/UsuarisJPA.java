@@ -191,19 +191,6 @@ public class UsuarisJPA implements Usuaris {
     return __result;
   }
 
-// EXP  Field:usuariid | Table: qef_grupsusuari | Type: 0  
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuaris")
-    private Set<GrupsusuariJPA> grupsusuaris = new HashSet<GrupsusuariJPA>(0);
-    public  Set<GrupsusuariJPA> getGrupsusuaris() {
-    return this.grupsusuaris;
-  }
-
-    public void setGrupsusuaris(Set<GrupsusuariJPA> grupsusuaris) {
-      this.grupsusuaris = grupsusuaris;
-    }
-
-
 // EXP  Field:usuariid | Table: qef_usuarisdepartament | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuaris")
@@ -262,10 +249,6 @@ public class UsuarisJPA implements Usuaris {
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
-    if(!"GrupsusuariJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.grupsusuaris) || org.hibernate.Hibernate.isInitialized(__jpa.getGrupsusuaris())) ) {
-      __tmp.setGrupsusuaris(GrupsusuariJPA.copyJPA(__jpa.getGrupsusuaris(), __alreadyCopied,"UsuarisJPA"));
-    }
     if(!"UsuarisDepartamentJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuarisDepartaments) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuarisDepartaments())) ) {
       __tmp.setUsuarisDepartaments(UsuarisDepartamentJPA.copyJPA(__jpa.getUsuarisDepartaments(), __alreadyCopied,"UsuarisJPA"));
