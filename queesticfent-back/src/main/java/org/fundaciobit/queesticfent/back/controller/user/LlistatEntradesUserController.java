@@ -171,10 +171,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         Where ww = Where.AND(ww1, ww2, ww3);
 
-        /*Query<IModificacionsQueEsticFent,Integer> query;
-        query = ModificacionsQueEsticFentManager.getQuery(IModificacionsQueEsticFent.QUEESTICFENTID, ww);
-        List<Integer> listOfqueesticFentID =  query.execute();*/
-
         List<Long> listOfqueesticFentID = modificacionsQueEsticFentEjb
                 .executeQuery(ModificacionsQueEsticFentFields.QUEESTICFENTID, ww);
 
@@ -264,7 +260,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         form.addReadOnlyField(USUARIID);
         form.addReadOnlyField(ACCIOID);
         form.addHiddenField(QUEESTICFENTID);
-        //form.addReadOnlyField(PROJECTEID);
         form.setAttachedAdditionalJspCode(true);
 
         return form;
@@ -407,20 +402,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         return api3;
     }
 
-    /*
-    @Override
-    public ModificacionsQueEsticFentJPA create(HttpServletRequest request,
-            ModificacionsQueEsticFentJPA modificacionsQueEsticFent) throws I18NException, I18NValidationException {
-    
-        ModificacionsQueEsticFentJPA m;
-        m = (ModificacionsQueEsticFentJPA) modificacionsQueEsticFentEjb.create(modificacionsQueEsticFent);
-        
-        return m;
-        
-        
-        
-    }
-    */
 
     // TODO Falta DELETE De tipus Vacances
 
@@ -437,47 +418,20 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             }
         }
 
-        // 2.- Cercar Elements de QueEsticFent
-
-        //Where w1 = null; //getWhereOfQueEsticFent(usuariID, start, end);
-        //Where w2 = getWhereProjecte(projectes);
-        //Where w3 = null;
-        //Where w3 = getWhereExcloureModificacions(usuariID, projectes);
-
-        //Where w = Where.AND(w1, w2, w3);
+        
 
         // 3.- Mapejar dades
         Map<Long, QueEsticFentItem> itemsByQueEsticFentID = new HashMap<Long, QueEsticFentItem>();
         Map<Date, List<QueEsticFentItem>> llista = new HashMap<Date, List<QueEsticFentItem>>();
 
-        // 3.1.- Mapejar entrades OTAE12 (OTAE + YEAR)
-        //Where w5a = getWhereCurrentOTAE(start);
-        //Where w_OTAE = Where.AND(w);
-
-        //List<IQueEsticFent> all = QueEsticFentManager.getInstance().select(w,OrderType.ASC, IQueEsticFent.DATA);
-        //afegirEntrades(usuariID, all, itemsByQueEsticFentID, llista, projectes);
-
-        // 3.2.- Mapejar entrades  SINONIMS
-        /*
-        Where w5b = getWhereSinonimsOTAE();    
-        Where w_Sinonims = Where.AND(w, w5b);
-        List<IQueEsticFent> all_Sin = QueEsticFentManager.getInstance().select(w_Sinonims, OrderType.ASC, IQueEsticFent.DATA);    
-        final IAccions accioSinonim = accionsByID.get(Utils.ACCIO_SINONIM);
-        afegirEntrades(usuariID, all_Sin, itemsByQueEsticFentID, llista, accioSinonim);
-        */
-        //log.info("XYZ ZZZ Projectes = " + Arrays.toString(projectes.toArray()));
         // 4.- Aplicar Modificacions
         // 4.1.- Cercar Modificacions
         Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
         Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
         Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
-        Where wm4a = ModificacionsQueEsticFentFields.PROJECTEID.in(projectes.toArray(new Long[projectes.size()]));
-        Where wm4b = ModificacionsQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_VACANCES);
-        Where wm = Where.AND(wm1, wm2, wm3, Where.OR(wm4a, wm4b));
+        Where wm = Where.AND(wm1, wm2, wm3);
 
-        //IModificacionsQueEsticFent[] modificacions = ModificacionsQueEsticFentManager.selectForOnlyRead(wm);
         List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm);
-        //log.info("XYZ ZZZ Modificacions = " + modificacions.size());
 
         // 4.2.- Adaptar entrades
         QueEsticFentItem item;
@@ -491,14 +445,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 //    '-3', 'Afegir Nova Entrada'                  usuari, data, dada1  
                 case (int) Utils.ACCIO_NOVA_ENTRADA: {
                     Date date = toDate000000(modificacio.getData().getTime());
-                    log.info("XXX XYZ Dia = " + modificacio.getData() + "       --- Titol Dia mes: " + date);
                     item = new QueEsticFentItem(usuariID, modificacio.getData(), modificacio.getDada1());
                     item.addModificacioItem(
                             new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    /*
-                    item.setModificacio(modificacio);
-                    item.setAccio(accionsByID.get(modificacio.getAccioID()));
-                    */
+                    
                     List<QueEsticFentItem> items = llista.get(date);
                     if (items == null) {
                         items = new ArrayList<QueEsticFentItem>();
@@ -531,10 +481,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     }
                     item.addModificacioItem(
                             new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    /*
-                    item.setAccio(accionsByID.get(Utils.ACCIO_AFEGIR_QUEESTICFENT));
-                    item.setModificacio(modificacio);
-                    */
                 }
                 break;
                 //    '-1'   Festiu                                        data
@@ -551,10 +497,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     } else {
                         item.addModificacioItem(
                                 new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                        /*
-                        item.setModificacio(modificacio);
-                        item.setAccio(accionsByID.get(modificacio.getAccioID()));
-                        */
                     }
                 }
                 break;
@@ -566,20 +508,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         if (dada2 == null) {
                             dada2 = "";
                         }
-                        /*
-                        log.info("DADA1: ]" + modificacio.getDada1() + "[");
-                        log.info("DADA2: ]" + dada2 + "[");
-                        log.info("DESC: ]" + item.getDescripcio() + "[");
-                        */
 
                         String newText = item.getDescripcio().replace(modificacio.getDada1(), dada2);
                         item.setDescripcio(newText);
                         item.addModificacioItem(
                                 new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                        /*
-                        item.setModificacio(modificacio);
-                        item.setAccio(accionsByID.get(modificacio.getAccioID()));
-                        */
                     }
                 }
                 break;
@@ -590,10 +523,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                     item = new QueEsticFentItem(usuariID, modificacio.getData(), "Vacances");
                     item.addModificacioItem(
                             new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    /*
-                    item.setModificacio(modificacio);
-                    item.setAccio(accionsByID.get(modificacio.getAccioID()));
-                    */
 
                     List<QueEsticFentItem> items = llista.get(date);
                     if (items == null) {
@@ -605,7 +534,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 break;
                 //    '3',  'Canvi Data',                          usuari, data  
                 case (int) Utils.ACCIO_CANVI_DATA: {
-                    //log.info(" + Modificacio QEF_ID: " + modificacio.getQueEsticFentID());
                     item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
                     if (item == null) {
                         ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
@@ -649,10 +577,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                         item.setData(modificacio.getData());
                         item.addModificacioItem(
                                 new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                        /*
-                        item.setModificacio(modificacio);
-                        item.setAccio(accionsByID.get(modificacio.getAccioID()));
-                        */
+
 
                     }
                 }
@@ -777,24 +702,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         // ============== PROJECTES
         List<Long> projectes;
-        /*
-        if (esAdministrador) {
-          // Com que soc administrador llegirï¿½ tots els projectes del departament
-          Where wp = IProjectes.DEPARTAMENTID.equal(departamentID);
-          Query<IProjectes, Integer> query;
-          query = ProjectesManager.getQuery(IProjectes.PROJECTEID, wp);
-          projectes = query.execute();
-        } else
-          */
+
         {
             /** Seleccionar projectes de l'usuari */
-            Where wp = PersonalProjecteFields.USUARIID.equal(usuariID);
-
-            projectes = personalProjecteEjb.executeQuery(PersonalProjecteFields.PROJECTEID, wp);
+        	//Seleccionam tots els projectes
+            projectes = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
         }
 
         Long projecteID = null; // null == TOTS
-        List<Long> projectesSeleccionats = projectes;
         {
             String projecteStr = null;
             if (request.getParameter("projecteID") != null) {
@@ -805,16 +720,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
                 projecteID = Long.parseLong(projecteStr);
                 // Projecte per parï¿½metre no esta en la llista de disponibles
                 if (projectes.contains(projecteID)) {
-                    projectesSeleccionats = new ArrayList<Long>();
-                    projectesSeleccionats.add(projecteID);
+                	projectes = new ArrayList<Long>();
+                	projectes.add(projecteID);
                 }
             }
         }
 
         if (projecteID == null) {
-            // Tots els projectes
-            projectesSeleccionats = projectes;
-            if (projectesSeleccionats.size() == 1) {
+            if (projectes.size() == 1) {
                 projecteID = projectes.get(0);
             }
         }
@@ -915,8 +828,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-        itemsByDate = getQueEsticFentItemByUser(usuariID, projectesSeleccionats, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
-        //  itemsByDate = new java.util.HashMap<Date, List<QueEsticFentItem>>();
+        itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
         mav.addObject("start", start);
         llistatEntradesModel.setStart(start);
         mav.addObject("itemsByDate", itemsByDate);
@@ -924,7 +836,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         {
             List<Accions> allAccions;
-            //allAccions = new IAccions[0];
 
             Where wa = AccionsFields.ACCIOID.greaterThanOrEqual((long) 0);
             allAccions = accionsEjb.select(wa, new OrderBy(AccionsFields.NOM, OrderType.ASC));
@@ -1117,10 +1028,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
             Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
 
-            ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map
-                    .get("usuaris");
-            log.info("XYZ llistatDeUserInfo SIZE= " + llistaDeUserInfo.size());
-
+            ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map.get("usuaris");
             for (org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo : llistaDeUserInfo) {
                 log.info(" ----- " + userInfo.nom);
                 for (Item item : userInfo.items) {
