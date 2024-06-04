@@ -432,7 +432,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
         Where wm = Where.AND(wm1, wm2, wm3);
 
-        List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm);
+        List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm, new OrderBy(ModificacionsQueEsticFentFields.DATA));
 
         // 4.2.- Adaptar entrades
         QueEsticFentItem item;
