@@ -192,7 +192,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             //TODO XYZ Falta UsuariID, Data, Accio com a readonly
             // Amagar queesticfentID
             m.setUsuariID(request.getParameter("usuariID"));
-            form.addReadOnlyField(DATA);
+            form.setTitleCode("novaentrada");
+            form.addHiddenField(DADA2);
 
             try {
                 m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
@@ -651,7 +652,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         mav.addObject("tePermisos", tePermisos);
         llistatEntradesModel.setTePermisos(tePermisos);
 
-
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
         mav.addObject("yesterday", yesterday);
@@ -811,7 +811,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         start.set(Calendar.MONTH, mes);
         start.set(Calendar.YEAR, any);
         start.set(Calendar.DATE, 1);
+        
 
+
+       
         int maxDay = start.getActualMaximum(Calendar.DAY_OF_MONTH);
         mav.addObject("maxDay", maxDay);
         llistatEntradesModel.setMaxDay(maxDay);
@@ -824,6 +827,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         end.set(Calendar.MINUTE, 59);
         end.set(Calendar.SECOND, 59);
         end.set(Calendar.MILLISECOND, 999);
+        
 
         // (1) Obtenir dades
         Map<Date, List<QueEsticFentItem>> itemsByDate;
@@ -831,6 +835,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
         mav.addObject("start", start);
         llistatEntradesModel.setStart(start);
+        
+        
         mav.addObject("itemsByDate", itemsByDate);
         llistatEntradesModel.setItemsByDate(itemsByDate);
 

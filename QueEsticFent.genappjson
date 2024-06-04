@@ -845,8 +845,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "Usuari ID",
-            "es": "Usuario ID"
+            "ca": "Usuari",
+            "es": "Usuario"
           },
           "javaName": "usuariID",
           "javaType": "java.lang.String",
@@ -871,8 +871,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Projecte ID",
-            "es": "Proyecto ID"
+            "ca": "Projecte",
+            "es": "Proyecto"
           },
           "javaName": "projecteID",
           "javaType": "java.lang.Long",
@@ -882,7 +882,7 @@
           "transientField": false,
           "filter": false,
           "orderBy": 0,
-          "groupBy": false,
+          "groupBy": true,
           "webFieldInfo": {
             "webtype": 3,
             "foreignKey": {
@@ -960,8 +960,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Dada1",
-            "es": "Dato1"
+            "ca": "Descripció",
+            "es": "Descripció"
           },
           "javaName": "dada1",
           "javaType": "java.lang.String",

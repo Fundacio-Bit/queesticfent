@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
-<div id="botonsrapids" style="display: none;" class="row">
-    <div class="row">
+<div id="botonsrapids" style="display: none;" class="row col-md-9 mt-1">
+    <div class="row col-md-9 mt-1">
         <input id="preferit.boto.1" type="button" class="btn btn-warning" style="display: none" onclick="setCategoria(1)" value="Temporal" />&nbsp;&nbsp;
         <input id="preferit.boto.2" type="button" class="btn btn-warning" style="display: none" onclick="setCategoria(2)" value="Temporal" />&nbsp;&nbsp;
         <input id="preferit.boto.3" type="button" class="btn btn-warning" style="display: none" onclick="setCategoria(3)" value="Temporal" />&nbsp;&nbsp;
