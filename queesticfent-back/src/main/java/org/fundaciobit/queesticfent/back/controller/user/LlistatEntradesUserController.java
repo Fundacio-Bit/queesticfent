@@ -103,1120 +103,1083 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class LlistatEntradesUserController extends ModificacionsQueEsticFentController {
 
-    public static final String CONTEXT_WEB = "/user/entrades";
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.PersonalProjecteService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.PersonalProjecteService personalProjecteEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.AccionsService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.AccionsService accionsEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjectesService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.ProjectesService projectesEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentsService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.DepartamentsService departamentsEjb;
-
-    @Override
-    public String getTileForm() {
-        return "entradesFormUser";
-    }
-
-    @Override
-    public String getTileList() {
-        return "modificacionsQueEsticFentListWebDB";
-    }
-
-    @Override
-    public String getSessionAttributeFilterForm() {
-        return "ModificacionsQueEsticFent_FilterForm_" + this.getClass().getName();
-    }
-
-    protected Where getWhereProjecte(List<Long> projectes) throws Exception {
-        Where w = null;
-        for (Long projecteID : projectes) {
-            Projectes proj = projectesEjb.findByPrimaryKey(projecteID);
-            if (w == null) {
-                w = ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %");
-            } else {
-                w = Where.OR(w, ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %"));
-            }
-        }
-        return w;
-    }
-
-    protected Where getWhereExcloureModificacions(String usuariID, List<Long> projectes) throws Exception {
-        // (a) Eliminar elments moguts a altres llocs (CANVI DE DATA)
-        Where ww1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
-        Where ww2 = ModificacionsQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_CANVI_DATA);
-
-        Where ww3 = null;
-        for (Long projecteID : projectes) {
-            //IProjectes proj = ProjectesManager.findByPrimaryKey(projecteID);
-            if (ww3 == null) {
-                ww3 = ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID);
-            } else {
-                ww3 = Where.OR(ww3, ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID));
-            }
-        }
-
-        Where ww = Where.AND(ww1, ww2, ww3);
-
-        List<Long> listOfqueesticFentID = modificacionsQueEsticFentEjb
-                .executeQuery(ModificacionsQueEsticFentFields.QUEESTICFENTID, ww);
-
-        if (listOfqueesticFentID.size() == 0) {
-            return ModificacionsQueEsticFentFields.QUEESTICFENTID.isNotNull();
-        } else {
-            Long[] queesticFentIDs = listOfqueesticFentID.toArray(new Long[listOfqueesticFentID.size()]);
-            return ModificacionsQueEsticFentFields.QUEESTICFENTID.notIn(queesticFentIDs);
-        }
-    }
-
-    @Override
-    public ModificacionsQueEsticFentForm getModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA _jpa,
-            boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-
-        ModificacionsQueEsticFentForm form = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
-        if (form.isNou()) {
-            ModificacionsQueEsticFentJPA m = form.getModificacionsQueEsticFent();
-            //TODO XYZ Falta UsuariID, Data, Accio com a readonly
-            // Amagar queesticfentID
-            m.setUsuariID(request.getParameter("usuariID"));
-            form.setTitleCode("novaentrada");
-            form.addHiddenField(DADA2);
+	public static final String CONTEXT_WEB = "/user/entrades";
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.PersonalProjecteService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.PersonalProjecteService personalProjecteEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.AccionsService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.AccionsService accionsEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjectesService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.ProjectesService projectesEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentsService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.DepartamentsService departamentsEjb;
+
+	@Override
+	public String getTileForm() {
+		return "entradesFormUser";
+	}
+
+	@Override
+	public String getTileList() {
+		return "modificacionsQueEsticFentListWebDB";
+	}
+
+	@Override
+	public String getSessionAttributeFilterForm() {
+		return "ModificacionsQueEsticFent_FilterForm_" + this.getClass().getName();
+	}
+
+	protected Where getWhereProjecte(List<Long> projectes) throws Exception {
+		Where w = null;
+		for (Long projecteID : projectes) {
+			Projectes proj = projectesEjb.findByPrimaryKey(projecteID);
+			if (w == null) {
+				w = ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %");
+			} else {
+				w = Where.OR(w, ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %"));
+			}
+		}
+		return w;
+	}
+
+	protected Where getWhereExcloureModificacions(String usuariID, List<Long> projectes) throws Exception {
+		// (a) Eliminar elments moguts a altres llocs (CANVI DE DATA)
+		Where ww1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
+		Where ww2 = ModificacionsQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_CANVI_DATA);
+
+		Where ww3 = null;
+		for (Long projecteID : projectes) {
+			// IProjectes proj = ProjectesManager.findByPrimaryKey(projecteID);
+			if (ww3 == null) {
+				ww3 = ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID);
+			} else {
+				ww3 = Where.OR(ww3, ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID));
+			}
+		}
+
+		Where ww = Where.AND(ww1, ww2, ww3);
+
+		List<Long> listOfqueesticFentID = modificacionsQueEsticFentEjb
+				.executeQuery(ModificacionsQueEsticFentFields.QUEESTICFENTID, ww);
+
+		if (listOfqueesticFentID.size() == 0) {
+			return ModificacionsQueEsticFentFields.QUEESTICFENTID.isNotNull();
+		} else {
+			Long[] queesticFentIDs = listOfqueesticFentID.toArray(new Long[listOfqueesticFentID.size()]);
+			return ModificacionsQueEsticFentFields.QUEESTICFENTID.notIn(queesticFentIDs);
+		}
+	}
+
+	@Override
+	public ModificacionsQueEsticFentForm getModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA _jpa,
+			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+
+		ModificacionsQueEsticFentForm form = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
+		if (form.isNou()) {
+			ModificacionsQueEsticFentJPA m = form.getModificacionsQueEsticFent();
+			// TODO XYZ Falta UsuariID, Data, Accio com a readonly
+			// Amagar queesticfentID
+			m.setUsuariID(request.getParameter("usuariID"));
+			form.setTitleCode("novaentrada");
+			form.addHiddenField(DADA2);
+
+			try {
+				m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
+			} catch (ParseException e) {
+				// TODO XYZ
+				e.printStackTrace();
+			}
+			String projecteIdStr = request.getParameter("projecteID");
+			if (projecteIdStr != null) {
+				// TODO XYZ Falta posar ProjecteID com a readonly
+				m.setProjecteID(Long.parseLong(projecteIdStr));
+			}
+			String accioID = request.getParameter("accioID");
+			if (String.valueOf(Utils.ACCIO_VACANCES).contentEquals(accioID)) {
+				m.setAccioID(Utils.ACCIO_VACANCES);
+				m.setDada1("Vacances");
+				try {
+					this.create(request, m);
 
-            try {
-                m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
-            } catch (ParseException e) {
-                // TODO XYZ 
-                e.printStackTrace();
-            }
-            String projecteIdStr = request.getParameter("projecteID");
-            if (projecteIdStr != null) {
-                //TODO XYZ Falta posar ProjecteID com a readonly
-                m.setProjecteID(Long.parseLong(projecteIdStr));
-            }
-            String accioID = request.getParameter("accioID");
-            if (String.valueOf(Utils.ACCIO_VACANCES).contentEquals(accioID)) {
-                m.setAccioID(Utils.ACCIO_VACANCES);
-                m.setDada1("Vacances");
-                try {
-                    this.create(request, m);
+					BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
+							Configuracio.getBasecampOrganizationID(),
+							new File(Configuracio.getBasecampTokenPropertiesFile()));
 
-                    BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
-                            Configuracio.getBasecampOrganizationID(),
-                            new File(Configuracio.getBasecampTokenPropertiesFile()));
+					if (api3.isNecessaryUpdateToken()) {
 
-                    if (api3.isNecessaryUpdateToken()) {
+						String client_id = Configuracio.getBasecampClientID();
+						String redirectUrl = Configuracio.getBasecampRedirectUrl();
 
-                        String client_id = Configuracio.getBasecampClientID();
-                        String redirectUrl = Configuracio.getBasecampRedirectUrl();
+						String getTokenUrl = UpdateTokenUtils.getGetCodeUrl(client_id, redirectUrl);
 
-                        String getTokenUrl = UpdateTokenUtils.getGetCodeUrl(client_id, redirectUrl);
+						request.getSession().setAttribute("__MODIFICACIOID__", m.getModificacioID());
 
-                        request.getSession().setAttribute("__MODIFICACIOID__", m.getModificacioID());
+						mav.setView(new RedirectView(getTokenUrl, false));
 
-                        mav.setView(new RedirectView(getTokenUrl, false));
+						return form;
 
-                        return form;
+					}
 
-                    }
+					mav.setView(new RedirectView(
+							getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
 
-                    mav.setView(new RedirectView(
-                            getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
-                    
+					return form;
 
+				} catch (I18NException e) {
+					String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
+					log.error(msg, e);
+					HtmlUtils.saveMessageError(request, msg);
+				} catch (I18NValidationException e) {
+					String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
+					log.error(msg, e);
+					HtmlUtils.saveMessageError(request, msg);
 
-                    return form;
+				}
+				mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+				return form;
 
-                } catch (I18NException e) {
-                    String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
-                    log.error(msg, e);
-                    HtmlUtils.saveMessageError(request, msg);
-                } catch (I18NValidationException e) {
-                    String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
-                    log.error(msg, e);
-                    HtmlUtils.saveMessageError(request, msg);
+			} else {
+				m.setAccioID(Utils.ACCIO_NOVA_ENTRADA);
+			}
 
-                }
-                mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
-                return form;
+		}
 
-            } else {
-                m.setAccioID(Utils.ACCIO_NOVA_ENTRADA);
-            }
+		form.addReadOnlyField(USUARIID);
+		form.addReadOnlyField(ACCIOID);
+		form.addHiddenField(QUEESTICFENTID);
+		form.setAttachedAdditionalJspCode(true);
 
-        }
+		return form;
+	}
 
-        form.addReadOnlyField(USUARIID);
-        form.addReadOnlyField(ACCIOID);
-        form.addHiddenField(QUEESTICFENTID);
-        form.setAttachedAdditionalJspCode(true);
+	public static SimpleDateFormat getSimpleDateTimeFormat() {
+		return new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+	}
 
-        return form;
-    }
+	@RequestMapping("/basecamptoken")
+	public ModelAndView token(HttpServletRequest request, javax.servlet.http.HttpServletResponse response) {
 
-    public static SimpleDateFormat getSimpleDateTimeFormat() {
-        return new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
-    }
+		ModelAndView mav = new ModelAndView();
+		try {
 
-    @RequestMapping("/basecamptoken")
-    public ModelAndView token(HttpServletRequest request, javax.servlet.http.HttpServletResponse response) {
+			// TODO XYZ ZZZ falta gestionar si l'usuari cancela, envia parametre error !!!!!
+			String code = request.getParameter("code");
 
-        ModelAndView mav = new ModelAndView();
-        try {
+			log.info("CODE => ]" + code + "[");
 
-            // TODO XYZ ZZZ falta gestionar si l'usuari cancela, envia parametre error !!!!!
-            String code = request.getParameter("code");
+			// https://governdigital.fundaciobit.org/queesticfent/user/entrades/basecamptoken
 
-            log.info("CODE => ]" + code + "[");
+			TokenResponse tokenInfo = UpdateTokenUtils.getNewTokenFromCode(Configuracio.getBasecampClientID(),
+					Configuracio.getBasecampClientSecret(), Configuracio.getBasecampRedirectUrl(), code);
 
-            //  https://governdigital.fundaciobit.org/queesticfent/user/entrades/basecamptoken
+			File basecampTokenFile = new File(Configuracio.getBasecampTokenPropertiesFile());
 
-            TokenResponse tokenInfo = UpdateTokenUtils.getNewTokenFromCode(Configuracio.getBasecampClientID(),
-                    Configuracio.getBasecampClientSecret(), Configuracio.getBasecampRedirectUrl(), code);
+			UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, tokenInfo);
 
-            File basecampTokenFile = new File(Configuracio.getBasecampTokenPropertiesFile());
+			Long modificacioID = (Long) request.getSession().getAttribute("__MODIFICACIOID__");
 
-            UpdateTokenUtils.updateBasecampTokenProperties(basecampTokenFile, tokenInfo);
+			mav.setView(new RedirectView(getContextWeb() + "/addbasecampscheduleentries/" + modificacioID, true));
 
-            Long modificacioID = (Long) request.getSession().getAttribute("__MODIFICACIOID__");
+		} catch (Exception e) {
+			String msg = "Error afegint vacances(Error actualitzant token de Basecamp): " + e.getMessage();
+			log.error(msg, e);
+			HtmlUtils.saveMessageError(request, msg);
 
-            mav.setView(new RedirectView(getContextWeb() + "/addbasecampscheduleentries/" + modificacioID, true));
+			mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
 
-        } catch (Exception e) {
-            String msg = "Error afegint vacances(Error actualitzant token de Basecamp): " + e.getMessage();
-            log.error(msg, e);
-            HtmlUtils.saveMessageError(request, msg);
+		}
 
-            mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+		return mav;
+	}
 
-        }
+	@Override
+	public void delete(HttpServletRequest request, ModificacionsQueEsticFent modificacionsQueEsticFent)
+			throws I18NException {
 
-        return mav;
-    }
+		modificacionsQueEsticFentEjb.delete(modificacionsQueEsticFent);
 
-    @Override
-    public void delete(HttpServletRequest request, ModificacionsQueEsticFent modificacionsQueEsticFent)
-            throws I18NException {
+		if (modificacionsQueEsticFent.getAccioID() == Utils.ACCIO_VACANCES) {
+			BaseCampApi3 api3 = getBasecampApi3();
+			Long projectID = Configuracio.getBasecampProjectID();
 
-        modificacionsQueEsticFentEjb.delete(modificacionsQueEsticFent);
+			String info = modificacionsQueEsticFent.getDada2();
+			Long entryID = null;
+			try {
+				Properties prop = new Properties();
+				prop.load(new StringReader(info));
 
-        if (modificacionsQueEsticFent.getAccioID() == Utils.ACCIO_VACANCES) {
-            BaseCampApi3 api3 = getBasecampApi3();
-            Long projectID = Configuracio.getBasecampProjectID();
+				String entryIDStr = prop.getProperty("basecamp.entryID");
 
-            String info = modificacionsQueEsticFent.getDada2();
-            Long entryID = null;
-            try {
-                Properties prop = new Properties();
-                prop.load(new StringReader(info));
+				if (entryIDStr != null) {
 
-                String entryIDStr = prop.getProperty("basecamp.entryID");
+					entryID = Long.parseLong(entryIDStr);
+					api3.deleteScheduleEntry(projectID, entryID);
 
-                if (entryIDStr != null) {
+					HtmlUtils.saveMessageSuccess(request, "Esborrada entrada del Calendari de Basecamp");
 
-                    entryID = Long.parseLong(entryIDStr);
-                    api3.deleteScheduleEntry(projectID, entryID);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				entryID = null;
+			}
 
-                    HtmlUtils.saveMessageSuccess(request, "Esborrada entrada del Calendari de Basecamp");
+			if (entryID == null) {
+				HtmlUtils.saveMessageWarning(request,
+						"Ha d'esborrar manualment " + "del Calendari de Basecamp l'entrada de Vacances del dia "
+								+ modificacionsQueEsticFent.getData());
+			}
 
-                }
-            } catch (Exception e) {
-                // TODO: handle exception
-                e.printStackTrace();
-                entryID = null;
-            }
+		}
 
-            if (entryID == null) {
-                HtmlUtils.saveMessageWarning(request,
-                        "Ha d'esborrar manualment " + "del Calendari de Basecamp l'entrada de Vacances del dia "
-                                + modificacionsQueEsticFent.getData());
-            }
+	}
 
-        }
+	@RequestMapping(value = "/addbasecampscheduleentries/{modificacioID}", method = RequestMethod.GET)
+	public ModelAndView addBasecampScheduleEntries(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable Long modificacioID) throws I18NException {
+		try {
+			ModificacionsQueEsticFentJPA m = this.findByPrimaryKey(request, modificacioID);
 
-    }
+			BaseCampApi3 api3 = getBasecampApi3();
 
-    @RequestMapping(value = "/addbasecampscheduleentries/{modificacioID}", method = RequestMethod.GET)
-    public ModelAndView addBasecampScheduleEntries(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable Long modificacioID) throws I18NException {
-        try {
-            ModificacionsQueEsticFentJPA m = this.findByPrimaryKey(request, modificacioID);
+			Long projectID = Configuracio.getBasecampProjectID();
 
-            BaseCampApi3 api3 = getBasecampApi3();
+			Long scheduleID = api3.getScheduleID(projectID);
 
-            Long projectID = Configuracio.getBasecampProjectID();
+			NewEntry e = new NewEntry();
+			e.setStarts_at(ISO8601.dateToISO8601(m.getData()));
+			e.setEnds_at(ISO8601.dateToISO8601(m.getData()));
 
-            Long scheduleID = api3.getScheduleID(projectID);
+			// XYZ ZZZ Canviar per EMAIL !!!!!
+			String username = LoginInfo.getInstance().getUsername();
 
-            NewEntry e = new NewEntry();
-            e.setStarts_at(ISO8601.dateToISO8601(m.getData()));
-            e.setEnds_at(ISO8601.dateToISO8601(m.getData()));
+			User user = api3.getUserIdFromEmail(projectID, username + "@fundaciobit.org");
+			e.setSummary("Vacances " + username.toUpperCase());
+			e.setAllDay(true);
+			e.setParticipant_ids(new Integer[] { user.getId() });
 
-            // XYZ ZZZ  Canviar per EMAIL !!!!!
-            String username = LoginInfo.getInstance().getUsername();
+			Entry fullEntry = api3.addScheduleEntry(projectID, scheduleID, e);
 
-            User user = api3.getUserIdFromEmail(projectID, username + "@fundaciobit.org");
-            e.setSummary("Vacances " + username.toUpperCase());
-            e.setAllDay(true);
-            e.setParticipant_ids(new Integer[] { user.getId() });
+			m.setDada2("basecamp.entryID=" + fullEntry.getId());
 
-            Entry fullEntry = api3.addScheduleEntry(projectID, scheduleID, e);
+			this.update(request, m);
 
-            m.setDada2("basecamp.entryID=" + fullEntry.getId());
+			HtmlUtils.saveMessageSuccess(request, "Afegit dia lliure al calendari de BaseCamp");
 
-            this.update(request, m);
+		} catch (Throwable th) {
 
-            HtmlUtils.saveMessageSuccess(request, "Afegit dia lliure al calendari de BaseCamp");
+			String msg = "Error no controlat intentant donat d'alta l'entrada al calendari de Basecamp."
+					+ " L'haurà de donat d'alta manualment. Error: " + th.getMessage();
 
-        } catch (Throwable th) {
+			log.error(msg, th);
 
-            String msg = "Error no controlat intentant donat d'alta l'entrada al calendari de Basecamp."
-                    + " L'haurà de donat d'alta manualment. Error: " + th.getMessage();
+			HtmlUtils.saveMessageError(request, msg);
 
-            log.error(msg, th);
+		}
 
-            HtmlUtils.saveMessageError(request, msg);
+		ModelAndView mav = new ModelAndView();
+		mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
 
-        }
+		return mav;
+	}
 
-        ModelAndView mav = new ModelAndView();
-        mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+	protected BaseCampApi3 getBasecampApi3() {
+		BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
+				Configuracio.getBasecampOrganizationID(), new File(Configuracio.getBasecampTokenPropertiesFile()));
+		return api3;
+	}
 
-        return mav;
-    }
+	// TODO Falta DELETE De tipus Vacances
 
-    protected BaseCampApi3 getBasecampApi3() {
-        BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
-                Configuracio.getBasecampOrganizationID(), new File(Configuracio.getBasecampTokenPropertiesFile()));
-        return api3;
-    }
+	protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID, List<Long> projectes,
+			Timestamp start, Timestamp end) throws Exception {
 
+		// 1.- Llegir Accions
+		Map<Long, Accions> accionsByID = new HashMap<Long, Accions>();
+		{
 
-    // TODO Falta DELETE De tipus Vacances
+			List<Accions> accions = this.accionsEjb.select();
+			for (Accions acc : accions) {
+				accionsByID.put(acc.getAccioID(), acc);
+			}
+		}
 
-    protected Map<Date, List<QueEsticFentItem>> getQueEsticFentItemByUser(String usuariID, List<Long> projectes,
-            Timestamp start, Timestamp end) throws Exception {
+		// 3.- Mapejar dades
+		Map<Long, QueEsticFentItem> itemsByQueEsticFentID = new HashMap<Long, QueEsticFentItem>();
+		Map<Date, List<QueEsticFentItem>> llista = new HashMap<Date, List<QueEsticFentItem>>();
 
-        // 1.- Llegir Accions
-        Map<Long, Accions> accionsByID = new HashMap<Long, Accions>();
-        {
-
-            List<Accions> accions = this.accionsEjb.select();
-            for (Accions acc : accions) {
-                accionsByID.put(acc.getAccioID(), acc);
-            }
-        }
-
-        
-
-        // 3.- Mapejar dades
-        Map<Long, QueEsticFentItem> itemsByQueEsticFentID = new HashMap<Long, QueEsticFentItem>();
-        Map<Date, List<QueEsticFentItem>> llista = new HashMap<Date, List<QueEsticFentItem>>();
-
-        // 4.- Aplicar Modificacions
-        // 4.1.- Cercar Modificacions
-        Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
-        Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
-        Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
-        Where wm = Where.AND(wm1, wm2, wm3);
-
-        List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm, new OrderBy(ModificacionsQueEsticFentFields.DATA));
-
-        // 4.2.- Adaptar entrades
-        QueEsticFentItem item;
-        for (ModificacionsQueEsticFent modificacio : modificacions) {
-            switch ((int) modificacio.getAccioID()) {
-                // '-4'  ACCIO_SINONIM XXX
-                //case Utils.ACCIO_SINONIM:
-                // Aix� es fa en el punt anterior
-                //break;
-
-                //    '-3', 'Afegir Nova Entrada'                  usuari, data, dada1  
-                case (int) Utils.ACCIO_NOVA_ENTRADA: {
-                    Date date = toDate000000(modificacio.getData().getTime());
-                    item = new QueEsticFentItem(usuariID, modificacio.getData(), modificacio.getDada1());
-                    item.addModificacioItem(
-                            new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    
-                    List<QueEsticFentItem> items = llista.get(date);
-                    if (items == null) {
-                        items = new ArrayList<QueEsticFentItem>();
-                        llista.put(date, items);
-                    }
-                    items.add(item);
-                }
-                break;
-                //    '-2', 'Afegir Entrada de QueEsticFent'   ID, usuari, data
-                case (int) Utils.ACCIO_AFEGIR_QUEESTICFENT: {
-
-                    item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
-                    if (item == null) {
-                        ModificacionsQueEsticFentJPA qef = modificacionsQueEsticFentEjb
-                                .findByPrimaryKey(modificacio.getQueEsticFentID());
-                        if (qef != null) {
-                            item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDada1());
-                        }
-
-                        Date date = toDate000000(item.getData().getTime());
-                        List<QueEsticFentItem> items = llista.get(date);
-
-                        if (items == null) {
-                            items = new ArrayList<QueEsticFentItem>();
-                            llista.put(date, items);
-                        }
-                        // Mapejar per data
-                        items.add(item);
-                        itemsByQueEsticFentID.put(modificacio.getQueEsticFentID(), item);
-                    }
-                    item.addModificacioItem(
-                            new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                }
-                break;
-                //    '-1'   Festiu                                        data
-                case (int) Utils.ACCIO_FESTIU:
-                // Es realitza amb la taula de Fesius
-
-                break;
-                //    '0'    no mostrar entrada                ID, usuari, data    
-                case (int) Utils.ACCIO_AMAGAR_ENTRADA: {
-                    item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
-                    if (item == null) {
-                        log.info("Modificació amb ID " + modificacio.getModificacioID()
-                                + " fa referència a entrada no arregada amb ID " + modificacio.getQueEsticFentID());
-                    } else {
-                        item.addModificacioItem(
-                                new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    }
-                }
-                break;
-                //    '1',  'Modificar Text dins Entrada',     ID, usuari, data, dada1, dada2
-                case (int) Utils.ACCIO_CANVI_TEXT: {
-                    item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
-                    if (item != null) {
-                        String dada2 = modificacio.getDada2();
-                        if (dada2 == null) {
-                            dada2 = "";
-                        }
-
-                        String newText = item.getDescripcio().replace(modificacio.getDada1(), dada2);
-                        item.setDescripcio(newText);
-                        item.addModificacioItem(
-                                new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-                    }
-                }
-                break;
-                //    '-4',  'Vacances',                            usuari, data
-                case (int) Utils.ACCIO_VACANCES: {
-                    Date date = toDate000000(modificacio.getData().getTime());
-
-                    item = new QueEsticFentItem(usuariID, modificacio.getData(), "Vacances");
-                    item.addModificacioItem(
-                            new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-
-                    List<QueEsticFentItem> items = llista.get(date);
-                    if (items == null) {
-                        items = new ArrayList<QueEsticFentItem>();
-                        llista.put(date, items);
-                    }
-                    items.add(item);
-                }
-                break;
-                //    '3',  'Canvi Data',                          usuari, data  
-                case (int) Utils.ACCIO_CANVI_DATA: {
-                    item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
-                    if (item == null) {
-                        ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
-                                .findByPrimaryKey(modificacio.getQueEsticFentID());
-                        QueEsticFentItem_Old qef = new QueEsticFentItem_Old(mqef.getUsuariID(), mqef.getData(),
-                                mqef.getDada1());
-                        if (qef != null) {
-                            item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDescripcio());
-                        }
-                        itemsByQueEsticFentID.put(modificacio.getQueEsticFentID(), item);
-                    }
-
-                    if (item != null) {
-
-                        // Eliminar del map per data 
-                        Date date = toDate000000(item.getData().getTime());
-                        List<QueEsticFentItem> items = llista.get(date);
-                        if (items != null) {
-                            //QueEsticFentItem aborrar = null;
-                            //for (QueEsticFentItem qefi : items) {
-                            //log.info(" ID original: " + qefi.getQueesticfentOriginal().getQueesticfentID());
-                            //log.info(" Modificacio ID: " + modificacio.getQueEsticFentID());
-                            /*if (qefi.getQueesticfentOriginal().getQueesticfentID() == modificacio.getQueesticfentId()) {                    
-                              aborrar = qefi;
-                              break;
-                            }*/
-                            //}
-
-                        }
-
-                        // Afegir al nou Map per data
-                        Date newDate = toDate000000(modificacio.getData().getTime());
-                        items = llista.get(newDate);
-                        if (items == null) {
-                            items = new ArrayList<QueEsticFentItem>();
-                            llista.put(newDate, items);
-                        }
-                        items.add(item);
-
-                        // Canviar data i afegir modificacio
-                        item.setData(modificacio.getData());
-                        item.addModificacioItem(
-                                new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
-
-
-                    }
-                }
-                break;
-
-                default:
-                    throw new Exception("Accio desconeguda (" + modificacio.getAccioID()
-                            + ") executant la modificacio amb ID " + modificacio.getModificacioID());
-            }
-        }
-
-        // 5.- Afegir FESTIUS
-        {
-            Where wf1 = FestiusFields.DATA.greaterThanOrEqual(new java.sql.Date(start.getTime()));
-            Where wf2 = FestiusFields.DATA.lessThanOrEqual(new java.sql.Date(end.getTime()));
-
-            Where wf = Where.AND(wf1, wf2);
-
-            List<Festius> festius = festiusEjb.select(wf, new OrderBy(FestiusFields.DATA, OrderType.ASC));
-            for (Festius festa : festius) {
-
-                Date date = toDate000000(festa.getData().getTime());
-
-                item = new QueEsticFentItem(null, new Timestamp(festa.getData().getTime()),
-                        "Festiu - " + festa.getNom());
-                //item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
-                Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
-
-                //log.info("Accio Festa : " + accFesta);
-                ModificacionsQueEsticFent mqef = new ModificacionsQueEsticFentBean();
-                mqef.setAccioID(Utils.ACCIO_FESTIU);
-                mqef.setModificacioID(0);
-
-                item.addModificacioItem(new ModificacioItem(mqef, accFesta));
-
-                List<QueEsticFentItem> items = llista.get(date);
-
-                if (items == null) {
-                    items = new ArrayList<QueEsticFentItem>();
-                    llista.put(date, items);
-                }
-                // Mapejar per data
-                items.add(item);
-            }
-
-        }
-
-        return llista;
-
-    }
-
-    public static final String LLISTAT_ENTRADES = "/llistatentrades";
-
-    @RequestMapping(value = LLISTAT_ENTRADES, method = { RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView llistatEntrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        ModelAndView mav = new ModelAndView("entradesListUser");
-        LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
-
-        String loggedUser = LoginInfo.getInstance().getUsername();
-
-        boolean tePermisos;
-        {
-
-            boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
-            tePermisos = esAdministrador; //|| esCoordinador || esCapDeProjecte;
-        }
-        
-        mav.addObject("tePermisos", tePermisos);
-        llistatEntradesModel.setTePermisos(tePermisos);
-
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.add(Calendar.DATE, -1);
-        mav.addObject("yesterday", yesterday);
-        llistatEntradesModel.setYesterday(yesterday);
-        Calendar today = Calendar.getInstance();
-        mav.addObject("today", today);
-        llistatEntradesModel.setToday(today);
-        Calendar start = Calendar.getInstance();
-        start.set(Calendar.HOUR_OF_DAY, 0);
-        start.set(Calendar.MINUTE, 0);
-        start.set(Calendar.SECOND, 0);
-        start.set(Calendar.MILLISECOND, 0);
-
-        String usuariID = request.getParameter("usuariID");
-        if (usuariID == null) {
-            usuariID = loggedUser;
-        }
-        mav.addObject("usuariID", usuariID);
-        llistatEntradesModel.setUsuariId(usuariID);
-        
-        // Cercar departaments de l'usuari
-        List<Long> departaments;
-        //UsuarisDepartament[] departamentsUsuari;
-        {
-            Where wud = UsuarisDepartamentFields.USUARIID.equal(usuariID);
-            departaments = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.DEPARTAMENTID, wud);
-        }
-
-        if (departaments.isEmpty()) {
-            throw new Exception("L'usuari " + usuariID + " no té departament assignat.");
-        }
-
-        // Seleccionar departamentID
-        long departamentID;
-        {
-            String departamentIDStr = request.getParameter("departamentID");
-            if (departamentIDStr == null) {
-                departamentID = departaments.get(0);
-            } else {
-                departamentID = Long.parseLong(departamentIDStr);
-            }
-        }
-
-        mav.addObject("departaments", departaments);
-        llistatEntradesModel.setDepartaments(departaments);
-        mav.addObject("departamentID", departamentID);
-        llistatEntradesModel.setDepartamentId(departamentID);
-
-        // ============== PROJECTES
-        List<Long> projectes;
-
-        {
-            /** Seleccionar projectes de l'usuari */
-        	//Seleccionam tots els projectes
-            projectes = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
-        }
-
-        Long projecteID = 0L; // null == TOTS
-        {
-            String projecteStr = null;
-            if (request.getParameter("projecteID") != null) {
-                projecteStr = request.getParameter("projecteID");
-            }
-
-            if (projecteStr != null && projecteStr.length() != 0) {
-                projecteID = Long.parseLong(projecteStr);
-                // Projecte per parï¿½metre no esta en la llista de disponibles
-                if (projectes.contains(projecteID)) {
-                	projectes = new ArrayList<Long>();
-                	projectes.add(projecteID);
-                }
-            }
-        }
-
-        if (projecteID == 0L) {
-            if (projectes.size() == 1) {
-                projecteID = projectes.get(0);
-            }
-        }
-        
-        
-        mav.addObject("projecteID", projecteID);
-        llistatEntradesModel.setProjecteId(projecteID);
-
-        int mes;
-        
-        if (request.getParameter("mes") != null) {
-        	 // Quan canviam   des del llistat
-        	 mes = Integer.valueOf(request.getParameter("mes"));
-        	 request.getSession().setAttribute("MES_LLISTAT", mes); 
-        	} else {
-        	    // Quan venim d'un altre pagina
-        	     if (request.getSession().getAttribute("MES_LLISTAT") == null)    {
-        	    	 String mesStr = request.getParameter("mes");
-        	            if (mesStr == null) {
-        	                mes = start.get(Calendar.MONTH);
-        	            } else {
-        	                mes = Integer.parseInt(mesStr);
-        	            }
-        	         request.getSession().setAttribute("MES_LLISTAT", mes); 
-        	      } else {
-        	          mes = (int)request.getSession().getAttribute("MES_LLISTAT");
-        	       } 
-        	}
-
-
-        mav.addObject("mes", mes);
-        llistatEntradesModel.setMes(mes);
-
-        // Seleccionar any
-        int any;
-        {
-            String anyStr = request.getParameter("any");
-            if (anyStr == null) {
-                any = start.get(Calendar.YEAR);
-            } else {
-                any = Integer.parseInt(anyStr);
-            }
-        }
-        mav.addObject("any", any);
-        llistatEntradesModel.setAny(any);
-
-        boolean mostrarEntradesAmagades = false;
-        {
-            String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");
-            if (mostrarEntradesAmagadesStr != null) {
-                log.info("mostrarEntradesAmagades: " + mostrarEntradesAmagadesStr);
-                mostrarEntradesAmagades = ("on".compareTo(mostrarEntradesAmagadesStr) == 0);
-            }
-            mav.addObject("mostrarEntradesAmagades", mostrarEntradesAmagades);
-            llistatEntradesModel.setMostrarEntradesAmagades(mostrarEntradesAmagades);
-        }
-
-        int mesAnterior = mes - 1;
-        int anyAnterior = any;
-        if (mesAnterior < Calendar.JANUARY) {
-            mesAnterior = Calendar.DECEMBER;
-            anyAnterior = any - 1;
-        }
-
-        mav.addObject("anyAnterior", anyAnterior);
-        llistatEntradesModel.setAnyAnterior(anyAnterior);
-        mav.addObject("mesAnterior", mesAnterior);
-        llistatEntradesModel.setMesAnterior(mesAnterior);
-
-        int anySeguent = any;
-        int mesSeguent = mes + 1;
-        if (mesSeguent > Calendar.DECEMBER) {
-            mesSeguent = Calendar.JANUARY;
-            anySeguent = any + 1;
-        }
-        mav.addObject("anySeguent", anySeguent);
-        llistatEntradesModel.setAnySeguent(anySeguent);
-        mav.addObject("mesSeguent", mesSeguent);
-        llistatEntradesModel.setMesSeguent(mesSeguent);
-
-        start.set(Calendar.MONTH, mes);
-        start.set(Calendar.YEAR, any);
-        start.set(Calendar.DATE, 1);
-        
-
-
-       
-        int maxDay = start.getActualMaximum(Calendar.DAY_OF_MONTH);
-        mav.addObject("maxDay", maxDay);
-        llistatEntradesModel.setMaxDay(maxDay);
-        
-        
-        Calendar end = Calendar.getInstance();
-        end.setTimeInMillis(start.getTimeInMillis());
-        end.set(Calendar.DATE, maxDay);
-        end.set(Calendar.HOUR_OF_DAY, 23);
-        end.set(Calendar.MINUTE, 59);
-        end.set(Calendar.SECOND, 59);
-        end.set(Calendar.MILLISECOND, 999);
-        
-
-        // (1) Obtenir dades
-        Map<Date, List<QueEsticFentItem>> itemsByDate;
-
-        itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
-        mav.addObject("start", start);
-        llistatEntradesModel.setStart(start);
-        
-        
-        mav.addObject("itemsByDate", itemsByDate);
-        llistatEntradesModel.setItemsByDate(itemsByDate);
-
-        {
-            List<Accions> allAccions;
-
-            Where wa = AccionsFields.ACCIOID.greaterThanOrEqual((long) 0);
-            allAccions = accionsEjb.select(wa, new OrderBy(AccionsFields.NOM, OrderType.ASC));
-            //allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC, AccionsFields.NOM);
-            mav.addObject("allAccions", allAccions);
-            llistatEntradesModel.setAllAccions(allAccions);
-        }
-
-        String redirectUrlParams = "mes=" + mes + "&any=" + any + "&usuariID=" + usuariID;
-        if (projecteID != null) {
-            redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteID.intValue();
-        }
-        mav.addObject("redirectUrlParams", redirectUrlParams);
-        llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
-        String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
-        mav.addObject("redirectUrl", redirectUrl);
-        llistatEntradesModel.setRedirectUrl(redirectUrl);
-        mav.addObject("projecteID", projecteID);
-        llistatEntradesModel.setProjecteId(projecteID);
-        {
-            //ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
-            Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);
-            List<UsuarisDepartament> personalCap = this.usuarisDepartamentEjb.select(ud);
-            for (UsuarisDepartament usuarisDepartament : personalCap) {
-
-                UsuarisJPA usuari = usuarisEjb.findByPrimaryKey(usuarisDepartament.getUsuariID());
-                UsuarisDepartamentJPA usuarisDepartamentJpa = (UsuarisDepartamentJPA) usuarisDepartament;
-                usuarisDepartamentJpa.setUsuaris(usuari);
-            }
-            mav.addObject("personalCap", personalCap);
-            llistatEntradesModel.setPersonalCap(personalCap);
-        }
-        {
-            List<Accions> actions = this.accionsEjb.select(AccionsFields.COLOR.isNotNull(),
-                    new OrderBy(AccionsFields.ACCIOID, OrderType.ASC));
-            actions.add(new AccionsBean(-10, null, "Multiples Canvis", "ffff00", null));
-            mav.addObject("actions", actions);
-            llistatEntradesModel.setActions(actions);
-        }
-        {
-            Where where = ProjectesFields.PROJECTEID.in(projectes);
-            List<Projectes> projectesList = this.projectesEjb.select(where);
-            mav.addObject("projectesList", projectesList);
-            llistatEntradesModel.setProjectesList(projectesList);
-        }
-        {
-            Where where = DepartamentsFields.DEPARTAMENTID.in(departaments);
-            List<Departaments> departamentsInfo = this.departamentsEjb.select(where);
-            mav.addObject("departamentsInfo", departamentsInfo);
-            llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
-        }
-        
-        
-        mav.addObject("model", llistatEntradesModel);
-        return mav;
-    }
-
-    protected static Date toDate000000(long time) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(time);
-        //return cal.get(Calendar.DAY_OF_MONTH);
-
-        // Set time fields to zero  
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        // Put it back in the Date object  
-        return new Date(cal.getTimeInMillis());
-
-    }
-
-    @Override
-    public String getRedirectWhenCreated(HttpServletRequest request,
-            ModificacionsQueEsticFentForm modificacionsQueEsticFentForm) {
-        return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
-    }
-
-    @Override
-    public String getRedirectWhenModified(HttpServletRequest request,
-            ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, Throwable __e) {
-        if (__e == null) {
-            return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
-        } else {
-            return getTileForm();
-        }
-    }
-
-    @Override
-    public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long modificacioID, Throwable __e) {
-        return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
-    }
-
-    @Override
-    public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long modificacioID) {
-        return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
-    }
-
-    @RequestMapping(value = "mostrarodt", method = { RequestMethod.GET, RequestMethod.POST })
-    public void mostrarODT(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //Usuari seleccionat
-        String usuariID = request.getParameter("usuariID");
-
-        try {
-            Calendar start = Calendar.getInstance();
-            //Mes seleccionat
-            int mes;
-            {
-                String mesStr = request.getParameter("mes");
-                if (mesStr == null) {
-                    mes = start.get(Calendar.MONTH);
-                } else {
-                    mes = Integer.parseInt(mesStr);
-                }
-            }
-
-            // Any Seleccionat
-            int any;
-            {
-                String anyStr = request.getParameter("any");
-                if (anyStr == null) {
-                    any = start.get(Calendar.YEAR);
-                } else {
-                    any = Integer.parseInt(anyStr);
-                }
-            }
-
-            //Projecte seleccionat
-
-            String projecteStr = request.getParameter("projecteID");
-            String projectName = "OTAE";
-
-            List<String> usuarisList;
-            List<Long> projectesID = new ArrayList<Long>();
-            List<Projectes> projectes;
-            Where w;
-
-            if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr) > 0) {
-                //En cas de que arribi un projecte per parametre: Seleccionam 1 projecte
-                Long projecteID = Long.parseLong(projecteStr);
-                projectesID.add(projecteID);
-
-                Where equalProjecteId = PersonalProjecteFields.PROJECTEID.equal(projecteID);
-                Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
-
-                if ("true".equals(request.getParameter("multiple"))) {
-                    log.info("S'HA ENTRAT A MULTIPLES USUARI");
-                    w = equalProjecteId;
-                } else {
-                    log.info("S'HA ENTRAT A UN USUARI");
-                    w = Where.AND(equalProjecteId, equalUsuariId);
-                }
-
-            } else {
-                // No arriba projecte per parametre: Tots els projectes
-                projectName = "OTAE";
-
-                //Agafam el llistat complet de projectes
-                projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID,
-                        new OrderBy(ProjectesFields.PROJECTEID));
-
-                if ("true".equals(request.getParameter("multiple"))) {
-                    log.info("S'HA ENTRAT A MULTIPLES USUARI");
-                    Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
-                    w = equalProjecteId;
-                } else {
-                    log.info("S'HA ENTRAT A UN USUARI");
-                    Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
-                    Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
-                    w = Where.AND(equalProjecteId, equalUsuariId);
-                }
-            }
-
-            usuarisList = personalProjecteEjb.executeQuery(PersonalProjecteFields.USUARIID, w,
-                    new OrderBy(PersonalProjecteFields.ORDRE));
-
-            response.setContentType("application/application/vnd.oasis.opendocument.text");
-            response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
-
-                    + StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
-
-            File webInfDir = new File(FileSystemManager.getFilesPath(), "plantilles");
-            webInfDir.mkdirs();
-
-            File templateFile = new File(webInfDir, projectName + "_Template.odt"); //"Template_TasquesPersonalOTAE.odt")
-            if (!templateFile.exists()) {
-                templateFile = new File("DEFAULT_Template.odt");
-            }
-
-            Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
-
-            ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map.get("usuaris");
-            for (org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo : llistaDeUserInfo) {
-                log.info(" ----- " + userInfo.nom);
-                for (Item item : userInfo.items) {
-                    log.info(" **" + item.dia + "   -" + item.comentari);
-                }
-
-            }
-
-            //template.createDocument(map, baos);
-
-            OutputStream outStream = response.getOutputStream();
-            generateUsingXDocReport(map, templateFile, outStream);
-            //generateUsingJooReports(map, templateFile, outStream);
-
-            outStream.flush();
-
-        } catch (Throwable e) {
-
-            String msg = "Error generant ODT: ";
-            if (e instanceof I18NException) {
-                msg = msg + I18NUtils.getMessage((I18NException) e);
-
-            } else {
-                msg = msg + e.getMessage();
-            }
-            log.error(msg, e);
-            HtmlUtils.saveMessageError(request, msg);
-            response.sendRedirect(request.getContextPath() + getContextWeb() + LLISTAT_ENTRADES);
-
-        }
-    }
-
-    public static void generateUsingXDocReport(Map<String, Object> map, File templateFile, OutputStream outStream)
-            throws IOException, XDocReportException {
-        InputStream in = new FileInputStream(templateFile);
-        IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Freemarker);
-
-        // 2) Create fields metadata to manage lazy loop ([#list Freemarker) for table row and manage dynamic image
-        FieldsMetadata metadata = report.createFieldsMetadata();
-
-        metadata.load("items", Item.class, true);
-        report.setFieldsMetadata(metadata);
-
-        // Create context Java model
-        IContext context = report.createContext();
-        context.putMap(map);
-        report.process(context, outStream);
-    }
-
-    public Map<String, Object> generateUserInfo(List<String> usuaris, Long projecteID, int any, int mes)
-            throws Exception {
-        return generateUserInfo(usuaris, Arrays.asList(new Long[] { projecteID }), any, mes);
-    }
-
-    private Map<String, Object> generateUserInfo(List<String> usuaris, List<Long> projectes, int any, int mes)
-            throws Exception {
-
-        List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(
-                new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select),
-                new OrderBy(ProjectesFields.PROJECTEID));
-
-        Map<Long, String> projectesMap = new HashMap<Long, String>();
-
-        for (KeyValue<Long> keyValue : projectesList) {
-            projectesMap.put(keyValue.getKey(), keyValue.getValue());
-        }
-
-        Calendar start = Calendar.getInstance();
-
-        start.set(Calendar.HOUR_OF_DAY, 0);
-        start.set(Calendar.MINUTE, 0);
-        start.set(Calendar.SECOND, 0);
-        start.set(Calendar.MILLISECOND, 0);
-
-        start.set(Calendar.MONTH, mes);
-        start.set(Calendar.YEAR, any);
-        start.set(Calendar.DATE, 1);
-
-        int maxDay = start.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        Calendar end = Calendar.getInstance();
-        end.setTimeInMillis(start.getTimeInMillis());
-        end.set(Calendar.DATE, maxDay);
-        end.set(Calendar.HOUR_OF_DAY, 23);
-        end.set(Calendar.MINUTE, 59);
-        end.set(Calendar.SECOND, 59);
-        end.set(Calendar.MILLISECOND, 999);
-
-        ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = new ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>();
-
-        List<Usuaris> usuarisFull = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
-        for (Usuaris usuari : usuarisFull) {
-            String usuariID = usuari.getUsuariID();
-            start.set(Calendar.DATE, 1);
-
-            Map<Date, List<QueEsticFentItem>> itemsByDate;
-            itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
-
-            log.info("=========================");
-            log.info(": " + itemsByDate.size());
-            log.info("Llista: " + itemsByDate.size());
-            log.info("MAX DAY: " + maxDay);
-            log.info("Usuari: " + usuariID);
-
-            List<Item> items = new ArrayList<Item>();
-            List<QueEsticFentItem> llista;
-            for (int d = 1; d <= maxDay; d++) {
-
-                String dStr = String.valueOf(d);
-
-                start.set(Calendar.DATE, d);
-                int dayOfWeek = start.get(Calendar.DAY_OF_WEEK);
-
-                boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
-                llista = itemsByDate.get(start.getTime());
-
-                Item item = new Item();
-                item.setDia(dStr);
-                if (isCapDeSetmana) {
-                    item.setComentari("----------------------------- " + Utils.diesFull[dayOfWeek]
-                            + " -----------------------------");
-                } else {
-                    if (llista == null || llista.size() == 0) {
-                        item.setComentari("");
-                    } else {
-                        StringBuffer comment = new StringBuffer();
-                        for (QueEsticFentItem qefi : llista) {
-                            if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null) {
-                                continue;
-                            }
-
-                            if (comment.length() != 0) {
-                                comment.append('\n');
-                            }
-                            String descripcioItem = "";
-                            if (qefi.getModificacions().get(0).getModificacio().getProjecteID() != null) {
-                                descripcioItem = projectesMap
-                                        .get(qefi.getModificacions().get(0).getModificacio().getProjecteID()) + ": "
-                                        + qefi.getDescripcio();
-                            } else {
-                                descripcioItem = qefi.getDescripcio();
-                            }
-
-                            log.info("    *" + descripcioItem);
-
-                            comment.append(descripcioItem);
-
-                        }
-                        item.setComentari(comment.toString());
-                    }
-                }
-                items.add(item);
-                log.info("Introduit Item: [" + d + "] " + item.comentari);
-                ;
-            }
-            String fullname = usuari.getNom() + " " + usuari.getLlinatge1()
-                    + (usuari.getLlinatge2() != null ? (" " + usuari.getLlinatge2()) : "");
-            org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo = new org.fundaciobit.queesticfent.back.controller.user.UserInfo(
-                    fullname, items);
-
-            llistaDeUserInfo.add(userInfo);
-
-        }
-        Map<String, Object> data = new HashMap<String, Object>();
-
-        data.put("mes", StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]));
-        data.put("any", String.valueOf(any));
-        data.put("usuaris", llistaDeUserInfo);
-
-        return data;
-    }
-
-    @Override
-    public void postValidate(HttpServletRequest request,ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, BindingResult result)  throws I18NException {
-    
-        if (modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteID() == null) {
-            
-            I18NFieldError fieldError = new I18NFieldError(PROJECTEID, new I18NTranslation  ("genapp.validation.required", 
-                    new I18NArgument[] { new I18NArgumentCode(get(PROJECTEID)) } ));
-            
-
-            ValidationWebUtils.addFieldErrorsToBindingResult(result, new I18NValidationException(fieldError));
-        }
-    
-    }
+		// 4.- Aplicar Modificacions
+		// 4.1.- Cercar Modificacions
+		Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
+		Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
+		Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
+		Where wm = Where.AND(wm1, wm2, wm3);
+
+		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm,
+				new OrderBy(ModificacionsQueEsticFentFields.DATA));
+
+		// 4.2.- Adaptar entrades
+		QueEsticFentItem item;
+		for (ModificacionsQueEsticFent modificacio : modificacions) {
+			switch ((int) modificacio.getAccioID()) {
+			// '-4' ACCIO_SINONIM XXX
+			// case Utils.ACCIO_SINONIM:
+			// Aix� es fa en el punt anterior
+			// break;
+
+			// '-3', 'Afegir Nova Entrada' usuari, data, dada1
+			case (int) Utils.ACCIO_NOVA_ENTRADA: {
+				Date date = toDate000000(modificacio.getData().getTime());
+				item = new QueEsticFentItem(usuariID, modificacio.getData(), modificacio.getDada1());
+				item.addModificacioItem(new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+
+				List<QueEsticFentItem> items = llista.get(date);
+				if (items == null) {
+					items = new ArrayList<QueEsticFentItem>();
+					llista.put(date, items);
+				}
+				items.add(item);
+			}
+				break;
+			// '-2', 'Afegir Entrada de QueEsticFent' ID, usuari, data
+			case (int) Utils.ACCIO_AFEGIR_QUEESTICFENT: {
+
+				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
+				if (item == null) {
+					ModificacionsQueEsticFentJPA qef = modificacionsQueEsticFentEjb
+							.findByPrimaryKey(modificacio.getQueEsticFentID());
+					if (qef != null) {
+						item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDada1());
+					}
+
+					Date date = toDate000000(item.getData().getTime());
+					List<QueEsticFentItem> items = llista.get(date);
+
+					if (items == null) {
+						items = new ArrayList<QueEsticFentItem>();
+						llista.put(date, items);
+					}
+					// Mapejar per data
+					items.add(item);
+					itemsByQueEsticFentID.put(modificacio.getQueEsticFentID(), item);
+				}
+				item.addModificacioItem(new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+			}
+				break;
+			// '-1' Festiu data
+			case (int) Utils.ACCIO_FESTIU:
+				// Es realitza amb la taula de Fesius
+
+				break;
+			// '0' no mostrar entrada ID, usuari, data
+			case (int) Utils.ACCIO_AMAGAR_ENTRADA: {
+				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
+				if (item == null) {
+					log.info("Modificació amb ID " + modificacio.getModificacioID()
+							+ " fa referència a entrada no arregada amb ID " + modificacio.getQueEsticFentID());
+				} else {
+					item.addModificacioItem(
+							new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+				}
+			}
+				break;
+			// '1', 'Modificar Text dins Entrada', ID, usuari, data, dada1, dada2
+			case (int) Utils.ACCIO_CANVI_TEXT: {
+				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
+				if (item != null) {
+					String dada2 = modificacio.getDada2();
+					if (dada2 == null) {
+						dada2 = "";
+					}
+
+					String newText = item.getDescripcio().replace(modificacio.getDada1(), dada2);
+					item.setDescripcio(newText);
+					item.addModificacioItem(
+							new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+				}
+			}
+				break;
+			// '-4', 'Vacances', usuari, data
+			case (int) Utils.ACCIO_VACANCES: {
+				Date date = toDate000000(modificacio.getData().getTime());
+
+				item = new QueEsticFentItem(usuariID, modificacio.getData(), "Vacances");
+				item.addModificacioItem(new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+
+				List<QueEsticFentItem> items = llista.get(date);
+				if (items == null) {
+					items = new ArrayList<QueEsticFentItem>();
+					llista.put(date, items);
+				}
+				items.add(item);
+			}
+				break;
+			// '3', 'Canvi Data', usuari, data
+			case (int) Utils.ACCIO_CANVI_DATA: {
+				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
+				if (item == null) {
+					ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
+							.findByPrimaryKey(modificacio.getQueEsticFentID());
+					QueEsticFentItem_Old qef = new QueEsticFentItem_Old(mqef.getUsuariID(), mqef.getData(),
+							mqef.getDada1());
+					if (qef != null) {
+						item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDescripcio());
+					}
+					itemsByQueEsticFentID.put(modificacio.getQueEsticFentID(), item);
+				}
+
+				if (item != null) {
+
+					// Eliminar del map per data
+					Date date = toDate000000(item.getData().getTime());
+					List<QueEsticFentItem> items = llista.get(date);
+					if (items != null) {
+						// QueEsticFentItem aborrar = null;
+						// for (QueEsticFentItem qefi : items) {
+						// log.info(" ID original: " +
+						// qefi.getQueesticfentOriginal().getQueesticfentID());
+						// log.info(" Modificacio ID: " + modificacio.getQueEsticFentID());
+						/*
+						 * if (qefi.getQueesticfentOriginal().getQueesticfentID() ==
+						 * modificacio.getQueesticfentId()) { aborrar = qefi; break; }
+						 */
+						// }
+
+					}
+
+					// Afegir al nou Map per data
+					Date newDate = toDate000000(modificacio.getData().getTime());
+					items = llista.get(newDate);
+					if (items == null) {
+						items = new ArrayList<QueEsticFentItem>();
+						llista.put(newDate, items);
+					}
+					items.add(item);
+
+					// Canviar data i afegir modificacio
+					item.setData(modificacio.getData());
+					item.addModificacioItem(
+							new ModificacioItem(modificacio, accionsByID.get(modificacio.getAccioID())));
+
+				}
+			}
+				break;
+
+			default:
+				throw new Exception("Accio desconeguda (" + modificacio.getAccioID()
+						+ ") executant la modificacio amb ID " + modificacio.getModificacioID());
+			}
+		}
+
+		// 5.- Afegir FESTIUS
+		{
+			Where wf1 = FestiusFields.DATA.greaterThanOrEqual(new java.sql.Date(start.getTime()));
+			Where wf2 = FestiusFields.DATA.lessThanOrEqual(new java.sql.Date(end.getTime()));
+
+			Where wf = Where.AND(wf1, wf2);
+
+			List<Festius> festius = festiusEjb.select(wf, new OrderBy(FestiusFields.DATA, OrderType.ASC));
+			for (Festius festa : festius) {
+
+				Date date = toDate000000(festa.getData().getTime());
+
+				item = new QueEsticFentItem(null, new Timestamp(festa.getData().getTime()),
+						"Festiu - " + festa.getNom());
+				// item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
+				Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
+
+				// log.info("Accio Festa : " + accFesta);
+				ModificacionsQueEsticFent mqef = new ModificacionsQueEsticFentBean();
+				mqef.setAccioID(Utils.ACCIO_FESTIU);
+				mqef.setModificacioID(0);
+
+				item.addModificacioItem(new ModificacioItem(mqef, accFesta));
+
+				List<QueEsticFentItem> items = llista.get(date);
+
+				if (items == null) {
+					items = new ArrayList<QueEsticFentItem>();
+					llista.put(date, items);
+				}
+				// Mapejar per data
+				items.add(item);
+			}
+
+		}
+
+		return llista;
+
+	}
+
+	public static final String LLISTAT_ENTRADES = "/llistatentrades";
+
+	@RequestMapping(value = LLISTAT_ENTRADES, method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView llistatEntrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		ModelAndView mav = new ModelAndView("entradesListUser");
+		LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
+
+		String loggedUser = LoginInfo.getInstance().getUsername();
+
+		boolean tePermisos;
+		{
+
+			boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
+			tePermisos = esAdministrador; // || esCoordinador || esCapDeProjecte;
+		}
+
+		mav.addObject("tePermisos", tePermisos);
+		llistatEntradesModel.setTePermisos(tePermisos);
+
+		Calendar yesterday = Calendar.getInstance();
+		yesterday.add(Calendar.DATE, -1);
+		mav.addObject("yesterday", yesterday);
+		llistatEntradesModel.setYesterday(yesterday);
+		Calendar today = Calendar.getInstance();
+		mav.addObject("today", today);
+		llistatEntradesModel.setToday(today);
+		Calendar start = Calendar.getInstance();
+		start.set(Calendar.HOUR_OF_DAY, 0);
+		start.set(Calendar.MINUTE, 0);
+		start.set(Calendar.SECOND, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		String usuariID = request.getParameter("usuariID");
+		if (usuariID == null) {
+			usuariID = loggedUser;
+		}
+		mav.addObject("usuariID", usuariID);
+		llistatEntradesModel.setUsuariId(usuariID);
+
+		// Cercar departaments de l'usuari
+		List<Long> departaments;
+		// UsuarisDepartament[] departamentsUsuari;
+		{
+			Where wud = UsuarisDepartamentFields.USUARIID.equal(usuariID);
+			departaments = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.DEPARTAMENTID, wud);
+		}
+
+		if (departaments.isEmpty()) {
+			throw new Exception("L'usuari " + usuariID + " no té departament assignat.");
+		}
+
+		// Seleccionar departamentID
+		long departamentID;
+		{
+			String departamentIDStr = request.getParameter("departamentID");
+			if (departamentIDStr == null) {
+				departamentID = departaments.get(0);
+			} else {
+				departamentID = Long.parseLong(departamentIDStr);
+			}
+		}
+
+		mav.addObject("departaments", departaments);
+		llistatEntradesModel.setDepartaments(departaments);
+		mav.addObject("departamentID", departamentID);
+		llistatEntradesModel.setDepartamentId(departamentID);
+
+		// ============== PROJECTES
+		List<Long> projectes;
+
+		{
+			/** Seleccionar projectes de l'usuari */
+			// Seleccionam tots els projectes
+			projectes = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
+		}
+
+		Long projecteID = 0L; // null == TOTS
+		{
+			String projecteStr = null;
+			if (request.getParameter("projecteID") != null) {
+				projecteStr = request.getParameter("projecteID");
+			}
+
+			if (projecteStr != null && projecteStr.length() != 0) {
+				projecteID = Long.parseLong(projecteStr);
+				// Projecte per parï¿½metre no esta en la llista de disponibles
+				if (projectes.contains(projecteID)) {
+					projectes = new ArrayList<Long>();
+					projectes.add(projecteID);
+				}
+			}
+		}
+
+		if (projecteID == 0L) {
+			if (projectes.size() == 1) {
+				projecteID = projectes.get(0);
+			}
+		}
+
+		mav.addObject("projecteID", projecteID);
+		llistatEntradesModel.setProjecteId(projecteID);
+
+		int mes;
+
+		if (request.getParameter("mes") != null) {
+			// Quan canviam des del llistat
+			mes = Integer.valueOf(request.getParameter("mes"));
+			request.getSession().setAttribute("MES_LLISTAT", mes);
+
+		} else {
+			// Quan venim d'un altre pagina
+			if (request.getSession().getAttribute("MES_LLISTAT") == null) {
+				String mesStr = request.getParameter("mes");
+				if (mesStr == null) {
+					mes = start.get(Calendar.MONTH);
+				} else {
+					mes = Integer.parseInt(mesStr);
+				}
+				request.getSession().setAttribute("MES_LLISTAT", mes);
+			} else {
+				mes = (int) request.getSession().getAttribute("MES_LLISTAT");
+			}
+		}
+
+		mav.addObject("mes", mes);
+		llistatEntradesModel.setMes(mes);
+
+		// Seleccionar any
+		int any;
+		{
+			String anyStr = request.getParameter("any");
+			if (anyStr == null) {
+				any = start.get(Calendar.YEAR);
+			} else {
+				any = Integer.parseInt(anyStr);
+			}
+		}
+		mav.addObject("any", any);
+		llistatEntradesModel.setAny(any);
+
+		boolean mostrarEntradesAmagades = false;
+		{
+			String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");
+			if (mostrarEntradesAmagadesStr != null) {
+				log.info("mostrarEntradesAmagades: " + mostrarEntradesAmagadesStr);
+				mostrarEntradesAmagades = ("on".compareTo(mostrarEntradesAmagadesStr) == 0);
+			}
+			mav.addObject("mostrarEntradesAmagades", mostrarEntradesAmagades);
+			llistatEntradesModel.setMostrarEntradesAmagades(mostrarEntradesAmagades);
+		}
+
+		start.set(Calendar.MONTH, mes);
+		start.set(Calendar.YEAR, any);
+		start.set(Calendar.DATE, 1);
+
+		Calendar end = Calendar.getInstance();
+		end.setTimeInMillis(start.getTimeInMillis());
+		end.set(Calendar.DATE, start.getActualMaximum(Calendar.DAY_OF_MONTH));
+		end.set(Calendar.HOUR_OF_DAY, 23);
+		end.set(Calendar.MINUTE, 59);
+		end.set(Calendar.SECOND, 59);
+		end.set(Calendar.MILLISECOND, 999);
+
+		// (1) Obtenir dades
+		Map<Date, List<QueEsticFentItem>> itemsByDate;
+
+		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()),
+				new Timestamp(end.getTimeInMillis()));
+		mav.addObject("start", start);
+		llistatEntradesModel.setStart(start);
+
+		mav.addObject("itemsByDate", itemsByDate);
+		llistatEntradesModel.setItemsByDate(itemsByDate);
+
+		{
+			List<Accions> allAccions;
+
+			Where wa = AccionsFields.ACCIOID.greaterThanOrEqual((long) 0);
+			allAccions = accionsEjb.select(wa, new OrderBy(AccionsFields.NOM, OrderType.ASC));
+			// allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC,
+			// AccionsFields.NOM);
+			mav.addObject("allAccions", allAccions);
+			llistatEntradesModel.setAllAccions(allAccions);
+		}
+
+		String redirectUrlParams = "mes=" + mes + "&any=" + any + "&usuariID=" + usuariID;
+		if (projecteID != null) {
+			redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteID.intValue();
+		}
+		mav.addObject("redirectUrlParams", redirectUrlParams);
+		llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
+		String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
+		mav.addObject("redirectUrl", redirectUrl);
+		llistatEntradesModel.setRedirectUrl(redirectUrl);
+		mav.addObject("projecteID", projecteID);
+		llistatEntradesModel.setProjecteId(projecteID);
+		{
+			// ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
+			Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);
+			List<UsuarisDepartament> personalCap = this.usuarisDepartamentEjb.select(ud);
+			for (UsuarisDepartament usuarisDepartament : personalCap) {
+
+				UsuarisJPA usuari = usuarisEjb.findByPrimaryKey(usuarisDepartament.getUsuariID());
+				UsuarisDepartamentJPA usuarisDepartamentJpa = (UsuarisDepartamentJPA) usuarisDepartament;
+				usuarisDepartamentJpa.setUsuaris(usuari);
+			}
+			mav.addObject("personalCap", personalCap);
+			llistatEntradesModel.setPersonalCap(personalCap);
+		}
+		{
+			List<Accions> actions = this.accionsEjb.select(AccionsFields.COLOR.isNotNull(),
+					new OrderBy(AccionsFields.ACCIOID, OrderType.ASC));
+			actions.add(new AccionsBean(-10, null, "Multiples Canvis", "ffff00", null));
+			mav.addObject("actions", actions);
+			llistatEntradesModel.setActions(actions);
+		}
+		{
+			Where where = ProjectesFields.PROJECTEID.in(projectes);
+			List<Projectes> projectesList = this.projectesEjb.select(where);
+			mav.addObject("projectesList", projectesList);
+			llistatEntradesModel.setProjectesList(projectesList);
+		}
+		{
+			Where where = DepartamentsFields.DEPARTAMENTID.in(departaments);
+			List<Departaments> departamentsInfo = this.departamentsEjb.select(where);
+			mav.addObject("departamentsInfo", departamentsInfo);
+			llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
+		}
+
+		mav.addObject("model", llistatEntradesModel);
+		return mav;
+	}
+
+	protected static Date toDate000000(long time) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(time);
+		// return cal.get(Calendar.DAY_OF_MONTH);
+
+		// Set time fields to zero
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		// Put it back in the Date object
+		return new Date(cal.getTimeInMillis());
+
+	}
+
+	@Override
+	public String getRedirectWhenCreated(HttpServletRequest request,
+			ModificacionsQueEsticFentForm modificacionsQueEsticFentForm) {
+		return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
+	}
+
+	@Override
+	public String getRedirectWhenModified(HttpServletRequest request,
+			ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, Throwable __e) {
+		if (__e == null) {
+			return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
+		} else {
+			return getTileForm();
+		}
+	}
+
+	@Override
+	public String getRedirectWhenDelete(HttpServletRequest request, java.lang.Long modificacioID, Throwable __e) {
+		return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
+	}
+
+	@Override
+	public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long modificacioID) {
+		return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
+	}
+
+	@RequestMapping(value = "mostrarodt", method = { RequestMethod.GET, RequestMethod.POST })
+	public void mostrarODT(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// Usuari seleccionat
+		String usuariID = request.getParameter("usuariID");
+
+		try {
+			Calendar start = Calendar.getInstance();
+			// Mes seleccionat
+			int mes;
+			{
+				String mesStr = request.getParameter("mes");
+				if (mesStr == null) {
+					mes = start.get(Calendar.MONTH);
+				} else {
+					mes = Integer.parseInt(mesStr);
+				}
+			}
+
+			// Any Seleccionat
+			int any;
+			{
+				String anyStr = request.getParameter("any");
+				if (anyStr == null) {
+					any = start.get(Calendar.YEAR);
+				} else {
+					any = Integer.parseInt(anyStr);
+				}
+			}
+
+			// Projecte seleccionat
+
+			String projecteStr = request.getParameter("projecteID");
+			String projectName = "OTAE";
+
+			List<String> usuarisList;
+			List<Long> projectesID = new ArrayList<Long>();
+			List<Projectes> projectes;
+			Where w;
+
+			if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr) > 0) {
+				// En cas de que arribi un projecte per parametre: Seleccionam 1 projecte
+				Long projecteID = Long.parseLong(projecteStr);
+				projectesID.add(projecteID);
+
+				Where equalProjecteId = PersonalProjecteFields.PROJECTEID.equal(projecteID);
+				Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
+
+				if ("true".equals(request.getParameter("multiple"))) {
+					log.info("S'HA ENTRAT A MULTIPLES USUARI");
+					w = equalProjecteId;
+				} else {
+					log.info("S'HA ENTRAT A UN USUARI");
+					w = Where.AND(equalProjecteId, equalUsuariId);
+				}
+
+			} else {
+				// No arriba projecte per parametre: Tots els projectes
+				projectName = "OTAE";
+
+				// Agafam el llistat complet de projectes
+				projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID,
+						new OrderBy(ProjectesFields.PROJECTEID));
+
+				if ("true".equals(request.getParameter("multiple"))) {
+					log.info("S'HA ENTRAT A MULTIPLES USUARI");
+					Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
+					w = equalProjecteId;
+				} else {
+					log.info("S'HA ENTRAT A UN USUARI");
+					Where equalProjecteId = PersonalProjecteFields.PROJECTEID.in(projectesID);
+					Where equalUsuariId = PersonalProjecteFields.USUARIID.equal(usuariID);
+					w = Where.AND(equalProjecteId, equalUsuariId);
+				}
+			}
+
+			usuarisList = personalProjecteEjb.executeQuery(PersonalProjecteFields.USUARIID, w,
+					new OrderBy(PersonalProjecteFields.ORDRE));
+
+			response.setContentType("application/application/vnd.oasis.opendocument.text");
+			response.setHeader("Content-Disposition", "filename=\"" + projectName + "_Seguiment_Tasques_"
+
+					+ StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]) + "_" + any + ".odt\""); // inline;
+
+			File webInfDir = new File(FileSystemManager.getFilesPath(), "plantilles");
+			webInfDir.mkdirs();
+
+			File templateFile = new File(webInfDir, projectName + "_Template.odt"); // "Template_TasquesPersonalOTAE.odt")
+			if (!templateFile.exists()) {
+				templateFile = new File("DEFAULT_Template.odt");
+			}
+
+			Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
+
+			ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map
+					.get("usuaris");
+			for (org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo : llistaDeUserInfo) {
+				log.info(" ----- " + userInfo.nom);
+				for (Item item : userInfo.items) {
+					log.info(" **" + item.dia + "   -" + item.comentari);
+				}
+
+			}
+
+			// template.createDocument(map, baos);
+
+			OutputStream outStream = response.getOutputStream();
+			generateUsingXDocReport(map, templateFile, outStream);
+			// generateUsingJooReports(map, templateFile, outStream);
+
+			outStream.flush();
+
+		} catch (Throwable e) {
+
+			String msg = "Error generant ODT: ";
+			if (e instanceof I18NException) {
+				msg = msg + I18NUtils.getMessage((I18NException) e);
+
+			} else {
+				msg = msg + e.getMessage();
+			}
+			log.error(msg, e);
+			HtmlUtils.saveMessageError(request, msg);
+			response.sendRedirect(request.getContextPath() + getContextWeb() + LLISTAT_ENTRADES);
+
+		}
+	}
+
+	public static void generateUsingXDocReport(Map<String, Object> map, File templateFile, OutputStream outStream)
+			throws IOException, XDocReportException {
+		InputStream in = new FileInputStream(templateFile);
+		IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Freemarker);
+
+		// 2) Create fields metadata to manage lazy loop ([#list Freemarker) for table
+		// row and manage dynamic image
+		FieldsMetadata metadata = report.createFieldsMetadata();
+
+		metadata.load("items", Item.class, true);
+		report.setFieldsMetadata(metadata);
+
+		// Create context Java model
+		IContext context = report.createContext();
+		context.putMap(map);
+		report.process(context, outStream);
+	}
+
+	public Map<String, Object> generateUserInfo(List<String> usuaris, Long projecteID, int any, int mes)
+			throws Exception {
+		return generateUserInfo(usuaris, Arrays.asList(new Long[] { projecteID }), any, mes);
+	}
+
+	private Map<String, Object> generateUserInfo(List<String> usuaris, List<Long> projectes, int any, int mes)
+			throws Exception {
+
+		List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(
+				new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select),
+				new OrderBy(ProjectesFields.PROJECTEID));
+
+		Map<Long, String> projectesMap = new HashMap<Long, String>();
+
+		for (KeyValue<Long> keyValue : projectesList) {
+			projectesMap.put(keyValue.getKey(), keyValue.getValue());
+		}
+
+		Calendar start = Calendar.getInstance();
+
+		start.set(Calendar.HOUR_OF_DAY, 0);
+		start.set(Calendar.MINUTE, 0);
+		start.set(Calendar.SECOND, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		start.set(Calendar.MONTH, mes);
+		start.set(Calendar.YEAR, any);
+		start.set(Calendar.DATE, 1);
+
+		int maxDay = start.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+		Calendar end = Calendar.getInstance();
+		end.setTimeInMillis(start.getTimeInMillis());
+		end.set(Calendar.DATE, maxDay);
+		end.set(Calendar.HOUR_OF_DAY, 23);
+		end.set(Calendar.MINUTE, 59);
+		end.set(Calendar.SECOND, 59);
+		end.set(Calendar.MILLISECOND, 999);
+
+		ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = new ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>();
+
+		List<Usuaris> usuarisFull = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
+		for (Usuaris usuari : usuarisFull) {
+			String usuariID = usuari.getUsuariID();
+			start.set(Calendar.DATE, 1);
+
+			Map<Date, List<QueEsticFentItem>> itemsByDate;
+			itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()),
+					new Timestamp(end.getTimeInMillis()));
+
+			log.info("=========================");
+			log.info(": " + itemsByDate.size());
+			log.info("Llista: " + itemsByDate.size());
+			log.info("MAX DAY: " + maxDay);
+			log.info("Usuari: " + usuariID);
+
+			List<Item> items = new ArrayList<Item>();
+			List<QueEsticFentItem> llista;
+			for (int d = 1; d <= maxDay; d++) {
+
+				String dStr = String.valueOf(d);
+
+				start.set(Calendar.DATE, d);
+				int dayOfWeek = start.get(Calendar.DAY_OF_WEEK);
+
+				boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
+				llista = itemsByDate.get(start.getTime());
+
+				Item item = new Item();
+				item.setDia(dStr);
+				if (isCapDeSetmana) {
+					item.setComentari("----------------------------- " + Utils.diesFull[dayOfWeek]
+							+ " -----------------------------");
+				} else {
+					if (llista == null || llista.size() == 0) {
+						item.setComentari("");
+					} else {
+						StringBuffer comment = new StringBuffer();
+						for (QueEsticFentItem qefi : llista) {
+							if (qefi.getModificacioItemByAccioType(Utils.ACCIO_AMAGAR_ENTRADA) != null) {
+								continue;
+							}
+
+							if (comment.length() != 0) {
+								comment.append('\n');
+							}
+							String descripcioItem = "";
+							if (qefi.getModificacions().get(0).getModificacio().getProjecteID() != null) {
+								descripcioItem = projectesMap
+										.get(qefi.getModificacions().get(0).getModificacio().getProjecteID()) + ": "
+										+ qefi.getDescripcio();
+							} else {
+								descripcioItem = qefi.getDescripcio();
+							}
+
+							log.info("    *" + descripcioItem);
+
+							comment.append(descripcioItem);
+
+						}
+						item.setComentari(comment.toString());
+					}
+				}
+				items.add(item);
+				log.info("Introduit Item: [" + d + "] " + item.comentari);
+				;
+			}
+			String fullname = usuari.getNom() + " " + usuari.getLlinatge1()
+					+ (usuari.getLlinatge2() != null ? (" " + usuari.getLlinatge2()) : "");
+			org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo = new org.fundaciobit.queesticfent.back.controller.user.UserInfo(
+					fullname, items);
+
+			llistaDeUserInfo.add(userInfo);
+
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+
+		data.put("mes", StringEscapeUtils.unescapeHtml4(Utils.mesos[mes]));
+		data.put("any", String.valueOf(any));
+		data.put("usuaris", llistaDeUserInfo);
+
+		return data;
+	}
+
+	@Override
+	public void postValidate(HttpServletRequest request, ModificacionsQueEsticFentForm modificacionsQueEsticFentForm,
+			BindingResult result) throws I18NException {
+
+		if (modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteID() == null) {
+
+			I18NFieldError fieldError = new I18NFieldError(PROJECTEID, new I18NTranslation("genapp.validation.required",
+					new I18NArgument[] { new I18NArgumentCode(get(PROJECTEID)) }));
+
+			ValidationWebUtils.addFieldErrorsToBindingResult(result, new I18NValidationException(fieldError));
+		}
+
+	}
 
 }

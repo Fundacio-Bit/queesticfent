@@ -197,9 +197,34 @@ noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
      }
      %>
   </td>
-
+    
+  <% 
+  // Es calculen els ints per al mes i any per als botons de seguent i previ.
+      int mesActual = model.getStart().get(Calendar.MONTH);
+      int anyActual = model.getStart().get(Calendar.YEAR);
+      int mesAnterior, mesSeguent;
+      int anyAnterior, anySeguent;
+      
+      if(mesActual == Calendar.JANUARY){
+         mesAnterior = Calendar.DECEMBER;
+         mesSeguent = mesActual + 1;
+         anyAnterior = anyActual -1;
+         anySeguent = anyActual;
+      }else if(mesActual == Calendar.DECEMBER){
+         mesAnterior = mesActual - 1;
+         mesSeguent = Calendar.JANUARY;
+         anyAnterior = anyActual;
+         anySeguent = anyActual+1;
+      }else{
+         mesAnterior = mesActual - 1;
+         mesSeguent = mesActual + 1;
+         anyAnterior = anyActual;
+         anySeguent = anyActual;
+      }
+  
+  %>
   <td align="right" width="40px" style="border-left: 1px solid">
-     &nbsp;&nbsp;<img onclick="document.REB2010.mes.value=<%=model.getMesAnterior()%>;document.REB2010.any.value=<%=model.getAnyAnterior()%>;document.REB2010.submit()" src="<c:url value="/img"/>/previous.jpg">  
+     &nbsp;&nbsp;<img onclick="document.REB2010.mes.value=<%=mesAnterior%>;document.REB2010.any.value=<%=anyAnterior%>;document.REB2010.submit()" src="<c:url value="/img"/>/previous.jpg">  
   </td>
 <td align="center" >
   
@@ -209,7 +234,7 @@ noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
  
 </td> 
 <td align="left"  width="40px">
-  <img onclick="document.REB2010.mes.value=<%=model.getMesSeguent()%>;document.REB2010.any.value=<%=model.getAnySeguent()%>;document.REB2010.submit()" src="<c:url value="/img"/>/next.jpg">
+  <img onclick="document.REB2010.mes.value=<%=mesSeguent%>;document.REB2010.any.value=<%=anySeguent%>;document.REB2010.submit()" src="<c:url value="/img"/>/next.jpg">
 </td>
 
 
@@ -294,7 +319,7 @@ Afegir Entrada
 </tr>
 <%
 List<QueEsticFentItem> llista;
-for(int d=1; d <= model.getMaxDay(); d++) {
+for(int d=1; d <= model.getStart().getActualMaximum(Calendar.DAY_OF_MONTH); d++) {
 
  model.getStart().set(Calendar.DATE, d);
  int dayOfWeek = model.getStart().get(Calendar.DAY_OF_WEEK);

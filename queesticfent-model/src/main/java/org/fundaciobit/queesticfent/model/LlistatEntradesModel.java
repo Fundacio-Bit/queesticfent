@@ -10,68 +10,62 @@ import org.fundaciobit.queesticfent.model.entity.Departaments;
 import org.fundaciobit.queesticfent.model.entity.Projectes;
 import org.fundaciobit.queesticfent.model.entity.UsuarisDepartament;
 
-
 public class LlistatEntradesModel {
-	
+
 	boolean tePermisos;
-	
+
 	Calendar yesterday, today;
-	
+
 	String usuariId;
-	
+
 	List<Long> departaments;
-	
+
 	long departamentId;
-	
+
 	Long projecteId = 0L;
-	
+
 	List<Long> projectes;
-	
+
 	List<Long> projectesSeleccionats;
-	
-	int mes, any, mesAnterior, anyAnterior, mesSeguent, anySeguent, maxDay;
-	
+
+	int mes, any;
+
 	boolean mostrarEntradesAmagades;
-	
+
 	Calendar start;
-	
+
 	Map<Date, List<QueEsticFentItem>> itemsByDate;
-	
+
 	List<Accions> allAccions;
-	
+
 	String redirectUrlParams;
-	
+
 	String redirectUrl;
-	
+
 	List<UsuarisDepartament> personalCap;
-	
+
 	List<Accions> actions;
-	
+
 	List<Projectes> projectesList;
-	
+
 	List<Departaments> departamentsInfo;
-	
-	
 
-	/*List<String> nomDropdown;
-	
-	String departament;
-	
-	List<String> projectesDropdown;
-	
-	int previousMonth, currentMonth, nextMonth, currentYear;
-	
-	String urlExportacioUserOdt;
-	
-	String urlExportacioDeptOdt;
-	
-	List<DiaEntrades> dies;*/
+	/*
+	 * List<String> nomDropdown;
+	 * 
+	 * String departament;
+	 * 
+	 * List<String> projectesDropdown;
+	 * 
+	 * int previousMonth, currentMonth, nextMonth, currentYear;
+	 * 
+	 * String urlExportacioUserOdt;
+	 * 
+	 * String urlExportacioDeptOdt;
+	 * 
+	 * List<DiaEntrades> dies;
+	 */
 
-	
-	
-	
-	
-	
 	public int getAny() {
 		return any;
 	}
@@ -150,46 +144,6 @@ public class LlistatEntradesModel {
 
 	public void setItemsByDate(Map<Date, List<QueEsticFentItem>> itemsByDate) {
 		this.itemsByDate = itemsByDate;
-	}
-
-	public int getMaxDay() {
-		return maxDay;
-	}
-
-	public void setMaxDay(int maxDay) {
-		this.maxDay = maxDay;
-	}
-
-	public int getMesAnterior() {
-		return mesAnterior;
-	}
-
-	public void setMesAnterior(int mesAnterior) {
-		this.mesAnterior = mesAnterior;
-	}
-
-	public int getAnyAnterior() {
-		return anyAnterior;
-	}
-
-	public void setAnyAnterior(int anyAnterior) {
-		this.anyAnterior = anyAnterior;
-	}
-
-	public int getMesSeguent() {
-		return mesSeguent;
-	}
-
-	public void setMesSeguent(int mesSeguent) {
-		this.mesSeguent = mesSeguent;
-	}
-
-	public int getAnySeguent() {
-		return anySeguent;
-	}
-
-	public void setAnySeguent(int anySeguent) {
-		this.anySeguent = anySeguent;
 	}
 
 	public boolean isMostrarEntradesAmagades() {
@@ -283,13 +237,5 @@ public class LlistatEntradesModel {
 	public void setMes(int mes) {
 		this.mes = mes;
 	}
-	
-	
 
-	
-	
-	
-	
-	
-	
 }
