@@ -637,7 +637,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
         ModelAndView mav = new ModelAndView("entradesListUser");
         LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
-        
 
         String loggedUser = LoginInfo.getInstance().getUsername();
 
@@ -647,7 +646,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
             tePermisos = esAdministrador; //|| esCoordinador || esCapDeProjecte;
         }
-        
         
         mav.addObject("tePermisos", tePermisos);
         llistatEntradesModel.setTePermisos(tePermisos);
@@ -709,7 +707,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             projectes = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
         }
 
-        Long projecteID = null; // null == TOTS
+        Long projecteID = 0L; // null == TOTS
         {
             String projecteStr = null;
             if (request.getParameter("projecteID") != null) {
@@ -726,7 +724,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
             }
         }
 
-        if (projecteID == null) {
+        if (projecteID == 0L) {
             if (projectes.size() == 1) {
                 projecteID = projectes.get(0);
             }
@@ -860,7 +858,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         mav.addObject("redirectUrl", redirectUrl);
         llistatEntradesModel.setRedirectUrl(redirectUrl);
         mav.addObject("projecteID", projecteID);
-        llistatEntradesModel.setProjecteId(maxDay);
+        llistatEntradesModel.setProjecteId(projecteID);
         {
             //ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
             Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);

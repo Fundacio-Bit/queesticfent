@@ -52,37 +52,6 @@
 
 LlistatEntradesModel model = (LlistatEntradesModel) request.getAttribute("model");
 
-Long projecteID = (Long) request.getAttribute("projecteID");
-
-
-/*List<Long> departaments = (List<Long>) request.getAttribute("departaments");
-Boolean tePermisos = (Boolean) request.getAttribute("tePermisos");
-List<Accions> actions = (List<Accions>) request.getAttribute("actions");
-Boolean mostrarEntradesAmagades = (Boolean) request.getAttribute("mostrarEntradesAmagades");
-
-List<Accions> allAccions = (List<Accions>) request.getAttribute("allAccions");
-String redirectUrl = (String) request.getAttribute("redirectUrl");
-Long projecteID = (Long) request.getAttribute("projecteID");
-Calendar start = (Calendar) request.getAttribute("start");
-Calendar yesterday = (Calendar) request.getAttribute("yesterday");
-Calendar today = (Calendar) request.getAttribute("today");
-String usuariID = (String) request.getAttribute("usuariID");
-Map<Date, List<QueEsticFentItem_Old>> itemsByDate = (Map<Date, List<QueEsticFentItem_Old>>) request.getAttribute("itemsByDate");
-int maxDay = (int) request.getAttribute("maxDay");
-String redirectUrlParams = (String) request.getAttribute("redirectUrlParams");
-
-int mesAnterior = (int) request.getAttribute("mesAnterior");
-int anyAnterior = (int) request.getAttribute("anyAnterior");
-int anySeguent = (int) request.getAttribute("anySeguent");
-int mesSeguent = (int) request.getAttribute("mesSeguent");
-
-int mes = (int) request.getAttribute("mes");
-int any = (int) request.getAttribute("any");
-
-Long departamentID = (Long)request.getAttribute("departamentID");
-List<Projectes> projectesList = (List<Projectes>) request.getAttribute("projectesList");
-
-List<Departaments> departamentsInfo = (List<Departaments>) request.getAttribute("departamentsInfo");*/
 
 Map<String, String> noms = new HashMap<String, String>();
 LoginInfo info = LoginInfo.getInstance();
@@ -367,7 +336,7 @@ c2.set(Calendar.MILLISECOND, mil);
 String novaAccioURL ="new?usuariID=" + model.getUsuariId() 
              + "&data=" 
              + URLEncoder.encode(getSimpleDateTimeFormat().format(c2.getTime()))
-             + ((projecteID == null)? "": ("&projecteID=" + projecteID))
+             + (model.getProjecteId() == 0L? "": ("&projecteID=" + model.getProjecteId()))
              + "&redirectUrl=" + model.getRedirectUrl();
 %>
 <td align="center">

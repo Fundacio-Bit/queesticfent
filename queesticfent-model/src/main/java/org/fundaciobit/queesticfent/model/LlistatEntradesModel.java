@@ -23,7 +23,7 @@ public class LlistatEntradesModel {
 	
 	long departamentId;
 	
-	Long projecteId;
+	Long projecteId = 0L;
 	
 	List<Long> projectes;
 	
