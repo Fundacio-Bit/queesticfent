@@ -229,7 +229,7 @@ noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
 <td align="center" >
   
   <span style="font-family: helvetica, impact, sans-serif;font-size: 12pt; font-weight: bold;">
-   <%=Utils.mesos[model.getMes()]%> <%=model.getAny()%>
+   <%=Utils.mesos[mesActual]%> <%=anyActual%>
   </span>
  
 </td> 

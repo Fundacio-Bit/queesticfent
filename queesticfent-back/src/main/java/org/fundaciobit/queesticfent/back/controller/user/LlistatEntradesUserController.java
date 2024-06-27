@@ -650,11 +650,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		Calendar today = Calendar.getInstance();
 		mav.addObject("today", today);
 		llistatEntradesModel.setToday(today);
-		Calendar start = Calendar.getInstance();
-		start.set(Calendar.HOUR_OF_DAY, 0);
-		start.set(Calendar.MINUTE, 0);
-		start.set(Calendar.SECOND, 0);
-		start.set(Calendar.MILLISECOND, 0);
+		Calendar selectedMonthStart = Calendar.getInstance();
+		selectedMonthStart.set(Calendar.HOUR_OF_DAY, 0);
+		selectedMonthStart.set(Calendar.MINUTE, 0);
+		selectedMonthStart.set(Calendar.SECOND, 0);
+		selectedMonthStart.set(Calendar.MILLISECOND, 0);
 
 		String usuariID = request.getParameter("usuariID");
 		if (usuariID == null) {
@@ -725,10 +725,30 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		mav.addObject("projecteID", projecteID);
 		llistatEntradesModel.setProjecteId(projecteID);
+		
+		
+        int mes, any;
 
-		int mes;
-
-		if (request.getParameter("mes") != null) {
+        if(request.getParameter("mes")!=null) {
+            mes = Integer.valueOf(request.getParameter("mes"));
+            request.getSession().setAttribute("MES_LLISTAT", mes);
+        }else if(request.getSession().getAttribute("MES_LLISTAT") == null){
+            mes = selectedMonthStart.get(Calendar.MONTH);
+            request.getSession().setAttribute("MES_LLISTAT", mes);
+        }else {
+            mes = (int) request.getSession().getAttribute("MES_LLISTAT");
+        }
+        
+        if(request.getParameter("any") != null) {
+            String anyStr = request.getParameter("any");
+            any = Integer.parseInt(anyStr);
+        }else {
+            any = selectedMonthStart.get(Calendar.YEAR);
+        }
+		
+		
+		
+/*		if (request.getParameter("mes") != null) {
 			// Quan canviam des del llistat
 			mes = Integer.valueOf(request.getParameter("mes"));
 			request.getSession().setAttribute("MES_LLISTAT", mes);
@@ -738,7 +758,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			if (request.getSession().getAttribute("MES_LLISTAT") == null) {
 				String mesStr = request.getParameter("mes");
 				if (mesStr == null) {
-					mes = start.get(Calendar.MONTH);
+					mes = selectedMonthStart.get(Calendar.MONTH);
 				} else {
 					mes = Integer.parseInt(mesStr);
 				}
@@ -749,20 +769,19 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		}
 
 		mav.addObject("mes", mes);
-		llistatEntradesModel.setMes(mes);
+		llistatEntradesModel.setMes(mes);*/
 
-		// Seleccionar any
-		int any;
-		{
+
+		/*{
 			String anyStr = request.getParameter("any");
 			if (anyStr == null) {
-				any = start.get(Calendar.YEAR);
+				any = selectedMonthStart.get(Calendar.YEAR);
 			} else {
 				any = Integer.parseInt(anyStr);
 			}
 		}
 		mav.addObject("any", any);
-		llistatEntradesModel.setAny(any);
+		llistatEntradesModel.setAny(any);*/
 
 		boolean mostrarEntradesAmagades = false;
 		{
@@ -775,13 +794,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			llistatEntradesModel.setMostrarEntradesAmagades(mostrarEntradesAmagades);
 		}
 
-		start.set(Calendar.MONTH, mes);
-		start.set(Calendar.YEAR, any);
-		start.set(Calendar.DATE, 1);
+		selectedMonthStart.set(Calendar.MONTH, mes);
+		selectedMonthStart.set(Calendar.YEAR, any);
+		selectedMonthStart.set(Calendar.DATE, 1);
 
 		Calendar end = Calendar.getInstance();
-		end.setTimeInMillis(start.getTimeInMillis());
-		end.set(Calendar.DATE, start.getActualMaximum(Calendar.DAY_OF_MONTH));
+		end.setTimeInMillis(selectedMonthStart.getTimeInMillis());
+		end.set(Calendar.DATE, selectedMonthStart.getActualMaximum(Calendar.DAY_OF_MONTH));
 		end.set(Calendar.HOUR_OF_DAY, 23);
 		end.set(Calendar.MINUTE, 59);
 		end.set(Calendar.SECOND, 59);
@@ -790,10 +809,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		// (1) Obtenir dades
 		Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()),
+		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(selectedMonthStart.getTimeInMillis()),
 				new Timestamp(end.getTimeInMillis()));
-		mav.addObject("start", start);
-		llistatEntradesModel.setStart(start);
+		mav.addObject("start", selectedMonthStart);
+		llistatEntradesModel.setStart(selectedMonthStart);
 
 		mav.addObject("itemsByDate", itemsByDate);
 		llistatEntradesModel.setItemsByDate(itemsByDate);
