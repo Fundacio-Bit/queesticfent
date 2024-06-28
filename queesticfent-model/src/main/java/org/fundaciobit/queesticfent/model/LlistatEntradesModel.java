@@ -14,8 +14,6 @@ public class LlistatEntradesModel {
 
 	boolean tePermisos;
 
-	Calendar yesterday, today;
-
 	String usuariId;
 
 	List<Long> departaments;
@@ -28,11 +26,9 @@ public class LlistatEntradesModel {
 
 	List<Long> projectesSeleccionats;
 
-	int mes, any;
-
 	boolean mostrarEntradesAmagades;
 
-	Calendar start;
+	Calendar selectedMonthStart;
 
 	Map<Date, List<QueEsticFentItem>> itemsByDate;
 
@@ -65,10 +61,6 @@ public class LlistatEntradesModel {
 	 * 
 	 * List<DiaEntrades> dies;
 	 */
-
-	public int getAny() {
-		return any;
-	}
 
 	public List<Accions> getActions() {
 		return actions;
@@ -131,11 +123,11 @@ public class LlistatEntradesModel {
 	}
 
 	public Calendar getStart() {
-		return start;
+		return selectedMonthStart;
 	}
 
 	public void setStart(Calendar start) {
-		this.start = start;
+		this.selectedMonthStart = start;
 	}
 
 	public Map<Date, List<QueEsticFentItem>> getItemsByDate() {
@@ -154,32 +146,12 @@ public class LlistatEntradesModel {
 		this.mostrarEntradesAmagades = mostrarEntradesAmagades;
 	}
 
-	public void setAny(int any) {
-		this.any = any;
-	}
-
 	public boolean isTePermisos() {
 		return tePermisos;
 	}
 
 	public void setTePermisos(boolean tePermisos) {
 		this.tePermisos = tePermisos;
-	}
-
-	public Calendar getYesterday() {
-		return yesterday;
-	}
-
-	public void setYesterday(Calendar yesterday) {
-		this.yesterday = yesterday;
-	}
-
-	public Calendar getToday() {
-		return today;
-	}
-
-	public void setToday(Calendar today) {
-		this.today = today;
 	}
 
 	public String getUsuariId() {
@@ -228,14 +200,6 @@ public class LlistatEntradesModel {
 
 	public void setProjectesSeleccionats(List<Long> projectesSeleccionats) {
 		this.projectesSeleccionats = projectesSeleccionats;
-	}
-
-	public int getMes() {
-		return mes;
-	}
-
-	public void setMes(int mes) {
-		this.mes = mes;
 	}
 
 }

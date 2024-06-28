@@ -635,7 +635,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		boolean tePermisos;
 		{
-
 			boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
 			tePermisos = esAdministrador; // || esCoordinador || esCapDeProjecte;
 		}
@@ -643,13 +642,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		mav.addObject("tePermisos", tePermisos);
 		llistatEntradesModel.setTePermisos(tePermisos);
 
-		Calendar yesterday = Calendar.getInstance();
-		yesterday.add(Calendar.DATE, -1);
-		mav.addObject("yesterday", yesterday);
-		llistatEntradesModel.setYesterday(yesterday);
-		Calendar today = Calendar.getInstance();
-		mav.addObject("today", today);
-		llistatEntradesModel.setToday(today);
 		Calendar selectedMonthStart = Calendar.getInstance();
 		selectedMonthStart.set(Calendar.HOUR_OF_DAY, 0);
 		selectedMonthStart.set(Calendar.MINUTE, 0);
@@ -747,42 +739,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
         }
 		
 		
-		
-/*		if (request.getParameter("mes") != null) {
-			// Quan canviam des del llistat
-			mes = Integer.valueOf(request.getParameter("mes"));
-			request.getSession().setAttribute("MES_LLISTAT", mes);
-
-		} else {
-			// Quan venim d'un altre pagina
-			if (request.getSession().getAttribute("MES_LLISTAT") == null) {
-				String mesStr = request.getParameter("mes");
-				if (mesStr == null) {
-					mes = selectedMonthStart.get(Calendar.MONTH);
-				} else {
-					mes = Integer.parseInt(mesStr);
-				}
-				request.getSession().setAttribute("MES_LLISTAT", mes);
-			} else {
-				mes = (int) request.getSession().getAttribute("MES_LLISTAT");
-			}
-		}
-
-		mav.addObject("mes", mes);
-		llistatEntradesModel.setMes(mes);*/
-
-
-		/*{
-			String anyStr = request.getParameter("any");
-			if (anyStr == null) {
-				any = selectedMonthStart.get(Calendar.YEAR);
-			} else {
-				any = Integer.parseInt(anyStr);
-			}
-		}
-		mav.addObject("any", any);
-		llistatEntradesModel.setAny(any);*/
-
 		boolean mostrarEntradesAmagades = false;
 		{
 			String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");

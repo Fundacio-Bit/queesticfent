@@ -56,6 +56,9 @@ LlistatEntradesModel model = (LlistatEntradesModel) request.getAttribute("model"
 Map<String, String> noms = new HashMap<String, String>();
 LoginInfo info = LoginInfo.getInstance();
 noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
+
+int mesActual = model.getStart().get(Calendar.MONTH);
+int anyActual = model.getStart().get(Calendar.YEAR);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -80,8 +83,8 @@ noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
   <td>
   <FORM name="REB2010" method="post">
   <span id="toolTipBox" width="200"></span>
-<input type="hidden" name="mes" value="<%=model.getMes()%>">
-<input type="hidden" name="any" value="<%=model.getAny()%>">
+<input type="hidden" name="mes" value="<%=mesActual%>">
+<input type="hidden" name="any" value="<%=anyActual%>">
   <table border="0" cellpadding="0" cellspacing="0" >
     <tr>
       <td style="padding-right:10px;">
@@ -200,8 +203,6 @@ noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
     
   <% 
   // Es calculen els ints per al mes i any per als botons de seguent i previ.
-      int mesActual = model.getStart().get(Calendar.MONTH);
-      int anyActual = model.getStart().get(Calendar.YEAR);
       int mesAnterior, mesSeguent;
       int anyAnterior, anySeguent;
       
@@ -332,7 +333,9 @@ for(int d=1; d <= model.getStart().getActualMaximum(Calendar.DAY_OF_MONTH); d++)
  if (isCapDeSetmana) {
    rowbgcolor = "cccccc";
  } else {
-   if ((llista == null || llista.size() ==0) && model.getStart().compareTo(model.getYesterday()) == -1) {
+	 Calendar yesterday = Calendar.getInstance();
+     yesterday.add(Calendar.DATE, -1);
+   if ((llista == null || llista.size() ==0) && model.getStart().compareTo(yesterday) == -1) {
      rowbgcolor = "ff0000";
    }
  }
