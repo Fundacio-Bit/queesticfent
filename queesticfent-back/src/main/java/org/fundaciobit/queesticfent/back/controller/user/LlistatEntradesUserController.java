@@ -959,8 +959,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 			File webInfDir = new File(FileSystemManager.getFilesPath(), "plantilles");
 			webInfDir.mkdirs();
-
-			File templateFile = new File(webInfDir, projectName + "_Template.odt"); // "Template_TasquesPersonalOTAE.odt")
+			
+			File templateFile;
+			if("true".equals(request.getParameter("apaisat"))) {
+				templateFile = new File(webInfDir, projectName + "_TemplateApaisat.odt"); // "Template_TasquesPersonalOTAE.odt")
+			}else {
+				templateFile = new File(webInfDir, projectName + "_Template.odt"); // "Template_TasquesPersonalOTAE.odt")
+			}
+			
 			if (!templateFile.exists()) {
 				templateFile = new File("DEFAULT_Template.odt");
 			}

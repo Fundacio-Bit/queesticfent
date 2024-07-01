@@ -265,6 +265,33 @@ int anyActual = model.getStart().get(Calendar.YEAR);
  }
  %>
  
+ <!-- Botó per ODT en format apaisat -->
+ <td align="center" style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
+   
+   <a href="mostrarodt?<%=model.getRedirectUrlParams()%>&usuariID=<%=model.getUsuariId()%>&apaisat=true" target="_blank" onmouseover="toolTip('ODT de Tasques de getSecurity().getFullNameOfUser(usuariID)', this)">
+      <img border="0" src="<c:url value="/img"/>/odtapaisat.gif"></a>
+   
+ </td>
+ 
+  <%
+ if (model.isTePermisos()) {
+ %><td>&nbsp;</td>
+
+<td align="center" style="border-left: 1px solid; padding-right:10px; padding-left:10px;"> 
+   <%
+    String href;
+              String target;
+              href = "mostrarodt?" + model.getRedirectUrlParams() +"&multiple=true"+"&apaisat=true";
+              target = "target=\"_blank\"";
+    %>
+   <a href="<%=href%>" <%=target%>  onmouseover="toolTip('ODT de Tasques de tot el personal', this)" >
+      <img border="0" src="<c:url value="/img"/>/odtapaisatmultiple.gif">
+   </a>
+ </td>
+ <%
+ }
+ %>
+ 
  <%--
  
  <td style="border-left: 1px solid; padding-right:10px; padding-left:10px;">
