@@ -218,7 +218,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 							new File(Configuracio.getBasecampTokenPropertiesFile()));
 
 					if (api3.isNecessaryUpdateToken()) {
-
 						String client_id = Configuracio.getBasecampClientID();
 						String redirectUrl = Configuracio.getBasecampRedirectUrl();
 
@@ -229,7 +228,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 						mav.setView(new RedirectView(getTokenUrl, false));
 
 						return form;
-
 					}
 
 					mav.setView(new RedirectView(
@@ -253,7 +251,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			} else {
 				m.setAccioID(Utils.ACCIO_NOVA_ENTRADA);
 			}
-
 		}
 
 		form.addReadOnlyField(USUARIID);
@@ -425,9 +422,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
 		Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
 		Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
-		Where wm = Where.AND(wm1, wm2, wm3);
+		Where wm4 = ModificacionsQueEsticFentFields.PROJECTEID.in(projectes);
+		Where wm5 = ModificacionsQueEsticFentFields.ACCIOID.equal(Utils.ACCIO_VACANCES);
 
-		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(wm,
+		Where wm = Where.AND(wm1, wm2, wm3, wm4);
+		
+		Where ww = Where.OR(wm,wm5);
+
+		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(ww,
 				new OrderBy(ModificacionsQueEsticFentFields.DATA));
 
 		// 4.2.- Adaptar entrades
@@ -684,69 +686,31 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		llistatEntradesModel.setDepartamentId(departamentID);
 
 		// ============== PROJECTES
-		List<Long> projectes;
-
-		{
-			/** Seleccionar projectes de l'usuari */
-			// Seleccionam tots els projectes
-			projectes = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
+		//Llista de tots els projectes o el projecte seleccionat per filtrar
+		List<Long> selectedProjects = new ArrayList<Long> ();
+		String projecteStr = null;
+		
+		if(request.getParameter("projecteID")!=null && !request.getParameter("projecteID").isEmpty() && !request.getParameter("projecteID").equals("0L")){
+			//Projectes filtrats
+			projecteStr = request.getParameter("projecteID");
+			long selectedProjectId = Long.parseLong(projecteStr);
+			selectedProjects.add(selectedProjectId);
+			llistatEntradesModel.setProjecteId(selectedProjectId);
+		}else {
+			//Llistat de tots els projectesIDs (cap projecte seleccionar
+			selectedProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
 		}
-
-		Long projecteID = 0L; // null == TOTS
-		{
-			String projecteStr = null;
-			if (request.getParameter("projecteID") != null) {
-				projecteStr = request.getParameter("projecteID");
-			}
-
-			if (projecteStr != null && projecteStr.length() != 0) {
-				projecteID = Long.parseLong(projecteStr);
-				// Projecte per parï¿½metre no esta en la llista de disponibles
-				if (projectes.contains(projecteID)) {
-					projectes = new ArrayList<Long>();
-					projectes.add(projecteID);
-				}
-			}
+		
+		{//Llistat de tots els projectes per al dropdown de selecció de projectes
+			List<Long> allProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
+			Where where = ProjectesFields.PROJECTEID.in(allProjects);
+			List<Projectes> projectesList = this.projectesEjb.select(where);
+			llistatEntradesModel.setProjectesList(projectesList);
 		}
-
-		if (projecteID == 0L) {
-			if (projectes.size() == 1) {
-				projecteID = projectes.get(0);
-			}
-		}
-
-		mav.addObject("projecteID", projecteID);
-		llistatEntradesModel.setProjecteId(projecteID);
-
-		int mes, any;
-
-		if (request.getParameter("mes") != null) {
-			mes = Integer.valueOf(request.getParameter("mes"));
-			request.getSession().setAttribute("MES_LLISTAT", mes);
-		} else if (request.getSession().getAttribute("MES_LLISTAT") == null) {
-			mes = selectedMonthStart.get(Calendar.MONTH);
-			request.getSession().setAttribute("MES_LLISTAT", mes);
-		} else {
-			mes = (int) request.getSession().getAttribute("MES_LLISTAT");
-		}
-
-		if (request.getParameter("any") != null) {
-			String anyStr = request.getParameter("any");
-			any = Integer.parseInt(anyStr);
-		} else {
-			any = selectedMonthStart.get(Calendar.YEAR);
-		}
-
-		boolean mostrarEntradesAmagades = false;
-		{
-			String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");
-			if (mostrarEntradesAmagadesStr != null) {
-				log.info("mostrarEntradesAmagades: " + mostrarEntradesAmagadesStr);
-				mostrarEntradesAmagades = ("on".compareTo(mostrarEntradesAmagadesStr) == 0);
-			}
-			mav.addObject("mostrarEntradesAmagades", mostrarEntradesAmagades);
-			llistatEntradesModel.setMostrarEntradesAmagades(mostrarEntradesAmagades);
-		}
+		
+		
+		int mes = getSelectedMonth(request, selectedMonthStart);
+		int any = getSelectedAny(request, selectedMonthStart);
 
 		selectedMonthStart.set(Calendar.MONTH, mes);
 		selectedMonthStart.set(Calendar.YEAR, any);
@@ -763,7 +727,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		// (1) Obtenir dades
 		Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes,
+		itemsByDate = getQueEsticFentItemByUser(usuariID, selectedProjects,
 				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
 		mav.addObject("start", selectedMonthStart);
 		llistatEntradesModel.setStart(selectedMonthStart);
@@ -781,18 +745,17 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("allAccions", allAccions);
 			llistatEntradesModel.setAllAccions(allAccions);
 		}
-
+		
+		
+		
 		String redirectUrlParams = "mes=" + mes + "&any=" + any + "&usuariID=" + usuariID;
-		if (projecteID != null) {
-			redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteID.intValue();
+		if (projecteStr != null && !projecteStr.isEmpty()) {
+			redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteStr;
 		}
-		mav.addObject("redirectUrlParams", redirectUrlParams);
-		llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
+		
 		String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
 		mav.addObject("redirectUrl", redirectUrl);
 		llistatEntradesModel.setRedirectUrl(redirectUrl);
-		mav.addObject("projecteID", projecteID);
-		llistatEntradesModel.setProjecteId(projecteID);
 		{
 			// ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
 			Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);
@@ -813,11 +776,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("actions", actions);
 			llistatEntradesModel.setActions(actions);
 		}
-		{
-			Where where = ProjectesFields.PROJECTEID.in(projectes);
-			List<Projectes> projectesList = this.projectesEjb.select(where);
-			mav.addObject("projectesList", projectesList);
-			llistatEntradesModel.setProjectesList(projectesList);
+		
+		if (request.getParameter("mostrarEntradesAmagades") != null && "on".compareTo(request.getParameter("mostrarEntradesAmagades")) == 0) {
+			llistatEntradesModel.setMostrarEntradesAmagades(true);
 		}
 		{
 			Where where = DepartamentsFields.DEPARTAMENTID.in(departaments);
@@ -825,6 +786,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("departamentsInfo", departamentsInfo);
 			llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
 		}
+		
+		mav.addObject("redirectUrlParams", redirectUrlParams);
+		llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
 
 		mav.addObject("model", llistatEntradesModel);
 		return mav;
@@ -1144,5 +1108,33 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		}
 
 	}
+	
+	private int getSelectedMonth(HttpServletRequest request, Calendar selectedMonthStart) {
+		int mes;
+		if (request.getParameter("mes") != null) {
+			mes = Integer.valueOf(request.getParameter("mes"));
+			request.getSession().setAttribute("MES_LLISTAT", mes);
+		} else if (request.getSession().getAttribute("MES_LLISTAT") == null) {
+			mes = selectedMonthStart.get(Calendar.MONTH);
+			request.getSession().setAttribute("MES_LLISTAT", mes);
+		} else {
+			mes = (int) request.getSession().getAttribute("MES_LLISTAT");
+		}
+		
+		return mes;
+	}
+	
+	private int getSelectedAny(HttpServletRequest request, Calendar selectedMonthStart) {
+		int any;
+		if (request.getParameter("any") != null) {
+			String anyStr = request.getParameter("any");
+			any = Integer.parseInt(anyStr);
+		} else {
+			any = selectedMonthStart.get(Calendar.YEAR);
+		}
+		return any;
+	}
+	
+	
 
 }

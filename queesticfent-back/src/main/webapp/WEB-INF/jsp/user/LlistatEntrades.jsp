@@ -178,7 +178,6 @@ int anyActual = model.getStart().get(Calendar.YEAR);
             <option value="" <%=model.getProjecteId() == 0L ? "selected":""%> >Tots</option>
           <%
           {
-                                
                                 //java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
                                 String __def;
                                 for(Projectes proj : model.getProjectesList()) {
@@ -201,19 +200,13 @@ int anyActual = model.getStart().get(Calendar.YEAR);
     
   <% 
   // Es calculen els ints per al mes i any per als botons de seguent i previ.
-  
-      
-      
       Calendar auxCalendar = (Calendar) model.getStart().clone();
       auxCalendar.add(Calendar.MONTH, -1);
       int mesAnterior = auxCalendar.get(Calendar.MONTH);
       int anyAnterior = auxCalendar.get(Calendar.YEAR);
       auxCalendar.add(Calendar.MONTH, 2);
       int mesSeguent = auxCalendar.get(Calendar.MONTH);
-      int anySeguent = auxCalendar.get(Calendar.YEAR);
-      
-     
-      
+      int anySeguent = auxCalendar.get(Calendar.YEAR);   
   %>
   <td align="right" width="40px" style="border-left: 1px solid">
      &nbsp;&nbsp;<img onclick="document.REB2010.mes.value=<%=mesAnterior%>;document.REB2010.any.value=<%=anyAnterior%>;document.REB2010.submit()" src="<c:url value="/img"/>/previous.jpg">  
