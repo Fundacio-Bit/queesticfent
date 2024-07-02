@@ -717,28 +717,26 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		mav.addObject("projecteID", projecteID);
 		llistatEntradesModel.setProjecteId(projecteID);
-		
-		
-        int mes, any;
 
-        if(request.getParameter("mes")!=null) {
-            mes = Integer.valueOf(request.getParameter("mes"));
-            request.getSession().setAttribute("MES_LLISTAT", mes);
-        }else if(request.getSession().getAttribute("MES_LLISTAT") == null){
-            mes = selectedMonthStart.get(Calendar.MONTH);
-            request.getSession().setAttribute("MES_LLISTAT", mes);
-        }else {
-            mes = (int) request.getSession().getAttribute("MES_LLISTAT");
-        }
-        
-        if(request.getParameter("any") != null) {
-            String anyStr = request.getParameter("any");
-            any = Integer.parseInt(anyStr);
-        }else {
-            any = selectedMonthStart.get(Calendar.YEAR);
-        }
-		
-		
+		int mes, any;
+
+		if (request.getParameter("mes") != null) {
+			mes = Integer.valueOf(request.getParameter("mes"));
+			request.getSession().setAttribute("MES_LLISTAT", mes);
+		} else if (request.getSession().getAttribute("MES_LLISTAT") == null) {
+			mes = selectedMonthStart.get(Calendar.MONTH);
+			request.getSession().setAttribute("MES_LLISTAT", mes);
+		} else {
+			mes = (int) request.getSession().getAttribute("MES_LLISTAT");
+		}
+
+		if (request.getParameter("any") != null) {
+			String anyStr = request.getParameter("any");
+			any = Integer.parseInt(anyStr);
+		} else {
+			any = selectedMonthStart.get(Calendar.YEAR);
+		}
+
 		boolean mostrarEntradesAmagades = false;
 		{
 			String mostrarEntradesAmagadesStr = request.getParameter("mostrarEntradesAmagades");
@@ -765,8 +763,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		// (1) Obtenir dades
 		Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(selectedMonthStart.getTimeInMillis()),
-				new Timestamp(end.getTimeInMillis()));
+		itemsByDate = getQueEsticFentItemByUser(usuariID, projectes,
+				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
 		mav.addObject("start", selectedMonthStart);
 		llistatEntradesModel.setStart(selectedMonthStart);
 
@@ -959,14 +957,14 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 			File webInfDir = new File(FileSystemManager.getFilesPath(), "plantilles");
 			webInfDir.mkdirs();
-			
+
 			File templateFile;
-			if("true".equals(request.getParameter("apaisat"))) {
+			if ("true".equals(request.getParameter("apaisat"))) {
 				templateFile = new File(webInfDir, projectName + "_TemplateApaisat.odt"); // "Template_TasquesPersonalOTAE.odt")
-			}else {
+			} else {
 				templateFile = new File(webInfDir, projectName + "_Template.odt"); // "Template_TasquesPersonalOTAE.odt")
 			}
-			
+
 			if (!templateFile.exists()) {
 				templateFile = new File("DEFAULT_Template.odt");
 			}
@@ -975,13 +973,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 			ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map
 					.get("usuaris");
-			for (org.fundaciobit.queesticfent.back.controller.user.UserInfo userInfo : llistaDeUserInfo) {
-				log.info(" ----- " + userInfo.nom);
-				for (Item item : userInfo.items) {
-					log.info(" **" + item.dia + "   -" + item.comentari);
-				}
-
-			}
 
 			// template.createDocument(map, baos);
 
@@ -1075,12 +1066,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			itemsByDate = getQueEsticFentItemByUser(usuariID, projectes, new Timestamp(start.getTimeInMillis()),
 					new Timestamp(end.getTimeInMillis()));
 
-			log.info("=========================");
-			log.info(": " + itemsByDate.size());
-			log.info("Llista: " + itemsByDate.size());
-			log.info("MAX DAY: " + maxDay);
-			log.info("Usuari: " + usuariID);
-
 			List<Item> items = new ArrayList<Item>();
 			List<QueEsticFentItem> llista;
 			for (int d = 1; d <= maxDay; d++) {
@@ -1120,8 +1105,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 								descripcioItem = qefi.getDescripcio();
 							}
 
-							log.info("    *" + descripcioItem);
-
 							comment.append(descripcioItem);
 
 						}
@@ -1129,8 +1112,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 					}
 				}
 				items.add(item);
-				log.info("Introduit Item: [" + d + "] " + item.comentari);
-				;
+
 			}
 			String fullname = usuari.getNom() + " " + usuari.getLlinatge1()
 					+ (usuari.getLlinatge2() != null ? (" " + usuari.getLlinatge2()) : "");
