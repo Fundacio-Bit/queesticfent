@@ -195,8 +195,18 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			form.setTitleCode("novaentrada");
 			form.addHiddenField(DADA2);
 
+			Calendar dateWithCurrentTime = Calendar.getInstance();
+			Calendar currentTimeCal = Calendar.getInstance();
+
 			try {
-				m.setData(new Timestamp(getSimpleDateTimeFormat().parse(request.getParameter("data")).getTime()));
+				dateWithCurrentTime.setTime(getSimpleDateTimeFormat().parse(request.getParameter("data")));
+				dateWithCurrentTime.set(Calendar.HOUR_OF_DAY, currentTimeCal.get(Calendar.HOUR_OF_DAY));
+				dateWithCurrentTime.set(Calendar.MINUTE, currentTimeCal.get(Calendar.MINUTE));
+				dateWithCurrentTime.set(Calendar.SECOND, currentTimeCal.get(Calendar.SECOND));
+
+				dateWithCurrentTime.set(Calendar.MILLISECOND, currentTimeCal.get(Calendar.MILLISECOND));
+
+				m.setData(new Timestamp(dateWithCurrentTime.getTimeInMillis()));
 			} catch (ParseException e) {
 				// TODO XYZ
 				e.printStackTrace();
@@ -427,8 +437,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		Where wAnd1 = Where.AND(wm1, wm2, wm3, wm4);
 		Where wAnd2 = Where.AND(wm1, wm2, wm3, wm5);
-		
-		Where ww = Where.OR(wAnd1,wAnd2);
+
+		Where ww = Where.OR(wAnd1, wAnd2);
 
 		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(ww,
 				new OrderBy(ModificacionsQueEsticFentFields.DATA));
@@ -645,11 +655,19 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		mav.addObject("tePermisos", tePermisos);
 		llistatEntradesModel.setTePermisos(tePermisos);
 
+		// Inicialització del mes seleccionat
 		Calendar selectedMonthStart = Calendar.getInstance();
 		selectedMonthStart.set(Calendar.HOUR_OF_DAY, 0);
 		selectedMonthStart.set(Calendar.MINUTE, 0);
 		selectedMonthStart.set(Calendar.SECOND, 0);
 		selectedMonthStart.set(Calendar.MILLISECOND, 0);
+
+		int mes = getSelectedMonth(request, selectedMonthStart);
+		int any = getSelectedAny(request, selectedMonthStart);
+
+		selectedMonthStart.set(Calendar.MONTH, mes);
+		selectedMonthStart.set(Calendar.YEAR, any);
+		selectedMonthStart.set(Calendar.DATE, 1);
 
 		String usuariID = request.getParameter("usuariID");
 		if (usuariID == null) {
@@ -687,35 +705,28 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		llistatEntradesModel.setDepartamentId(departamentID);
 
 		// ============== PROJECTES
-		//Llista de tots els projectes o el projecte seleccionat per filtrar
-		List<Long> selectedProjects = new ArrayList<Long> ();
+		// Llista de tots els projectes o el projecte seleccionat per filtrar
+		List<Long> selectedProjects = new ArrayList<Long>();
 		String projecteStr = null;
-		
-		if(request.getParameter("projecteID")!=null && !request.getParameter("projecteID").isEmpty() && !request.getParameter("projecteID").equals("0L")){
-			//Projectes filtrats
+
+		if (request.getParameter("projecteID") != null && !request.getParameter("projecteID").isEmpty()
+				&& !request.getParameter("projecteID").equals("0L")) {
+			// Projectes filtrats
 			projecteStr = request.getParameter("projecteID");
 			long selectedProjectId = Long.parseLong(projecteStr);
 			selectedProjects.add(selectedProjectId);
 			llistatEntradesModel.setProjecteId(selectedProjectId);
-		}else {
-			//Llistat de tots els projectesIDs (cap projecte seleccionar
+		} else {
+			// Llistat de tots els projectesIDs (cap projecte seleccionar
 			selectedProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
 		}
-		
-		{//Llistat de tots els projectes per al dropdown de selecció de projectes
+
+		{// Llistat de tots els projectes per al dropdown de selecció de projectes
 			List<Long> allProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
 			Where where = ProjectesFields.PROJECTEID.in(allProjects);
 			List<Projectes> projectesList = this.projectesEjb.select(where);
 			llistatEntradesModel.setProjectesList(projectesList);
 		}
-		
-		
-		int mes = getSelectedMonth(request, selectedMonthStart);
-		int any = getSelectedAny(request, selectedMonthStart);
-
-		selectedMonthStart.set(Calendar.MONTH, mes);
-		selectedMonthStart.set(Calendar.YEAR, any);
-		selectedMonthStart.set(Calendar.DATE, 1);
 
 		Calendar end = Calendar.getInstance();
 		end.setTimeInMillis(selectedMonthStart.getTimeInMillis());
@@ -746,14 +757,12 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("allAccions", allAccions);
 			llistatEntradesModel.setAllAccions(allAccions);
 		}
-		
-		
-		
+
 		String redirectUrlParams = "mes=" + mes + "&any=" + any + "&usuariID=" + usuariID;
 		if (projecteStr != null && !projecteStr.isEmpty()) {
 			redirectUrlParams = redirectUrlParams + "&projecteID=" + projecteStr;
 		}
-		
+
 		String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
 		mav.addObject("redirectUrl", redirectUrl);
 		llistatEntradesModel.setRedirectUrl(redirectUrl);
@@ -777,8 +786,9 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("actions", actions);
 			llistatEntradesModel.setActions(actions);
 		}
-		
-		if (request.getParameter("mostrarEntradesAmagades") != null && "on".compareTo(request.getParameter("mostrarEntradesAmagades")) == 0) {
+
+		if (request.getParameter("mostrarEntradesAmagades") != null
+				&& "on".compareTo(request.getParameter("mostrarEntradesAmagades")) == 0) {
 			llistatEntradesModel.setMostrarEntradesAmagades(true);
 		}
 		{
@@ -787,7 +797,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			mav.addObject("departamentsInfo", departamentsInfo);
 			llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
 		}
-		
+
 		mav.addObject("redirectUrlParams", redirectUrlParams);
 		llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
 
@@ -1109,7 +1119,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		}
 
 	}
-	
+
 	private int getSelectedMonth(HttpServletRequest request, Calendar selectedMonthStart) {
 		int mes;
 		if (request.getParameter("mes") != null) {
@@ -1121,10 +1131,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		} else {
 			mes = (int) request.getSession().getAttribute("MES_LLISTAT");
 		}
-		
+
 		return mes;
 	}
-	
+
 	private int getSelectedAny(HttpServletRequest request, Calendar selectedMonthStart) {
 		int any;
 		if (request.getParameter("any") != null) {
@@ -1135,7 +1145,5 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		}
 		return any;
 	}
-	
-	
 
 }

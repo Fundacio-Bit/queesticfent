@@ -357,26 +357,11 @@ for(int d=1; d <= model.getStart().getActualMaximum(Calendar.DAY_OF_MONTH); d++)
 
 <%
 
-
-Calendar c2 = Calendar.getInstance();
-{
-int h = c2.get(Calendar.HOUR_OF_DAY);
-int m = c2.get(Calendar.MINUTE);
-int s = c2.get(Calendar.SECOND);
-int mil = c2.get(Calendar.MILLISECOND);
-c2.setTimeInMillis(model.getStart().getTimeInMillis());
-c2.set(Calendar.HOUR_OF_DAY, h);
-c2.set(Calendar.MINUTE, m);
-c2.set(Calendar.SECOND, s);
-c2.set(Calendar.MILLISECOND, mil);
-}	
-
-
 String novaAccioURL ="new?usuariID=" + model.getUsuariId() 
              + "&data=" 
-             + URLEncoder.encode(getSimpleDateTimeFormat().format(c2.getTime()))
-             + (model.getProjecteId() == 0L? "": ("&projecteID=" + model.getProjecteId()))
-             + "&redirectUrl=" + model.getRedirectUrl();
+             + URLEncoder.encode(getSimpleDateTimeFormat().format(model.getStart().getTime()))
+             + (model.getProjecteId() == 0L? "": ("&projecteID=" + model.getProjecteId()));
+             //+ "&redirectUrl=" + model.getRedirectUrl();
 %>
 <td align="center">
  <%
