@@ -425,9 +425,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		Where wm4 = ModificacionsQueEsticFentFields.PROJECTEID.in(projectes);
 		Where wm5 = ModificacionsQueEsticFentFields.ACCIOID.equal(Utils.ACCIO_VACANCES);
 
-		Where wm = Where.AND(wm1, wm2, wm3, wm4);
+		Where wAnd1 = Where.AND(wm1, wm2, wm3, wm4);
+		Where wAnd2 = Where.AND(wm1, wm2, wm3, wm5);
 		
-		Where ww = Where.OR(wm,wm5);
+		Where ww = Where.OR(wAnd1,wAnd2);
 
 		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(ww,
 				new OrderBy(ModificacionsQueEsticFentFields.DATA));
