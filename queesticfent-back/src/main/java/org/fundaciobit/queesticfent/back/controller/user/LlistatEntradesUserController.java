@@ -45,7 +45,7 @@ import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
-import org.fundaciobit.pluginsib.core.utils.ISO8601;
+import org.fundaciobit.pluginsib.core.v3.utils.ISO8601;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;

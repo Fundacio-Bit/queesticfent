@@ -18,7 +18,6 @@
         <module>scripts</module>
     </modules>
     <repositories>
-
         <repository>
             <id>maven-nuxeo</id>
             <name>Maven Nuxeo Repository</name>
@@ -107,8 +106,8 @@
         <!-- XYZ ZZZ S'ha de fer la substitució -->
         <genapp.version>2.0.0-SNAPSHOT</genapp.version>
         <version_txt_template_file>./scripts/templates/versio.txt.template</version_txt_template_file>
-        <pluginsib.userinformation.api.version>3.1.0</pluginsib.userinformation.api.version>
-        <pluginsib.userinformation.impl.version>3.1.0-SNAPSHOT</pluginsib.userinformation.impl.version>
+        <pluginsib.userinformation.api.version>4.0.0-SNAPSHOT</pluginsib.userinformation.api.version>
+        <pluginsib.userinformation.impl.version>4.0.0-SNAPSHOT</pluginsib.userinformation.impl.version>
     </properties>
     <dependencyManagement>
         <dependencies>
