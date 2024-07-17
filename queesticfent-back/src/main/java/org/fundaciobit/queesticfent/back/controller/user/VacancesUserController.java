@@ -11,12 +11,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
@@ -24,8 +26,10 @@ import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFor
 import org.fundaciobit.queesticfent.model.entity.Festius;
 import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
 import org.fundaciobit.queesticfent.model.entity.Usuaris;
+import org.fundaciobit.queesticfent.model.entity.UsuarisDepartament;
 import org.fundaciobit.queesticfent.model.fields.FestiusFields;
 import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuarisDepartamentFields;
 import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +56,9 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+    
+    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
+    protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
 
     @Override
     public String getEntityNameCode() {
@@ -103,10 +110,13 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
     @RequestMapping(value = "/vacancespermes", method = RequestMethod.GET)
     public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-
+    	
+    	
+    	//Where per accio vacances i entre 2 mesos enrera i 8 mesos envant.
         Where w;
         Timestamp from, to;
         {
+        	// Accio vacances
             Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
             Calendar cal = Calendar.getInstance();
@@ -119,9 +129,15 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
             cal.set(Calendar.DATE, -1);
 
             to = new Timestamp(cal.getTimeInMillis());
-
+            
+            // Entre dia 1 de dos mesos enrere i dia 30 de (8 mesos envant?)
             Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
-            w = Where.AND(w1, w2);
+            
+            List<String> usuarisIds = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.USUARIID);
+            
+            Where w3 = ModificacionsQueEsticFentFields.USUARIID.in(usuarisIds);
+            
+            w = Where.AND(w1, w2, w3);
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

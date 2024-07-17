@@ -26,10 +26,6 @@ import org.fundaciobit.queesticfent.logic.utils.I18NLogicUtils;
 import org.fundaciobit.queesticfent.logic.utils.LogicUtils;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
 
-//import org.fundaciobit.pluginsib.core.utils.PluginsManager;
-//import org.fundaciobit.pluginsib.exportdata.IExportDataPlugin;
-//import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
-
 /**
  * Servlet emprat per inicialitzar el Back
  * 
