@@ -48,322 +48,318 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
 public class VacancesUserController extends ModificacionsQueEsticFentController {
 
-    public static final String[] MESOS = { "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost",
-            "Setembre", "Octubre", "Novembre", "Desembre" };
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
-
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
-    
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
+	public static final String[] MESOS = { "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost",
+			"Setembre", "Octubre", "Novembre", "Desembre" };
 
-    @Override
-    public String getEntityNameCode() {
-        return "vacances";
-    }
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
 
-    @Override
-    public String getEntityNameCodePlural() {
-        return "vacances";
-    }
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
 
-    @Override
-    public String getTileList() {
-        return "modificacionsQueEsticFentListUser";
-    }
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
 
-    @Override
-    public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+	@Override
+	public String getEntityNameCode() {
+		return "vacances";
+	}
 
-        Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
+	@Override
+	public String getEntityNameCodePlural() {
+		return "vacances";
+	}
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DATE, 1);
-        cal.add(Calendar.MONTH, -2);
+	@Override
+	public String getTileList() {
+		return "modificacionsQueEsticFentListUser";
+	}
 
-        Timestamp from = new Timestamp(cal.getTimeInMillis());
+	@Override
+	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
 
-        cal.add(Calendar.MONTH, +10);
-        cal.set(Calendar.DATE, -1);
+		Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
-        Timestamp to = new Timestamp(cal.getTimeInMillis());
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DATE, 1);
+		cal.add(Calendar.MONTH, -2);
 
-        Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
-        return Where.AND(w1, w2);
-    }
+		Timestamp from = new Timestamp(cal.getTimeInMillis());
 
-    @Override
-    public ModificacionsQueEsticFentFilterForm getModificacionsQueEsticFentFilterForm(Integer pagina, ModelAndView mav,
-            HttpServletRequest request) throws I18NException {
-        ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm;
-        modificacionsQueEsticFentFilterForm = super.getModificacionsQueEsticFentFilterForm(pagina, mav, request);
+		cal.add(Calendar.MONTH, +10);
+		cal.set(Calendar.DATE, -1);
 
-        if (modificacionsQueEsticFentFilterForm.isNou()) {
+		Timestamp to = new Timestamp(cal.getTimeInMillis());
 
-        }
+		Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
+		return Where.AND(w1, w2);
+	}
 
-        return modificacionsQueEsticFentFilterForm;
-    }
+	@Override
+	public ModificacionsQueEsticFentFilterForm getModificacionsQueEsticFentFilterForm(Integer pagina, ModelAndView mav,
+			HttpServletRequest request) throws I18NException {
+		ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm;
+		modificacionsQueEsticFentFilterForm = super.getModificacionsQueEsticFentFilterForm(pagina, mav, request);
 
-    @RequestMapping(value = "/vacancespermes", method = RequestMethod.GET)
-    public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-    	
-    	
-    	//Where per accio vacances i entre 2 mesos enrera i 8 mesos envant.
-        Where w;
-        Timestamp from, to;
-        {
-        	// Accio vacances
-            Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
+		if (modificacionsQueEsticFentFilterForm.isNou()) {
 
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.DATE, 1);
-            cal.add(Calendar.MONTH, -2);
+		}
 
-            from = new Timestamp(cal.getTimeInMillis());
+		return modificacionsQueEsticFentFilterForm;
+	}
 
-            cal.add(Calendar.MONTH, +10);
-            cal.set(Calendar.DATE, -1);
+	@RequestMapping(value = "/vacancespermes", method = RequestMethod.GET)
+	public ModelAndView vacancesPerMes(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-            to = new Timestamp(cal.getTimeInMillis());
-            
-            // Entre dia 1 de dos mesos enrere i dia 30 de (8 mesos envant?)
-            Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
-            
-            List<String> usuarisIds = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.USUARIID);
-            
-            Where w3 = ModificacionsQueEsticFentFields.USUARIID.in(usuarisIds);
-            
-            w = Where.AND(w1, w2, w3);
-        }
+		// Where per accio vacances i entre 2 mesos enrera i 8? mesos envant.
+		Where w;
+		Timestamp from, to;
+		{
+			Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Set<String> festius = new HashSet<String>();
-        {
-            List<Festius> festiusList = festiusEjb.select(
-                    FestiusFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.DATE, 1);
+			cal.add(Calendar.MONTH, -2);
 
-            for (Festius f : festiusList) {
+			from = new Timestamp(cal.getTimeInMillis());
 
-                festius.add(sdf.format(f.getData()));
-            }
+			cal.add(Calendar.MONTH, +10);
+			cal.set(Calendar.DATE, -1);
 
-        }
+			to = new Timestamp(cal.getTimeInMillis());
 
-        List<ModificacionsQueEsticFent> vacances = this.modificacionsQueEsticFentEjb.select(w);
+			Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
 
-        log.info("vacances.size() =>" + vacances.size());
+			List<String> usuarisIds = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.USUARIID);
 
-        Map<String, VacancesMes> vacancesmesos = new TreeMap<String, VacancesUserController.VacancesMes>();
+			Where w3 = ModificacionsQueEsticFentFields.USUARIID.in(usuarisIds);
 
-        Set<String> usuaris = new HashSet<String>();
+			w = Where.AND(w1, w2, w3);
+		}
 
-        for (ModificacionsQueEsticFent m : vacances) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Set<String> festius = new HashSet<String>();
+		{
+			List<Festius> festiusList = festiusEjb.select(
+					FestiusFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
 
-        	Timestamp date = m.getData();
+			for (Festius f : festiusList) {
 
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
+				festius.add(sdf.format(f.getData()));
+			}
 
-            int mes = cal.get(Calendar.MONTH);
+		}
 
-            int anyo = cal.get(Calendar.YEAR);
+		List<ModificacionsQueEsticFent> vacances = this.modificacionsQueEsticFentEjb.select(w);
 
-            String anyMes = anyo + String.format("%02d", mes);
+		log.info("vacances.size() =>" + vacances.size());
 
-            VacancesMes vacancesPerMes = vacancesmesos.get(anyMes);
-            if (vacancesPerMes == null) {
-                vacancesPerMes = new VacancesMes();
+		Map<String, VacancesMes> vacancesmesos = new TreeMap<String, VacancesUserController.VacancesMes>();
 
-                vacancesPerMes.anyo = anyo;
-                vacancesPerMes.mesnom = MESOS[mes];
+		Set<String> usuaris = new HashSet<String>();
 
-                vacancesPerMes.numberofdays = cal.getActualMaximum(Calendar.DATE);
-                log.info("Mes " + vacancesPerMes.mesnom + " te " + vacancesPerMes.numberofdays + " dies");
+		for (ModificacionsQueEsticFent m : vacances) {
 
-                vacancesPerMes.personesMap = new TreeMap<String, VacancesUserController.PersonaVacancesInfo>();
+			Timestamp date = m.getData();
 
-                Calendar dia = Calendar.getInstance();
-                dia.setTimeInMillis(cal.getTimeInMillis());
-                BitSet capdesetmanes = new BitSet(vacancesPerMes.numberofdays);
-                BitSet festiusMes = new BitSet(vacancesPerMes.numberofdays);
-                for (int i = 1; i <= vacancesPerMes.numberofdays; i++) {
-                    dia.set(Calendar.DATE, i);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
 
-                    int diaset = dia.get(Calendar.DAY_OF_WEEK);
+			int mes = cal.get(Calendar.MONTH);
 
-                    if (diaset == Calendar.SATURDAY || diaset == Calendar.SUNDAY) {
-                        capdesetmanes.set(i);
-                    } else {
+			int anyo = cal.get(Calendar.YEAR);
 
-                        if (festius.contains(sdf.format(dia.getTime()))) {
-                            festiusMes.set(i);
-                        }
-                    }
+			String anyMes = anyo + String.format("%02d", mes);
 
-                }
+			VacancesMes vacancesPerMes = vacancesmesos.get(anyMes);
+			if (vacancesPerMes == null) {
+				vacancesPerMes = new VacancesMes();
 
-                vacancesPerMes.capdesetmanes = capdesetmanes;
-                vacancesPerMes.festius = festiusMes;
+				vacancesPerMes.anyo = anyo;
+				vacancesPerMes.mesnom = MESOS[mes];
 
-                vacancesmesos.put(anyMes, vacancesPerMes);
+				vacancesPerMes.numberofdays = cal.getActualMaximum(Calendar.DATE);
 
-            }
+				vacancesPerMes.personesMap = new TreeMap<String, VacancesUserController.PersonaVacancesInfo>();
 
-            String user = m.getUsuariID();
+				Calendar dia = Calendar.getInstance();
+				dia.setTimeInMillis(cal.getTimeInMillis());
+				BitSet capdesetmanes = new BitSet(vacancesPerMes.numberofdays);
+				BitSet festiusMes = new BitSet(vacancesPerMes.numberofdays);
+				for (int i = 1; i <= vacancesPerMes.numberofdays; i++) {
+					dia.set(Calendar.DATE, i);
 
-            usuaris.add(user);
+					int diaset = dia.get(Calendar.DAY_OF_WEEK);
 
-            PersonaVacancesInfo persona = vacancesPerMes.personesMap.get(user);
-            if (persona == null) {
+					if (diaset == Calendar.SATURDAY || diaset == Calendar.SUNDAY) {
+						capdesetmanes.set(i);
+					} else {
 
-                persona = new PersonaVacancesInfo();
-                persona.username = user;
-                persona.vacances = new BitSet(vacancesPerMes.numberofdays);
+						if (festius.contains(sdf.format(dia.getTime()))) {
+							festiusMes.set(i);
+						}
+					}
 
-                vacancesPerMes.personesMap.put(user, persona);
-            }
+				}
 
-            persona.vacances.set(cal.get(Calendar.DATE));
-        }
+				vacancesPerMes.capdesetmanes = capdesetmanes;
+				vacancesPerMes.festius = festiusMes;
 
-        List<Usuaris> usuarisList = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
-        Set<UsuariInfo> persones = new TreeSet<UsuariInfo>();
-        for (Usuaris u : usuarisList) {
-            UsuariInfo p = new UsuariInfo();
-            p.username = u.getUsuariID();
-            p.color = u.getColor();
-            p.nom = u.getNom() + " " + u.getLlinatge1() + " " + u.getLlinatge2();
-            persones.add(p);
-        }
+				vacancesmesos.put(anyMes, vacancesPerMes);
 
-        ModelAndView mav = new ModelAndView("taulaDeVacances");
-        mav.addObject("vacancesmesos", vacancesmesos.values());
-        mav.addObject("persones", persones);
+			}
 
-        return mav;
+			String user = m.getUsuariID();
 
-    }
+			usuaris.add(user);
 
-    public static class VacancesMes {
-        int anyo;
-        String mesnom;
-        int numberofdays;
-        Map<String, PersonaVacancesInfo> personesMap;
+			PersonaVacancesInfo persona = vacancesPerMes.personesMap.get(user);
+			if (persona == null) {
 
-        BitSet festius;
+				persona = new PersonaVacancesInfo();
+				persona.username = user;
+				persona.vacances = new BitSet(vacancesPerMes.numberofdays);
 
-        BitSet capdesetmanes;
+				vacancesPerMes.personesMap.put(user, persona);
+			}
 
-        public int getAnyo() {
-            return anyo;
-        }
+			persona.vacances.set(cal.get(Calendar.DATE));
+		}
 
-        public void setAnyo(int anyo) {
-            this.anyo = anyo;
-        }
+		List<Usuaris> usuarisList = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
+		Set<UsuariInfo> persones = new TreeSet<UsuariInfo>();
+		for (Usuaris u : usuarisList) {
+			UsuariInfo p = new UsuariInfo();
+			p.username = u.getUsuariID();
+			p.color = u.getColor();
+			p.nom = u.getNom() + " " + u.getLlinatge1() + " " + u.getLlinatge2();
+			persones.add(p);
+		}
 
-        public String getMesnom() {
-            return mesnom;
-        }
+		ModelAndView mav = new ModelAndView("taulaDeVacances");
+		mav.addObject("vacancesmesos", vacancesmesos.values());
+		mav.addObject("persones", persones);
 
-        public void setMesnom(String mesnom) {
-            this.mesnom = mesnom;
-        }
+		return mav;
 
-        public int getNumberofdays() {
-            return numberofdays;
-        }
+	}
 
-        public void setNumberofdays(int numberofdays) {
-            this.numberofdays = numberofdays;
-        }
+	public static class VacancesMes {
+		int anyo;
+		String mesnom;
+		int numberofdays;
+		Map<String, PersonaVacancesInfo> personesMap;
 
-        public Map<String, PersonaVacancesInfo> getPersonesMap() {
-            return personesMap;
-        }
+		BitSet festius;
 
-        public void setPersonesMap(Map<String, PersonaVacancesInfo> personesMap) {
-            this.personesMap = personesMap;
-        }
+		BitSet capdesetmanes;
 
-        public BitSet getFestius() {
-            return festius;
-        }
+		public int getAnyo() {
+			return anyo;
+		}
 
-        public void setFestius(BitSet festius) {
-            this.festius = festius;
-        }
+		public void setAnyo(int anyo) {
+			this.anyo = anyo;
+		}
 
-        public BitSet getCapdesetmanes() {
-            return capdesetmanes;
-        }
+		public String getMesnom() {
+			return mesnom;
+		}
 
-        public void setCapdesetmanes(BitSet capdesetmanes) {
-            this.capdesetmanes = capdesetmanes;
-        }
+		public void setMesnom(String mesnom) {
+			this.mesnom = mesnom;
+		}
 
-    }
+		public int getNumberofdays() {
+			return numberofdays;
+		}
 
-    public static class PersonaVacancesInfo {
-        String username;
-        BitSet vacances;
+		public void setNumberofdays(int numberofdays) {
+			this.numberofdays = numberofdays;
+		}
 
-        public String getUsername() {
-            return username;
-        }
+		public Map<String, PersonaVacancesInfo> getPersonesMap() {
+			return personesMap;
+		}
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
+		public void setPersonesMap(Map<String, PersonaVacancesInfo> personesMap) {
+			this.personesMap = personesMap;
+		}
 
-        public BitSet getVacances() {
-            return vacances;
-        }
+		public BitSet getFestius() {
+			return festius;
+		}
 
-        public void setVacances(BitSet vacances) {
-            this.vacances = vacances;
-        }
+		public void setFestius(BitSet festius) {
+			this.festius = festius;
+		}
 
-    }
+		public BitSet getCapdesetmanes() {
+			return capdesetmanes;
+		}
 
-    public static class UsuariInfo implements Comparable<UsuariInfo> {
-        String username;
-        String nom;
-        String color;
+		public void setCapdesetmanes(BitSet capdesetmanes) {
+			this.capdesetmanes = capdesetmanes;
+		}
 
-        public String getUsername() {
-            return username;
-        }
+	}
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
+	public static class PersonaVacancesInfo {
+		String username;
+		BitSet vacances;
 
-        public String getNom() {
-            return nom;
-        }
+		public String getUsername() {
+			return username;
+		}
 
-        public void setNom(String nom) {
-            this.nom = nom;
-        }
+		public void setUsername(String username) {
+			this.username = username;
+		}
 
-        public String getColor() {
-            return color;
-        }
+		public BitSet getVacances() {
+			return vacances;
+		}
 
-        public void setColor(String color) {
-            this.color = color;
-        }
+		public void setVacances(BitSet vacances) {
+			this.vacances = vacances;
+		}
 
-        @Override
-        public int compareTo(UsuariInfo o) {
-            return this.username.compareTo(o.username);
-        }
+	}
 
-    }
+	public static class UsuariInfo implements Comparable<UsuariInfo> {
+		String username;
+		String nom;
+		String color;
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+		public String getNom() {
+			return nom;
+		}
+
+		public void setNom(String nom) {
+			this.nom = nom;
+		}
+
+		public String getColor() {
+			return color;
+		}
+
+		public void setColor(String color) {
+			this.color = color;
+		}
+
+		@Override
+		public int compareTo(UsuariInfo o) {
+			return this.username.compareTo(o.username);
+		}
+
+	}
 
 }
