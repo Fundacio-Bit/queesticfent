@@ -45,6 +45,7 @@ public class ModificacionsApiTest {
         ModificacionsApiTest apiTest = new ModificacionsApiTest();
         
         apiTest.getModificacionsTest();
+        apiTest.addTest();
         
     }
     
@@ -80,7 +81,7 @@ public class ModificacionsApiTest {
         modificacio.setDada1("Dada 1 XXX");
         modificacio.setData(OffsetDateTime.now());
         modificacio.setLanguage("ca");
-        modificacio.setProjecteID((long) 13);
+        modificacio.setProjecteID((long) 28);
         
         Long response = api.add(modificacio);
         
