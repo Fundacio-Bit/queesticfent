@@ -104,6 +104,7 @@ public class ModificacionsService extends RestUtils {
             modif.setData(new Timestamp(modificacio.getData().getTime()));
             modif.setProjecteID(modificacio.getProjecteID());
             modif.setUsuariID(modificacio.getUsuariID());
+            modif.setAccioID(-3); //Accio afegir entrada
             modif = modificacionsQueEsticFentEjb.create(modif);
 
             return modif.getModificacioID();
