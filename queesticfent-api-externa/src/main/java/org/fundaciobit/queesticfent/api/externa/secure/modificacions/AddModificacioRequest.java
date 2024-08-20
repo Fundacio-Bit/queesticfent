@@ -2,6 +2,8 @@ package org.fundaciobit.queesticfent.api.externa.secure.modificacions;
 
 import java.util.Date;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * 
  * @author anadal
@@ -14,7 +16,7 @@ public class AddModificacioRequest {
     protected java.lang.String usuariID;
 
     protected java.lang.Long projecteID;
-
+    
     protected Date data;
 
     protected java.lang.String dada1;

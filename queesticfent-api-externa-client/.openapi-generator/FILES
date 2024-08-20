@@ -29,7 +29,6 @@ src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/ApiClient.
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/ApiException.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/Configuration.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/JSON.java
-src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/JavaTimeFormatter.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/Pair.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/RFC3339DateFormat.java
 src/main/java/org/fundaciobit/queesticfent/apiexterna/client/services/ServerConfiguration.java

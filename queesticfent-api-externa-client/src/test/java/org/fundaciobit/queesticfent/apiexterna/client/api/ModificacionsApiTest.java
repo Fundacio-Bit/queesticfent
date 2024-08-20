@@ -79,7 +79,7 @@ public class ModificacionsApiTest {
         AddModificacioRequest modificacio = new AddModificacioRequest();
         modificacio.setUsuariID("fbosch");
         modificacio.setDada1("Dada 1 XXX");
-        modificacio.setData(OffsetDateTime.now());
+        modificacio.setData(new Date());
         modificacio.setLanguage("ca");
         modificacio.setProjecteID((long) 28);
         

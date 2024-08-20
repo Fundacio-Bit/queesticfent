@@ -14,7 +14,7 @@ Bean que inclou informació d'una entrada.
 |**projecteID** | **Long** |  |  [optional] |
 |**dada1** | **String** |  |  [optional] |
 |**dada2** | **String** |  |  [optional] |
-|**data** | **OffsetDateTime** | Data de l&#39;entrada |  [optional] |
+|**data** | **Date** | Data de l&#39;entrada |  [optional] |
 
 
 

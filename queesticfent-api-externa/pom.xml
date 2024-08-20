@@ -144,7 +144,7 @@
                                 <artifactId>queesticfent-api-externa-client</artifactId>
                                 <artifactVersion>1.0</artifactVersion>
                                 <artifactDescription>queesticfent - API Rest - Externa Client</artifactDescription>
-                                <dateLibrary>java8</dateLibrary>
+                                <dateLibrary>legacy</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
