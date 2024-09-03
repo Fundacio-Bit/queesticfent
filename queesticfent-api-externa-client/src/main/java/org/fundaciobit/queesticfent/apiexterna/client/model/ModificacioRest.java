@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -57,7 +57,7 @@ public class ModificacioRest {
   private String dada2;
 
   public static final String JSON_PROPERTY_DATA = "data";
-  private Date data;
+  private OffsetDateTime data;
 
   public ModificacioRest() {
   }
@@ -218,7 +218,7 @@ public class ModificacioRest {
   }
 
 
-  public ModificacioRest data(Date data) {
+  public ModificacioRest data(OffsetDateTime data) {
     
     this.data = data;
     return this;
@@ -232,14 +232,14 @@ public class ModificacioRest {
   @JsonProperty(JSON_PROPERTY_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Date getData() {
+  public OffsetDateTime getData() {
     return data;
   }
 
 
   @JsonProperty(JSON_PROPERTY_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(Date data) {
+  public void setData(OffsetDateTime data) {
     this.data = data;
   }
 

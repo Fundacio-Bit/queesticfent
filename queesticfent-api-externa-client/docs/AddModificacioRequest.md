@@ -10,7 +10,7 @@
 |**language** | **String** |  |  [optional] |
 |**usuariID** | **String** |  |  [optional] |
 |**projecteID** | **Long** |  |  [optional] |
-|**data** | **Date** |  |  [optional] |
+|**data** | **OffsetDateTime** |  |  [optional] |
 |**dada1** | **String** |  |  [optional] |
 
 

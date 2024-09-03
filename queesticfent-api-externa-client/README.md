@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.fundaciobit.queesticfent</groupId>
   <artifactId>queesticfent-api-externa-client</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.fundaciobit.queesticfent:queesticfent-api-externa-client:1.0"
+     implementation "org.fundaciobit.queesticfent:queesticfent-api-externa-client:1.0-SNAPSHOT"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/queesticfent-api-externa-client-1.0.jar`
+- `target/queesticfent-api-externa-client-1.0-SNAPSHOT.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
