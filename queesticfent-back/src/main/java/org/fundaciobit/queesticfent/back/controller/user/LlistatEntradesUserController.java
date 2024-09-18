@@ -125,6 +125,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
     @EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentsService.JNDI_NAME)
     protected org.fundaciobit.queesticfent.ejb.DepartamentsService departamentsEjb;
+    
+    
+    
+    
 
     @Override
     public String getTileForm() {
