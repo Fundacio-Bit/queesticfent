@@ -1,4 +1,34 @@
--- TAULA DE MODIFICACIONS
+-- Sequence: qef_entrades_seq
+
+-- DROP SEQUENCE qef_entrades_seq;
+
+CREATE SEQUENCE qef_entrades_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1000
+  CACHE 1;
+ALTER TABLE qef_entrades_seq
+  OWNER TO queesticfent;
+
+
+
+  -- Sequence: qef_modificacions_seq
+
+-- DROP SEQUENCE qef_modificacions_seq;
+
+CREATE SEQUENCE qef_modificacions_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1000
+  CACHE 1;
+ALTER TABLE qef_modificacions_seq
+  OWNER TO queesticfent;
+
+
+
+
 
 -- Table: qef_modificacions
 
@@ -86,10 +116,9 @@ CREATE INDEX qef_modif_pk_i
   USING btree
   (modificacioid);
 
+
+
 -- Table: qef_entrades
-
-
--- TAULA DE ENTRADES
 
 -- DROP TABLE qef_entrades;
 
