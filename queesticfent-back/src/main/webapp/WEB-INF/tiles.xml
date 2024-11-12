@@ -199,6 +199,16 @@
     </definition>
 
 
+    <definition name="entradesFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="entrades.entrades" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradesForm.jsp" />
+    </definition>
+    
+    <definition name="entradesListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradesList.jsp" />
+    </definition>
+
+
     <definition name="festiusFormWebDB" extends="webdb">
         <put-attribute name="titol" value="festius.festius" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusForm.jsp" />
@@ -226,6 +236,16 @@
     
     <definition name="idiomaListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaList.jsp" />
+    </definition>
+
+
+    <definition name="modificacionsFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="modificacions.modificacions" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsForm.jsp" />
+    </definition>
+    
+    <definition name="modificacionsListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsList.jsp" />
     </definition>
 
 

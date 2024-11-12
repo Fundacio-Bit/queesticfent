@@ -21,6 +21,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- Entrades --%>
+       <fmt:message var="entityname" key="entrades.entrades.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/entrades/list/1"/>" ><span style="${(fn:contains(url, 'entrades/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- Festius --%>
        <fmt:message var="entityname" key="festius.festius.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/festius/list/1"/>" ><span style="${(fn:contains(url, 'festius/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
@@ -38,6 +45,13 @@ ${entityname}
     <%-- Idioma --%>
        <fmt:message var="entityname" key="idioma.idioma.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/idioma/list/1"/>" ><span style="${(fn:contains(url, 'idioma/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
+    <%-- Modificacions --%>
+       <fmt:message var="entityname" key="modificacions.modificacions.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/modificacions/list/1"/>" ><span style="${(fn:contains(url, 'modificacions/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
 ${entityname}
         </span></a>
         </li>

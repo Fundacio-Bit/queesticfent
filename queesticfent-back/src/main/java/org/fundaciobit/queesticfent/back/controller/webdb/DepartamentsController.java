@@ -506,6 +506,14 @@ public java.lang.Long stringToPK(String value) {
      return getRedirectWhenCancel(request, departamentID);
   }
 
+  /**
+   * Entra aqui al pitjar el boto cancel en el la creació de Departaments
+   */
+  @RequestMapping(value = "/cancel")
+  public String cancelDepartaments(HttpServletRequest request,HttpServletResponse response) {
+     return getRedirectWhenCancel(request, null);
+  }
+
   @Override
   public String getTableModelName() {
     return _TABLE_MODEL;

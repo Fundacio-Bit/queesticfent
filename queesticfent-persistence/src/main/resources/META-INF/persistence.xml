@@ -12,9 +12,11 @@
         
 		<class>org.fundaciobit.queesticfent.persistence.AccionsJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.DepartamentsJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.EntradesJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.FestiusJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.FitxerJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.IdiomaJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.ModificacionsJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.PersonalProjecteJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.ProjectesJPA</class>

@@ -53,6 +53,48 @@ public class ProjectesQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
+  public EntradesQueryPath ENTRADESS() {
+    return new EntradesQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ProjectesQueryPath.this.getQueryPath() + "entradess" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ModificacionsQueryPath MODIFICACIONS_NEWPROJECTEIDS() {
+    return new ModificacionsQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ProjectesQueryPath.this.getQueryPath() + "modificacions_newprojecteids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ModificacionsQueryPath MODIFICACIONS_OLDPROJECTEIDS() {
+    return new ModificacionsQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ProjectesQueryPath.this.getQueryPath() + "modificacions_oldprojecteids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
   public ModificacionsQueEsticFentQueryPath MODIFICACIONSQUEESTICFENTS() {
     return new ModificacionsQueEsticFentQueryPath(new QueryPath() {
       public String getQueryPath() {

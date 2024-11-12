@@ -20,7 +20,7 @@ import javax.persistence.Id;
         @Index(name="qef_modific_pk_i", columnList = "modificacioid"),
         @Index(name="qef_modific_accioid_fk_i", columnList = "accioid"),
         @Index(name="qef_modific_projecteid_fk_i", columnList = "projecteid")})
-@SequenceGenerator(name="MODIFICACIONSQUEESTICFENT_SEQ", sequenceName="qef_modificacionsqueesticfent_seq", allocationSize=1, initialValue=1000)
+@SequenceGenerator(name="MODIFICACIONSQUEESTICFENT_SEQ", sequenceName="qef_modificacionsqueesticf_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class ModificacionsQueEsticFentJPA implements ModificacionsQueEsticFent {
 

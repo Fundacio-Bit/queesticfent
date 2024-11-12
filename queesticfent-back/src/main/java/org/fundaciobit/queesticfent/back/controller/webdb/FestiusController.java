@@ -506,6 +506,14 @@ public java.lang.Long stringToPK(String value) {
      return getRedirectWhenCancel(request, festiuID);
   }
 
+  /**
+   * Entra aqui al pitjar el boto cancel en el la creació de Festius
+   */
+  @RequestMapping(value = "/cancel")
+  public String cancelFestius(HttpServletRequest request,HttpServletResponse response) {
+     return getRedirectWhenCancel(request, null);
+  }
+
   @Override
   public String getTableModelName() {
     return _TABLE_MODEL;

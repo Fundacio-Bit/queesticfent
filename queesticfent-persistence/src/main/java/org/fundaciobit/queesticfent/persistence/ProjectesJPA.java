@@ -156,6 +156,45 @@ public class ProjectesJPA implements Projectes {
     return __result;
   }
 
+// EXP  Field:projecteid | Table: qef_entrades | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectes")
+    private Set<EntradesJPA> entradess = new HashSet<EntradesJPA>(0);
+    public  Set<EntradesJPA> getEntradess() {
+    return this.entradess;
+  }
+
+    public void setEntradess(Set<EntradesJPA> entradess) {
+      this.entradess = entradess;
+    }
+
+
+// EXP  Field:newprojecteid | Table: qef_modificacions | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "newprojecteID")
+    private Set<ModificacionsJPA> modificacions_newprojecteids = new HashSet<ModificacionsJPA>(0);
+    public  Set<ModificacionsJPA> getModificacions_newprojecteids() {
+    return this.modificacions_newprojecteids;
+  }
+
+    public void setModificacions_newprojecteids(Set<ModificacionsJPA> modificacions_newprojecteids) {
+      this.modificacions_newprojecteids = modificacions_newprojecteids;
+    }
+
+
+// EXP  Field:oldprojecteid | Table: qef_modificacions | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "oldprojecteID")
+    private Set<ModificacionsJPA> modificacions_oldprojecteids = new HashSet<ModificacionsJPA>(0);
+    public  Set<ModificacionsJPA> getModificacions_oldprojecteids() {
+    return this.modificacions_oldprojecteids;
+  }
+
+    public void setModificacions_oldprojecteids(Set<ModificacionsJPA> modificacions_oldprojecteids) {
+      this.modificacions_oldprojecteids = modificacions_oldprojecteids;
+    }
+
+
 // EXP  Field:projecteid | Table: qef_modificacionsqueesticfent | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectes")
@@ -237,6 +276,10 @@ public class ProjectesJPA implements Projectes {
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"ModificacionsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.modificacions_oldprojecteids) || org.hibernate.Hibernate.isInitialized(__jpa.getModificacions_oldprojecteids())) ) {
+      __tmp.setModificacions_oldprojecteids(ModificacionsJPA.copyJPA(__jpa.getModificacions_oldprojecteids(), __alreadyCopied,"ProjectesJPA"));
+    }
     if(!"PersonalProjecteJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.personalProjectes) || org.hibernate.Hibernate.isInitialized(__jpa.getPersonalProjectes())) ) {
       __tmp.setPersonalProjectes(PersonalProjecteJPA.copyJPA(__jpa.getPersonalProjectes(), __alreadyCopied,"ProjectesJPA"));
@@ -244,6 +287,14 @@ public class ProjectesJPA implements Projectes {
     if(!"ModificacionsQueEsticFentJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.modificacionsQueEsticFents) || org.hibernate.Hibernate.isInitialized(__jpa.getModificacionsQueEsticFents())) ) {
       __tmp.setModificacionsQueEsticFents(ModificacionsQueEsticFentJPA.copyJPA(__jpa.getModificacionsQueEsticFents(), __alreadyCopied,"ProjectesJPA"));
+    }
+    if(!"EntradesJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entradess) || org.hibernate.Hibernate.isInitialized(__jpa.getEntradess())) ) {
+      __tmp.setEntradess(EntradesJPA.copyJPA(__jpa.getEntradess(), __alreadyCopied,"ProjectesJPA"));
+    }
+    if(!"ModificacionsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.modificacions_newprojecteids) || org.hibernate.Hibernate.isInitialized(__jpa.getModificacions_newprojecteids())) ) {
+      __tmp.setModificacions_newprojecteids(ModificacionsJPA.copyJPA(__jpa.getModificacions_newprojecteids(), __alreadyCopied,"ProjectesJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"DepartamentsJPA".equals(origenJPA) && 

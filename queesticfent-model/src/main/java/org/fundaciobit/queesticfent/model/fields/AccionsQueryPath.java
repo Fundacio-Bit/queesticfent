@@ -45,6 +45,34 @@ public class AccionsQueryPath extends org.fundaciobit.genapp.common.query.QueryP
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
+  public EntradesQueryPath ENTRADESS() {
+    return new EntradesQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return AccionsQueryPath.this.getQueryPath() + "entradess" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ModificacionsQueryPath MODIFICACIONSS() {
+    return new ModificacionsQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return AccionsQueryPath.this.getQueryPath() + "modificacionss" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
   public ModificacionsQueEsticFentQueryPath MODIFICACIONSQUEESTICFENTS() {
     return new ModificacionsQueEsticFentQueryPath(new QueryPath() {
       public String getQueryPath() {

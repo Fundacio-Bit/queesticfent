@@ -128,6 +128,32 @@ public class AccionsJPA implements Accions {
     return __result;
   }
 
+// EXP  Field:accioid | Table: qef_entrades | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "accions")
+    private Set<EntradesJPA> entradess = new HashSet<EntradesJPA>(0);
+    public  Set<EntradesJPA> getEntradess() {
+    return this.entradess;
+  }
+
+    public void setEntradess(Set<EntradesJPA> entradess) {
+      this.entradess = entradess;
+    }
+
+
+// EXP  Field:accioid | Table: qef_modificacions | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "accions")
+    private Set<ModificacionsJPA> modificacionss = new HashSet<ModificacionsJPA>(0);
+    public  Set<ModificacionsJPA> getModificacionss() {
+    return this.modificacionss;
+  }
+
+    public void setModificacionss(Set<ModificacionsJPA> modificacionss) {
+      this.modificacionss = modificacionss;
+    }
+
+
 // EXP  Field:accioid | Table: qef_modificacionsqueesticfent | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "accions")
@@ -180,9 +206,17 @@ public class AccionsJPA implements Accions {
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"ModificacionsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.modificacionss) || org.hibernate.Hibernate.isInitialized(__jpa.getModificacionss())) ) {
+      __tmp.setModificacionss(ModificacionsJPA.copyJPA(__jpa.getModificacionss(), __alreadyCopied,"AccionsJPA"));
+    }
     if(!"ModificacionsQueEsticFentJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.modificacionsQueEsticFents) || org.hibernate.Hibernate.isInitialized(__jpa.getModificacionsQueEsticFents())) ) {
       __tmp.setModificacionsQueEsticFents(ModificacionsQueEsticFentJPA.copyJPA(__jpa.getModificacionsQueEsticFents(), __alreadyCopied,"AccionsJPA"));
+    }
+    if(!"EntradesJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entradess) || org.hibernate.Hibernate.isInitialized(__jpa.getEntradess())) ) {
+      __tmp.setEntradess(EntradesJPA.copyJPA(__jpa.getEntradess(), __alreadyCopied,"AccionsJPA"));
     }
     // Copia de beans complexes (IMP)
 

@@ -8,9 +8,11 @@ public final class queesticfentJPADaoManagers implements IqueesticfentDaoManager
 
    private final AccionsJPAManager qef_accions;
    private final DepartamentsJPAManager qef_departaments;
+   private final EntradesJPAManager qef_entrades;
    private final FestiusJPAManager qef_festius;
    private final FitxerJPAManager qef_fitxer;
    private final IdiomaJPAManager qef_idioma;
+   private final ModificacionsJPAManager qef_modificacions;
    private final ModificacionsQueEsticFentJPAManager qef_modificacionsqueesticfent;
    private final PersonalProjecteJPAManager qef_personalprojecte;
    private final ProjectesJPAManager qef_projectes;
@@ -21,9 +23,11 @@ public final class queesticfentJPADaoManagers implements IqueesticfentDaoManager
   public  queesticfentJPADaoManagers(EntityManager __em) {
     this.qef_accions = new AccionsJPAManager(__em);
     this.qef_departaments = new DepartamentsJPAManager(__em);
+    this.qef_entrades = new EntradesJPAManager(__em);
     this.qef_festius = new FestiusJPAManager(__em);
     this.qef_fitxer = new FitxerJPAManager(__em);
     this.qef_idioma = new IdiomaJPAManager(__em);
+    this.qef_modificacions = new ModificacionsJPAManager(__em);
     this.qef_modificacionsqueesticfent = new ModificacionsQueEsticFentJPAManager(__em);
     this.qef_personalprojecte = new PersonalProjecteJPAManager(__em);
     this.qef_projectes = new ProjectesJPAManager(__em);
@@ -40,6 +44,10 @@ public final class queesticfentJPADaoManagers implements IqueesticfentDaoManager
         return this.qef_departaments;
     };
 
+    public IEntradesManager getEntradesManager() {
+        return this.qef_entrades;
+    };
+
     public IFestiusManager getFestiusManager() {
         return this.qef_festius;
     };
@@ -50,6 +58,10 @@ public final class queesticfentJPADaoManagers implements IqueesticfentDaoManager
 
     public IIdiomaManager getIdiomaManager() {
         return this.qef_idioma;
+    };
+
+    public IModificacionsManager getModificacionsManager() {
+        return this.qef_modificacions;
     };
 
     public IModificacionsQueEsticFentManager getModificacionsQueEsticFentManager() {
