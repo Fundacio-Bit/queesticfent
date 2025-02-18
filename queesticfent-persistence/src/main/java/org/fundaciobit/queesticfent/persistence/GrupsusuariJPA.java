@@ -98,13 +98,13 @@ public class GrupsusuariJPA implements Grupsusuari {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_grupsusu_usuaris_usuari_fk"))
-    private UsuarisJPA usuaris;
+    private UsuariJPA usuaris;
 
-    public UsuarisJPA getUsuaris() {
+    public UsuariJPA getUsuaris() {
     return this.usuaris;
   }
 
-    public  void setUsuaris(UsuarisJPA usuaris) {
+    public  void setUsuaris(UsuariJPA usuaris) {
     this.usuaris = usuaris;
   }
 
@@ -166,7 +166,7 @@ public class GrupsusuariJPA implements Grupsusuari {
     }
     if(!"UsuarisJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuaris) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuaris()) ) ) {
-      __tmp.setUsuaris(UsuarisJPA.copyJPA(__jpa.getUsuaris(), __alreadyCopied,"GrupsusuariJPA"));
+      __tmp.setUsuaris(UsuariJPA.copyJPA(__jpa.getUsuaris(), __alreadyCopied,"GrupsusuariJPA"));
     }
 
     return __tmp;

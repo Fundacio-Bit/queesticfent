@@ -33,7 +33,7 @@ public class PersonalProjecteRefList extends RefListBase
     this.personalProjecteEjb = __clone.personalProjecteEjb;
   }
   public PersonalProjecteRefList() {
-    setSelects(new Select<?>[] { USUARIID.select, PROJECTEID.select });
+    setSelects(new Select<?>[] { PERSONALPROJECTEID.select, USUARIID.select, PROJECTEID.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

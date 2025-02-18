@@ -173,3 +173,23 @@ CREATE INDEX qef_entrades_projecteid_fk_i
   USING btree
   (projecteid);
 
+
+--
+-- MODIFICACIO DE NOMS: ISSUE #21
+--
+
+CREATE SEQUENCE qef_modificacio_seq INCREMENT 1 START 1000;
+ALTER TABLE qef_modificacio ALTER COLUMN modificacioid SET DEFAULT nextval('qef_modificacio_seq');
+-- oracle ALTER TABLE qef_modificacio ALTER COLUMN modificacioid SET DEFAULT qef_modificacio_seq.nextval);
+
+ALTER TABLE qef_modificacio DROP CONSTRAINT qef_modif_accions_accioid_fk;
+ALTER TABLE qef_modificacio ADD CONSTRAINT qef_modific_accio_accioid_fk  FOREIGN KEY (accioid)  REFERENCES qef_accio (accioid);
+
+ALTER TABLE qef_modificacio DROP CONSTRAINT qef_modif_projectes_newproj_fk;
+ALTER TABLE qef_modificacio ADD CONSTRAINT qef_modific_projecte_newpro_fk  FOREIGN KEY (newprojecteid)  REFERENCES qef_projecte (projecteid);
+
+ALTER TABLE qef_modificacio DROP CONSTRAINT qef_modif_entrades_entradai_fk;
+ALTER TABLE qef_modificacio ADD CONSTRAINT qef_modific_entrada_entrada_fk  FOREIGN KEY (entradaid)  REFERENCES qef_entrada (entradaid);
+
+ALTER TABLE qef_modificacio DROP CONSTRAINT qef_modif_projectes_oldproj_fk;
+ALTER TABLE qef_modificacio ADD CONSTRAINT qef_modific_projecte_oldpro_fk  FOREIGN KEY (oldprojecteid)  REFERENCES qef_projecte (projecteid);

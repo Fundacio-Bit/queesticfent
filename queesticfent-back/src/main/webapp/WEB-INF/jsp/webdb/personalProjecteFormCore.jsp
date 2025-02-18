@@ -34,12 +34,12 @@
           <form:errors path="personalProjecte.projecteID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PersonalProjecteFields.PROJECTEID)}" >
           <form:hidden path="personalProjecte.projecteID"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.personalProjecte.projecteID,__theForm.listOfProjectesForProjecteID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.personalProjecte.projecteID,__theForm.listOfProjecteForProjecteID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PersonalProjecteFields.PROJECTEID)}" >
           <c:set var="containEmptyValue"  value="false" />
           <form:select id="personalProjecte_projecteID"  onchange="if(typeof onChangeProjecteID == 'function') {  onChangeProjecteID(this); };"  cssClass="form-control col-md-9-optional" path="personalProjecte.projecteID">
-            <c:forEach items="${__theForm.listOfProjectesForProjecteID}" var="tmp">
+            <c:forEach items="${__theForm.listOfProjecteForProjecteID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
                   <c:set var="containEmptyValue"  value="true" />

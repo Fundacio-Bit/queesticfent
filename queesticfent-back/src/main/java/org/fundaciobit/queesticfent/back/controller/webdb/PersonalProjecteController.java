@@ -36,6 +36,7 @@ import org.fundaciobit.queesticfent.back.validator.webdb.PersonalProjecteWebVali
 import org.fundaciobit.queesticfent.persistence.PersonalProjecteJPA;
 import org.fundaciobit.queesticfent.model.entity.PersonalProjecte;
 import org.fundaciobit.queesticfent.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 
 /**
  * Controller per gestionar un PersonalProjecte
@@ -43,6 +44,7 @@ import org.fundaciobit.queesticfent.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="personalProjecte.personalProjecte.plural", order=70, group="WEBDB")
 @Controller
 @RequestMapping(value = "/webdb/personalProjecte")
 @SessionAttributes(types = { PersonalProjecteForm.class, PersonalProjecteFilterForm.class })
@@ -60,7 +62,7 @@ public class PersonalProjecteController
 
   // References 
   @Autowired
-  protected ProjectesRefList projectesRefList;
+  protected ProjecteRefList projecteRefList;
 
   /**
    * Llistat de totes PersonalProjecte
@@ -186,7 +188,7 @@ public class PersonalProjecteController
     {
       _listSKV = getReferenceListForProjecteID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfProjectesForProjecteID(_tmp);
+      filterForm.setMapOfProjecteForProjecteID(_tmp);
       if (filterForm.getGroupByFields().contains(PROJECTEID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, PROJECTEID, false);
       };
@@ -207,7 +209,7 @@ public class PersonalProjecteController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(PROJECTEID, filterForm.getMapOfProjectesForProjecteID());
+    __mapping.put(PROJECTEID, filterForm.getMapOfProjecteForProjecteID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -256,13 +258,13 @@ public class PersonalProjecteController
   public void fillReferencesForForm(PersonalProjecteForm personalProjecteForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (personalProjecteForm.getListOfProjectesForProjecteID() == null) {
+    if (personalProjecteForm.getListOfProjecteForProjecteID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForProjecteID(request, mav, personalProjecteForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      personalProjecteForm.setListOfProjectesForProjecteID(_listSKV);
+      personalProjecteForm.setListOfProjecteForProjecteID(_listSKV);
     }
     
   }
@@ -331,7 +333,6 @@ public class PersonalProjecteController
 
     if (personalProjecte == null) {
       createMessageWarning(request, "error.notfound", personalProjecteID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, personalProjecteID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -582,7 +583,7 @@ public java.lang.Long stringToPK(String value) {
     }
     Where _where = null;
     if (personalProjecteForm.isReadOnlyField(PROJECTEID)) {
-      _where = ProjectesFields.PROJECTEID.equal(personalProjecteForm.getPersonalProjecte().getProjecteID());
+      _where = ProjecteFields.PROJECTEID.equal(personalProjecteForm.getPersonalProjecte().getProjecteID());
     }
     return getReferenceListForProjecteID(request, mav, Where.AND(where, _where));
   }
@@ -602,7 +603,7 @@ public java.lang.Long stringToPK(String value) {
       for (PersonalProjecte _item : list) {
         _pkList.add(_item.getProjecteID());
         }
-        _w = ProjectesFields.PROJECTEID.in(_pkList);
+        _w = ProjecteFields.PROJECTEID.in(_pkList);
       }
     return getReferenceListForProjecteID(request, mav, Where.AND(where,_w));
   }
@@ -610,7 +611,7 @@ public java.lang.Long stringToPK(String value) {
 
   public List<StringKeyValue> getReferenceListForProjecteID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
-    return projectesRefList.getReferenceList(ProjectesFields.PROJECTEID, where );
+    return projecteRefList.getReferenceList(ProjecteFields.PROJECTEID, where );
   }
 
 

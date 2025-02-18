@@ -38,7 +38,7 @@
           <td>
           <c:set var="tmp">${personalProjecte.projecteID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfProjectesForProjecteID[tmp]}
+          ${__theFilterForm.mapOfProjecteForProjecteID[tmp]}
           </c:if>
           </td>
         </c:if>

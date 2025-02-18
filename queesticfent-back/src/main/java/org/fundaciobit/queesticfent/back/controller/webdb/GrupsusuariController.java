@@ -60,7 +60,7 @@ public class GrupsusuariController
 
   // References 
   @Autowired
-  protected UsuarisRefList usuarisRefList;
+  protected UsuariRefList usuarisRefList;
 
   // References 
   @Autowired
@@ -598,7 +598,7 @@ public java.lang.Long stringToPK(String value) {
     }
     Where _where = null;
     if (grupsusuariForm.isReadOnlyField(USUARIID)) {
-      _where = UsuarisFields.USUARIID.equal(grupsusuariForm.getGrupsusuari().getUsuariID());
+      _where = UsuariFields.USUARIID.equal(grupsusuariForm.getGrupsusuari().getUsuariID());
     }
     return getReferenceListForUsuariID(request, mav, Where.AND(where, _where));
   }
@@ -618,7 +618,7 @@ public java.lang.Long stringToPK(String value) {
       for (Grupsusuari _item : list) {
         _pkList.add(_item.getUsuariID());
         }
-        _w = UsuarisFields.USUARIID.in(_pkList);
+        _w = UsuariFields.USUARIID.in(_pkList);
       }
     return getReferenceListForUsuariID(request, mav, Where.AND(where,_w));
   }
@@ -626,7 +626,7 @@ public java.lang.Long stringToPK(String value) {
 
   public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
-    return usuarisRefList.getReferenceList(UsuarisFields.USUARIID, where );
+    return usuarisRefList.getReferenceList(UsuariFields.USUARIID, where );
   }
 
 

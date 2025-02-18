@@ -35,8 +35,8 @@ public class PersonalProjecteWebValidator extends AbstractWebValidator<PersonalP
   @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.PersonalProjecteService.JNDI_NAME)
   protected org.fundaciobit.queesticfent.ejb.PersonalProjecteService personalProjecteEjb;
 
-  @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjectesService.JNDI_NAME)
-  protected org.fundaciobit.queesticfent.ejb.ProjectesService projectesEjb;
+  @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjecteService.JNDI_NAME)
+  protected org.fundaciobit.queesticfent.ejb.ProjecteService projecteEjb;
 
 
 
@@ -80,7 +80,7 @@ public class PersonalProjecteWebValidator extends AbstractWebValidator<PersonalP
 
     BeanValidatorResult<PersonalProjecte> __vr = new BeanValidatorResult<PersonalProjecte>();
     validator.validate(__vr, __bean,
-      isNou, personalProjecteEjb, projectesEjb);
+      isNou, personalProjecteEjb, projecteEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

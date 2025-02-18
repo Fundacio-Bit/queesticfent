@@ -19,31 +19,31 @@ public class PersonalProjecteBeanValidator
   // EJB's
   protected final org.fundaciobit.queesticfent.model.dao.IPersonalProjecteManager __personalProjecteManager;
 
-  protected final org.fundaciobit.queesticfent.model.dao.IProjectesManager __projectesManager;
+  protected final org.fundaciobit.queesticfent.model.dao.IProjecteManager __projecteManager;
 
 
   public final PersonalProjecteValidator<PersonalProjecteJPA> _validator;
 
 
   public PersonalProjecteBeanValidator(org.fundaciobit.queesticfent.model.dao.IPersonalProjecteManager __personalProjecteManager,
-     org.fundaciobit.queesticfent.model.dao.IProjectesManager __projectesManager) { 
+     org.fundaciobit.queesticfent.model.dao.IProjecteManager __projecteManager) { 
     this.__personalProjecteManager = __personalProjecteManager;
-    this.__projectesManager = __projectesManager;
+    this.__projecteManager = __projecteManager;
     _validator = new PersonalProjecteValidator<PersonalProjecteJPA>();
   }
 
   public PersonalProjecteBeanValidator(PersonalProjecteValidator<PersonalProjecteJPA> _validator,
      org.fundaciobit.queesticfent.model.dao.IPersonalProjecteManager __personalProjecteManager,
-     org.fundaciobit.queesticfent.model.dao.IProjectesManager __projectesManager) {
+     org.fundaciobit.queesticfent.model.dao.IProjecteManager __projecteManager) {
     this.__personalProjecteManager = __personalProjecteManager;
-    this.__projectesManager = __projectesManager;
+    this.__projecteManager = __projecteManager;
     this._validator = _validator;
   }
 
   @Override
   public List<I18NFieldError> validate(PersonalProjecteJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<PersonalProjecteJPA> _bvr_ = new BeanValidatorResult<PersonalProjecteJPA>();
-    _validator.validate(_bvr_, target, isNou, __personalProjecteManager, __projectesManager);
+    _validator.validate(_bvr_, target, isNou, __personalProjecteManager, __projecteManager);
     return _bvr_.getErrors();
   }
 }

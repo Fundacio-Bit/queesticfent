@@ -33,7 +33,7 @@ public class IdiomaRefList extends RefListBase
     this.idiomaEjb = __clone.idiomaEjb;
   }
   public IdiomaRefList() {
-    setSelects(new Select<?>[] { NOM.select });
+    setSelects(new Select<?>[] { IDIOMAID.select, NOM.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

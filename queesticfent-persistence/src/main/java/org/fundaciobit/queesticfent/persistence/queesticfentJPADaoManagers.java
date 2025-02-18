@@ -6,50 +6,48 @@ import javax.persistence.EntityManager;
 
 public final class queesticfentJPADaoManagers implements IqueesticfentDaoManagers{
 
-   private final AccionsJPAManager qef_accions;
-   private final DepartamentsJPAManager qef_departaments;
-   private final EntradesJPAManager qef_entrades;
-   private final FestiusJPAManager qef_festius;
+   private final AccioJPAManager qef_accio;
+   private final DepartamentJPAManager qef_departament;
+   private final EntradaJPAManager qef_entrada;
+   private final FestiuJPAManager qef_festiu;
    private final FitxerJPAManager qef_fitxer;
    private final IdiomaJPAManager qef_idioma;
-   private final ModificacionsJPAManager qef_modificacions;
-   private final ModificacionsQueEsticFentJPAManager qef_modificacionsqueesticfent;
+   private final ModificacioQueEsticFentJPAManager qef_modificacioqueesticfent;
    private final PersonalProjecteJPAManager qef_personalprojecte;
-   private final ProjectesJPAManager qef_projectes;
+   private final ProjecteJPAManager qef_projecte;
    private final TraduccioJPAManager qef_traduccio;
-   private final UsuarisJPAManager qef_usuaris;
-   private final UsuarisDepartamentJPAManager qef_usuarisdepartament;
+   private final UsuariJPAManager qef_usuari;
+   private final UsuariDepartamentJPAManager qef_usuaridepartament;
 
   public  queesticfentJPADaoManagers(EntityManager __em) {
-    this.qef_accions = new AccionsJPAManager(__em);
-    this.qef_departaments = new DepartamentsJPAManager(__em);
-    this.qef_entrades = new EntradesJPAManager(__em);
-    this.qef_festius = new FestiusJPAManager(__em);
+    this.qef_accio = new AccioJPAManager(__em);
+    this.qef_departament = new DepartamentJPAManager(__em);
+    this.qef_entrada = new EntradaJPAManager(__em);
+    this.qef_festiu = new FestiuJPAManager(__em);
     this.qef_fitxer = new FitxerJPAManager(__em);
     this.qef_idioma = new IdiomaJPAManager(__em);
-    this.qef_modificacions = new ModificacionsJPAManager(__em);
-    this.qef_modificacionsqueesticfent = new ModificacionsQueEsticFentJPAManager(__em);
+    this.qef_modificacioqueesticfent = new ModificacioQueEsticFentJPAManager(__em);
     this.qef_personalprojecte = new PersonalProjecteJPAManager(__em);
-    this.qef_projectes = new ProjectesJPAManager(__em);
+    this.qef_projecte = new ProjecteJPAManager(__em);
     this.qef_traduccio = new TraduccioJPAManager(__em);
-    this.qef_usuaris = new UsuarisJPAManager(__em);
-    this.qef_usuarisdepartament = new UsuarisDepartamentJPAManager(__em);
+    this.qef_usuari = new UsuariJPAManager(__em);
+    this.qef_usuaridepartament = new UsuariDepartamentJPAManager(__em);
   }
 
-    public IAccionsManager getAccionsManager() {
-        return this.qef_accions;
+    public IAccioManager getAccioManager() {
+        return this.qef_accio;
     };
 
-    public IDepartamentsManager getDepartamentsManager() {
-        return this.qef_departaments;
+    public IDepartamentManager getDepartamentManager() {
+        return this.qef_departament;
     };
 
-    public IEntradesManager getEntradesManager() {
-        return this.qef_entrades;
+    public IEntradaManager getEntradaManager() {
+        return this.qef_entrada;
     };
 
-    public IFestiusManager getFestiusManager() {
-        return this.qef_festius;
+    public IFestiuManager getFestiuManager() {
+        return this.qef_festiu;
     };
 
     public IFitxerManager getFitxerManager() {
@@ -60,32 +58,28 @@ public final class queesticfentJPADaoManagers implements IqueesticfentDaoManager
         return this.qef_idioma;
     };
 
-    public IModificacionsManager getModificacionsManager() {
-        return this.qef_modificacions;
-    };
-
-    public IModificacionsQueEsticFentManager getModificacionsQueEsticFentManager() {
-        return this.qef_modificacionsqueesticfent;
+    public IModificacioQueEsticFentManager getModificacioQueEsticFentManager() {
+        return this.qef_modificacioqueesticfent;
     };
 
     public IPersonalProjecteManager getPersonalProjecteManager() {
         return this.qef_personalprojecte;
     };
 
-    public IProjectesManager getProjectesManager() {
-        return this.qef_projectes;
+    public IProjecteManager getProjecteManager() {
+        return this.qef_projecte;
     };
 
     public ITraduccioManager getTraduccioManager() {
         return this.qef_traduccio;
     };
 
-    public IUsuarisManager getUsuarisManager() {
-        return this.qef_usuaris;
+    public IUsuariManager getUsuariManager() {
+        return this.qef_usuari;
     };
 
-    public IUsuarisDepartamentManager getUsuarisDepartamentManager() {
-        return this.qef_usuarisdepartament;
+    public IUsuariDepartamentManager getUsuariDepartamentManager() {
+        return this.qef_usuaridepartament;
     };
 
 

@@ -33,7 +33,7 @@ public class FitxerRefList extends RefListBase
     this.fitxerEjb = __clone.fitxerEjb;
   }
   public FitxerRefList() {
-    setSelects(new Select<?>[] { NOM.select });
+    setSelects(new Select<?>[] { FITXERID.select, NOM.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

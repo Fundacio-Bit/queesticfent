@@ -4,7 +4,7 @@ import org.fundaciobit.queesticfent.back.security.AuthenticationSuccessListener;
 import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
 import org.fundaciobit.queesticfent.commons.utils.Constants;
-import org.fundaciobit.queesticfent.model.fields.UsuarisDepartamentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariDepartamentFields;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -34,8 +34,8 @@ public class PrincipalController {
 
     protected final Logger log = Logger.getLogger(getClass());
 
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
+    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariDepartamentService.JNDI_NAME)
+    protected org.fundaciobit.queesticfent.ejb.UsuariDepartamentService UsuariDepartamentEjb;
 
     @RequestMapping(value = "/common/principal.html")
     public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -54,8 +54,8 @@ public class PrincipalController {
             LoginInfo li = LoginInfo.getInstance();
             UserInfo info = plugin.getUserInfoByUserName(li.getUsername());
 
-            Where wud = UsuarisDepartamentFields.USUARIID.equal(info.getUsername());
-            departaments = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.DEPARTAMENTID, wud);
+            Where wud = UsuariDepartamentFields.USUARIID.equal(info.getUsername());
+            departaments = UsuariDepartamentEjb.executeQuery(UsuariDepartamentFields.DEPARTAMENTID, wud);
 
             log.info("XXX XYZ departaments: " + departaments.size());
 

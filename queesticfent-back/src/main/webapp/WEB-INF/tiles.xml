@@ -80,11 +80,11 @@
     
     <definition name="entradesFormUser" extends="user">
         <put-attribute name="titol" value="modificacionsQueEsticFent.modificacionsQueEsticFent" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentForm.jsp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacioQueEsticFentForm.jsp" />
     </definition>
     
     <definition name="modificacionsQueEsticFentListUser" extends="user">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentList.jsp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacioQueEsticFentList.jsp" />
     </definition>
     
     <definition name="taulaDeVacances" extends="user">
@@ -102,44 +102,44 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
     
-    <definition name="gestioFestiusForm" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusForm.jsp" />
+    <definition name="gestioFestiuForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiuForm.jsp" />
     </definition>
     
-    <definition name="gestioFestiusList" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusList.jsp" />
+    <definition name="gestioFestiuList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiuList.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisDepartamentForm" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentForm.jsp" />
+    <definition name="gestioUsuariDepartamentForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariDepartamentForm.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisDepartamentList" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentList.jsp" />
+    <definition name="gestioUsuariDepartamentList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariDepartamentList.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisProjecteForm" extends="admin">
+    <definition name="gestioUsuariProjecteForm" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/personalProjecteForm.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisProjecteList" extends="admin">
+    <definition name="gestioUsuariProjecteList" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/personalProjecteList.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisForm" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisForm.jsp" />
+    <definition name="gestioUsuariForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariForm.jsp" />
     </definition>
     
-    <definition name="gestioUsuarisList" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisList.jsp" />
+    <definition name="gestioUsuariList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariList.jsp" />
     </definition>
     
-    <definition name="gestioProjectesForm" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesForm.jsp" />
+    <definition name="gestioProjecteForm" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projecteForm.jsp" />
     </definition>
     
-    <definition name="gestioProjectesList" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesList.jsp" />
+    <definition name="gestioProjecteList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projecteList.jsp" />
     </definition>
      
     
@@ -179,43 +179,43 @@
 <!-- ==== GENAPP MARK START -->
 
 
-    <definition name="accionsFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="accions.accions" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accionsForm.jsp" />
+    <definition name="accioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="accio.accio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accioForm.jsp" />
     </definition>
     
-    <definition name="accionsListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accionsList.jsp" />
+    <definition name="accioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accioList.jsp" />
     </definition>
 
 
-    <definition name="departamentsFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="departaments.departaments" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/departamentsForm.jsp" />
-    </definition>
-    
-    <definition name="departamentsListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/departamentsList.jsp" />
-    </definition>
-
-
-    <definition name="entradesFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="entrades.entrades" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradesForm.jsp" />
+    <definition name="departamentFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="departament.departament" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/departamentForm.jsp" />
     </definition>
     
-    <definition name="entradesListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradesList.jsp" />
+    <definition name="departamentListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/departamentList.jsp" />
     </definition>
 
 
-    <definition name="festiusFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="festius.festius" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusForm.jsp" />
+    <definition name="entradaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="entrada.entrada" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradaForm.jsp" />
     </definition>
     
-    <definition name="festiusListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiusList.jsp" />
+    <definition name="entradaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entradaList.jsp" />
+    </definition>
+
+
+    <definition name="festiuFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="festiu.festiu" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiuForm.jsp" />
+    </definition>
+    
+    <definition name="festiuListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/festiuList.jsp" />
     </definition>
 
 
@@ -239,23 +239,13 @@
     </definition>
 
 
-    <definition name="modificacionsFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="modificacions.modificacions" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsForm.jsp" />
+    <definition name="modificacioQueEsticFentFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="modificacioQueEsticFent.modificacioQueEsticFent" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacioQueEsticFentForm.jsp" />
     </definition>
     
-    <definition name="modificacionsListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsList.jsp" />
-    </definition>
-
-
-    <definition name="modificacionsQueEsticFentFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="modificacionsQueEsticFent.modificacionsQueEsticFent" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentForm.jsp" />
-    </definition>
-    
-    <definition name="modificacionsQueEsticFentListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacionsQueEsticFentList.jsp" />
+    <definition name="modificacioQueEsticFentListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/modificacioQueEsticFentList.jsp" />
     </definition>
 
 
@@ -269,13 +259,13 @@
     </definition>
 
 
-    <definition name="projectesFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="projectes.projectes" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesForm.jsp" />
+    <definition name="projecteFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="projecte.projecte" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projecteForm.jsp" />
     </definition>
     
-    <definition name="projectesListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projectesList.jsp" />
+    <definition name="projecteListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/projecteList.jsp" />
     </definition>
 
 
@@ -289,23 +279,23 @@
     </definition>
 
 
-    <definition name="usuarisFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="usuaris.usuaris" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisForm.jsp" />
+    <definition name="usuariFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="usuari.usuari" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariForm.jsp" />
     </definition>
     
-    <definition name="usuarisListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisList.jsp" />
+    <definition name="usuariListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariList.jsp" />
     </definition>
 
 
-    <definition name="usuarisDepartamentFormWebDB" extends="webdb">
-        <put-attribute name="titol" value="usuarisDepartament.usuarisDepartament" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentForm.jsp" />
+    <definition name="usuariDepartamentFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="usuariDepartament.usuariDepartament" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariDepartamentForm.jsp" />
     </definition>
     
-    <definition name="usuarisDepartamentListWebDB" extends="webdb">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuarisDepartamentList.jsp" />
+    <definition name="usuariDepartamentListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariDepartamentList.jsp" />
     </definition>
 
 <!-- ==== GENAPP MARK END -->

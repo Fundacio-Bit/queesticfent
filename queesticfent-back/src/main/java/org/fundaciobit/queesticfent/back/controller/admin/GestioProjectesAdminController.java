@@ -1,8 +1,9 @@
 package org.fundaciobit.queesticfent.back.controller.admin;
 
-import org.fundaciobit.queesticfent.back.controller.webdb.ProjectesController;
-import org.fundaciobit.queesticfent.back.form.webdb.ProjectesFilterForm;
-import org.fundaciobit.queesticfent.back.form.webdb.ProjectesForm;
+
+import org.fundaciobit.queesticfent.back.controller.webdb.ProjecteController;
+import org.fundaciobit.queesticfent.back.form.webdb.ProjecteFilterForm;
+import org.fundaciobit.queesticfent.back.form.webdb.ProjecteForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -14,19 +15,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @RequestMapping(value = GestioProjectesAdminController.CONTEXT_WEB)
-@SessionAttributes(types = { ProjectesForm.class, ProjectesFilterForm.class })
-public class GestioProjectesAdminController extends ProjectesController{
+@SessionAttributes(types = { ProjecteForm.class, ProjecteFilterForm.class })
+public class GestioProjectesAdminController extends ProjecteController{
 
     public static final String CONTEXT_WEB = "/admin/gestioprojectes";
 
     @Override
     public String getTileForm() {
-        return "gestioProjectesForm";
+        return "gestioProjecteForm";
     }
 
     @Override
     public String getTileList() {
-        return "gestioProjectesList";
+        return "gestioProjecteList";
     }
   
   

@@ -1,6 +1,5 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
@@ -11,26 +10,23 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
-import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
-import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;
-import org.fundaciobit.queesticfent.model.entity.Festius;
-import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
-import org.fundaciobit.queesticfent.model.entity.Usuaris;
-import org.fundaciobit.queesticfent.model.entity.UsuarisDepartament;
-import org.fundaciobit.queesticfent.model.fields.FestiusFields;
-import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields;
-import org.fundaciobit.queesticfent.model.fields.UsuarisDepartamentFields;
-import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
+import org.fundaciobit.queesticfent.back.controller.webdb.ModificacioQueEsticFentController;
+import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentFilterForm;
+import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentForm;
+import org.fundaciobit.queesticfent.model.entity.Festiu;
+import org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent;
+import org.fundaciobit.queesticfent.model.entity.Usuari;
+import org.fundaciobit.queesticfent.model.fields.FestiuFields;
+import org.fundaciobit.queesticfent.model.fields.ModificacioQueEsticFentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariDepartamentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariFields;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,20 +41,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/user/vacances")
-@SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
-public class VacancesUserController extends ModificacionsQueEsticFentController {
+@SessionAttributes(types = { ModificacioQueEsticFentForm.class, ModificacioQueEsticFentFilterForm.class })
+public class VacancesUserController extends ModificacioQueEsticFentController {
 
 	public static final String[] MESOS = { "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost",
 			"Setembre", "Octubre", "Novembre", "Desembre" };
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiuService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.FestiuService festiusEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuariService usuarisEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariDepartamentService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuariDepartamentService UsuariDepartamentEjb;
 
 	@Override
 	public String getEntityNameCode() {
@@ -78,7 +74,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 	@Override
 	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
 
-		Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
+		Where w1 = ModificacioQueEsticFentFields.ACCIOID.equal(-4L);
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.DATE, 1);
@@ -91,15 +87,15 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
 		Timestamp to = new Timestamp(cal.getTimeInMillis());
 
-		Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
+		Where w2 = ModificacioQueEsticFentFields.DATA.between(from, to);
 		return Where.AND(w1, w2);
 	}
 
 	@Override
-	public ModificacionsQueEsticFentFilterForm getModificacionsQueEsticFentFilterForm(Integer pagina, ModelAndView mav,
+	public ModificacioQueEsticFentFilterForm getModificacioQueEsticFentFilterForm(Integer pagina, ModelAndView mav,
 			HttpServletRequest request) throws I18NException {
-		ModificacionsQueEsticFentFilterForm modificacionsQueEsticFentFilterForm;
-		modificacionsQueEsticFentFilterForm = super.getModificacionsQueEsticFentFilterForm(pagina, mav, request);
+		ModificacioQueEsticFentFilterForm modificacionsQueEsticFentFilterForm;
+		modificacionsQueEsticFentFilterForm = super.getModificacioQueEsticFentFilterForm(pagina, mav, request);
 
 		if (modificacionsQueEsticFentFilterForm.isNou()) {
 
@@ -115,7 +111,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 		Where w;
 		Timestamp from, to;
 		{
-			Where w1 = ModificacionsQueEsticFentFields.ACCIOID.equal(-4L);
+			Where w1 = ModificacioQueEsticFentFields.ACCIOID.equal(-4L);
 
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.DATE, 1);
@@ -128,11 +124,11 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
 			to = new Timestamp(cal.getTimeInMillis());
 
-			Where w2 = ModificacionsQueEsticFentFields.DATA.between(from, to);
+			Where w2 = ModificacioQueEsticFentFields.DATA.between(from, to);
 
-			List<String> usuarisIds = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.USUARIID);
+			List<String> usuarisIds = UsuariDepartamentEjb.executeQuery(UsuariDepartamentFields.USUARIID);
 
-			Where w3 = ModificacionsQueEsticFentFields.USUARIID.in(usuarisIds);
+			Where w3 = ModificacioQueEsticFentFields.USUARIID.in(usuarisIds);
 
 			w = Where.AND(w1, w2, w3);
 		}
@@ -140,17 +136,17 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Set<String> festius = new HashSet<String>();
 		{
-			List<Festius> festiusList = festiusEjb.select(
-					FestiusFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
+			List<Festiu> festiusList = festiusEjb.select(
+					FestiuFields.DATA.between(new java.sql.Date(from.getTime()), new java.sql.Date(to.getTime())));
 
-			for (Festius f : festiusList) {
+			for (Festiu f : festiusList) {
 
 				festius.add(sdf.format(f.getData()));
 			}
 
 		}
 
-		List<ModificacionsQueEsticFent> vacances = this.modificacionsQueEsticFentEjb.select(w);
+		List<ModificacioQueEsticFent> vacances = this.modificacioQueEsticFentEjb.select(w);
 
 		log.info("vacances.size() =>" + vacances.size());
 
@@ -158,7 +154,7 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 
 		Set<String> usuaris = new HashSet<String>();
 
-		for (ModificacionsQueEsticFent m : vacances) {
+		for (ModificacioQueEsticFent m : vacances) {
 
 			Timestamp date = m.getData();
 
@@ -226,12 +222,12 @@ public class VacancesUserController extends ModificacionsQueEsticFentController 
 			persona.vacances.set(cal.get(Calendar.DATE));
 		}
 
-		List<Usuaris> usuarisList = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
+		List<Usuari> usuarisList = usuarisEjb.select(UsuariFields.USUARIID.in(usuaris));
 		Set<UsuariInfo> persones = new TreeSet<UsuariInfo>();
-		for (Usuaris u : usuarisList) {
+		for (Usuari u : usuarisList) {
 			UsuariInfo p = new UsuariInfo();
 			p.username = u.getUsuariID();
-			p.color = u.getColor();
+			p.color = u.getContrasenya();
 			p.nom = u.getNom() + " " + u.getLlinatge1() + " " + u.getLlinatge2();
 			persones.add(p);
 		}

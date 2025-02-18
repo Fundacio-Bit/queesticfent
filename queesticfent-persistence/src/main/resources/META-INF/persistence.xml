@@ -10,20 +10,19 @@
         <provider>org.fundaciobit.queesticfent.hibernate.CustomHibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/queesticfentDS</jta-data-source>
         
-		<class>org.fundaciobit.queesticfent.persistence.AccionsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.DepartamentsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.EntradesJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.FestiusJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.AccioJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.DepartamentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.EntradaJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.FestiuJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.FitxerJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.IdiomaJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ModificacionsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.ModificacioQueEsticFentJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.PersonalProjecteJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ProjectesJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.ProjecteJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.TraduccioJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.TraduccioMapJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.UsuarisJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.UsuariJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.UsuariDepartamentJPA</class>
 
         <!-- Activar cache només per aquelles entitats on volguem expressament -->
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

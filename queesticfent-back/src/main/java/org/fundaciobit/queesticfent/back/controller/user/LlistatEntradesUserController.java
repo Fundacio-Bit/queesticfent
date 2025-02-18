@@ -46,9 +46,9 @@ import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
 import org.fundaciobit.pluginsib.core.v3.utils.ISO8601;
-import org.fundaciobit.queesticfent.back.controller.webdb.ModificacionsQueEsticFentController;
-import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentFilterForm;
-import org.fundaciobit.queesticfent.back.form.webdb.ModificacionsQueEsticFentForm;
+import org.fundaciobit.queesticfent.back.controller.webdb.ModificacioQueEsticFentController;
+import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentFilterForm;
+import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentForm;
 import org.fundaciobit.queesticfent.back.security.LoginInfo;
 import org.fundaciobit.queesticfent.back.utils.Utils;
 import org.fundaciobit.queesticfent.commons.utils.Configuracio;
@@ -56,26 +56,26 @@ import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.fundaciobit.queesticfent.model.LlistatEntradesModel;
 import org.fundaciobit.queesticfent.model.ModificacioItem;
 import org.fundaciobit.queesticfent.model.QueEsticFentItem;
-import org.fundaciobit.queesticfent.model.bean.AccionsBean;
-import org.fundaciobit.queesticfent.model.bean.ModificacionsQueEsticFentBean;
-import org.fundaciobit.queesticfent.model.entity.Accions;
-import org.fundaciobit.queesticfent.model.entity.Departaments;
-import org.fundaciobit.queesticfent.model.entity.Festius;
-import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
-import org.fundaciobit.queesticfent.model.entity.Projectes;
-import org.fundaciobit.queesticfent.model.entity.Usuaris;
-import org.fundaciobit.queesticfent.model.entity.UsuarisDepartament;
-import org.fundaciobit.queesticfent.model.fields.AccionsFields;
-import org.fundaciobit.queesticfent.model.fields.DepartamentsFields;
-import org.fundaciobit.queesticfent.model.fields.FestiusFields;
-import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields;
+import org.fundaciobit.queesticfent.model.bean.AccioBean;
+import org.fundaciobit.queesticfent.model.bean.ModificacioQueEsticFentBean;
+import org.fundaciobit.queesticfent.model.entity.Accio;
+import org.fundaciobit.queesticfent.model.entity.Departament;
+import org.fundaciobit.queesticfent.model.entity.Festiu;
+import org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent;
+import org.fundaciobit.queesticfent.model.entity.Projecte;
+import org.fundaciobit.queesticfent.model.entity.Usuari;
+import org.fundaciobit.queesticfent.model.entity.UsuariDepartament;
+import org.fundaciobit.queesticfent.model.fields.AccioFields;
+import org.fundaciobit.queesticfent.model.fields.DepartamentFields;
+import org.fundaciobit.queesticfent.model.fields.FestiuFields;
+import org.fundaciobit.queesticfent.model.fields.ModificacioQueEsticFentFields;
 import org.fundaciobit.queesticfent.model.fields.PersonalProjecteFields;
-import org.fundaciobit.queesticfent.model.fields.ProjectesFields;
-import org.fundaciobit.queesticfent.model.fields.UsuarisDepartamentFields;
-import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
-import org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA;
-import org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA;
-import org.fundaciobit.queesticfent.persistence.UsuarisJPA;
+import org.fundaciobit.queesticfent.model.fields.ProjecteFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariDepartamentFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariFields;
+import org.fundaciobit.queesticfent.persistence.ModificacioQueEsticFentJPA;
+import org.fundaciobit.queesticfent.persistence.UsuariDepartamentJPA;
+import org.fundaciobit.queesticfent.persistence.UsuariJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -100,37 +100,37 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
  */
 @Controller
 @RequestMapping(value = LlistatEntradesUserController.CONTEXT_WEB)
-@SessionAttributes(types = { ModificacionsQueEsticFentForm.class, ModificacionsQueEsticFentFilterForm.class })
-public class LlistatEntradesUserController extends ModificacionsQueEsticFentController {
+@SessionAttributes(types = { ModificacioQueEsticFentForm.class, ModificacioQueEsticFentFilterForm.class })
+public class LlistatEntradesUserController extends ModificacioQueEsticFentController {
 
 	public static final String CONTEXT_WEB = "/user/entrades";
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.UsuarisDepartamentService usuarisDepartamentEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariDepartamentService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuariDepartamentService UsuariDepartamentEjb;
 
 	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.PersonalProjecteService.JNDI_NAME)
 	protected org.fundaciobit.queesticfent.ejb.PersonalProjecteService personalProjecteEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.AccionsService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.AccionsService accionsEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.AccioService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.AccioService accionsEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjectesService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.ProjectesService projectesEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.ProjecteService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.ProjecteService projectesEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiusService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.FestiusService festiusEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.FestiuService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.FestiuService festiusEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.UsuariService usuarisEjb;
 
-	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentsService.JNDI_NAME)
-	protected org.fundaciobit.queesticfent.ejb.DepartamentsService departamentsEjb;
+	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.DepartamentService.JNDI_NAME)
+	protected org.fundaciobit.queesticfent.ejb.DepartamentService departamentsEjb;
 
 	@Override
 	public String getTileForm() {
 		return "entradesFormUser";
 	}
-
+	
 	@Override
 	public String getTileList() {
 		return "modificacionsQueEsticFentListWebDB";
@@ -144,11 +144,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 	protected Where getWhereProjecte(List<Long> projectes) throws Exception {
 		Where w = null;
 		for (Long projecteID : projectes) {
-			Projectes proj = projectesEjb.findByPrimaryKey(projecteID);
+			Projecte proj = projectesEjb.findByPrimaryKey(projecteID);
 			if (w == null) {
-				w = ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %");
+				w = ModificacioQueEsticFentFields.DADA1.like(proj.getNom() + ": %");
 			} else {
-				w = Where.OR(w, ModificacionsQueEsticFentFields.DADA1.like(proj.getNom() + ": %"));
+				w = Where.OR(w, ModificacioQueEsticFentFields.DADA1.like(proj.getNom() + ": %"));
 			}
 		}
 		return w;
@@ -156,39 +156,39 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 	protected Where getWhereExcloureModificacions(String usuariID, List<Long> projectes) throws Exception {
 		// (a) Eliminar elments moguts a altres llocs (CANVI DE DATA)
-		Where ww1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
-		Where ww2 = ModificacionsQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_CANVI_DATA);
+		Where ww1 = ModificacioQueEsticFentFields.USUARIID.equal(usuariID);
+		Where ww2 = ModificacioQueEsticFentFields.ACCIOID.equal((long) Utils.ACCIO_CANVI_DATA);
 
 		Where ww3 = null;
 		for (Long projecteID : projectes) {
 			// IProjectes proj = ProjectesManager.findByPrimaryKey(projecteID);
 			if (ww3 == null) {
-				ww3 = ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID);
+				ww3 = ModificacioQueEsticFentFields.PROJECTEID.equal(projecteID);
 			} else {
-				ww3 = Where.OR(ww3, ModificacionsQueEsticFentFields.PROJECTEID.equal(projecteID));
+				ww3 = Where.OR(ww3, ModificacioQueEsticFentFields.PROJECTEID.equal(projecteID));
 			}
 		}
 
 		Where ww = Where.AND(ww1, ww2, ww3);
 
-		List<Long> listOfqueesticFentID = modificacionsQueEsticFentEjb
-				.executeQuery(ModificacionsQueEsticFentFields.QUEESTICFENTID, ww);
+		List<Long> listOfqueesticFentID = modificacioQueEsticFentEjb
+				.executeQuery(ModificacioQueEsticFentFields.QUEESTICFENTID, ww);
 
 		if (listOfqueesticFentID.size() == 0) {
-			return ModificacionsQueEsticFentFields.QUEESTICFENTID.isNotNull();
+			return ModificacioQueEsticFentFields.QUEESTICFENTID.isNotNull();
 		} else {
 			Long[] queesticFentIDs = listOfqueesticFentID.toArray(new Long[listOfqueesticFentID.size()]);
-			return ModificacionsQueEsticFentFields.QUEESTICFENTID.notIn(queesticFentIDs);
+			return ModificacioQueEsticFentFields.QUEESTICFENTID.notIn(queesticFentIDs);
 		}
 	}
 
 	@Override
-	public ModificacionsQueEsticFentForm getModificacionsQueEsticFentForm(ModificacionsQueEsticFentJPA _jpa,
+	public ModificacioQueEsticFentForm getModificacioQueEsticFentForm(ModificacioQueEsticFentJPA _jpa,
 			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
 
-		ModificacionsQueEsticFentForm form = super.getModificacionsQueEsticFentForm(_jpa, __isView, request, mav);
+		ModificacioQueEsticFentForm form = super.getModificacioQueEsticFentForm(_jpa, __isView, request, mav);
 		if (form.isNou()) {
-			ModificacionsQueEsticFentJPA m = form.getModificacionsQueEsticFent();
+			ModificacioQueEsticFentJPA m = form.getModificacioQueEsticFent();
 			// TODO XYZ Falta UsuariID, Data, Accio com a readonly
 			// Amagar queesticfentID
 			m.setUsuariID(request.getParameter("usuariID"));
@@ -312,10 +312,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 	}
 
 	@Override
-	public void delete(HttpServletRequest request, ModificacionsQueEsticFent modificacionsQueEsticFent)
+	public void delete(HttpServletRequest request, ModificacioQueEsticFent modificacionsQueEsticFent)
 			throws I18NException {
 
-		modificacionsQueEsticFentEjb.delete(modificacionsQueEsticFent);
+		modificacioQueEsticFentEjb.delete(modificacionsQueEsticFent);
 
 		if (modificacionsQueEsticFent.getAccioID() == Utils.ACCIO_VACANCES) {
 			BaseCampApi3 api3 = getBasecampApi3();
@@ -357,7 +357,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 	public ModelAndView addBasecampScheduleEntries(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable Long modificacioID) throws I18NException {
 		try {
-			ModificacionsQueEsticFentJPA m = this.findByPrimaryKey(request, modificacioID);
+			ModificacioQueEsticFentJPA m = this.findByPrimaryKey(request, modificacioID);
 
 			BaseCampApi3 api3 = getBasecampApi3();
 
@@ -414,11 +414,11 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			Timestamp start, Timestamp end) throws Exception {
 
 		// 1.- Llegir Accions
-		Map<Long, Accions> accionsByID = new HashMap<Long, Accions>();
+		Map<Long, Accio> accionsByID = new HashMap<Long, Accio>();
 		{
 
-			List<Accions> accions = this.accionsEjb.select();
-			for (Accions acc : accions) {
+			List<Accio> accions = this.accionsEjb.select();
+			for (Accio acc : accions) {
 				accionsByID.put(acc.getAccioID(), acc);
 			}
 		}
@@ -429,23 +429,23 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		// 4.- Aplicar Modificacions
 		// 4.1.- Cercar Modificacions
-		Where wm1 = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
-		Where wm2 = ModificacionsQueEsticFentFields.DATA.greaterThanOrEqual(start);
-		Where wm3 = ModificacionsQueEsticFentFields.DATA.lessThanOrEqual(end);
-		Where wm4 = ModificacionsQueEsticFentFields.PROJECTEID.in(projectes);
-		Where wm5 = ModificacionsQueEsticFentFields.ACCIOID.equal(Utils.ACCIO_VACANCES);
+		Where wm1 = ModificacioQueEsticFentFields.USUARIID.equal(usuariID);
+		Where wm2 = ModificacioQueEsticFentFields.DATA.greaterThanOrEqual(start);
+		Where wm3 = ModificacioQueEsticFentFields.DATA.lessThanOrEqual(end);
+		Where wm4 = ModificacioQueEsticFentFields.PROJECTEID.in(projectes);
+		Where wm5 = ModificacioQueEsticFentFields.ACCIOID.equal(Utils.ACCIO_VACANCES);
 
 		Where wAnd1 = Where.AND(wm1, wm2, wm3, wm4);
 		Where wAnd2 = Where.AND(wm1, wm2, wm3, wm5);
 
 		Where ww = Where.OR(wAnd1, wAnd2);
 
-		List<ModificacionsQueEsticFent> modificacions = modificacionsQueEsticFentEjb.select(ww,
-				new OrderBy(ModificacionsQueEsticFentFields.DATA));
+		List<ModificacioQueEsticFent> modificacions = modificacioQueEsticFentEjb.select(ww,
+				new OrderBy(ModificacioQueEsticFentFields.DATA));
 
 		// 4.2.- Adaptar entrades
 		QueEsticFentItem item;
-		for (ModificacionsQueEsticFent modificacio : modificacions) {
+		for (ModificacioQueEsticFent modificacio : modificacions) {
 			switch ((int) modificacio.getAccioID()) {
 			// '-4' ACCIO_SINONIM XXX
 			// case Utils.ACCIO_SINONIM:
@@ -471,7 +471,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
 				if (item == null) {
-					ModificacionsQueEsticFentJPA qef = modificacionsQueEsticFentEjb
+					ModificacioQueEsticFentJPA qef = modificacioQueEsticFentEjb
 							.findByPrimaryKey(modificacio.getQueEsticFentID());
 					if (qef != null) {
 						item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDada1());
@@ -543,8 +543,7 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			case (int) Utils.ACCIO_CANVI_DATA: {
 				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
 				if (item == null) {
-					ModificacionsQueEsticFentJPA mqef = modificacionsQueEsticFentEjb
-							.findByPrimaryKey(modificacio.getQueEsticFentID());
+					ModificacioQueEsticFentJPA mqef = modificacioQueEsticFentEjb.findByPrimaryKey(modificacio.getQueEsticFentID());
 					QueEsticFentItem_Old qef = new QueEsticFentItem_Old(mqef.getUsuariID(), mqef.getData(),
 							mqef.getDada1());
 					if (qef != null) {
@@ -598,23 +597,23 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		// 5.- Afegir FESTIUS
 		{
-			Where wf1 = FestiusFields.DATA.greaterThanOrEqual(new java.sql.Date(start.getTime()));
-			Where wf2 = FestiusFields.DATA.lessThanOrEqual(new java.sql.Date(end.getTime()));
+			Where wf1 = FestiuFields.DATA.greaterThanOrEqual(new java.sql.Date(start.getTime()));
+			Where wf2 = FestiuFields.DATA.lessThanOrEqual(new java.sql.Date(end.getTime()));
 
 			Where wf = Where.AND(wf1, wf2);
 
-			List<Festius> festius = festiusEjb.select(wf, new OrderBy(FestiusFields.DATA, OrderType.ASC));
-			for (Festius festa : festius) {
+			List<Festiu> festius = festiusEjb.select(wf, new OrderBy(FestiuFields.DATA, OrderType.ASC));
+			for (Festiu festa : festius) {
 
 				Date date = toDate000000(festa.getData().getTime());
 
 				item = new QueEsticFentItem(null, new Timestamp(festa.getData().getTime()),
 						"Festiu - " + festa.getNom());
 				// item.setAccio(accionsByID.get(Utils.ACCIO_FESTIU));
-				Accions accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
+				Accio accFesta = accionsByID.get(Utils.ACCIO_FESTIU);
 
 				// log.info("Accio Festa : " + accFesta);
-				ModificacionsQueEsticFent mqef = new ModificacionsQueEsticFentBean();
+				ModificacioQueEsticFent mqef = new ModificacioQueEsticFentBean();
 				mqef.setAccioID(Utils.ACCIO_FESTIU);
 				mqef.setModificacioID(0);
 
@@ -678,10 +677,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		// Cercar departaments de l'usuari
 		List<Long> departaments;
-		// UsuarisDepartament[] departamentsUsuari;
+		// UsuariDepartament[] departamentsUsuari;
 		{
-			Where wud = UsuarisDepartamentFields.USUARIID.equal(usuariID);
-			departaments = usuarisDepartamentEjb.executeQuery(UsuarisDepartamentFields.DEPARTAMENTID, wud);
+			Where wud = UsuariDepartamentFields.USUARIID.equal(usuariID);
+			departaments = UsuariDepartamentEjb.executeQuery(UsuariDepartamentFields.DEPARTAMENTID, wud);
 		}
 
 		if (departaments.isEmpty()) {
@@ -718,13 +717,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			llistatEntradesModel.setProjecteId(selectedProjectId);
 		} else {
 			// Llistat de tots els projectesIDs (cap projecte seleccionar
-			selectedProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
+			selectedProjects = projectesEjb.executeQuery(ProjecteFields.PROJECTEID);
 		}
 
 		{// Llistat de tots els projectes per al dropdown de selecció de projectes
-			List<Long> allProjects = projectesEjb.executeQuery(ProjectesFields.PROJECTEID);
-			Where where = ProjectesFields.PROJECTEID.in(allProjects);
-			List<Projectes> projectesList = this.projectesEjb.select(where);
+			List<Long> allProjects = projectesEjb.executeQuery(ProjecteFields.PROJECTEID);
+			Where where = ProjecteFields.PROJECTEID.in(allProjects);
+			List<Projecte> projectesList = this.projectesEjb.select(where);
 			llistatEntradesModel.setProjectesList(projectesList);
 		}
 
@@ -748,10 +747,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		llistatEntradesModel.setItemsByDate(itemsByDate);
 
 		{
-			List<Accions> allAccions;
+			List<Accio> allAccions;
 
-			Where wa = AccionsFields.ACCIOID.greaterThanOrEqual((long) 0);
-			allAccions = accionsEjb.select(wa, new OrderBy(AccionsFields.NOM, OrderType.ASC));
+			Where wa = AccioFields.ACCIOID.greaterThanOrEqual((long) 0);
+			allAccions = accionsEjb.select(wa, new OrderBy(AccioFields.NOM, OrderType.ASC));
 			// allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC,
 			// AccionsFields.NOM);
 			mav.addObject("allAccions", allAccions);
@@ -768,21 +767,21 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 		llistatEntradesModel.setRedirectUrl(redirectUrl);
 		{
 			// ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
-			Where ud = UsuarisDepartamentFields.DEPARTAMENTID.equal(departamentID);
-			List<UsuarisDepartament> personalCap = this.usuarisDepartamentEjb.select(ud);
-			for (UsuarisDepartament usuarisDepartament : personalCap) {
+			Where ud = UsuariDepartamentFields.DEPARTAMENTID.equal(departamentID);
+			List<UsuariDepartament> personalCap = this.UsuariDepartamentEjb.select(ud);
+			for (UsuariDepartament UsuariDepartament : personalCap) {
 
-				UsuarisJPA usuari = usuarisEjb.findByPrimaryKey(usuarisDepartament.getUsuariID());
-				UsuarisDepartamentJPA usuarisDepartamentJpa = (UsuarisDepartamentJPA) usuarisDepartament;
-				usuarisDepartamentJpa.setUsuaris(usuari);
+				UsuariJPA usuari = usuarisEjb.findByPrimaryKey(UsuariDepartament.getUsuariID());
+				UsuariDepartamentJPA usuariDepartamentJpa = (UsuariDepartamentJPA) UsuariDepartament;
+				usuariDepartamentJpa.setUsuari(usuari);
 			}
 			mav.addObject("personalCap", personalCap);
 			llistatEntradesModel.setPersonalCap(personalCap);
 		}
 		{
-			List<Accions> actions = this.accionsEjb.select(AccionsFields.COLOR.isNotNull(),
-					new OrderBy(AccionsFields.ACCIOID, OrderType.ASC));
-			actions.add(new AccionsBean(-10, null, "Multiples Canvis", "ffff00", null));
+			List<Accio> actions = this.accionsEjb.select(AccioFields.COLOR.isNotNull(),
+					new OrderBy(AccioFields.ACCIOID, OrderType.ASC));
+			actions.add(new AccioBean(-10, null, "Multiples Canvis", "ffff00", null));
 			mav.addObject("actions", actions);
 			llistatEntradesModel.setActions(actions);
 		}
@@ -792,8 +791,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			llistatEntradesModel.setMostrarEntradesAmagades(true);
 		}
 		{
-			Where where = DepartamentsFields.DEPARTAMENTID.in(departaments);
-			List<Departaments> departamentsInfo = this.departamentsEjb.select(where);
+			Where where = DepartamentFields.DEPARTAMENTID.in(departaments);
+			List<Departament> departamentsInfo = this.departamentsEjb.select(where);
 			mav.addObject("departamentsInfo", departamentsInfo);
 			llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
 		}
@@ -823,13 +822,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 	@Override
 	public String getRedirectWhenCreated(HttpServletRequest request,
-			ModificacionsQueEsticFentForm modificacionsQueEsticFentForm) {
+			ModificacioQueEsticFentForm modificacionsQueEsticFentForm) {
 		return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
 	}
 
 	@Override
 	public String getRedirectWhenModified(HttpServletRequest request,
-			ModificacionsQueEsticFentForm modificacionsQueEsticFentForm, Throwable __e) {
+			ModificacioQueEsticFentForm modificacionsQueEsticFentForm, Throwable __e) {
 		if (__e == null) {
 			return "redirect:" + getContextWeb() + LLISTAT_ENTRADES;
 		} else {
@@ -883,7 +882,6 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 			List<String> usuarisList;
 			List<Long> projectesID = new ArrayList<Long>();
-			List<Projectes> projectes;
 			Where w;
 
 			if (projecteStr != null && projecteStr.trim().length() > 0 && Long.parseLong(projecteStr) > 0) {
@@ -907,8 +905,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 				projectName = "OTAE";
 
 				// Agafam el llistat complet de projectes
-				projectesID = projectesEjb.executeQuery(ProjectesFields.PROJECTEID,
-						new OrderBy(ProjectesFields.PROJECTEID));
+				projectesID = projectesEjb.executeQuery(ProjecteFields.PROJECTEID,
+						new OrderBy(ProjecteFields.PROJECTEID));
 
 				if ("true".equals(request.getParameter("multiple"))) {
 					log.info("S'HA ENTRAT A MULTIPLES USUARI");
@@ -946,14 +944,13 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 			Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
 
-			ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map
-					.get("usuaris");
+			//ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map.get("usuaris");
 
 			// template.createDocument(map, baos);
 
 			OutputStream outStream = response.getOutputStream();
 			generateUsingXDocReport(map, templateFile, outStream);
-			// generateUsingJooReports(map, templateFile, outStream);
+			//generateUsingJooReports(map, templateFile, outStream);
 
 			outStream.flush();
 
@@ -1000,8 +997,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 			throws Exception {
 
 		List<KeyValue<Long>> projectesList = this.projectesEjb.executeQuery(
-				new SelectMultipleKeyValue<Long>(ProjectesFields.PROJECTEID.select, ProjectesFields.NOM.select),
-				new OrderBy(ProjectesFields.PROJECTEID));
+				new SelectMultipleKeyValue<Long>(ProjecteFields.PROJECTEID.select, ProjecteFields.NOM.select),
+				new OrderBy(ProjecteFields.PROJECTEID));
 
 		Map<Long, String> projectesMap = new HashMap<Long, String>();
 
@@ -1032,8 +1029,8 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 
 		ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = new ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>();
 
-		List<Usuaris> usuarisFull = usuarisEjb.select(UsuarisFields.USUARIID.in(usuaris));
-		for (Usuaris usuari : usuarisFull) {
+		List<Usuari> usuarisFull = usuarisEjb.select(UsuariFields.USUARIID.in(usuaris));
+		for (Usuari usuari : usuarisFull) {
 			String usuariID = usuari.getUsuariID();
 			start.set(Calendar.DATE, 1);
 
@@ -1107,10 +1104,10 @@ public class LlistatEntradesUserController extends ModificacionsQueEsticFentCont
 	}
 
 	@Override
-	public void postValidate(HttpServletRequest request, ModificacionsQueEsticFentForm modificacionsQueEsticFentForm,
+	public void postValidate(HttpServletRequest request, ModificacioQueEsticFentForm modificacionsQueEsticFentForm,
 			BindingResult result) throws I18NException {
 
-		if (modificacionsQueEsticFentForm.getModificacionsQueEsticFent().getProjecteID() == null) {
+		if (modificacionsQueEsticFentForm.getModificacioQueEsticFent().getProjecteID() == null) {
 
 			I18NFieldError fieldError = new I18NFieldError(PROJECTEID, new I18NTranslation("genapp.validation.required",
 					new I18NArgument[] { new I18NArgumentCode(get(PROJECTEID)) }));

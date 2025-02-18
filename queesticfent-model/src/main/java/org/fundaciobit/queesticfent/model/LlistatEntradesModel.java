@@ -5,10 +5,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import org.fundaciobit.queesticfent.model.entity.Accions;
-import org.fundaciobit.queesticfent.model.entity.Departaments;
-import org.fundaciobit.queesticfent.model.entity.Projectes;
-import org.fundaciobit.queesticfent.model.entity.UsuarisDepartament;
+import org.fundaciobit.queesticfent.model.entity.Accio;
+import org.fundaciobit.queesticfent.model.entity.Departament;
+import org.fundaciobit.queesticfent.model.entity.Projecte;
+import org.fundaciobit.queesticfent.model.entity.UsuariDepartament;
 
 public class LlistatEntradesModel {
 
@@ -32,19 +32,19 @@ public class LlistatEntradesModel {
 
 	Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-	List<Accions> allAccions;
+	List<Accio> allAccions;
 
 	String redirectUrlParams;
 
 	String redirectUrl;
 
-	List<UsuarisDepartament> personalCap;
+	List<UsuariDepartament> personalCap;
 
-	List<Accions> actions;
+	List<Accio> actions;
 
-	List<Projectes> projectesList;
+	List<Projecte> projectesList;
 
-	List<Departaments> departamentsInfo;
+	List<Departament> departamentsInfo;
 
 	/*
 	 * List<String> nomDropdown;
@@ -62,35 +62,35 @@ public class LlistatEntradesModel {
 	 * List<DiaEntrades> dies;
 	 */
 
-	public List<Accions> getActions() {
+	public List<Accio> getActions() {
 		return actions;
 	}
 
-	public void setActions(List<Accions> actions) {
+	public void setActions(List<Accio> actions) {
 		this.actions = actions;
 	}
 
-	public List<Projectes> getProjectesList() {
+	public List<Projecte> getProjectesList() {
 		return projectesList;
 	}
 
-	public void setProjectesList(List<Projectes> projectesList) {
+	public void setProjectesList(List<Projecte> projectesList) {
 		this.projectesList = projectesList;
 	}
 
-	public List<Departaments> getDepartamentsInfo() {
+	public List<Departament> getDepartamentsInfo() {
 		return departamentsInfo;
 	}
 
-	public void setDepartamentsInfo(List<Departaments> departamentsInfo) {
+	public void setDepartamentsInfo(List<Departament> departamentsInfo) {
 		this.departamentsInfo = departamentsInfo;
 	}
 
-	public List<Accions> getAllAccions() {
+	public List<Accio> getAllAccions() {
 		return allAccions;
 	}
 
-	public void setAllAccions(List<Accions> allAccions) {
+	public void setAllAccions(List<Accio> allAccions) {
 		this.allAccions = allAccions;
 	}
 
@@ -110,11 +110,11 @@ public class LlistatEntradesModel {
 		this.redirectUrl = redirectUrl;
 	}
 
-	public List<UsuarisDepartament> getPersonalCap() {
+	public List<UsuariDepartament> getPersonalCap() {
 		return personalCap;
 	}
 
-	public void setPersonalCap(List<UsuarisDepartament> personalCap) {
+	public void setPersonalCap(List<UsuariDepartament> personalCap) {
 		this.personalCap = personalCap;
 	}
 

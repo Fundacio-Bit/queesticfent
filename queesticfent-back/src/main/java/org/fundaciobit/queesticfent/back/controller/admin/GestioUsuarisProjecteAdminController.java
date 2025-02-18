@@ -21,12 +21,12 @@ public class GestioUsuarisProjecteAdminController extends PersonalProjecteContro
 
     @Override
     public String getTileForm() {
-        return "gestioUsuarisProjecteForm";
+        return "gestioUsuariProjecteForm";
     }
 
     @Override
     public String getTileList() {
-        return "gestioUsuarisProjecteList";
+        return "gestioUsuariProjecteList";
     }
   
   

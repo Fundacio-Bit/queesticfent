@@ -3,18 +3,17 @@ package org.fundaciobit.queesticfent.model;
 import org.fundaciobit.queesticfent.model.dao.*;
 
 public interface IqueesticfentDaoManagers {
-	public IAccionsManager getAccionsManager();
-	public IDepartamentsManager getDepartamentsManager();
-	public IEntradesManager getEntradesManager();
-	public IFestiusManager getFestiusManager();
+	public IAccioManager getAccioManager();
+	public IDepartamentManager getDepartamentManager();
+	public IEntradaManager getEntradaManager();
+	public IFestiuManager getFestiuManager();
 	public IFitxerManager getFitxerManager();
 	public IIdiomaManager getIdiomaManager();
-	public IModificacionsManager getModificacionsManager();
-	public IModificacionsQueEsticFentManager getModificacionsQueEsticFentManager();
+	public IModificacioQueEsticFentManager getModificacioQueEsticFentManager();
 	public IPersonalProjecteManager getPersonalProjecteManager();
-	public IProjectesManager getProjectesManager();
+	public IProjecteManager getProjecteManager();
 	public ITraduccioManager getTraduccioManager();
-	public IUsuarisManager getUsuarisManager();
-	public IUsuarisDepartamentManager getUsuarisDepartamentManager();
+	public IUsuariManager getUsuariManager();
+	public IUsuariDepartamentManager getUsuariDepartamentManager();
 
 }

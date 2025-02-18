@@ -7,20 +7,19 @@
     <persistence-unit name="queesticfentPULocal" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>org.fundaciobit.queesticfent.persistence.AccionsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.DepartamentsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.EntradesJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.FestiusJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.AccioJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.DepartamentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.EntradaJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.FestiuJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.FitxerJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.IdiomaJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ModificacionsJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.ModificacioQueEsticFentJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.PersonalProjecteJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.ProjectesJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.ProjecteJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.TraduccioJPA</class>
 		<class>org.fundaciobit.queesticfent.persistence.TraduccioMapJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.UsuarisJPA</class>
-		<class>org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.UsuariJPA</class>
+		<class>org.fundaciobit.queesticfent.persistence.UsuariDepartamentJPA</class>
 
         <!-- Desactivar cache -->
         <shared-cache-mode>NONE</shared-cache-mode>

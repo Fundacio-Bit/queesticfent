@@ -1,10 +1,10 @@
 
 package org.fundaciobit.queesticfent.model.bean;
 
-import org.fundaciobit.queesticfent.model.entity.Modificacions;
+import org.fundaciobit.queesticfent.model.entity.Modificacio;
 
 
-public class ModificacionsBean implements Modificacions {
+public class ModificacionsBean implements Modificacio {
 
 
 
@@ -74,7 +74,7 @@ public class ModificacionsBean implements Modificacions {
     this.newusuariID=newusuariID;
     this.newdata=newdata;
 }
-  public ModificacionsBean(Modificacions __bean) {
+  public ModificacionsBean(Modificacio __bean) {
     this.setModificacioid(__bean.getModificacioid());
     this.setEntradaid(__bean.getEntradaid());
     this.setAccioid(__bean.getAccioid());
@@ -201,7 +201,7 @@ public class ModificacionsBean implements Modificacions {
 
   // ======================================
 
-  public static ModificacionsBean toBean(Modificacions __bean) {
+  public static ModificacionsBean toBean(Modificacio __bean) {
     if (__bean == null) { return null;}
     ModificacionsBean __tmp = new ModificacionsBean();
     __tmp.setModificacioid(__bean.getModificacioid());

@@ -1,28 +1,28 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
-import org.fundaciobit.queesticfent.model.entity.Accions;
-import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
+import org.fundaciobit.queesticfent.model.entity.Accio;
+import org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent;
 
 public class ModificacioItem_Old {
-  public final ModificacionsQueEsticFent modificacio;;
+  public final ModificacioQueEsticFent modificacio;;
   
-  public final Accions accio;
+  public final Accio accio;
 
   /**
    * @param modificacio
    * @param accio
    */
-  public ModificacioItem_Old(ModificacionsQueEsticFent modificacio, Accions accio) {
+  public ModificacioItem_Old(ModificacioQueEsticFent modificacio, Accio accio) {
     super();
     this.modificacio = modificacio;
     this.accio = accio;
   }
 
-  public ModificacionsQueEsticFent getModificacio() {
+  public ModificacioQueEsticFent getModificacio() {
     return modificacio;
   }
 
-  public Accions getAccio() {
+  public Accio getAccio() {
     return accio;
   }
   

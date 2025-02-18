@@ -1,6 +1,9 @@
 
 package org.fundaciobit.queesticfent.model.fields;
-import org.fundaciobit.genapp.common.query.*;
+
+import org.fundaciobit.genapp.common.query.LongField;
+import org.fundaciobit.genapp.common.query.QueryPath;
+import org.fundaciobit.genapp.common.query.StringField;
 
 public class GrupsusuariQueryPath extends org.fundaciobit.genapp.common.query.QueryPath {
 
@@ -32,8 +35,8 @@ public class GrupsusuariQueryPath extends org.fundaciobit.genapp.common.query.Qu
   }
 
 
-  public UsuarisQueryPath USUARIS() {
-    return new UsuarisQueryPath(new QueryPath() {
+  public UsuariQueryPath USUARIS() {
+    return new UsuariQueryPath(new QueryPath() {
       public String getQueryPath() {
           return GrupsusuariQueryPath.this.getQueryPath() + "usuaris" + ".";
       }

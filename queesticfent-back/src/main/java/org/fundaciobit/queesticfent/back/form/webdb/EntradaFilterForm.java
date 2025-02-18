@@ -1,0 +1,255 @@
+
+package org.fundaciobit.queesticfent.back.form.webdb;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.OrderBy;
+import org.fundaciobit.queesticfent.back.form.queesticfentBaseFilterForm;
+
+import org.fundaciobit.queesticfent.model.fields.EntradaFields;
+
+/**
+ *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
+ * @author GenApp
+ * 
+ */
+@Component
+public class EntradaFilterForm extends queesticfentBaseFilterForm implements EntradaFields {
+
+  private java.lang.Long entradaIDDesde;
+
+  public java.lang.Long getEntradaIDDesde() {
+    return this.entradaIDDesde;
+  }
+
+  public void setEntradaIDDesde(java.lang.Long entradaIDDesde) {
+    this.entradaIDDesde = entradaIDDesde;
+  }
+
+
+  private java.lang.Long entradaIDFins;
+
+  public java.lang.Long getEntradaIDFins() {
+    return this.entradaIDFins;
+  }
+
+  public void setEntradaIDFins(java.lang.Long entradaIDFins) {
+    this.entradaIDFins = entradaIDFins;
+  }
+
+
+  private java.lang.Long accioIDDesde;
+
+  public java.lang.Long getAccioIDDesde() {
+    return this.accioIDDesde;
+  }
+
+  public void setAccioIDDesde(java.lang.Long accioIDDesde) {
+    this.accioIDDesde = accioIDDesde;
+  }
+
+
+  private java.lang.Long accioIDFins;
+
+  public java.lang.Long getAccioIDFins() {
+    return this.accioIDFins;
+  }
+
+  public void setAccioIDFins(java.lang.Long accioIDFins) {
+    this.accioIDFins = accioIDFins;
+  }
+
+
+  private java.lang.String usuariID;
+
+  public java.lang.String getUsuariID() {
+    return this.usuariID;
+  }
+
+  public void setUsuariID(java.lang.String usuariID) {
+    this.usuariID = usuariID;
+  }
+
+
+  private java.lang.Long projecteIDDesde;
+
+  public java.lang.Long getProjecteIDDesde() {
+    return this.projecteIDDesde;
+  }
+
+  public void setProjecteIDDesde(java.lang.Long projecteIDDesde) {
+    this.projecteIDDesde = projecteIDDesde;
+  }
+
+
+  private java.lang.Long projecteIDFins;
+
+  public java.lang.Long getProjecteIDFins() {
+    return this.projecteIDFins;
+  }
+
+  public void setProjecteIDFins(java.lang.Long projecteIDFins) {
+    this.projecteIDFins = projecteIDFins;
+  }
+
+
+  private java.lang.String dada1;
+
+  public java.lang.String getDada1() {
+    return this.dada1;
+  }
+
+  public void setDada1(java.lang.String dada1) {
+    this.dada1 = dada1;
+  }
+
+
+  private java.lang.Long queEsticFentIDDesde;
+
+  public java.lang.Long getQueEsticFentIDDesde() {
+    return this.queEsticFentIDDesde;
+  }
+
+  public void setQueEsticFentIDDesde(java.lang.Long queEsticFentIDDesde) {
+    this.queEsticFentIDDesde = queEsticFentIDDesde;
+  }
+
+
+  private java.lang.Long queEsticFentIDFins;
+
+  public java.lang.Long getQueEsticFentIDFins() {
+    return this.queEsticFentIDFins;
+  }
+
+  public void setQueEsticFentIDFins(java.lang.Long queEsticFentIDFins) {
+    this.queEsticFentIDFins = queEsticFentIDFins;
+  }
+
+
+  private java.lang.String dada2;
+
+  public java.lang.String getDada2() {
+    return this.dada2;
+  }
+
+  public void setDada2(java.lang.String dada2) {
+    this.dada2 = dada2;
+  }
+
+
+  private java.sql.Timestamp dataDesde;
+
+  public java.sql.Timestamp getDataDesde() {
+    return this.dataDesde;
+  }
+
+  public void setDataDesde(java.sql.Timestamp dataDesde) {
+    this.dataDesde = dataDesde;
+  }
+
+
+  private java.sql.Timestamp dataFins;
+
+  public java.sql.Timestamp getDataFins() {
+    return this.dataFins;
+  }
+
+  public void setDataFins(java.sql.Timestamp dataFins) {
+    this.dataFins = dataFins;
+  }
+
+
+  public EntradaFilterForm() {
+  }
+  
+  public EntradaFilterForm(EntradaFilterForm __toClone) {
+    super(__toClone);
+    this.entradaIDDesde = __toClone.entradaIDDesde;
+    this.entradaIDFins = __toClone.entradaIDFins;
+    this.accioIDDesde = __toClone.accioIDDesde;
+    this.accioIDFins = __toClone.accioIDFins;
+    this.usuariID = __toClone.usuariID;
+    this.projecteIDDesde = __toClone.projecteIDDesde;
+    this.projecteIDFins = __toClone.projecteIDFins;
+    this.dada1 = __toClone.dada1;
+    this.queEsticFentIDDesde = __toClone.queEsticFentIDDesde;
+    this.queEsticFentIDFins = __toClone.queEsticFentIDFins;
+    this.dada2 = __toClone.dada2;
+    this.dataDesde = __toClone.dataDesde;
+    this.dataFins = __toClone.dataFins;
+    this.mapOfAccioForAccioID = __toClone.mapOfAccioForAccioID;
+    this.mapOfProjecteForProjecteID = __toClone.mapOfProjecteForProjecteID;
+  }
+  
+  /* ========= UTILS ========== */
+
+  @Override
+  public List<Field<?>> getDefaultFilterByFields() {
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+  }
+
+  @Override
+  public List<Field<?>> getDefaultGroupByFields() {
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+  }
+
+
+  protected OrderBy[] defaultOrderBy = null;
+
+
+  public OrderBy[] getDefaultOrderBy() {
+    return this.defaultOrderBy;
+  }
+
+  public void setDefaultOrderBy(OrderBy[] defOrderBy) {
+    this.defaultOrderBy = defOrderBy;
+  }
+
+  @Override
+  public String getTableModelName() {
+    return _TABLE_MODEL;
+  }
+
+   // -----------------------
+   // Maps de referencies.
+   // -----------------------
+  private Map<String, String> mapOfAccioForAccioID;
+
+  public Map<String, String> getMapOfAccioForAccioID() {
+    return this.mapOfAccioForAccioID;
+  }
+
+  public void setMapOfAccioForAccioID(Map<String, String> mapOfAccioForAccioID) {
+    this.mapOfAccioForAccioID = mapOfAccioForAccioID;
+  }
+
+
+
+  private Map<String, String> mapOfProjecteForProjecteID;
+
+  public Map<String, String> getMapOfProjecteForProjecteID() {
+    return this.mapOfProjecteForProjecteID;
+  }
+
+  public void setMapOfProjecteForProjecteID(Map<String, String> mapOfProjecteForProjecteID) {
+    this.mapOfProjecteForProjecteID = mapOfProjecteForProjecteID;
+  }
+
+
+
+
+   // --------------------------------
+   // Camps traduibles de referencies.
+   // ---------------------------------
+   public static final List<String> traduibles;
+
+   static {
+     traduibles = new java.util.ArrayList<String>();
+   };
+
+}

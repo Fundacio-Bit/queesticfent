@@ -106,31 +106,36 @@ public class PersonalProjecteJPA implements PersonalProjecte {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof PersonalProjecte) {
-      PersonalProjecte __instance = (PersonalProjecte)__obj;
-      __result = true;
-      __result = __result && (this.getPersonalProjecteID() == __instance.getPersonalProjecteID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof PersonalProjecte) {
+            PersonalProjecte __instance = (PersonalProjecte)__obj;
+            __result = true;
+            __result = __result && (this.getPersonalProjecteID() == __instance.getPersonalProjecteID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
-// IMP Field:projecteid | Table: qef_projectes | Type: 1  
+    @Override
+    public int hashCode() {
+        return (String.valueOf(this.getPersonalProjecteID())).hashCode();
+    }
+
+// IMP Field:projecteid | Table: qef_projecte | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projecteid", referencedColumnName ="projecteID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_persproj_projectes_pro_fk"))
-    private ProjectesJPA projectes;
+    @JoinColumn(name = "projecteid", referencedColumnName ="projecteID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="qef_persproj_projecte_proje_fk"))
+    private ProjecteJPA projecte;
 
-    public ProjectesJPA getProjectes() {
-    return this.projectes;
+    public ProjecteJPA getProjecte() {
+    return this.projecte;
   }
 
-    public  void setProjectes(ProjectesJPA projectes) {
-    this.projectes = projectes;
+    public  void setProjecte(ProjecteJPA projecte) {
+    this.projecte = projecte;
   }
 
 
@@ -173,9 +178,9 @@ public class PersonalProjecteJPA implements PersonalProjecte {
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
-    if(!"ProjectesJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.projectes) || org.hibernate.Hibernate.isInitialized(__jpa.getProjectes()) ) ) {
-      __tmp.setProjectes(ProjectesJPA.copyJPA(__jpa.getProjectes(), __alreadyCopied,"PersonalProjecteJPA"));
+    if(!"ProjecteJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.projecte) || org.hibernate.Hibernate.isInitialized(__jpa.getProjecte()) ) ) {
+      __tmp.setProjecte(ProjecteJPA.copyJPA(__jpa.getProjecte(), __alreadyCopied,"PersonalProjecteJPA"));
     }
 
     return __tmp;

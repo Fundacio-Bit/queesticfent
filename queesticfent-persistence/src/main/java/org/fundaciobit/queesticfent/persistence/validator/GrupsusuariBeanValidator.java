@@ -21,7 +21,7 @@ public class GrupsusuariBeanValidator
 
   protected final org.fundaciobit.queesticfent.model.dao.IGrupsusuariManager __grupsusuariManager;
 
-  protected final org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager;
+  protected final org.fundaciobit.queesticfent.model.dao.IUsuariManager __usuarisManager;
 
 
   public final GrupsusuariValidator<GrupsusuariJPA> _validator;
@@ -29,7 +29,7 @@ public class GrupsusuariBeanValidator
 
   public GrupsusuariBeanValidator(org.fundaciobit.queesticfent.model.dao.IGrupsManager __grupsManager,
      org.fundaciobit.queesticfent.model.dao.IGrupsusuariManager __grupsusuariManager,
-     org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager) { 
+     org.fundaciobit.queesticfent.model.dao.IUsuariManager __usuarisManager) { 
     this.__grupsManager = __grupsManager;
     this.__grupsusuariManager = __grupsusuariManager;
     this.__usuarisManager = __usuarisManager;
@@ -39,7 +39,7 @@ public class GrupsusuariBeanValidator
   public GrupsusuariBeanValidator(GrupsusuariValidator<GrupsusuariJPA> _validator,
      org.fundaciobit.queesticfent.model.dao.IGrupsManager __grupsManager,
      org.fundaciobit.queesticfent.model.dao.IGrupsusuariManager __grupsusuariManager,
-     org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager) {
+     org.fundaciobit.queesticfent.model.dao.IUsuariManager __usuarisManager) {
     this.__grupsManager = __grupsManager;
     this.__grupsusuariManager = __grupsusuariManager;
     this.__usuarisManager = __usuarisManager;

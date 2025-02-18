@@ -3,10 +3,10 @@ package org.fundaciobit.queesticfent.persistence;
 import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.fundaciobit.queesticfent.model.entity.*;
-import org.fundaciobit.queesticfent.model.fields.*;
-import org.fundaciobit.queesticfent.model.dao.*;
 import org.fundaciobit.genapp.common.query.TableName;
+import org.fundaciobit.queesticfent.model.dao.IGrupsManager;
+import org.fundaciobit.queesticfent.model.entity.Grups;
+import org.fundaciobit.queesticfent.model.fields.GrupsFields;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 

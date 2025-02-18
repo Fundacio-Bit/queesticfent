@@ -28,9 +28,9 @@ import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 import org.fundaciobit.pluginsib.utils.rest.RestUtils;
 import org.fundaciobit.queesticfent.commons.utils.Constants;
 import org.fundaciobit.queesticfent.logic.utils.I18NLogicUtils;
-import org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent;
-import org.fundaciobit.queesticfent.model.fields.ModificacionsQueEsticFentFields;
-import org.fundaciobit.queesticfent.persistence.ModificacionsQueEsticFentJPA;
+import org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent;
+import org.fundaciobit.queesticfent.model.fields.ModificacioQueEsticFentFields;
+import org.fundaciobit.queesticfent.persistence.ModificacioQueEsticFentJPA;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,11 +66,11 @@ public class ModificacionsService extends RestUtils {
 
     protected final Logger log = Logger.getLogger(this.getClass());
 
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.ModificacionsQueEsticFentService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.ModificacionsQueEsticFentService modificacionsQueEsticFentEjb;
+    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.ModificacioQueEsticFentService.JNDI_NAME)
+    protected org.fundaciobit.queesticfent.ejb.ModificacioQueEsticFentService modificacionsQueEsticFentEjb;
 
-    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-    protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+    @EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariService.JNDI_NAME)
+    protected org.fundaciobit.queesticfent.ejb.UsuariService usuarisEjb;
 
     @Path("/add")
     @POST
@@ -99,7 +99,7 @@ public class ModificacionsService extends RestUtils {
 
         try {
 
-            ModificacionsQueEsticFent modif = new ModificacionsQueEsticFentJPA();
+            ModificacioQueEsticFent modif = new ModificacioQueEsticFentJPA();
             modif.setDada1(modificacio.getDada1());
             modif.setData(new Timestamp(modificacio.getData().getTime()));
             modif.setProjecteID(modificacio.getProjecteID());
@@ -164,7 +164,7 @@ public class ModificacionsService extends RestUtils {
 
             language = RestUtils.checkLanguage(language);
 
-            Where whereUserId = ModificacionsQueEsticFentFields.USUARIID.equal(usuariID);
+            Where whereUserId = ModificacioQueEsticFentFields.USUARIID.equal(usuariID);
 
             java.util.Date data2 = RestUtils.parseOnlyDateISO8601ToDate(date, "date", "ca");
             if (data2 == null) {
@@ -173,16 +173,16 @@ public class ModificacionsService extends RestUtils {
             
             Calendar cal = Calendar.getInstance();
             cal.setTime(data2);
-            Where whereDateStart = ModificacionsQueEsticFentFields.DATA.greaterThan(new Timestamp(cal.getTimeInMillis()));
+            Where whereDateStart = ModificacioQueEsticFentFields.DATA.greaterThan(new Timestamp(cal.getTimeInMillis()));
             cal.add(Calendar.DATE, 1);
-            Where whereDateFinish = ModificacionsQueEsticFentFields.DATA.lessThan(new Timestamp(cal.getTimeInMillis()));
+            Where whereDateFinish = ModificacioQueEsticFentFields.DATA.lessThan(new Timestamp(cal.getTimeInMillis()));
             Where whereGetModificacions = Where.AND(whereUserId, whereDateStart, whereDateFinish);
 
             GetModificacionsResponse modificacionsResponse = new GetModificacionsResponse();
-            List<ModificacionsQueEsticFent> select = modificacionsQueEsticFentEjb.select(whereGetModificacions);
+            List<ModificacioQueEsticFent> select = modificacionsQueEsticFentEjb.select(whereGetModificacions);
             List<ModificacioRest> list = new ArrayList<ModificacioRest>();
             
-            for (ModificacionsQueEsticFent modificacionsQueEsticFent : select) {
+            for (ModificacioQueEsticFent modificacionsQueEsticFent : select) {
                 list.add(new ModificacioRest(modificacionsQueEsticFent.getModificacioID(),
                         modificacionsQueEsticFent.getAccioID(), modificacionsQueEsticFent.getUsuariID(),
                         modificacionsQueEsticFent.getProjecteID(),

@@ -38,8 +38,8 @@ public class GrupsusuariWebValidator extends AbstractWebValidator<GrupsusuariFor
   @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.GrupsusuariService.JNDI_NAME)
   protected org.fundaciobit.queesticfent.ejb.GrupsusuariService grupsusuariEjb;
 
-  @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuarisService.JNDI_NAME)
-  protected org.fundaciobit.queesticfent.ejb.UsuarisService usuarisEjb;
+  @javax.ejb.EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariService.JNDI_NAME)
+  protected org.fundaciobit.queesticfent.ejb.UsuariService usuarisEjb;
 
 
 

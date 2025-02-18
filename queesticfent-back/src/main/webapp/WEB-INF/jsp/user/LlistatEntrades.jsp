@@ -1,10 +1,10 @@
 <%@page import="org.fundaciobit.queesticfent.model.LlistatEntradesModel"%>
 <%@page import="org.fundaciobit.queesticfent.back.controller.user.LlistatEntradesUserController"%>
 <%@page import="java.util.HashMap"%><%@page import="org.fundaciobit.queesticfent.back.security.LoginInfo"%><%@page
-    import="org.fundaciobit.queesticfent.persistence.UsuarisJPA"%><%@page
-    import="org.fundaciobit.queesticfent.persistence.UsuarisDepartamentJPA"%><%@page
-    import="org.fundaciobit.queesticfent.model.entity.Projectes"%><%@page
-    import="org.fundaciobit.queesticfent.model.entity.Departaments"%><%@ page language="java" contentType="text/html;"%><%@page
+    import="org.fundaciobit.queesticfent.persistence.UsuariJPA"%><%@page
+    import="org.fundaciobit.queesticfent.persistence.UsuariDepartamentJPA"%><%@page
+    import="org.fundaciobit.queesticfent.model.entity.Projecte"%><%@page
+    import="org.fundaciobit.queesticfent.model.entity.Departament"%><%@ page language="java" contentType="text/html;"%><%@page
     import="java.text.SimpleDateFormat"%>
 <%@page import="org.fundaciobit.queesticfent.back.utils.Utils"%>
 <%@page import="org.fundaciobit.queesticfent.back.controller.user.QueEsticFentItem_Old"%>
@@ -13,10 +13,10 @@
 <%@page import="org.fundaciobit.queesticfent.model.QueEsticFentItem"%>
 <%@page import="org.fundaciobit.queesticfent.model.ModificacioItem"%>
 
-<%@page import="org.fundaciobit.queesticfent.model.entity.ModificacionsQueEsticFent"%>
-<%@page import="org.fundaciobit.queesticfent.model.entity.Accions"%>
-<%@page import="org.fundaciobit.queesticfent.model.fields.AccionsFields"%>
-<%@page import="org.fundaciobit.queesticfent.model.entity.UsuarisDepartament"%>
+<%@page import="org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent"%>
+<%@page import="org.fundaciobit.queesticfent.model.entity.Accio"%>
+<%@page import="org.fundaciobit.queesticfent.model.fields.AccioFields"%>
+<%@page import="org.fundaciobit.queesticfent.model.entity.UsuariDepartament"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="java.util.Calendar"%>
@@ -92,14 +92,14 @@ window.onload = scrollToCurrentDay;
                                                     <%
                                                     {
 
-                                                    	List<UsuarisDepartament> personalCap = (List<UsuarisDepartament>) request.getAttribute("personalCap");
+                                                    	List<UsuariDepartament> personalCap = (List<UsuariDepartament>) request.getAttribute("personalCap");
 
                                                     	//java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
                                                     	String __def;
 
-                                                    	for (UsuarisDepartament po : personalCap) {
+                                                    	for (UsuariDepartament po : personalCap) {
                                                     		__def = po.getUsuariID().equals(model.getUsuariId()) ? "selected" : "";
-                                                    		UsuarisJPA usu = ((UsuarisDepartamentJPA) po).getUsuaris();
+                                                    		UsuariJPA usu = ((UsuariDepartamentJPA) po).getUsuari();
                                                     %>
 
                                                     <option value="<%=po.getUsuariID()%>" <%=__def%>><%=(usu.getNom() + " " + usu.getLlinatge1() + " " + usu.getLlinatge2())%></option>
@@ -130,7 +130,7 @@ window.onload = scrollToCurrentDay;
 
                                                     	//java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
                                                     	String __def;
-                                                    	for (Departaments dep : model.getDepartamentsInfo()) {
+                                                    	for (Departament dep : model.getDepartamentsInfo()) {
                                                     		__def = model.getDepartamentId() == dep.getDepartamentID() ? "selected" : "";
                                                     %>
                                                     <option value="<%=dep.getDepartamentID()%>" <%=__def%>><%=dep.getNom() + " (getSecurity().getFullNameOfUser(dep.getCoordinadorID())"%></option>
@@ -161,7 +161,7 @@ window.onload = scrollToCurrentDay;
                                                     {
                                                     	//java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
                                                     	String __def;
-                                                    	for (Projectes proj : model.getProjectesList()) {
+                                                    	for (Projecte proj : model.getProjectesList()) {
 
                                                     		__def = (model.getProjecteId() != 0L && proj.getProjecteID() == model.getProjecteId()) ? "selected" : "";
                                                     		projectesMap.put(proj.getProjecteID(), proj.getNom());
@@ -429,7 +429,7 @@ Afegir Entrada
                                                                     <%
                                                                     if (modificacions.size() != 0) {
                                                                     	for (ModificacioItem mi : modificacions) {
-                                                                    		ModificacionsQueEsticFent mod = mi.getModificacio();
+                                                                    		ModificacioQueEsticFent mod = mi.getModificacio();
                                                                     		if (mod != null) {
                                                                     %>
                                                                     <td style="padding-left: 5px;">
@@ -437,14 +437,14 @@ Afegir Entrada
                                                                             <tr>
                                                                                 <td><a
                                                                                     href="<%=mod.getModificacioID()%>/delete"
-                                                                                    onmouseover="toolTip('Eliminar <%=mi.getAccio().getNomLlegenda().replace('\'', '_')%>', this)">
+                                                                                    onmouseover="toolTip('Eliminar <%=mi.getAccio().getNomllegenda().replace('\'', '_')%>', this)">
                                                                                         <img alt="Eliminar modificacio"
                                                                                         src="<c:url value="/img"/>/delete_12x12.gif" />
                                                                                 </a></td>
                                                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                                                 <td><a
                                                                                     href="<%=mod.getModificacioID()%>/edit"
-                                                                                    onmouseover="toolTip('Editar <%=mi.getAccio().getNomLlegenda().replace('\'', '_')%>', this)">
+                                                                                    onmouseover="toolTip('Editar <%=mi.getAccio().getNomllegenda().replace('\'', '_')%>', this)">
                                                                                         <img alt="Editar modificacio"
                                                                                         src="<c:url value="/img"/>/link.gif" />
                                                                                 </a></td>
@@ -522,7 +522,7 @@ Afegir Entrada
                         <tr>
                             <%
                             counter = -1;
-                            for (Accions lleg : model.getActions()) {
+                            for (Accio lleg : model.getActions()) {
                             	counter++;
 
                             	if (counter > 0 && counter % 4 == 0) {
@@ -537,7 +537,7 @@ Afegir Entrada
                                     <tr>
                                         <td width="17" height="17"
                                             style="border-style:solid; border-width:1px; background-color:#<%=lleg.getColor()%>"></td>
-                                        <td style="font-size: 11"><b><%=lleg.getNomLlegenda()%></b></td>
+                                        <td style="font-size: 11"><b><%=lleg.getNomllegenda()%></b></td>
                                     </tr>
                                 </table>
                             </td>

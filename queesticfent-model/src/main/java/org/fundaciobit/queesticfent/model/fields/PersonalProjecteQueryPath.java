@@ -40,10 +40,10 @@ public class PersonalProjecteQueryPath extends org.fundaciobit.genapp.common.que
   }
 
 
-  public ProjectesQueryPath PROJECTES() {
-    return new ProjectesQueryPath(new QueryPath() {
+  public ProjecteQueryPath PROJECTE() {
+    return new ProjecteQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PersonalProjecteQueryPath.this.getQueryPath() + "projectes" + ".";
+          return PersonalProjecteQueryPath.this.getQueryPath() + "projecte" + ".";
       }
     });
   }

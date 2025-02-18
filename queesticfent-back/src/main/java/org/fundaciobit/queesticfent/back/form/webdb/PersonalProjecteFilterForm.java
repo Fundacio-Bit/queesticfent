@@ -134,7 +134,7 @@ public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm imple
     this.ordreFins = __toClone.ordreFins;
     this.percentDesde = __toClone.percentDesde;
     this.percentFins = __toClone.percentFins;
-    this.mapOfProjectesForProjecteID = __toClone.mapOfProjectesForProjecteID;
+    this.mapOfProjecteForProjecteID = __toClone.mapOfProjecteForProjecteID;
   }
   
   /* ========= UTILS ========== */
@@ -169,14 +169,14 @@ public class PersonalProjecteFilterForm extends queesticfentBaseFilterForm imple
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfProjectesForProjecteID;
+  private Map<String, String> mapOfProjecteForProjecteID;
 
-  public Map<String, String> getMapOfProjectesForProjecteID() {
-    return this.mapOfProjectesForProjecteID;
+  public Map<String, String> getMapOfProjecteForProjecteID() {
+    return this.mapOfProjecteForProjecteID;
   }
 
-  public void setMapOfProjectesForProjecteID(Map<String, String> mapOfProjectesForProjecteID) {
-    this.mapOfProjectesForProjecteID = mapOfProjectesForProjecteID;
+  public void setMapOfProjecteForProjecteID(Map<String, String> mapOfProjecteForProjecteID) {
+    this.mapOfProjecteForProjecteID = mapOfProjecteForProjecteID;
   }
 
 

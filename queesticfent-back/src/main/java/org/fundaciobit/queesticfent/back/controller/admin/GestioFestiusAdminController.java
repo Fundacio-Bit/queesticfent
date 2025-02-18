@@ -1,8 +1,8 @@
 package org.fundaciobit.queesticfent.back.controller.admin;
 
-import org.fundaciobit.queesticfent.back.controller.webdb.FestiusController;
-import org.fundaciobit.queesticfent.back.form.webdb.FestiusFilterForm;
-import org.fundaciobit.queesticfent.back.form.webdb.FestiusForm;
+import org.fundaciobit.queesticfent.back.controller.webdb.FestiuController;
+import org.fundaciobit.queesticfent.back.form.webdb.FestiuFilterForm;
+import org.fundaciobit.queesticfent.back.form.webdb.FestiuForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @RequestMapping(value = GestioFestiusAdminController.CONTEXT_WEB)
-@SessionAttributes(types = { FestiusForm.class, FestiusFilterForm.class })
-public class GestioFestiusAdminController extends FestiusController{
+@SessionAttributes(types = { FestiuForm.class, FestiuFilterForm.class })
+public class GestioFestiusAdminController extends FestiuController{
 
     public static final String CONTEXT_WEB = "/admin/gestiofestius";
     
     
     @Override
     public String getTileForm() {
-        return "gestioFestiusForm";
+        return "gestioFestiuForm";
     }
 
     @Override
     public String getTileList() {
-        return "gestioFestiusList";
+        return "gestioFestiuList";
     }
 
     /*@Override

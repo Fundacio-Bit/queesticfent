@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.queesticfent.model.entity.Grupsusuari;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.queesticfent.model.fields.GrupsusuariFields;
+import org.fundaciobit.queesticfent.model.fields.UsuariFields;
 import org.fundaciobit.queesticfent.model.fields.GrupsFields;
-import org.fundaciobit.queesticfent.model.fields.UsuarisFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -31,7 +31,7 @@ public class GrupsusuariValidator<I extends Grupsusuari>
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,org.fundaciobit.queesticfent.model.dao.IGrupsManager __grupsManager
     ,org.fundaciobit.queesticfent.model.dao.IGrupsusuariManager __grupsusuariManager
-    ,org.fundaciobit.queesticfent.model.dao.IUsuarisManager __usuarisManager) {
+    ,org.fundaciobit.queesticfent.model.dao.IUsuariManager __usuarisManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,USUARIID, 
@@ -70,7 +70,7 @@ public class GrupsusuariValidator<I extends Grupsusuari>
     if (__vr.getFieldErrorCount(USUARIID) == 0) {
       java.lang.String __usuariid = __target__.getUsuariID();
       Long __count_ = null;
-      try { __count_ = __usuarisManager.count(UsuarisFields.USUARIID.equal(__usuariid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+      try { __count_ = __usuarisManager.count(UsuariFields.USUARIID.equal(__usuariid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        
         __vr.rejectValue(USUARIID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuaris.usuaris"),
