@@ -217,58 +217,65 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 				m.setProjecteID(Long.parseLong(projecteIdStr));
 			}
 			String accioID = request.getParameter("accioID");
-			if (String.valueOf(Utils.ACCIO_VACANCES).contentEquals(accioID)) {
-				m.setAccioID(Utils.ACCIO_VACANCES);
-				m.setDada1("Vacances");
-				try {
-					this.create(request, m);
+			boolean basecampActive = Boolean
+                    .parseBoolean(Configuracio.getProperty(Constants.QUEESTICFENT_PROPERTY_BASE + "basecamp.enabled"));
+            if (String.valueOf(Utils.ACCIO_VACANCES).contentEquals(accioID)) {
+                m.setAccioID(Utils.ACCIO_VACANCES);
+                m.setDada1("Vacances");
+                try {
+                    this.create(request, m);
+                    
+                    
+                    if(basecampActive) {
+                        BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
+                                Configuracio.getBasecampOrganizationID(),
+                                new File(Configuracio.getBasecampTokenPropertiesFile()));
+                        
+                        if (api3.isNecessaryUpdateToken()) {
+                            String client_id = Configuracio.getBasecampClientID();
+                            String redirectUrl = Configuracio.getBasecampRedirectUrl();
 
-					BaseCampApi3 api3 = new BaseCampApi3(Configuracio.getBasecampUrlBase(),
-							Configuracio.getBasecampOrganizationID(),
-							new File(Configuracio.getBasecampTokenPropertiesFile()));
+                            String getTokenUrl = UpdateTokenUtils.getGetCodeUrl(client_id, redirectUrl);
 
-					if (api3.isNecessaryUpdateToken()) {
-						String client_id = Configuracio.getBasecampClientID();
-						String redirectUrl = Configuracio.getBasecampRedirectUrl();
+                            request.getSession().setAttribute("__MODIFICACIOID__", m.getModificacioID());
 
-						String getTokenUrl = UpdateTokenUtils.getGetCodeUrl(client_id, redirectUrl);
+                            mav.setView(new RedirectView(getTokenUrl, false));
 
-						request.getSession().setAttribute("__MODIFICACIOID__", m.getModificacioID());
+                            return form;
+                        }
+                        
+                        mav.setView(new RedirectView(
+                                getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
 
-						mav.setView(new RedirectView(getTokenUrl, false));
+                        return form;
+                    }
+                    
+                    
 
-						return form;
-					}
+                } catch (I18NException e) {
+                    String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
+                    log.error(msg, e);
+                    HtmlUtils.saveMessageError(request, msg);
+                } catch (I18NValidationException e) {
+                    String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
+                    log.error(msg, e);
+                    HtmlUtils.saveMessageError(request, msg);
 
-					mav.setView(new RedirectView(
-							getContextWeb() + "/addbasecampscheduleentries/" + m.getModificacioID(), true));
+                }
+                mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
+                return form;
 
-					return form;
+            } else {
+                m.setAccioID(Utils.ACCIO_NOVA_ENTRADA);
+            }
+        }
 
-				} catch (I18NException e) {
-					String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
-					log.error(msg, e);
-					HtmlUtils.saveMessageError(request, msg);
-				} catch (I18NValidationException e) {
-					String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
-					log.error(msg, e);
-					HtmlUtils.saveMessageError(request, msg);
+        form.addReadOnlyField(USUARIID);
+        form.addReadOnlyField(ACCIOID);
+        form.addHiddenField(QUEESTICFENTID);
+        form.setAttachedAdditionalJspCode(true);
 
-				}
-				mav.setView(new RedirectView(getContextWeb() + LLISTAT_ENTRADES, true));
-				return form;
-
-			} else {
-				m.setAccioID(Utils.ACCIO_NOVA_ENTRADA);
-			}
-		}
-
-		form.addReadOnlyField(USUARIID);
-		form.addReadOnlyField(ACCIOID);
-		form.addHiddenField(QUEESTICFENTID);
-		form.setAttachedAdditionalJspCode(true);
-
-		return form;
+        return form;
 	}
 
 	public static SimpleDateFormat getSimpleDateTimeFormat() {
@@ -323,25 +330,28 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
 			String info = modificacionsQueEsticFent.getDada2();
 			Long entryID = null;
-			try {
-				Properties prop = new Properties();
-				prop.load(new StringReader(info));
+			if(info != null) {
+			    try {
+	                Properties prop = new Properties();
+	                prop.load(new StringReader(info));
 
-				String entryIDStr = prop.getProperty("basecamp.entryID");
+	                String entryIDStr = prop.getProperty("basecamp.entryID");
 
-				if (entryIDStr != null) {
+	                if (entryIDStr != null) {
 
-					entryID = Long.parseLong(entryIDStr);
-					api3.deleteScheduleEntry(projectID, entryID);
+	                    entryID = Long.parseLong(entryIDStr);
+	                    api3.deleteScheduleEntry(projectID, entryID);
 
-					HtmlUtils.saveMessageSuccess(request, "Esborrada entrada del Calendari de Basecamp");
+	                    HtmlUtils.saveMessageSuccess(request, "Esborrada entrada del Calendari de Basecamp");
 
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				entryID = null;
+	                }
+	            } catch (Exception e) {
+	                // TODO: handle exception
+	                e.printStackTrace();
+	                entryID = null;
+	            }
 			}
+			
 
 			if (entryID == null) {
 				HtmlUtils.saveMessageWarning(request,
@@ -741,7 +751,7 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 		itemsByDate = getQueEsticFentItemByUser(usuariID, selectedProjects,
 				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
 		mav.addObject("start", selectedMonthStart);
-		llistatEntradesModel.setStart(selectedMonthStart);
+		llistatEntradesModel.setSelectedMonthStart(selectedMonthStart);
 
 		mav.addObject("itemsByDate", itemsByDate);
 		llistatEntradesModel.setItemsByDate(itemsByDate);

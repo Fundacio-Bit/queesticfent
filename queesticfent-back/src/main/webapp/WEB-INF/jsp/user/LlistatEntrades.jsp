@@ -52,8 +52,8 @@ Map<String, String> noms = new HashMap<String, String>();
 LoginInfo info = LoginInfo.getInstance();
 noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
 
-int mesActual = model.getStart().get(Calendar.MONTH);
-int anyActual = model.getStart().get(Calendar.YEAR);
+int mesActual = model.getSelectedMonthStart().get(Calendar.MONTH);
+int anyActual = model.getSelectedMonthStart().get(Calendar.YEAR);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -180,7 +180,7 @@ window.onload = scrollToCurrentDay;
 
                                             <%
                                             // Es calculen els ints per al mes i any per als botons de seguent i previ.
-                                            Calendar auxCalendar = (Calendar) model.getStart().clone();
+                                            Calendar auxCalendar = (Calendar) model.getSelectedMonthStart().clone();
                                             auxCalendar.add(Calendar.MONTH, -1);
                                             int mesAnterior = auxCalendar.get(Calendar.MONTH);
                                             int anyAnterior = auxCalendar.get(Calendar.YEAR);
@@ -321,34 +321,34 @@ Afegir Entrada
                                         <%
                                         List<QueEsticFentItem> llista;
                                         String scrollId = "";
-                                        for (int d = 1; d <= model.getStart().getActualMaximum(Calendar.DAY_OF_MONTH); d++) {
+                                        for (int d = 1; d <= model.getSelectedMonthStart().getActualMaximum(Calendar.DAY_OF_MONTH); d++) {
 
-                                        	model.getStart().set(Calendar.DATE, d);
-                                        	int dayOfWeek = model.getStart().get(Calendar.DAY_OF_WEEK);
+                                        	model.getSelectedMonthStart().set(Calendar.DATE, d);
+                                        	int dayOfWeek = model.getSelectedMonthStart().get(Calendar.DAY_OF_WEEK);
 
                                         	boolean isCapDeSetmana = (dayOfWeek == Calendar.SUNDAY) || (dayOfWeek == Calendar.SATURDAY);
                                         	//llista = itemsByDate.get(d);
-                                        	llista = model.getItemsByDate().get(model.getStart().getTime());
+                                        	llista = model.getItemsByDate().get(model.getSelectedMonthStart().getTime());
                                         	String rowbgcolor = null;
                                         	if (isCapDeSetmana) {
                                         		rowbgcolor = "cccccc";
                                         	} else {
                                         		Calendar yesterday = Calendar.getInstance();
                                         		yesterday.add(Calendar.DATE, -1);
-                                        		if ((llista == null || llista.size() == 0) && model.getStart().compareTo(yesterday) == -1) {
+                                        		if ((llista == null || llista.size() == 0) && model.getSelectedMonthStart().compareTo(yesterday) == -1) {
                                         	rowbgcolor = "ff0000";
-                                        		} else if (model.getStart().get(Calendar.DAY_OF_MONTH) == yesterday.get(Calendar.DAY_OF_MONTH) + 1) {
+                                        		} else if (model.getSelectedMonthStart().get(Calendar.DAY_OF_MONTH) == yesterday.get(Calendar.DAY_OF_MONTH) + 1) {
                                         	scrollId = "scrollId";
                                         		}
                                         	}
                                         %>
                                         <tr <%=(rowbgcolor == null) ? "" : ("bgcolor=\"#" + rowbgcolor + "\"")%>>
-                                            <td id="<%=scrollId%>"><%=model.getStart().get(Calendar.DAY_OF_MONTH)%></td>
+                                            <td id="<%=scrollId%>"><%=model.getSelectedMonthStart().get(Calendar.DAY_OF_MONTH)%></td>
                                             <td onmouseover="toolTip('<%=Utils.diesFull[dayOfWeek]%>', this)"><%=Utils.dies[dayOfWeek]%></td>
 
                                             <%
                                             String novaAccioURL = "new?usuariID=" + model.getUsuariId() + "&data="
-                                            		+ URLEncoder.encode(getSimpleDateTimeFormat().format(model.getStart().getTime()))
+                                            		+ URLEncoder.encode(getSimpleDateTimeFormat().format(model.getSelectedMonthStart().getTime()))
                                             		+ (model.getProjecteId() == 0L ? "" : ("&projecteID=" + model.getProjecteId()));
                                             //+ "&redirectUrl=" + model.getRedirectUrl();
                                             %>

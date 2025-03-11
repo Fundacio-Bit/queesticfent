@@ -45,22 +45,9 @@ public class LlistatEntradesModel {
 	List<Projecte> projectesList;
 
 	List<Departament> departamentsInfo;
+	
+	
 
-	/*
-	 * List<String> nomDropdown;
-	 * 
-	 * String departament;
-	 * 
-	 * List<String> projectesDropdown;
-	 * 
-	 * int previousMonth, currentMonth, nextMonth, currentYear;
-	 * 
-	 * String urlExportacioUserOdt;
-	 * 
-	 * String urlExportacioDeptOdt;
-	 * 
-	 * List<DiaEntrades> dies;
-	 */
 
 	public List<Accio> getActions() {
 		return actions;
@@ -122,12 +109,20 @@ public class LlistatEntradesModel {
 		this.projecteId = projecteId;
 	}
 
-	public Calendar getStart() {
+	public Calendar getSelectedMonthStart() {
 		return selectedMonthStart;
 	}
 
-	public void setStart(Calendar start) {
+	public void setSelectedMonthStart(Calendar start) {
 		this.selectedMonthStart = start;
+	}
+	
+	public int getSelectedMonth() {
+	    return this.getSelectedMonthStart().get(Calendar.MONTH);
+	}
+	
+	public int getSelectedYear() {
+       return this.getSelectedMonthStart().get(Calendar.YEAR);
 	}
 
 	public Map<Date, List<QueEsticFentItem>> getItemsByDate() {

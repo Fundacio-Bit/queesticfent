@@ -24,19 +24,19 @@ public class Configuracio implements Constants {
      */
     public static Properties getFilesProperties() {
 
-		if (fileProperties.isEmpty()) {
-			// matches the property name as defined in the system-properties element in
-			// WildFly
-			String property = Constants.QUEESTICFENT_PROPERTY_BASE + "properties";
-			loadPropertyFile(property);
+        if (fileProperties.isEmpty()) {
+            // matches the property name as defined in the system-properties element in
+            // WildFly
+            String property = Constants.QUEESTICFENT_PROPERTY_BASE + "properties";
+            loadPropertyFile(property);
 
-			String propertySystem = Constants.QUEESTICFENT_PROPERTY_BASE + "system.properties";
-			loadPropertyFile(propertySystem);
-		}
+            String propertySystem = Constants.QUEESTICFENT_PROPERTY_BASE + "system.properties";
+            loadPropertyFile(propertySystem);
+        }
 
-		return fileProperties;
+        return fileProperties;
 
-	}
+    }
 
     public static void loadPropertyFile(String property) {
 
@@ -78,15 +78,11 @@ public class Configuracio implements Constants {
     }
 
     public static String getProperty(String key) {
-
         return getFilesProperties().getProperty(key);
-
     }
 
     public static String getProperty(String key, String def) {
-
         return getFilesProperties().getProperty(key, def);
-
     }
 
     public static boolean isDesenvolupament() {
@@ -105,11 +101,11 @@ public class Configuracio implements Constants {
     public static String getAppName() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "name", "queesticfent");
     }
-    
+
     public static String getFrontUrl() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "url.front");
     }
-    
+
     public static String getBackUrl() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "url.back");
     }
@@ -123,16 +119,14 @@ public class Configuracio implements Constants {
     }
 
     public static Long getMaxUploadSizeInBytes() {
-        String maxStr =  getProperty(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes");
-        return maxStr == null? null: Long.parseLong(maxStr);
+        String maxStr = getProperty(QUEESTICFENT_PROPERTY_BASE + "maxuploadsizeinbytes");
+        return maxStr == null ? null : Long.parseLong(maxStr);
     }
 
     public static Long getBasecampOrganizationID() {
         return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.organizationID"));
     }
-    
-    
-    
+
     public static Long getBasecampProjectID() {
         return Long.parseLong(getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.projectID"));
     }
@@ -140,11 +134,11 @@ public class Configuracio implements Constants {
     public static String getBasecampUrlBase() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.urlBase");
     }
-    
+
     public static String getBasecampClientID() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.client_id");
     }
-    
+
     public static String getBasecampClientSecret() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.client_secret");
     }
@@ -152,32 +146,33 @@ public class Configuracio implements Constants {
     public static String getBasecampRedirectUrl() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.redirect_uri");
     }
-    
+
     public static String getBasecampTokenPropertiesFile() {
         return getProperty(QUEESTICFENT_PROPERTY_BASE + "basecamp.token_properties_file");
     }
-    
 
     public static File getFilesDirectory() {
         String path = getProperty(QUEESTICFENT_PROPERTY_BASE + "filesdirectory");
         if (path == null) {
             throw new RuntimeException("No existeix la propietat '" + QUEESTICFENT_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
-                    + ". S'hauria d'anar al fitxer " + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
-                    + " i incloure la propietat '" + QUEESTICFENT_PROPERTY_BASE
-                    + "filesdirectory'" + " amb una ruta al directori on l'aplició gestionara els fitxers.");
+                    + ". S'hauria d'anar al fitxer "
+                    + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
+                    + " i incloure la propietat '" + QUEESTICFENT_PROPERTY_BASE + "filesdirectory'"
+                    + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
 
         if (path.isEmpty()) {
             throw new RuntimeException("No s'ha definit la propietat '" + QUEESTICFENT_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
-                    + ". S'hauria d'anar al fitxer " + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
-                    + " i donar valor a la propietat '" + QUEESTICFENT_PROPERTY_BASE +"filesdirectory'"
+                    + ". S'hauria d'anar al fitxer "
+                    + System.getProperty(QUEESTICFENT_PROPERTY_BASE + "system.properties")
+                    + " i donar valor a la propietat '" + QUEESTICFENT_PROPERTY_BASE + "filesdirectory'"
                     + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
-        
+
         File filesFolder = new File(path);
-        
+
         if (!filesFolder.exists()) {
             throw new RuntimeException("El directori indicat a la propietat '" + QUEESTICFENT_PROPERTY_BASE
                     + ".filesdirectory'" + " del fitxer "
