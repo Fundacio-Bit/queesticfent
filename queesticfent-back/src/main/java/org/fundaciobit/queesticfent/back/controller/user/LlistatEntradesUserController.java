@@ -104,6 +104,8 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 public class LlistatEntradesUserController extends ModificacioQueEsticFentController {
 
 	public static final String CONTEXT_WEB = "/user/entrades";
+	
+	public LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
 
 	@EJB(mappedName = org.fundaciobit.queesticfent.ejb.UsuariDepartamentService.JNDI_NAME)
 	protected org.fundaciobit.queesticfent.ejb.UsuariDepartamentService UsuariDepartamentEjb;
@@ -651,7 +653,7 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 	public ModelAndView llistatEntrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mav = new ModelAndView("entradesListUser");
-		LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
+		//LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
 
 		String loggedUser = LoginInfo.getInstance().getUsername();
 
@@ -737,19 +739,19 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 			llistatEntradesModel.setProjectesList(projectesList);
 		}
 
-		Calendar end = Calendar.getInstance();
-		end.setTimeInMillis(selectedMonthStart.getTimeInMillis());
-		end.set(Calendar.DATE, selectedMonthStart.getActualMaximum(Calendar.DAY_OF_MONTH));
-		end.set(Calendar.HOUR_OF_DAY, 23);
-		end.set(Calendar.MINUTE, 59);
-		end.set(Calendar.SECOND, 59);
-		end.set(Calendar.MILLISECOND, 999);
+		Calendar selectedMonthEnd = Calendar.getInstance();
+		selectedMonthEnd.setTimeInMillis(selectedMonthStart.getTimeInMillis());
+		selectedMonthEnd.set(Calendar.DATE, selectedMonthStart.getActualMaximum(Calendar.DAY_OF_MONTH));
+		selectedMonthEnd.set(Calendar.HOUR_OF_DAY, 23);
+		selectedMonthEnd.set(Calendar.MINUTE, 59);
+		selectedMonthEnd.set(Calendar.SECOND, 59);
+		selectedMonthEnd.set(Calendar.MILLISECOND, 999);
 
 		// (1) Obtenir dades
 		Map<Date, List<QueEsticFentItem>> itemsByDate;
 
 		itemsByDate = getQueEsticFentItemByUser(usuariID, selectedProjects,
-				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(end.getTimeInMillis()));
+				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(selectedMonthEnd.getTimeInMillis()));
 		mav.addObject("start", selectedMonthStart);
 		llistatEntradesModel.setSelectedMonthStart(selectedMonthStart);
 
