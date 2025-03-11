@@ -653,17 +653,15 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 	public ModelAndView llistatEntrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mav = new ModelAndView("entradesListUser");
-		//LlistatEntradesModel llistatEntradesModel = new LlistatEntradesModel();
 
 		String loggedUser = LoginInfo.getInstance().getUsername();
 
 		boolean tePermisos;
 		{
 			boolean esAdministrador = LoginInfo.hasRole(Constants.ROLE_ADMIN);
-			tePermisos = esAdministrador; // || esCoordinador || esCapDeProjecte;
+			tePermisos = esAdministrador;
 		}
 
-		mav.addObject("tePermisos", tePermisos);
 		llistatEntradesModel.setTePermisos(tePermisos);
 
 		// Inicialització del mes seleccionat
@@ -684,12 +682,10 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 		if (usuariID == null) {
 			usuariID = loggedUser;
 		}
-		mav.addObject("usuariID", usuariID);
 		llistatEntradesModel.setUsuariId(usuariID);
 
 		// Cercar departaments de l'usuari
 		List<Long> departaments;
-		// UsuariDepartament[] departamentsUsuari;
 		{
 			Where wud = UsuariDepartamentFields.USUARIID.equal(usuariID);
 			departaments = UsuariDepartamentEjb.executeQuery(UsuariDepartamentFields.DEPARTAMENTID, wud);
@@ -710,9 +706,7 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 			}
 		}
 
-		mav.addObject("departaments", departaments);
 		llistatEntradesModel.setDepartaments(departaments);
-		mav.addObject("departamentID", departamentID);
 		llistatEntradesModel.setDepartamentId(departamentID);
 
 		// ============== PROJECTES
@@ -752,10 +746,8 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
 		itemsByDate = getQueEsticFentItemByUser(usuariID, selectedProjects,
 				new Timestamp(selectedMonthStart.getTimeInMillis()), new Timestamp(selectedMonthEnd.getTimeInMillis()));
-		mav.addObject("start", selectedMonthStart);
 		llistatEntradesModel.setSelectedMonthStart(selectedMonthStart);
 
-		mav.addObject("itemsByDate", itemsByDate);
 		llistatEntradesModel.setItemsByDate(itemsByDate);
 
 		{
@@ -765,7 +757,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 			allAccions = accionsEjb.select(wa, new OrderBy(AccioFields.NOM, OrderType.ASC));
 			// allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC,
 			// AccionsFields.NOM);
-			mav.addObject("allAccions", allAccions);
 			llistatEntradesModel.setAllAccions(allAccions);
 		}
 
@@ -775,7 +766,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 		}
 
 		String redirectUrl = URLEncoder.encode("LlistatEntrades.jsp?" + redirectUrlParams, "UTF-8");
-		mav.addObject("redirectUrl", redirectUrl);
 		llistatEntradesModel.setRedirectUrl(redirectUrl);
 		{
 			// ISecurity __security = ManagerQueEsticFentOTAE.getSecurity();
@@ -787,14 +777,12 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 				UsuariDepartamentJPA usuariDepartamentJpa = (UsuariDepartamentJPA) UsuariDepartament;
 				usuariDepartamentJpa.setUsuari(usuari);
 			}
-			mav.addObject("personalCap", personalCap);
 			llistatEntradesModel.setPersonalCap(personalCap);
 		}
 		{
 			List<Accio> actions = this.accionsEjb.select(AccioFields.COLOR.isNotNull(),
 					new OrderBy(AccioFields.ACCIOID, OrderType.ASC));
 			actions.add(new AccioBean(-10, null, "Multiples Canvis", "ffff00", null));
-			mav.addObject("actions", actions);
 			llistatEntradesModel.setActions(actions);
 		}
 
@@ -805,11 +793,9 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 		{
 			Where where = DepartamentFields.DEPARTAMENTID.in(departaments);
 			List<Departament> departamentsInfo = this.departamentsEjb.select(where);
-			mav.addObject("departamentsInfo", departamentsInfo);
 			llistatEntradesModel.setDepartamentsInfo(departamentsInfo);
 		}
 
-		mav.addObject("redirectUrlParams", redirectUrlParams);
 		llistatEntradesModel.setRedirectUrlParams(redirectUrlParams);
 
 		mav.addObject("model", llistatEntradesModel);

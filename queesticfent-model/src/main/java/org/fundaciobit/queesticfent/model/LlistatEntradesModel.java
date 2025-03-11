@@ -12,189 +12,210 @@ import org.fundaciobit.queesticfent.model.entity.UsuariDepartament;
 
 public class LlistatEntradesModel {
 
-	boolean tePermisos;
+    boolean tePermisos;
 
-	String usuariId;
+    String usuariId;
 
-	List<Long> departaments;
+    List<Long> departaments;
 
-	long departamentId;
+    long departamentId;
 
-	Long projecteId = 0L;
+    Long projecteId = 0L;
 
-	List<Long> projectes;
+    List<Long> projectes;
 
-	List<Long> projectesSeleccionats;
+    List<Long> projectesSeleccionats;
 
-	boolean mostrarEntradesAmagades;
+    boolean mostrarEntradesAmagades;
 
-	Calendar selectedMonthStart;
+    Calendar selectedMonthStart;
 
-	Map<Date, List<QueEsticFentItem>> itemsByDate;
+    Map<Date, List<QueEsticFentItem>> itemsByDate;
 
-	List<Accio> allAccions;
+    List<Accio> allAccions;
 
-	String redirectUrlParams;
+    String redirectUrlParams;
 
-	String redirectUrl;
+    String redirectUrl;
 
-	List<UsuariDepartament> personalCap;
+    List<UsuariDepartament> personalCap;
 
-	List<Accio> actions;
+    List<Accio> actions;
 
-	List<Projecte> projectesList;
+    List<Projecte> projectesList;
 
-	List<Departament> departamentsInfo;
-	
-	
+    List<Departament> departamentsInfo;
 
+    public List<Accio> getActions() {
+        return actions;
+    }
 
-	public List<Accio> getActions() {
-		return actions;
-	}
+    public void setActions(List<Accio> actions) {
+        this.actions = actions;
+    }
 
-	public void setActions(List<Accio> actions) {
-		this.actions = actions;
-	}
+    public List<Projecte> getProjectesList() {
+        return projectesList;
+    }
 
-	public List<Projecte> getProjectesList() {
-		return projectesList;
-	}
+    public void setProjectesList(List<Projecte> projectesList) {
+        this.projectesList = projectesList;
+    }
 
-	public void setProjectesList(List<Projecte> projectesList) {
-		this.projectesList = projectesList;
-	}
+    public List<Departament> getDepartamentsInfo() {
+        return departamentsInfo;
+    }
 
-	public List<Departament> getDepartamentsInfo() {
-		return departamentsInfo;
-	}
+    public void setDepartamentsInfo(List<Departament> departamentsInfo) {
+        this.departamentsInfo = departamentsInfo;
+    }
 
-	public void setDepartamentsInfo(List<Departament> departamentsInfo) {
-		this.departamentsInfo = departamentsInfo;
-	}
+    public List<Accio> getAllAccions() {
+        return allAccions;
+    }
 
-	public List<Accio> getAllAccions() {
-		return allAccions;
-	}
+    public void setAllAccions(List<Accio> allAccions) {
+        this.allAccions = allAccions;
+    }
 
-	public void setAllAccions(List<Accio> allAccions) {
-		this.allAccions = allAccions;
-	}
+    public String getRedirectUrlParams() {
+        return redirectUrlParams;
+    }
 
-	public String getRedirectUrlParams() {
-		return redirectUrlParams;
-	}
+    public void setRedirectUrlParams(String redirectUrlParams) {
+        this.redirectUrlParams = redirectUrlParams;
+    }
 
-	public void setRedirectUrlParams(String redirectUrlParams) {
-		this.redirectUrlParams = redirectUrlParams;
-	}
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
 
-	public String getRedirectUrl() {
-		return redirectUrl;
-	}
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
 
-	public void setRedirectUrl(String redirectUrl) {
-		this.redirectUrl = redirectUrl;
-	}
+    public List<UsuariDepartament> getPersonalCap() {
+        return personalCap;
+    }
 
-	public List<UsuariDepartament> getPersonalCap() {
-		return personalCap;
-	}
+    public void setPersonalCap(List<UsuariDepartament> personalCap) {
+        this.personalCap = personalCap;
+    }
 
-	public void setPersonalCap(List<UsuariDepartament> personalCap) {
-		this.personalCap = personalCap;
-	}
+    public void setProjecteId(Long projecteId) {
+        this.projecteId = projecteId;
+    }
 
-	public void setProjecteId(Long projecteId) {
-		this.projecteId = projecteId;
-	}
+    public Calendar getSelectedMonthStart() {
+        return selectedMonthStart;
+    }
 
-	public Calendar getSelectedMonthStart() {
-		return selectedMonthStart;
-	}
+    public void setSelectedMonthStart(Calendar start) {
+        this.selectedMonthStart = start;
+    }
 
-	public void setSelectedMonthStart(Calendar start) {
-		this.selectedMonthStart = start;
-	}
-	
-	public int getSelectedMonth() {
-	    return this.getSelectedMonthStart().get(Calendar.MONTH);
-	}
-	
-	public int getSelectedYear() {
-       return this.getSelectedMonthStart().get(Calendar.YEAR);
-	}
+    public int getSelectedMonth() {
+        return this.getSelectedMonthStart().get(Calendar.MONTH);
+    }
 
-	public Map<Date, List<QueEsticFentItem>> getItemsByDate() {
-		return itemsByDate;
-	}
+    public int getSelectedYear() {
+        return this.getSelectedMonthStart().get(Calendar.YEAR);
+    }
 
-	public void setItemsByDate(Map<Date, List<QueEsticFentItem>> itemsByDate) {
-		this.itemsByDate = itemsByDate;
-	}
+    public int getNextSelectedMonth() {
+        Calendar auxCalendar = (Calendar) this.selectedMonthStart.clone();
+        auxCalendar.add(Calendar.MONTH, 1);
+        return auxCalendar.get(Calendar.MONTH);
+    }
 
-	public boolean isMostrarEntradesAmagades() {
-		return mostrarEntradesAmagades;
-	}
+    public int getNextSelectedYear() {
+        Calendar auxCalendar = (Calendar) this.selectedMonthStart.clone();
+        auxCalendar.add(Calendar.MONTH, 1);
+        return auxCalendar.get(Calendar.YEAR);
+    }
 
-	public void setMostrarEntradesAmagades(boolean mostrarEntradesAmagades) {
-		this.mostrarEntradesAmagades = mostrarEntradesAmagades;
-	}
+    public int getPreviousSelectedMonth() {
+        Calendar auxCalendar = (Calendar) this.selectedMonthStart.clone();
+        auxCalendar.add(Calendar.MONTH, -1);
+        return auxCalendar.get(Calendar.MONTH);
+    }
 
-	public boolean isTePermisos() {
-		return tePermisos;
-	}
+    public int getPreviousSelectedYear() {
+        Calendar auxCalendar = (Calendar) this.selectedMonthStart.clone();
+        auxCalendar.add(Calendar.MONTH, -1);
+        return auxCalendar.get(Calendar.YEAR);
+    }
 
-	public void setTePermisos(boolean tePermisos) {
-		this.tePermisos = tePermisos;
-	}
+    public Map<Date, List<QueEsticFentItem>> getItemsByDate() {
+        return itemsByDate;
+    }
 
-	public String getUsuariId() {
-		return usuariId;
-	}
+    public void setItemsByDate(Map<Date, List<QueEsticFentItem>> itemsByDate) {
+        this.itemsByDate = itemsByDate;
+    }
 
-	public void setUsuariId(String usuariId) {
-		this.usuariId = usuariId;
-	}
+    public boolean isMostrarEntradesAmagades() {
+        return mostrarEntradesAmagades;
+    }
 
-	public List<Long> getDepartaments() {
-		return departaments;
-	}
+    public void setMostrarEntradesAmagades(boolean mostrarEntradesAmagades) {
+        this.mostrarEntradesAmagades = mostrarEntradesAmagades;
+    }
 
-	public void setDepartaments(List<Long> departaments) {
-		this.departaments = departaments;
-	}
+    public boolean isTePermisos() {
+        return tePermisos;
+    }
 
-	public long getDepartamentId() {
-		return departamentId;
-	}
+    public void setTePermisos(boolean tePermisos) {
+        this.tePermisos = tePermisos;
+    }
 
-	public void setDepartamentId(long departamentId) {
-		this.departamentId = departamentId;
-	}
+    public String getUsuariId() {
+        return usuariId;
+    }
 
-	public List<Long> getProjectes() {
-		return projectes;
-	}
+    public void setUsuariId(String usuariId) {
+        this.usuariId = usuariId;
+    }
 
-	public void setProjectes(List<Long> projectes) {
-		this.projectes = projectes;
-	}
+    public List<Long> getDepartaments() {
+        return departaments;
+    }
 
-	public long getProjecteId() {
-		return projecteId;
-	}
+    public void setDepartaments(List<Long> departaments) {
+        this.departaments = departaments;
+    }
 
-	public void setProjecteId(long projecteId) {
-		this.projecteId = projecteId;
-	}
+    public long getDepartamentId() {
+        return departamentId;
+    }
 
-	public List<Long> getProjectesSeleccionats() {
-		return projectesSeleccionats;
-	}
+    public void setDepartamentId(long departamentId) {
+        this.departamentId = departamentId;
+    }
 
-	public void setProjectesSeleccionats(List<Long> projectesSeleccionats) {
-		this.projectesSeleccionats = projectesSeleccionats;
-	}
+    public List<Long> getProjectes() {
+        return projectes;
+    }
+
+    public void setProjectes(List<Long> projectes) {
+        this.projectes = projectes;
+    }
+
+    public long getProjecteId() {
+        return projecteId;
+    }
+
+    public void setProjecteId(long projecteId) {
+        this.projecteId = projecteId;
+    }
+
+    public List<Long> getProjectesSeleccionats() {
+        return projectesSeleccionats;
+    }
+
+    public void setProjectesSeleccionats(List<Long> projectesSeleccionats) {
+        this.projectesSeleccionats = projectesSeleccionats;
+    }
 
 }

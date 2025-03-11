@@ -44,7 +44,8 @@
 	public boolean getBoolean(HttpServletRequest request, String name) {
 		String str = request.getParameter(name);
 		return Boolean.parseBoolean(str);
-	}%>
+	}
+    %>
 <%
 LlistatEntradesModel model = (LlistatEntradesModel) request.getAttribute("model");
 
@@ -82,8 +83,8 @@ window.onload = scrollToCurrentDay;
                             <td>
                                 <FORM name="REB2010" method="post">
                                     <span id="toolTipBox" width="200"></span> <input type="hidden" name="mes"
-                                        value="<%=mesActual%>"> <input type="hidden" name="any"
-                                        value="<%=anyActual%>">
+                                        value="<%=model.getSelectedMonth()%>"> <input type="hidden" name="any"
+                                        value="<%=model.getSelectedYear()%>">
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td style="padding-right: 10px;">Nom:<br> <%
@@ -92,7 +93,7 @@ window.onload = scrollToCurrentDay;
                                                     <%
                                                     {
 
-                                                    	List<UsuariDepartament> personalCap = (List<UsuariDepartament>) request.getAttribute("personalCap");
+                                                    	List<UsuariDepartament> personalCap = (List<UsuariDepartament>) model.getPersonalCap();
 
                                                     	//java.util.List<KeyValue<String>> __users = __security.getAllUserNames();
                                                     	String __def;
@@ -178,19 +179,10 @@ window.onload = scrollToCurrentDay;
  %>
                                             </td>
 
-                                            <%
-                                            // Es calculen els ints per al mes i any per als botons de seguent i previ.
-                                            Calendar auxCalendar = (Calendar) model.getSelectedMonthStart().clone();
-                                            auxCalendar.add(Calendar.MONTH, -1);
-                                            int mesAnterior = auxCalendar.get(Calendar.MONTH);
-                                            int anyAnterior = auxCalendar.get(Calendar.YEAR);
-                                            auxCalendar.add(Calendar.MONTH, 2);
-                                            int mesSeguent = auxCalendar.get(Calendar.MONTH);
-                                            int anySeguent = auxCalendar.get(Calendar.YEAR);
-                                            %>
+                                           
                                             <td align="right" width="40px" style="border-left: 1px solid">
                                                 &nbsp;&nbsp;<img
-                                                onclick="document.REB2010.mes.value=<%=mesAnterior%>;document.REB2010.any.value=<%=anyAnterior%>;document.REB2010.submit()"
+                                                onclick="document.REB2010.mes.value=<%=model.getPreviousSelectedMonth()%>;document.REB2010.any.value=<%=model.getPreviousSelectedYear()%>;document.REB2010.submit()"
                                                 src="<c:url value="/img"/>/previous.jpg">
                                             </td>
                                             <td align="center"><span
@@ -198,7 +190,7 @@ window.onload = scrollToCurrentDay;
                                                     <%=Utils.mesos[mesActual]%> <%=anyActual%>
                                             </span></td>
                                             <td align="left" width="40px"><img
-                                                onclick="document.REB2010.mes.value=<%=mesSeguent%>;document.REB2010.any.value=<%=anySeguent%>;document.REB2010.submit()"
+                                                onclick="document.REB2010.mes.value=<%=model.getNextSelectedMonth()%>;document.REB2010.any.value=<%=model.getNextSelectedYear()%>;document.REB2010.submit()"
                                                 src="<c:url value="/img"/>/next.jpg"></td>
 
 
