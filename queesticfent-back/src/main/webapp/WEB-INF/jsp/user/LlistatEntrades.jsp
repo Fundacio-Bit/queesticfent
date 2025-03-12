@@ -53,8 +53,6 @@ Map<String, String> noms = new HashMap<String, String>();
 LoginInfo info = LoginInfo.getInstance();
 noms.put(model.getUsuariId(), info.getUserInfo().getFullName());
 
-int mesActual = model.getSelectedMonthStart().get(Calendar.MONTH);
-int anyActual = model.getSelectedMonthStart().get(Calendar.YEAR);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -187,7 +185,7 @@ window.onload = scrollToCurrentDay;
                                             </td>
                                             <td align="center"><span
                                                 style="font-family: helvetica, impact, sans-serif; font-size: 12pt; font-weight: bold;">
-                                                    <%=Utils.mesos[mesActual]%> <%=anyActual%>
+                                                    <%=Utils.mesos[model.getSelectedMonth()]%> <%=model.getSelectedYear()%>
                                             </span></td>
                                             <td align="left" width="40px"><img
                                                 onclick="document.REB2010.mes.value=<%=model.getNextSelectedMonth()%>;document.REB2010.any.value=<%=model.getNextSelectedYear()%>;document.REB2010.submit()"

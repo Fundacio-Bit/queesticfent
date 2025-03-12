@@ -664,8 +664,9 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
 		llistatEntradesModel.setTePermisos(tePermisos);
 
-		// Inicialització del mes seleccionat
+		// Inicialització del calendar amb la data seleccionada
 		Calendar selectedMonthStart = Calendar.getInstance();
+		
 		selectedMonthStart.set(Calendar.HOUR_OF_DAY, 0);
 		selectedMonthStart.set(Calendar.MINUTE, 0);
 		selectedMonthStart.set(Calendar.SECOND, 0);
@@ -755,8 +756,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
 			Where wa = AccioFields.ACCIOID.greaterThanOrEqual((long) 0);
 			allAccions = accionsEjb.select(wa, new OrderBy(AccioFields.NOM, OrderType.ASC));
-			// allAccions = accionsEjb.selectForOnlyRead(wa, OrderType.ASC,
-			// AccionsFields.NOM);
 			llistatEntradesModel.setAllAccions(allAccions);
 		}
 
@@ -942,10 +941,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
 			Map<String, Object> map = generateUserInfo(usuarisList, projectesID, any, mes);
 
-			//ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo> llistaDeUserInfo = (ArrayList<org.fundaciobit.queesticfent.back.controller.user.UserInfo>) map.get("usuaris");
-
-			// template.createDocument(map, baos);
-
 			OutputStream outStream = response.getOutputStream();
 			generateUsingXDocReport(map, templateFile, outStream);
 			//generateUsingJooReports(map, templateFile, outStream);
@@ -1104,29 +1099,24 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 	@Override
 	public void postValidate(HttpServletRequest request, ModificacioQueEsticFentForm modificacionsQueEsticFentForm,
 			BindingResult result) throws I18NException {
-
 		if (modificacionsQueEsticFentForm.getModificacioQueEsticFent().getProjecteID() == null) {
-
 			I18NFieldError fieldError = new I18NFieldError(PROJECTEID, new I18NTranslation("genapp.validation.required",
 					new I18NArgument[] { new I18NArgumentCode(get(PROJECTEID)) }));
 
 			ValidationWebUtils.addFieldErrorsToBindingResult(result, new I18NValidationException(fieldError));
 		}
-
 	}
 
 	private int getSelectedMonth(HttpServletRequest request, Calendar selectedMonthStart) {
 		int mes;
 		if (request.getParameter("mes") != null) {
 			mes = Integer.valueOf(request.getParameter("mes"));
-			request.getSession().setAttribute("MES_LLISTAT", mes);
-		} else if (request.getSession().getAttribute("MES_LLISTAT") == null) {
+		} else if(request.getSession().getAttribute("mesSession") != null) {
+		    mes = (int) request.getSession().getAttribute("mesSession");
+		}else{
 			mes = selectedMonthStart.get(Calendar.MONTH);
-			request.getSession().setAttribute("MES_LLISTAT", mes);
-		} else {
-			mes = (int) request.getSession().getAttribute("MES_LLISTAT");
 		}
-
+		request.getSession().setAttribute("mesSession", mes);
 		return mes;
 	}
 
@@ -1135,10 +1125,13 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 		if (request.getParameter("any") != null) {
 			String anyStr = request.getParameter("any");
 			any = Integer.parseInt(anyStr);
-		} else {
+		} else if(request.getSession().getAttribute("anySession") != null){
+		    any = (int) request.getSession().getAttribute("anySession");
+		}else {
 			any = selectedMonthStart.get(Calendar.YEAR);
 		}
+	      request.getSession().setAttribute("anySession", any);
 		return any;
 	}
-
+	
 }
