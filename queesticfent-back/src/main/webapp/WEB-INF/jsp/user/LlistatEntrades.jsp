@@ -7,8 +7,6 @@
     import="org.fundaciobit.queesticfent.model.entity.Departament"%><%@ page language="java" contentType="text/html;"%><%@page
     import="java.text.SimpleDateFormat"%>
 <%@page import="org.fundaciobit.queesticfent.back.utils.Utils"%>
-<%@page import="org.fundaciobit.queesticfent.back.controller.user.QueEsticFentItem_Old"%>
-<%@page import="org.fundaciobit.queesticfent.back.controller.user.ModificacioItem_Old"%>
 
 <%@page import="org.fundaciobit.queesticfent.model.QueEsticFentItem"%>
 <%@page import="org.fundaciobit.queesticfent.model.ModificacioItem"%>

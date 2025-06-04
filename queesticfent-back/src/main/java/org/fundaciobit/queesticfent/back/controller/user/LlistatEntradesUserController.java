@@ -556,11 +556,7 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 				item = itemsByQueEsticFentID.get(modificacio.getQueEsticFentID());
 				if (item == null) {
 					ModificacioQueEsticFentJPA mqef = modificacioQueEsticFentEjb.findByPrimaryKey(modificacio.getQueEsticFentID());
-					QueEsticFentItem_Old qef = new QueEsticFentItem_Old(mqef.getUsuariID(), mqef.getData(),
-							mqef.getDada1());
-					if (qef != null) {
-						item = new QueEsticFentItem(usuariID, qef.getData(), qef.getDescripcio());
-					}
+					item = new QueEsticFentItem(usuariID, mqef.getData(), mqef.getDada1());
 					itemsByQueEsticFentID.put(modificacio.getQueEsticFentID(), item);
 				}
 
