@@ -1,9 +1,11 @@
 package org.fundaciobit.queesticfent.back.controller.user;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +17,15 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.fundaciobit.basecamp.api3.BaseCampApi3;
+import org.fundaciobit.basecamp.api3.beans.User;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.queesticfent.back.controller.webdb.ModificacioQueEsticFentController;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentFilterForm;
 import org.fundaciobit.queesticfent.back.form.webdb.ModificacioQueEsticFentForm;
+import org.fundaciobit.queesticfent.back.security.LoginInfo;
+import org.fundaciobit.queesticfent.commons.utils.Configuracio;
 import org.fundaciobit.queesticfent.model.entity.Festiu;
 import org.fundaciobit.queesticfent.model.entity.ModificacioQueEsticFent;
 import org.fundaciobit.queesticfent.model.entity.Usuari;
@@ -27,11 +33,13 @@ import org.fundaciobit.queesticfent.model.fields.FestiuFields;
 import org.fundaciobit.queesticfent.model.fields.ModificacioQueEsticFentFields;
 import org.fundaciobit.queesticfent.model.fields.UsuariDepartamentFields;
 import org.fundaciobit.queesticfent.model.fields.UsuariFields;
+import org.fundaciobit.queesticfent.persistence.ModificacioQueEsticFentJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * 
@@ -235,11 +243,62 @@ public class VacancesUserController extends ModificacioQueEsticFentController {
 		ModelAndView mav = new ModelAndView("taulaDeVacances");
 		mav.addObject("vacancesmesos", vacancesmesos.values());
 		mav.addObject("persones", persones);
+		log.info("UsuariID = "+request.getParameter("usuariID"));
+		mav.addObject("usuariID", request.getParameter("usuariID"));
+		
 
 		return mav;
 
 	}
 
+	
+	
+	@RequestMapping(value = "/afegirrangvacances", method = RequestMethod.GET)
+    public ModelAndView afegirRangVacances(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    
+	    String dataIniciStr = request.getParameter("dataInici");
+	    String dataFiStr = request.getParameter("dataFi");
+	    log.info("DataIniciStr = " + dataIniciStr);
+	    log.info("DataFiStr = " + dataFiStr);
+	    
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date dataInici = format.parse(dataIniciStr);
+        Date dataFi = format.parse(dataFiStr);
+
+        Calendar calendariInici = Calendar.getInstance();
+        calendariInici.setTime(dataInici);
+
+        Calendar calendariFi = Calendar.getInstance();
+        calendariFi.setTime(dataFi);
+	    
+        Calendar start = (Calendar) calendariInici.clone(); // Copiem per no modificar l'original
+        Calendar end = calendariFi;
+        LoginInfo li = LoginInfo.getInstance();
+        
+        log.info("li.getUsername()"+li.getUsername());
+        log.info("li.getUserInfo().getId()"+li.getUserInfo().getId());
+        
+        
+        
+        for (; !start.after(end); start.add(Calendar.DATE, 1)) {
+            
+            ModificacioQueEsticFentJPA m = new ModificacioQueEsticFentJPA();
+            Date dataTmp = start.getTime();
+            m.setData(new Timestamp(dataTmp.getTime()));
+            m.setAccioID(-4);
+            m.setUsuariID(li.getUsername());
+            m.setDada1("vacances");
+            
+            modificacioQueEsticFentEjb.create(m);
+        }
+	    
+	    return new ModelAndView(new RedirectView("/user/vacances/vacancespermes", true));
+	}
+	
+	
+	
+	
 	public static class VacancesMes {
 		int anyo;
 		String mesnom;
@@ -321,7 +380,8 @@ public class VacancesUserController extends ModificacioQueEsticFentController {
 		}
 
 	}
-
+	
+	
 	public static class UsuariInfo implements Comparable<UsuariInfo> {
 		String username;
 		String nom;

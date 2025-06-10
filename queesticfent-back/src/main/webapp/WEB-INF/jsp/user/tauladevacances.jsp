@@ -31,8 +31,104 @@ td:first-child, th:first-child {
 }
 </style>
 
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.10.4/dist/css/tempus-dominus.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-<h1>Calendari de Vacances</h1>
+
+
+
+<!-- Bootstrap 5 JS (amb Popper inclòs) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.10.4/dist/js/tempus-dominus.min.js"></script>
+
+<script>
+  const dateOnlyOptions = {
+    display: {
+      components: {
+        calendar: true,
+        date: true,
+        month: true,
+        year: true,
+        decades: true,
+        clock: false,
+        hours: false,
+        minutes: false,
+        seconds: false
+      }
+    },
+    defaultDate: null
+  };
+
+
+
+  let picker1, picker2;
+
+  // Quan el modal s’obre
+  const modal = document.getElementById('modalVacances');
+  modal.addEventListener('shown.bs.modal', function () {
+    // Inicialitza només si encara no existeixen
+    if (!picker1) {
+      picker1 = new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), options);
+    }
+    if (!picker2) {
+      picker2 = new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'), options);
+    }
+  });
+  
+</script>
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Calendari de Vacances</h1>
+  <a
+  class="btn btn-sm btn-success"
+  href="#"
+  data-bs-toggle="modal"
+  data-bs-target="#modalVacances"
+>
+  Afegir vacances
+</a>
+</div>
+
+<!-- Modal per introduir vacances -->
+<div class="modal fade" id="modalVacances" tabindex="-1" aria-labelledby="modalVacancesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="get" action="/queesticfent/user/vacances/afegirrangvacances/?">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVacancesLabel">Afegir vacances</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tanca"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="dataInici" class="form-label">Data d'inici</label>
+            <input type="date" class="form-control" id="dataInici" name="dataInici" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="dataFi" class="form-label">Data de fi</label>
+            <input type="date" class="form-control" id="dataFi" name="dataFi" required>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tanca</button>
+          <button type="submit" class="btn btn-success">Desa</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'));
+    new tempusDominus.TempusDominus(document.getElementById('datetimepicker2'));
+</script>
 
 <c:forEach items="${vacancesmesos}" var="vacancesmes">
 
