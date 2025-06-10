@@ -134,7 +134,7 @@ td:first-child, th:first-child {
 
     
 
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr >
                 <th colspan="${vacancesmes.numberofdays + 1}"><center><h4>${vacancesmes.anyo}- ${vacancesmes.mesnom}</h4></center></th>
