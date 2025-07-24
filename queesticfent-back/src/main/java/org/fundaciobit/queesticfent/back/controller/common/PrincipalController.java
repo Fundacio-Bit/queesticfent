@@ -57,8 +57,6 @@ public class PrincipalController {
             Where wud = UsuariDepartamentFields.USUARIID.equal(info.getUsername());
             departaments = UsuariDepartamentEjb.executeQuery(UsuariDepartamentFields.DEPARTAMENTID, wud);
 
-            log.info("XXX XYZ departaments: " + departaments.size());
-
             if (departaments.isEmpty()) {
                 HtmlUtils.saveMessageError(request,
                         "ADVERTENCIA: El teu usuari no té cap departament assignat. Contacta amb el teu administrador perque t'assigni un departament, creant una nova entrada per al teu usuari al menú d'Usuaris Departament.");

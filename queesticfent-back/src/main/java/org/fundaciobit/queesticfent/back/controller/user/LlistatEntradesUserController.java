@@ -215,7 +215,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 			}
 			String projecteIdStr = request.getParameter("projecteID");
 			if (projecteIdStr != null) {
-				// TODO XYZ Falta posar ProjecteID com a readonly
 				m.setProjecteID(Long.parseLong(projecteIdStr));
 			}
 			String accioID = request.getParameter("accioID");
@@ -251,8 +250,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 
                         return form;
                     }
-                    
-                    
 
                 } catch (I18NException e) {
                     String msg = "Error afegint vacances: " + I18NUtils.getMessage(e);
@@ -380,10 +377,15 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
 			NewEntry e = new NewEntry();
 			e.setStarts_at(ISO8601.dateToISO8601(m.getData()));
 			e.setEnds_at(ISO8601.dateToISO8601(m.getData()));
+			
+			
+			log.info("User-> "+m.getUsuariID() + " ha introduit vacances");
+			log.info("        Data Inici: "+e.getStarts_at());
+			log.info("        Data Fi: "+e.getEnds_at());
 
 			// XYZ ZZZ Canviar per EMAIL !!!!!
 			String username = LoginInfo.getInstance().getUsername();
-
+			
 			User user = api3.getUserIdFromEmail(projectID, username + "@fundaciobit.org");
 			e.setSummary("Vacances " + username.toUpperCase());
 			e.setAllDay(true);
