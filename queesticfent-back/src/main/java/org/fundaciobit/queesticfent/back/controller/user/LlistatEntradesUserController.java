@@ -1114,14 +1114,9 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
         return any;
     }
 
-    @Override
     @RequestMapping(value = "/afegirvacances", method = RequestMethod.GET)
-    public ModelAndView crearModificacioQueEsticFentGet(HttpServletRequest request, HttpServletResponse response)
+    public ModelAndView afegirVacancesModificacioQueEsticFentGet(HttpServletRequest request, HttpServletResponse response)
             throws I18NException {
-
-        log.info("********************************");
-        log.info("Ha entrat al nou /new ");
-        log.info("********************************");
 
         //No se que fa (mai entra?)
         if (!isActiveFormNew()) {
@@ -1150,7 +1145,6 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
 
         return mav;
     }
