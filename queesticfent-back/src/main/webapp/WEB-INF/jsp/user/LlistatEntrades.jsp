@@ -339,6 +339,11 @@ Afegir Entrada
                                             		+ URLEncoder.encode(getSimpleDateTimeFormat().format(model.getSelectedMonthStart().getTime()))
                                             		+ (model.getProjecteId() == 0L ? "" : ("&projecteID=" + model.getProjecteId()));
                                             //+ "&redirectUrl=" + model.getRedirectUrl();
+                                            
+                                            
+                                            String afegirVacancesURL = "afegirvacances?usuariID=" + model.getUsuariId() + "&data="
+                                                    + URLEncoder.encode(getSimpleDateTimeFormat().format(model.getSelectedMonthStart().getTime()))
+                                                    + (model.getProjecteId() == 0L ? "" : ("&projecteID=" + model.getProjecteId()));
                                             %>
                                             <td align="center">
                                                 <%
@@ -354,7 +359,7 @@ Afegir Entrada
                                             <td align="center">
                                                 <%
                                                 if (!isCapDeSetmana) {
-                                                %> <a href="<%=novaAccioURL%>&accioID=<%=Utils.ACCIO_VACANCES%>"> <img
+                                                %> <a href="<%=afegirVacancesURL%>&accioID=<%=Utils.ACCIO_VACANCES%>"> <img
                                                     onmouseover="toolTip('Marcar de vacances', this)"
                                                     src="<c:url value="/img/add2.gif"/>">
                                             </a> <%
