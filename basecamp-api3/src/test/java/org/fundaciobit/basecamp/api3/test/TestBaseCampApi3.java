@@ -37,7 +37,6 @@ import org.fundaciobit.basecamp.api3.beans.Todo;
 import org.fundaciobit.basecamp.api3.beans.Upload;
 import org.fundaciobit.basecamp.api3.utils.TokenResponse;
 import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
-import org.fundaciobit.pluginsib.core.utils.ISO8601;
 
 
 /**
@@ -238,11 +237,11 @@ public class TestBaseCampApi3 {
         e.setSummary(title);
         Calendar cal = Calendar.getInstance();
 
-        e.setStarts_at(ISO8601.dateToISO8601(cal.getTime()));
+        e.setStarts_at(org.fundaciobit.pluginsib.core.v3.utils.ISO8601.dateToISO8601(cal.getTime()));
 
         cal.add(Calendar.HOUR, 3);
 
-        e.setEnds_at(ISO8601.dateToISO8601(cal.getTime()));
+        e.setEnds_at(org.fundaciobit.pluginsib.core.v3.utils.ISO8601.dateToISO8601(cal.getTime()));
 
         e.setAllDay(true);
         
