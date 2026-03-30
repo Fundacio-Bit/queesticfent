@@ -3,10 +3,13 @@ package org.fundaciobit.basecamp.api3.test;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -16,6 +19,8 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +32,8 @@ import java.util.TreeMap;
 
 import org.fundaciobit.basecamp.api3.BaseCampApi3;
 import org.fundaciobit.basecamp.api3.beans.Assignee;
+import org.fundaciobit.basecamp.api3.beans.Dock;
+import org.fundaciobit.basecamp.api3.beans.Document;
 import org.fundaciobit.basecamp.api3.beans.Entries;
 import org.fundaciobit.basecamp.api3.beans.Entry;
 import org.fundaciobit.basecamp.api3.beans.Folder;
@@ -36,14 +43,15 @@ import org.fundaciobit.basecamp.api3.beans.Todo;
 import org.fundaciobit.basecamp.api3.beans.Upload;
 import org.fundaciobit.basecamp.api3.utils.TokenResponse;
 import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
-
+import org.fundaciobit.pluginsib.documentconverter.IDocumentConverterPlugin;
+import org.fundaciobit.pluginsib.documentconverter.openoffice.OpenOfficeDocumentConverterPlugin;
 
 /**
  * 
  * @author anadal
  *
  */
-public class TestBaseCampApi3 {
+public class DownloadDocsAndFilesFromBaseCamp {
 
     public static void main(String[] args) {
 
@@ -76,7 +84,7 @@ public class TestBaseCampApi3 {
                         // Intentam actualitzar emprant el refresh token
                         TokenResponse token = UpdateTokenUtils.getNewTokenFromRefreshToken(client_id, client_secret,
                                 redirect_uri, refreshToken);
-                        
+
                         System.out.println(token);
 
                         if (token.getRefreshToken() == null) {
@@ -98,7 +106,8 @@ public class TestBaseCampApi3 {
                 }
 
                 if (!tokenUpdated) {
-                    updateTokenViaWebFromStandaloneProgram(tu, basecampTokenFile, redirect_uri, client_id, client_secret);
+                    updateTokenViaWebFromStandaloneProgram(tu, basecampTokenFile, redirect_uri, client_id,
+                            client_secret);
                 }
 
             }
@@ -110,32 +119,27 @@ public class TestBaseCampApi3 {
 
             //listProjects(tu);
 
-            /*
             Properties testProps = new Properties();
             testProps.load(new FileInputStream(new File("test.properties")));
             long projectID = Long.parseLong(testProps.getProperty("projectID"));
 
-            
             Project project = getProject(tu, projectID);
-            System.out.println(project);
-            
-            
-            
+            //System.out.println(project);
+
             Long folderRootID = null;
             Long schedulerID = null;
             {
-               for(Dock d : project.getDock()) {
-                   if ("vault".equals(d.getName())) {
-                       folderRootID = d.getId();
-                   }
-                   if ("schedule".equals(d.getName())) {
-                       schedulerID = d.getId();
-                   }
-               }
+                for (Dock d : project.getDock()) {
+                    if ("vault".equals(d.getName())) {
+                        folderRootID = d.getId();
+                    }
+                    if ("schedule".equals(d.getName())) {
+                        schedulerID = d.getId();
+                    }
+                }
             }
-            
+
             System.out.println("SchedulerID: " + schedulerID);
-            */
 
             /*
             // Test users
@@ -145,9 +149,6 @@ public class TestBaseCampApi3 {
                 System.out.println(user.toString());
             }
             */
-            
-            
-            
 
             /*
             Entry e = addSchedulerEntry(tu, projectID, schedulerID, "Vacances AN");
@@ -163,7 +164,9 @@ public class TestBaseCampApi3 {
 
             //listSchedulerEntries(tu, projectID, scheduleID);
 
-            //listFolders(tu, projectID, folderRootID);
+            File base = new File("DocsAndFiles");
+
+            listFolders(tu, projectID, folderRootID, base);
 
             //uploadFile(tu, projectID, folderRootID);
 
@@ -184,8 +187,8 @@ public class TestBaseCampApi3 {
 
     }
 
-    protected static void updateTokenViaWebFromStandaloneProgram(BaseCampApi3 tu, File basecampTokenFile, String redirect_uri,
-            String client_id, String client_secret)
+    protected static void updateTokenViaWebFromStandaloneProgram(BaseCampApi3 tu, File basecampTokenFile,
+            String redirect_uri, String client_id, String client_secret)
             throws MalformedURLException, Exception, IOException, URISyntaxException, FileNotFoundException {
         URL uri = new URL(redirect_uri);
 
@@ -210,7 +213,7 @@ public class TestBaseCampApi3 {
         String resposta = readFromSocket(uri.getPort() == -1 ? 80 : uri.getPort());
 
         // token?error=access_denied
-        
+
         int index = resposta.indexOf("code=");
         if (index == -1) {
             throw new Exception("Error processant resposta del servidor de Basecamp => " + resposta);
@@ -249,9 +252,9 @@ public class TestBaseCampApi3 {
         e.setEnds_at(org.fundaciobit.pluginsib.core.v3.utils.ISO8601.dateToISO8601(cal.getTime()));
 
         e.setAllDay(true);
-        
+
         // Només funciona un participant ...
-        e.setParticipant_ids(new Integer[] { 27011117  }); // Juan Antonio 31907487 // Atrobat 29712337
+        e.setParticipant_ids(new Integer[] { 27011117 }); // Juan Antonio 31907487 // Atrobat 29712337
 
         return tu.addScheduleEntry(projectID, schedulerID, e);
     }
@@ -463,13 +466,54 @@ public class TestBaseCampApi3 {
         return project;
     }
 
-
-
-    protected static void listFolders(BaseCampApi3 tu, long projectID, Long folderID) throws Exception {
+    protected static void listFolders(BaseCampApi3 tu, long projectID, Long folderID, File base) throws Exception {
 
         if (folderID == null) {
             System.err.println("folderID és null.");
         } else {
+
+            Upload[] uploads = tu.getUploads(projectID, folderID);
+
+            if (uploads != null) {
+
+                for (int j = 0; j < uploads.length; j++) {
+                    System.out.println("     -- UPLOAD[" + j + "] FILENAME: " + uploads[j].getFilename());
+                    tu.downloadFile(uploads[j], new File(base, uploads[j].getFilename()));
+                }
+            }
+
+            // Listar todos los documentos que no son Upload de la carpeta
+            /*
+            List<Document> documents = tu.getDocuments(projectID, folderID);
+            
+            if (documents != null && !documents.isEmpty()) {
+            
+                for (int j = 0; j < documents.size(); j++) {
+                    System.out.println("     -- DOCUMENT[" + j + "] TITLE: " + documents.get(j).getTitle());
+                    System.out.println(" ----------------------------------------------------------------");
+            
+                    String htmlContent = PRE
+            
+                            + "    <div class=\"wrapper\">\n" + "      <h1 class=\"title\">"
+                            + documents.get(j).getTitle() + "</h1>\n" + "\n" + "   <hr/>\n"
+            
+                            + "<div class=\"formatted_content\">\n" + documents.get(j).getContent() + POST;
+            
+                    String name = documents.get(j).getTitle().replaceAll("[\\\\/:*?\"<>|]", "_");
+            
+                    //Files.write(new File(base, name + ".html").toPath(), htmlContent.getBytes());
+            
+                    System.out.println();
+            
+                    String xhtml = htmlContent; // Ja està ben formatat i no cal convertir a XHTML  
+            
+                    convertHtmlToOdtViaUNO(xhtml, new File(base, name + ".odt"), documents.get(j).getTitle());
+            
+                    System.out.println(" ----------------------------------------------------------------");
+            
+                }
+            }
+            */
 
             Folder[] folders = tu.getFolders(projectID, folderID);
 
@@ -478,12 +522,54 @@ public class TestBaseCampApi3 {
                 System.out.println("FOLDERS LEN : " + folders.length);
 
                 for (int i = 0; i < folders.length; i++) {
+                    System.out.println();
+                    System.out.println("---------------------------------------------");
                     System.out.println("FOLDER[" + i + "] Titol: " + folders[i].getTitle());
-                    System.out.println("FOLDER[" + i + "] tipus: " + folders[i].getType());
-                    System.out.println("FOLDER[" + i + "] URL: " + folders[i].getVaultsUrl());
+                    //System.out.println("FOLDER[" + i + "] tipus: " + folders[i].getType());
+
+                    //System.out.println("FOLDER[" + i + "] URL: " + folders[i].getVaultsUrl());
+
+                    String name = folders[i].getTitle();
+
+                    name = name.replaceAll("[\\\\/:*?\"<>|]", "_").trim();
+
+                    File folderFile = new File(base, name);
+                    if (!folderFile.exists()) {
+                        folderFile.mkdirs();
+                    }
+
+                    listFolders(tu, projectID, folders[i].getId(), folderFile);
+
                 }
+
             }
         }
+
+    }
+
+    public static void convertHtmlToOdtViaUNO(String htmlContent, File outputOdtFile, String title) throws Exception {
+
+        System.setProperty(OpenOfficeDocumentConverterPlugin.HOST_PROPERTY, "localhost");
+
+        System.setProperty(OpenOfficeDocumentConverterPlugin.PORT_PROPERTY, "8100");
+
+        IDocumentConverterPlugin oodcp = new OpenOfficeDocumentConverterPlugin();
+
+        System.out.println(" ==================================== ");
+
+        InputStream inputData = new ByteArrayInputStream(htmlContent.getBytes(StandardCharsets.UTF_8));
+
+        final String outputFileExtension = "odt";
+
+        FileOutputStream outputData = new FileOutputStream(outputOdtFile);
+
+        String inputFileExtension = "html";
+        {
+            oodcp.convertDocumentByExtension(inputData, inputFileExtension, outputData, outputFileExtension);
+        }
+        inputData.close();
+        outputData.flush();
+        outputData.close();
 
     }
 
@@ -536,7 +622,7 @@ public class TestBaseCampApi3 {
 
             out.println("HTTP/1.0 200 OK");
             out.println("Content-Type: text/html");
-            out.println("\r\n");
+            out.println("\n");
             out.println(
                     "<html><body>OK (Revisi consola per saber l'estat final del proc&eacute;s d'actualitzaci&oacute; del TOKEN)</body></html>");
 
@@ -550,5 +636,42 @@ public class TestBaseCampApi3 {
         serverSocket.close();
         return resposta;
     }
+
+    public static final String PRE = "<!DOCTYPE html><html lang=\"en\"><head>\n" + "    <meta charset=\"utf-8\">\n"
+            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n"
+            + "    <style>\n" + "      html {\n" + "        padding: 1em;\n" + "        background: #fff;\n"
+            + "        color: #222;\n"
+            + "        font-family: \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", Geneva, Verdana, sans-serif;\n"
+            + "        font-size: 100%;\n" + "        line-height: 1.5;\n" + "      }\n" + "\n" + "      h1,\n"
+            + "      p,\n" + "      ul,\n" + "      ol,\n" + "      div,\n" + "      figure {\n"
+            + "        margin: 0;\n" + "      }\n" + "\n" + "      h1 { font-size: 1.2em; }\n" + "\n" + "      ul {\n"
+            + "        list-style: disc;\n" + "        padding-left: 1.3em;\n" + "      }\n" + "\n" + "      ol {\n"
+            + "        padding-left: 1.3em;\n" + "        list-style: decimal;\n" + "      }\n" + "\n"
+            + "      blockquote {\n" + "        border-left: 3px solid #000;\n" + "        margin: 0;\n"
+            + "        padding: 0 0 0 1em;\n" + "      }\n" + "\n" + "      pre {\n"
+            + "        font-family: monaco, monospace;\n" + "        font-size: 0.875em;\n" + "        margin: 0;\n"
+            + "        padding: 1rem;\n" + "        background: #eee;\n" + "        border-radius: var(--radius-sm);\n"
+            + "        white-space: pre;\n" + "        word-wrap: normal;\n" + "        word-break: normal;\n"
+            + "        overflow-x: auto;\n" + "      }\n" + "\n" + "      code { border-radius: var(--radius-sm); }\n"
+            + "\n" + "      figure {\n" + "        display: inline-block;\n" + "        width: 100%;\n"
+            + "        box-sizing: border-box;\n" + "      }\n" + "\n"
+            + "      figcaption { word-break: break-word; }\n" + "\n" + "      img {\n" + "        display: block;\n"
+            + "        max-width: 100%;\n" + "        margin: 0 auto;\n" + "        padding: 1px;\n"
+            + "        border: 1px solid #eee;\n" + "      }\n" + "\n" + "      a {\n" + "        color: #1b6ac9;\n"
+            + "        text-decoration: underline;\n" + "      }\n" + "\n" + "      a:active { color: #064ac9; }\n"
+            + "\n" + "      .wrapper {\n" + "        max-width: 650px;\n" + "        margin: 0 auto;\n" + "      }\n"
+            + "\n" + "      .title {\n" + "        font-size: 2em;\n" + "        margin: 0.5em 0 1em;\n"
+            + "        line-height: 1.3;\n" + "      }\n" + "\n" + "      .attachment--image {\n"
+            + "        text-align: center;\n" + "        color: #888;\n" + "        font-size: 0.875em;\n" + "      }\n"
+            + "\n" + "      .attachment--file {\n" + "        position: relative;\n"
+            + "        padding: 1.4em 1em 1.5em;\n" + "        border: 1px solid #ddd;\n"
+            + "        border-bottom-width: 3px;\n" + "        border-radius: var(--radius-md);\n"
+            + "        color: #222;\n" + "      }\n" + "\n" + "      .attachment__label {\n"
+            + "        position: absolute;\n" + "        bottom: 0;\n" + "        right: 0;\n"
+            + "        background: #ddd;\n" + "        font-size: 10px;\n" + "        padding: 2px 6px;\n"
+            + "        border-radius: var(--radius-md) 0 var(--radius-sm) 0;\n" + "        color: #888;\n" + "      }\n"
+            + "\n" + "      .metadata { color: #888; }\n" + "    </style>\n" + "  </head>\n" + "\n" + "  <body>\n";
+
+    public static final String POST = "</div>\n" + "\n" + "    </div>\n" + "  \n" + "\n" + "</body></html>";
 
 }

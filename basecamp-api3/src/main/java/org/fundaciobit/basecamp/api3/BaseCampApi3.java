@@ -2,7 +2,9 @@ package org.fundaciobit.basecamp.api3;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +27,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.basecamp.api3.beans.AttachFile;
 import org.fundaciobit.basecamp.api3.beans.Dock;
+import org.fundaciobit.basecamp.api3.beans.Document;
 import org.fundaciobit.basecamp.api3.beans.Entries;
 import org.fundaciobit.basecamp.api3.beans.Entry;
 import org.fundaciobit.basecamp.api3.beans.Folder;
@@ -202,6 +205,131 @@ public class BaseCampApi3 {
         return uploads;
 
     }
+    
+    
+    /**
+     * Downloads a file from Basecamp given an Upload object.
+     *
+     * @param upload      the Upload object containing the download URL
+     * @param destination the local File where the content will be saved
+     * @throws Exception if the download fails
+     */
+    public void downloadFile(Upload upload, File destination) throws Exception {
+
+        String downloadUrl = upload.getDownloadUrl();
+
+        if (downloadUrl == null || downloadUrl.isEmpty()) {
+            throw new Exception("L'objecte Upload no conté una URL de descàrrega vàlida.");
+        }
+
+        log.info("DOWNLOAD FILE URL: " + downloadUrl);
+
+        ResteasyClient client = new ResteasyClientBuilder().build();
+
+        try {
+            // First request to get the redirect URL
+            ResteasyWebTarget webTarget = client.target(downloadUrl);
+
+            Invocation.Builder invocationBuilder = webTarget.request()
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + this.token);
+
+            Response response = invocationBuilder.get();
+
+            // Handle 302 redirect
+            if (response.getStatus() == 302 || response.getStatus() == 301) {
+                String redirectUrl = response.getHeaderString("Location");
+                response.close();
+
+                if (redirectUrl == null || redirectUrl.isEmpty()) {
+                    throw new Exception("Redirect sense header Location.");
+                }
+
+                log.info("REDIRECT URL: " + redirectUrl);
+
+                // Second request to the actual file URL (no auth needed for S3)
+                ResteasyWebTarget redirectTarget = client.target(redirectUrl);
+                response = redirectTarget.request().get();
+            }
+
+            if (response.getStatus() == 200) {
+
+                InputStream inputStream = response.readEntity(InputStream.class);
+
+                try (FileOutputStream outputStream = new FileOutputStream(destination)) {
+                    byte[] buffer = new byte[8192];
+                    int bytesRead;
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                } finally {
+                    inputStream.close();
+                }
+
+                log.info("Fitxer descarregat correctament a: " + destination.getAbsolutePath());
+
+            } else {
+                String raw_msg;
+                try {
+                    raw_msg = response.readEntity(String.class);
+                } catch (Throwable th) {
+                    Object obj = response.getEntity();
+                    raw_msg = String.valueOf(obj);
+                }
+
+                String msg = "Error descarregant fitxer (Codi de servidor " + response.getStatus() + "): "
+                        + raw_msg + " " + response.toString();
+                log.error(msg);
+                throw new Exception(msg);
+            }
+        } finally {
+            client.close();
+        }
+    }
+
+    
+    
+    
+    public List<Document> getDocuments(long projectID, long folderID) throws Exception {
+
+        List<Document> documents = new ArrayList<Document>();
+
+        int total = -1;
+        int page = 1;
+
+        Document[] currentDocuments;
+
+        do {
+            String endPoint = this.urlBaseCamp + this.organizationID + "/buckets/" + projectID
+                    + "/vaults/" + folderID + "/documents.json?page=" + page;
+
+            page++;
+
+            Response response = commonCall(null, endPoint);
+
+            String json = response.readEntity(String.class);
+
+            log.info(" OUTPUT GETDOCUMENTS ==> " + json);
+
+            if (total == -1) {
+                String totalCountHeader = response.getHeaderString("X-Total-Count");
+                if (totalCountHeader != null) {
+                    total = Integer.parseInt(totalCountHeader);
+                } else {
+                    total = Integer.MAX_VALUE; // fallback: keep reading until empty page
+                }
+            }
+
+            currentDocuments = deserializeJson(json, Document[].class);
+
+            documents.addAll(Arrays.asList(currentDocuments));
+
+            log.info(documents.size() + " de " + total);
+
+        } while (documents.size() < total && currentDocuments.length != 0);
+
+        return documents;
+    }
+
 
     public Folder[] getFolders(long projectID, long folderID) throws Exception {
 
