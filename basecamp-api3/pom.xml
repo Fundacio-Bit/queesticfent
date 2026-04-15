@@ -139,6 +139,14 @@
             <artifactId>pluginsib-documentconverter-openoffice</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+          <groupId>org.jsoup</groupId>
+          <artifactId>jsoup</artifactId>
+          <version>1.16.1</version>
+          <scope>test</scope>
+        </dependency>
+        
 
         <dependency>
             <groupId>junit</groupId>

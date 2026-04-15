@@ -46,6 +46,13 @@ import org.fundaciobit.basecamp.api3.utils.UpdateTokenUtils;
 import org.fundaciobit.pluginsib.documentconverter.IDocumentConverterPlugin;
 import org.fundaciobit.pluginsib.documentconverter.openoffice.OpenOfficeDocumentConverterPlugin;
 
+
+import java.net.HttpURLConnection;
+import java.util.Base64;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+
+
 /**
  * 
  * @author anadal
@@ -164,9 +171,63 @@ public class DownloadDocsAndFilesFromBaseCamp {
 
             //listSchedulerEntries(tu, projectID, scheduleID);
 
-            File base = new File("DocsAndFiles");
+            
+            
+            
+            
+            /*
+             * 
+             * FOLDER[9308879620] Titol: Cursos
+            ---------------------------------------------
+            FOLDER[9266044174] Titol: Sistemes
 
-            listFolders(tu, projectID, folderRootID, base);
+            ---------------------------------------------
+            FOLDER[7215812441] Titol: Normatives
+
+            ---------------------------------------------
+            FOLDER[7201650218] Titol: Nouvingut
+
+            ---------------------------------------------
+            FOLDER[4748329193] Titol: Qualitat
+
+            ---------------------------------------------
+            FOLDER[4525919411] Titol: Recursos
+
+            ---------------------------------------------
+            FOLDER[3785262148] Titol: SESSIONS TÈCNIQUES
+
+            ---------------------------------------------
+            FOLDER[3112086246] Titol: Agile (Retrospectives)
+
+            ---------------------------------------------
+            FOLDER[2153390174] Titol: OTAE
+            
+            
+            ARREL = folderRootID
+            */
+            
+            
+            File base = new File("DocsAndFiles_ODT");
+            long folderId = folderRootID;
+            
+            
+            /*
+            File root = new File("DocsAndFiles");
+            File base = new File(root, "Nouvingut");
+            base.mkdirs();
+            long folderId = 7201650218L;
+            */
+            
+            /*
+            File root = new File("DocsAndFiles");
+            File base = new File(root, "Cursos");
+            base.mkdirs();
+            long folderId = 9308879620L;
+            */
+            
+            
+
+            listFolders(tu, projectID, folderId, base);
 
             //uploadFile(tu, projectID, folderRootID);
 
@@ -472,6 +533,7 @@ public class DownloadDocsAndFilesFromBaseCamp {
             System.err.println("folderID és null.");
         } else {
 
+            
             Upload[] uploads = tu.getUploads(projectID, folderID);
 
             if (uploads != null) {
@@ -501,11 +563,13 @@ public class DownloadDocsAndFilesFromBaseCamp {
             
                     String name = documents.get(j).getTitle().replaceAll("[\\\\/:*?\"<>|]", "_");
             
-                    //Files.write(new File(base, name + ".html").toPath(), htmlContent.getBytes());
+                    
             
                     System.out.println();
             
-                    String xhtml = htmlContent; // Ja està ben formatat i no cal convertir a XHTML  
+                    String xhtml = embedImagesAsBase64(htmlContent); // Ja està ben formatat i no cal convertir a XHTML  
+                    
+                    Files.write(new File(base, name + ".html").toPath(), xhtml.getBytes());
             
                     convertHtmlToOdtViaUNO(xhtml, new File(base, name + ".odt"), documents.get(j).getTitle());
             
@@ -513,8 +577,8 @@ public class DownloadDocsAndFilesFromBaseCamp {
             
                 }
             }
-            */
-
+            
+*/
             Folder[] folders = tu.getFolders(projectID, folderID);
 
             if (folders != null) {
@@ -524,7 +588,7 @@ public class DownloadDocsAndFilesFromBaseCamp {
                 for (int i = 0; i < folders.length; i++) {
                     System.out.println();
                     System.out.println("---------------------------------------------");
-                    System.out.println("FOLDER[" + i + "] Titol: " + folders[i].getTitle());
+                    System.out.println("FOLDER[" + folders[i].getId() + "] Titol: " + folders[i].getTitle());
                     //System.out.println("FOLDER[" + i + "] tipus: " + folders[i].getType());
 
                     //System.out.println("FOLDER[" + i + "] URL: " + folders[i].getVaultsUrl());
@@ -545,6 +609,52 @@ public class DownloadDocsAndFilesFromBaseCamp {
             }
         }
 
+    }
+    
+    
+
+    public static String embedImagesAsBase64(String html) throws Exception {
+        org.jsoup.nodes.Document doc = Jsoup.parse(html);
+
+        for (Element img : doc.select("img")) {
+            String urlStr = firstUrl(img);
+            if (urlStr == null) continue;
+
+            byte[] data = download(urlStr);
+            String mime = detectMime(urlStr, data);
+            String base64 = Base64.getEncoder().encodeToString(data);
+
+            img.removeAttr("srcset");
+            img.attr("src", "data:" + mime + ";base64," + base64);
+        }
+        return doc.outerHtml();
+    }
+
+    private static String firstUrl(Element img) {
+        String src = img.attr("abs:src");
+        if (src != null && !src.isEmpty()) return src;
+
+        String srcset = img.attr("srcset");
+        if (srcset == null || srcset.isEmpty()) return null;
+        return srcset.split("\\s+")[0]; // first URL before width/dppx
+    }
+
+    private static byte[] download(String urlStr) throws Exception {
+        HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
+        conn.setInstanceFollowRedirects(true);
+        try (InputStream in = conn.getInputStream()) {
+            return in.readAllBytes();
+        }
+    }
+
+    private static String detectMime(String urlStr, byte[] data) {
+        // quick guess by extension; default to image/png
+        String lower = urlStr.toLowerCase();
+        if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) return "image/jpeg";
+        if (lower.endsWith(".gif")) return "image/gif";
+        if (lower.endsWith(".bmp")) return "image/bmp";
+        if (lower.endsWith(".svg")) return "image/svg+xml";
+        return "image/png";
     }
 
     public static void convertHtmlToOdtViaUNO(String htmlContent, File outputOdtFile, String title) throws Exception {
