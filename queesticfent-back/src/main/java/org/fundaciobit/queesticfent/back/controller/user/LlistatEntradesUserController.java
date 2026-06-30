@@ -694,17 +694,19 @@ public class LlistatEntradesUserController extends ModificacioQueEsticFentContro
         // Llista de tots els projectes o el projecte seleccionat per filtrar
         List<Long> selectedProjects = new ArrayList<Long>();
         String projecteStr = null;
+        String projecteParam = request.getParameter("projecteID");
 
-        if (request.getParameter("projecteID") != null && !request.getParameter("projecteID").isEmpty()
-                && !request.getParameter("projecteID").equals("0L")) {
+        if (projecteParam != null && !projecteParam.isEmpty() && !projecteParam.equals("0L")
+                && !projecteParam.equals("0")) {
             // Projectes filtrats
-            projecteStr = request.getParameter("projecteID");
+            projecteStr = projecteParam;
             long selectedProjectId = Long.parseLong(projecteStr);
             selectedProjects.add(selectedProjectId);
             llistatEntradesModel.setProjecteId(selectedProjectId);
         } else {
             // Llistat de tots els projectesIDs (cap projecte seleccionar
             selectedProjects = projectesEjb.executeQuery(ProjecteFields.PROJECTEID);
+            llistatEntradesModel.setProjecteId(0L);
         }
 
         {// Llistat de tots els projectes per al dropdown de selecció de projectes
